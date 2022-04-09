@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/change_quality_example_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/custom_icons_example.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/disabled_buttons_example_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/fullscreen_example_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/listview_example.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/network_with_subtitle_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/one_page_to_other_page_example.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/pick_file_page_example.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/playback_speed_example_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/player_with_header_page.dart';
 
 void main() {
   runApp(MyApp());

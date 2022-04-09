@@ -104,12 +104,8 @@ class PageTwo extends StatefulWidget {
 }
 
 class _PageTwoState extends State<PageTwo> {
-  // read the documentation https://the-meedu-app.github.io/flutter-meedu-player/#/picture-in-picture
-  // to enable the pip (picture in picture) support on Android
   final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.primary,
-    pipEnabled: true, // enable  pip on android
-    showPipButton: true, // use false to hide pip button in the player
   );
 
   StreamSubscription? _playerEventSubs;
