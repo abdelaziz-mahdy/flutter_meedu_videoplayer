@@ -1,7 +1,7 @@
 name: flutter_meedu_videoplayer
 description: A crossplatfrom video player.
 version: 0.0.1
-homepage:
+homepage: ""
 publish_to: none
 environment:
   sdk: ">=2.16.2 <3.0.0"
