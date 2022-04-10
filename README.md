@@ -2,11 +2,11 @@
 
 
 ## Cross-platform video player 
-- android and ios are using video player
-- desktop are using dart-vlc
+- Android and Ios are using video player
+- Desktop are using dart-vlc
 
 
-## Used meedu player as a base and added
+## Used meedu player as a base and added (also fixed some errors)
 - swipe to increse and decrease volume 
 - swipe to seek 
 - integrated wake lock in the code
