@@ -33,7 +33,7 @@ class PlayerButton extends StatelessWidget {
             child: Image.asset(
               this.iconPath,
               color: this.iconColor,
-              //package: 'meedu_player',
+              package: 'flutter_meedu_videoplayer',
             ),
             decoration: BoxDecoration(
               color: this.backgrounColor,

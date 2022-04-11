@@ -88,12 +88,14 @@ packages:
     source: git
     version: "0.2.0"
   dart_vlc_ffi:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: dart_vlc_ffi
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.5+1"
+      path: ffi
+      ref: master
+      resolved-ref: dc71ce3a2d7a9203d6f8d11a25dad1fa8a05351e
+      url: "https://github.com/alexmercerind/dart_vlc.git"
+    source: git
+    version: "0.1.6"
   fake_async:
     dependency: transitive
     description:

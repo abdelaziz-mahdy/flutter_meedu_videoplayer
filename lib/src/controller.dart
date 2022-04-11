@@ -396,11 +396,11 @@ class MeeduPlayerController {
   Player _createVideoControllerWindows(DataSource dataSource, Duration seekTo) {
     Random random = Random();
     int randomNumber = random.nextInt(1000);
-    String refer;
+    String refer = "";
     if (dataSource.type == DataSourceType.network) {
-      refer = dataSource.httpHeaders!["Referer"] ?? "";
-    } else {
-      refer = "";
+      if (dataSource.httpHeaders != null) {
+        refer = dataSource.httpHeaders!["Referer"] ?? "";
+      }
     }
     //print('--http-referrer=' + refer);
     Player player = Player(id: randomNumber, commandlineArguments: [

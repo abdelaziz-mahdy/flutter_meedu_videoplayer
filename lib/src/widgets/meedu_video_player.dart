@@ -1,4 +1,3 @@
-
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/rx.dart';
@@ -6,8 +5,6 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/primary/primary_player_controls.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/secondary/secondary_player_controls.dart';
-
-
 
 import 'closed_caption_view.dart';
 
@@ -78,16 +75,21 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                     RxBuilder(
                         //observables: [_.videoFit],
                         (__) {
-                      //print("NATIVE HAS BEEN REBUILT");
+                      print(
+                          "NATIVE HAS BEEN REBUILT ${_.videoPlayerControllerWindows}");
                       _.dataStatus.status.value;
+                      if (_.videoPlayerControllerWindows == null) {
+                        return Text("Loading");
+                      }
+
                       return Stack(
                         fit: StackFit.expand,
                         children: [
                           Video(
-                            player: _.videoPlayerControllerWindows!,
-                            width: 640,
+                            player: _.videoPlayerControllerWindows,
+                            //width: 500,
                             showControls: false,
-                            height: 480,
+                            //height: 500,
                             //playlistLength: 1,
                           ),
                         ],

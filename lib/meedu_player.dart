@@ -7,3 +7,4 @@ export 'src/helpers/screen_manager.dart';
 export 'src/helpers/custom_icons.dart';
 export 'src/helpers/enabled_buttons.dart';
 export 'package:video_player/video_player.dart';
+export 'package:dart_vlc/dart_vlc.dart';

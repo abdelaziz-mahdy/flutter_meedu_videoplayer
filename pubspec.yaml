@@ -60,7 +60,18 @@ flutter:
       web:
         pluginClass: FlutterMeeduVideoplayerWeb
         fileName: flutter_meedu_videoplayer_web.dart
-
+  assets:
+    - assets/icons/fast-forward.png
+    - assets/icons/fullscreen.png
+    - assets/icons/minimize.png
+    - assets/icons/mute.png
+    - assets/icons/play.png
+    - assets/icons/pause.png
+    - assets/icons/repeat.png
+    - assets/icons/rewind.png
+    - assets/icons/sound.png
+    - assets/icons/picture-in-picture.png
+    - assets/icons/fit.png
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
