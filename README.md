@@ -1,16 +1,12 @@
 # flutter_meedu_videoplayer
 
-<a target="blank" href="https://pub.dev/packages/meedu_player"><img src="https://img.shields.io/pub/v/meedu_player?include_prereleases&style=flat-square"/></a>
-<img src="https://img.shields.io/github/last-commit/darwin-morocho/flutter-meedu-player/master?style=flat-square"/>
-<img src="https://img.shields.io/github/license/darwin-morocho/flutter-meedu-player?style=flat-square"/>
+
+## Cross-platform video player 
+- Android and Ios are using video player
+- Desktop are using dart-vlc
 
 
-> cross-platform video player 
-- android and ios are using video player
-- desktop are using dart-vlc
-
-
-> used meedu player as a base and added
+## Used meedu player as a base and added (also fixed some errors)
 - swipe to increse and decrease volume 
 - swipe to seek 
 - integrated wake lock in the code
