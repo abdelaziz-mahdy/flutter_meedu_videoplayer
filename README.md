@@ -1,6 +1,7 @@
 # flutter_meedu_videoplayer
 
 
+
 ## Cross-platform video player 
 - Android and Ios are using video player
 - Desktop are using dart-vlc
@@ -12,6 +13,22 @@
 - integrated wake lock in the code
 
 
+## setup
+- Add in main 
+```dart
+if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+DartVLC.initialize();
+}
+```
+Example:
+```dart
+void main() {
+if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+DartVLC.initialize();
+}
+runApp(MyApp());
+}
+```
 
 
 <img src="https://darwin-morocho.github.io/flutter-meedu-player/assets/q2.gif" alt="meedu_player" width="160" />
