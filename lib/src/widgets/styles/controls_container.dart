@@ -407,7 +407,8 @@ class ControlsContainer extends StatelessWidget {
         //top: 120.h,
         //bottom: 110.h,
         child: VideoCoreForwardAndRewindLayout(
-          rewind: InkWell(
+          rewind: GestureDetector(
+            child: Container(),
             onTap: () {
               if (_.doubleTapCount.value != 0 || tappedTwice) {
                 _rewind(_);
@@ -416,16 +417,25 @@ class ControlsContainer extends StatelessWidget {
                 tappedOnce(_, false);
               }
             },
+            //behavior: HitTestBehavior.deferToChild,
           ),
-          forward: InkWell(
+          forward: GestureDetector(
+            child: Container(),
             onTap: () {
+              //print("0 " + tappedTwice.toString());
+
               if (_.doubleTapCount.value != 0 || tappedTwice) {
                 _forward(_);
+                //print("if");
                 tappedOnce(_, true);
               } else {
+                //print("else");
+                //print("1 " + tappedTwice.toString());
                 tappedOnce(_, false);
+                //print("2 " + tappedTwice.toString());
               }
             },
+            //behavior: HitTestBehavior.translucent,
           ),
         ),
       ),
