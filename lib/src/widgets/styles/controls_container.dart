@@ -435,7 +435,7 @@ class ControlsContainer extends StatelessWidget {
       ),
       Positioned.fill(
         bottom: MediaQuery.of(context).size.height * 0.10,
-        top: MediaQuery.of(context).size.height * 0.90,
+        top: MediaQuery.of(context).size.height * 0.10,
         child: Container(
           color: Colors.red,
           child: VideoCoreForwardAndRewindLayout(
