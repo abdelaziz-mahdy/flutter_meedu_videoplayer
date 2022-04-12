@@ -218,6 +218,36 @@ class ControlsContainer extends StatelessWidget {
 
   Widget controlsUI(MeeduPlayerController _, BuildContext context) {
     return Stack(children: [
+      VideoCoreForwardAndRewindLayout(
+        rewind: GestureDetector(
+          onTap: () {
+            if (_.doubleTapCount.value != 0 || tappedTwice) {
+              _rewind(_);
+              tappedOnce(_, true);
+            } else {
+              tappedOnce(_, false);
+            }
+          },
+          //behavior: HitTestBehavior.opaque,
+        ),
+        forward: GestureDetector(
+          onTap: () {
+            //print("0 " + tappedTwice.toString());
+
+            if (_.doubleTapCount.value != 0 || tappedTwice) {
+              _forward(_);
+              //print("if");
+              tappedOnce(_, true);
+            } else {
+              //print("else");
+              //print("1 " + tappedTwice.toString());
+              tappedOnce(_, false);
+              //print("2 " + tappedTwice.toString());
+            }
+          },
+          //behavior: HitTestBehavior.,
+        ),
+      ),
       RxBuilder((__) {
         if (_.windows) {
           return MouseRegion(
@@ -448,7 +478,7 @@ class ControlsContainer extends StatelessWidget {
               tappedOnce(_, false);
             }
           }
-          //_.controls = !_.showControls.value;
+          _.controls = !_.showControls.value;
           _dragInitialDelta = Offset.zero;
         },
         onHorizontalDragUpdate: (DragUpdateDetails details) {
