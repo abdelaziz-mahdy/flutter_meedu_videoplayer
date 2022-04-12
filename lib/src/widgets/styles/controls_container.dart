@@ -433,34 +433,34 @@ class ControlsContainer extends StatelessWidget {
           forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
         ),
       ),
-      VideoCoreForwardAndRewindLayout(
-        rewind: GestureDetector(
-          onTap: () {
-            if (_.doubleTapCount.value != 0 || tappedTwice) {
-              _rewind(_);
-              tappedOnce(_, true);
-            } else {
-              tappedOnce(_, false);
-            }
-          },
-          //behavior: HitTestBehavior.opaque,
-        ),
-        forward: GestureDetector(
-          onTap: () {
-            //print("0 " + tappedTwice.toString());
-
-            if (_.doubleTapCount.value != 0 || tappedTwice) {
-              _forward(_);
-              //print("if");
-              tappedOnce(_, true);
-            } else {
-              //print("else");
-              //print("1 " + tappedTwice.toString());
-              tappedOnce(_, false);
-              //print("2 " + tappedTwice.toString());
-            }
-          },
-          //behavior: HitTestBehavior.,
+      Positioned.fill(
+        bottom: MediaQuery.of(context).size.height * 0.10,
+        top: MediaQuery.of(context).size.height * 0.90,
+        child: Container(
+          color: Colors.red,
+          child: VideoCoreForwardAndRewindLayout(
+            rewind: GestureDetector(
+              onTap: () {
+                if (_.doubleTapCount.value != 0 || tappedTwice) {
+                  _rewind(_);
+                  tappedOnce(_, true);
+                } else {
+                  tappedOnce(_, false);
+                }
+              },
+            ),
+            forward: GestureDetector(
+              onTap: () {
+                if (_.doubleTapCount.value != 0 || tappedTwice) {
+                  _forward(_);
+                  tappedOnce(_, true);
+                } else {
+                  tappedOnce(_, false);
+                }
+              },
+              //behavior: HitTestBehavior.,
+            ),
+          ),
         ),
       ),
     ]);
