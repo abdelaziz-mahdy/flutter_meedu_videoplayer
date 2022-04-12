@@ -218,43 +218,6 @@ class ControlsContainer extends StatelessWidget {
 
   Widget controlsUI(MeeduPlayerController _, BuildContext context) {
     return Stack(children: [
-      Positioned.fill(
-        //top: 120.h,
-        //bottom: 110.h,
-        child: Container(
-          //color: Colors.red,
-          child: VideoCoreForwardAndRewindLayout(
-            rewind: GestureDetector(
-              onTap: () {
-                if (_.doubleTapCount.value != 0 || tappedTwice) {
-                  _rewind(_);
-                  tappedOnce(_, true);
-                } else {
-                  tappedOnce(_, false);
-                }
-              },
-              //behavior: HitTestBehavior.deferToChild,
-            ),
-            forward: GestureDetector(
-              onTap: () {
-                //print("0 " + tappedTwice.toString());
-
-                if (_.doubleTapCount.value != 0 || tappedTwice) {
-                  _forward(_);
-                  //print("if");
-                  tappedOnce(_, true);
-                } else {
-                  //print("else");
-                  //print("1 " + tappedTwice.toString());
-                  tappedOnce(_, false);
-                  //print("2 " + tappedTwice.toString());
-                }
-              },
-              //behavior: HitTestBehavior.translucent,
-            ),
-          ),
-        ),
-      ),
       RxBuilder((__) {
         if (_.windows) {
           return MouseRegion(
@@ -438,6 +401,32 @@ class ControlsContainer extends StatelessWidget {
           showForward: _.forwardIcons.value,
           rewindSeconds: _defaultSeekAmount * _.doubleTapCount.value,
           forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
+        ),
+      ),
+      Positioned.fill(
+        //top: 120.h,
+        //bottom: 110.h,
+        child: VideoCoreForwardAndRewindLayout(
+          rewind: InkWell(
+            onTap: () {
+              if (_.doubleTapCount.value != 0 || tappedTwice) {
+                _rewind(_);
+                tappedOnce(_, true);
+              } else {
+                tappedOnce(_, false);
+              }
+            },
+          ),
+          forward: InkWell(
+            onTap: () {
+              if (_.doubleTapCount.value != 0 || tappedTwice) {
+                _forward(_);
+                tappedOnce(_, true);
+              } else {
+                tappedOnce(_, false);
+              }
+            },
+          ),
         ),
       ),
     ]);
