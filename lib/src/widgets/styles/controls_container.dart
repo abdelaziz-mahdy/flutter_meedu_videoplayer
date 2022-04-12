@@ -448,7 +448,7 @@ class ControlsContainer extends StatelessWidget {
               tappedOnce(_, false);
             }
           }
-          _.controls = !_.showControls.value;
+          //_.controls = !_.showControls.value;
           _dragInitialDelta = Offset.zero;
         },
         onHorizontalDragUpdate: (DragUpdateDetails details) {
