@@ -436,30 +436,27 @@ class ControlsContainer extends StatelessWidget {
       Positioned.fill(
         bottom: MediaQuery.of(context).size.height * 0.20,
         top: MediaQuery.of(context).size.height * 0.20,
-        child: Container(
-          color: Colors.red,
-          child: VideoCoreForwardAndRewindLayout(
-            rewind: GestureDetector(
-              onTap: () {
-                if (_.doubleTapCount.value != 0 || tappedTwice) {
-                  _rewind(_);
-                  tappedOnce(_, true);
-                } else {
-                  tappedOnce(_, false);
-                }
-              },
-            ),
-            forward: GestureDetector(
-              onTap: () {
-                if (_.doubleTapCount.value != 0 || tappedTwice) {
-                  _forward(_);
-                  tappedOnce(_, true);
-                } else {
-                  tappedOnce(_, false);
-                }
-              },
-              //behavior: HitTestBehavior.,
-            ),
+        child: VideoCoreForwardAndRewindLayout(
+          rewind: GestureDetector(
+            onTap: () {
+              if (_.doubleTapCount.value != 0 || tappedTwice) {
+                _rewind(_);
+                tappedOnce(_, true);
+              } else {
+                tappedOnce(_, false);
+              }
+            },
+          ),
+          forward: GestureDetector(
+            onTap: () {
+              if (_.doubleTapCount.value != 0 || tappedTwice) {
+                _forward(_);
+                tappedOnce(_, true);
+              } else {
+                tappedOnce(_, false);
+              }
+            },
+            //behavior: HitTestBehavior.,
           ),
         ),
       ),
