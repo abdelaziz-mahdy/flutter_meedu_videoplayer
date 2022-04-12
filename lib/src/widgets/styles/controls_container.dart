@@ -413,7 +413,7 @@ class ControlsContainer extends StatelessWidget {
               tappedOnce(_, false);
             }
           },
-          behavior: HitTestBehavior.deferToChild,
+          behavior: HitTestBehavior.opaque,
         ),
         forward: GestureDetector(
           onTap: () {
@@ -430,7 +430,7 @@ class ControlsContainer extends StatelessWidget {
               //print("2 " + tappedTwice.toString());
             }
           },
-          behavior: HitTestBehavior.deferToChild,
+          behavior: HitTestBehavior.opaque,
         ),
       ),
     ]);
