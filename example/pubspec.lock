@@ -81,21 +81,17 @@ packages:
   dart_vlc:
     dependency: transitive
     description:
-      path: "."
-      ref: master
-      resolved-ref: dc71ce3a2d7a9203d6f8d11a25dad1fa8a05351e
-      url: "https://github.com/alexmercerind/dart_vlc.git"
-    source: git
-    version: "0.2.0"
+      name: dart_vlc
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.9"
   dart_vlc_ffi:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: ffi
-      ref: master
-      resolved-ref: dc71ce3a2d7a9203d6f8d11a25dad1fa8a05351e
-      url: "https://github.com/alexmercerind/dart_vlc.git"
-    source: git
-    version: "0.1.6"
+      name: dart_vlc_ffi
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.5+1"
   fake_async:
     dependency: transitive
     description:
@@ -149,15 +145,6 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.1"
-  flutter_native_view:
-    dependency: transitive
-    description:
-      path: "."
-      ref: "832dcf3dc0974edafd7dac592f703b260aeff502"
-      resolved-ref: "832dcf3dc0974edafd7dac592f703b260aeff502"
-      url: "https://github.com/alexmercerind/flutter_native_view.git"
-    source: git
     version: "0.0.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive

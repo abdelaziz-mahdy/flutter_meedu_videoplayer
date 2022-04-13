@@ -5,7 +5,6 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   dart_vlc
   flutter_meedu_videoplayer
-  flutter_native_view
   hotkey_manager
   window_manager
 )
