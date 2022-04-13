@@ -90,7 +90,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                             //width: 500,
                             showControls: false,
                             //height: 500,
-                            playlistLength: 1,
+                            //playlistLength: 1,
                           ),
                         ],
                       );
