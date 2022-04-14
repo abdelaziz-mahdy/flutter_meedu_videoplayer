@@ -11,6 +11,7 @@ import 'package:flutter_meedu_videoplayer/src/widgets/rewindAndForwardLayout.dar
 class ControlsContainer extends StatelessWidget {
   final Widget child;
   bool playing = false;
+  bool gettingNotification = false;
   late Offset horizontalDragStartOffset;
   Offset _dragInitialDelta = Offset.zero;
   Offset _verticalDragStartOffset = Offset.zero;
@@ -479,54 +480,86 @@ class ControlsContainer extends StatelessWidget {
       },
       onHorizontalDragUpdate: (DragUpdateDetails details) {
         if (!_.windows) {
-          if (!_.videoPlayerController!.value.isInitialized) {
-            return;
-          }
+          //if (!_.videoPlayerController!.value.isInitialized) {
+          //return;
+          //}
+
+          //_.controls=true;
           final Offset position = details.localPosition;
           if (_dragInitialDelta == Offset.zero) {
             final Offset delta = details.delta;
-            _forwardDragStart(position, _);
-            _dragInitialDelta = delta;
+            if (details.globalPosition.dx >
+                    MediaQuery.of(context).size.width * 0.05 &&
+                ((MediaQuery.of(context).size.width -
+                            details.globalPosition.dx) >
+                        MediaQuery.of(context).size.width * 0.05 &&
+                    !gettingNotification)) {
+              _forwardDragStart(position, _);
+              _dragInitialDelta = delta;
+            } else {
+              print("##############out###############");
+              gettingNotification = true;
+            }
           }
-          _forwardDragUpdate(position, _);
+          if (!gettingNotification) {
+            _forwardDragUpdate(position, _);
+          }
         }
+
+        //_.videoPlayerController!.seekTo(position);
       },
       onHorizontalDragEnd: (DragEndDetails details) {
         if (!_.windows) {
-          if (!_.videoPlayerController!.value.isInitialized) {
-            return;
-          }
+          //if (!_.videoPlayerController!.value.isInitialized) {
+          //return;
+          //}
+          gettingNotification = false;
           _forwardDragEnd(_);
         }
       },
       onVerticalDragUpdate: (DragUpdateDetails details) {
         if (!_.windows) {
-          if (!_.videoPlayerController!.value.isInitialized) {
-            return;
-          }
+          //if (!_.videoPlayerController!.value.isInitialized) {
+          //return;
+          //}
           //_.controls=true;
+
           final Offset position = details.localPosition;
           if (_dragInitialDelta == Offset.zero) {
-            final Offset delta = details.delta;
-            //if(details.globalPosition.dy<30){
-            if (details.globalPosition.dx >=
-                MediaQuery.of(context).size.width / 2) {
-              _volumeDragStart(position, _);
-              _dragInitialDelta = delta;
-              //print("right");
-            } else {
-              if (!_.windows) {
-                _brightnessDragStart(position, _);
+            print(details.globalPosition.dy);
+            if (details.globalPosition.dy >
+                    MediaQuery.of(context).size.height * 0.05 &&
+                ((MediaQuery.of(context).size.height -
+                        details.globalPosition.dy) >
+                    MediaQuery.of(context).size.height * 0.05) &&
+                !gettingNotification) {
+              final Offset delta = details.delta;
+              //if(details.globalPosition.dy<30){
+              if (details.globalPosition.dx >=
+                  MediaQuery.of(context).size.width / 2) {
+                _volumeDragStart(position, _);
+                _dragInitialDelta = delta;
+                //print("right");
+              } else {
+                if (!_.windows) {
+                  _brightnessDragStart(position, _);
+                }
+                _dragInitialDelta = delta;
+                //print("left");
               }
-              _dragInitialDelta = delta;
+            } else {
+              print("out");
+              gettingNotification = true;
             }
             //}
           } else {
-            if (isVolume) {
-              _volumeDragUpdate(position, _);
-            } else {
-              if (!_.windows) {
-                _brightnessDragUpdate(position, _);
+            if (!gettingNotification) {
+              if (isVolume) {
+                _volumeDragUpdate(position, _);
+              } else {
+                if (!_.windows) {
+                  _brightnessDragUpdate(position, _);
+                }
               }
             }
           }
@@ -538,6 +571,7 @@ class ControlsContainer extends StatelessWidget {
           //if (!_.videoPlayerController!.value.isInitialized) {
           // return;
           //}
+          gettingNotification = false;
           if (isVolume) {
             _volumeDragEnd(_);
           } else {
