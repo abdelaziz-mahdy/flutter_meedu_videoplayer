@@ -366,6 +366,13 @@ class MeeduPlayerController {
     //await HotKeyManager.instance.unregister(_hotKey);
   }
 
+/*
+  DataSource checkIfm3u8AndNoLinks(DataSource dataSource) {
+    final RegExp netRegxUrl = RegExp(r'^(http|https):\/\/([\w.]+\/?)\S*');
+    if (dataSource.type == DataSourceType.network &&
+        Uri.parse(dataSource.source!).path.endsWith(".m3u8")) {}
+  }
+*/
   /// create a new video_player controller
   VideoPlayerController _createVideoController(DataSource dataSource) {
     VideoPlayerController tmp; // create a new video controller

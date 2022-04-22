@@ -25,6 +25,9 @@ dependencies:
   wakelock: ^0.6.1+2
   shared_preferences: ^2.0.13
   helpers: ^1.1.4
+  dio: ^4.0.4
+  dio_smart_retry:
+  path_provider: ^2.0.6
 
 dev_dependencies:
   flutter_test:
