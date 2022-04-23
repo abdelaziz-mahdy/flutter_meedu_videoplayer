@@ -500,6 +500,7 @@ class MeeduPlayerController {
       if (newContent != "") {
         final File file =
             File(join((await getTemporaryDirectory()).path, 'hls_link.m3u8'));
+        file.writeAsStringSync(newContent);
         dataSource.file = file;
         dataSource.type = DataSourceType.file;
         return dataSource;
