@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 class DataSource {
-  final File? file;
+  File? file;
   String? source, package;
-  final DataSourceType type;
-  final VideoFormat? formatHint;
-  final Future<ClosedCaptionFile>? closedCaptionFile; // for subtiles
+  DataSourceType type;
+  VideoFormat? formatHint;
+  Future<ClosedCaptionFile>? closedCaptionFile; // for subtiles
   Map<String, String>? httpHeaders; // for headers
   DataSource({
     this.file,
