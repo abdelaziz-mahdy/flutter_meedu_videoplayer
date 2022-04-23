@@ -510,10 +510,9 @@ class MeeduPlayerController {
   }
 
   /// create a new video_player controller
-  Future<VideoPlayerController> _createVideoController(
-      DataSource dataSource) async {
+  VideoPlayerController _createVideoController(DataSource dataSource) {
     VideoPlayerController tmp; // create a new video controller
-    dataSource = await checkIfm3u8AndNoLinks(dataSource);
+    //dataSource = await checkIfm3u8AndNoLinks(dataSource);
     if (dataSource.type == DataSourceType.asset) {
       tmp = VideoPlayerController.asset(
         dataSource.source!,
