@@ -35,7 +35,7 @@ class ScreenManager {
     if (state) {
       windowManager.setFullScreen(state);
     } else {
-      windowManager.setFullScreen(state);
+      //windowManager.setFullScreen(state);
       windowManager.restore();
     }
   }
