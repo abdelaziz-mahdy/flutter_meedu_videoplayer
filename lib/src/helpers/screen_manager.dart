@@ -31,11 +31,12 @@ class ScreenManager {
 
   Future<void> setWindowsFullScreen(bool state, MeeduPlayerController _) async {
     _.fullscreen.value = state;
-    print(await windowManager.isFullScreen());
+    //print(await windowManager.isFullScreen());
     if (state) {
-      windowManager.setFullScreen(state);
+      await windowManager.setFullScreen(state);
     } else {
-      windowManager.setFullScreen(state);
+      await windowManager.setFullScreen(state);
+      await windowManager.setBounds(await windowManager.getBounds());
       //windowManager.restore();
     }
   }
