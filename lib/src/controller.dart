@@ -551,6 +551,7 @@ class MeeduPlayerController {
       //"-vvv",
       '--http-referrer=' + refer,
       '--http-reconnect',
+      '--sout-livehttp-caching'
     ]); // create a new video controller
     player = setPlayerDataSource(dataSource, player, seekTo);
     return player;
