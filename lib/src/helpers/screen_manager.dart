@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:auto_orientation/auto_orientation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
@@ -36,7 +38,9 @@ class ScreenManager {
       await windowManager.setFullScreen(state);
     } else {
       await windowManager.setFullScreen(state);
-      await windowManager.setBounds(await windowManager.getBounds());
+      Size size = await windowManager.getSize();
+      //size.=size.width+1;
+      await windowManager.setSize(size);
       //windowManager.restore();
     }
   }
