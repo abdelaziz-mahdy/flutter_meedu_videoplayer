@@ -60,7 +60,7 @@ class MeeduPlayerController {
   Rx<Duration> _duration = Rx(Duration.zero);
   Rx<int> _swipeDuration = 0.obs;
   Rx<int> doubleTapCount = 0.obs;
-  Rx<double> _currentVolume = 0.0.obs;
+  Rx<double> _currentVolume = 1.0.obs;
   Rx<double> _playbackSpeed = 1.0.obs;
   Rx<double> _currentBrightness = 0.0.obs;
   Rx<List<DurationRange>> _buffered = Rx([]);
