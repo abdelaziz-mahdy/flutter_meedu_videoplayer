@@ -39,7 +39,6 @@ class ScreenManager {
     } else {
       await windowManager.setFullScreen(state);
       Size size = await windowManager.getSize();
-      //size.=size.width+1;
       await windowManager.setSize(Size(size.width + 1, size.height + 1));
       //windowManager.restore();
     }
