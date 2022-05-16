@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:path/path.dart' as path;
 
 class PickFileExamplePage extends StatefulWidget {
   PickFileExamplePage({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class _PickFileExamplePageState extends State<PickFileExamplePage> {
   final _controller = MeeduPlayerController(
     screenManager: ScreenManager(forceLandScapeInFullscreen: false),
   );
-
+  String fileName = "";
   @override
   void dispose() {
     _controller.dispose();
@@ -24,22 +26,50 @@ class _PickFileExamplePageState extends State<PickFileExamplePage> {
   _onPickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['mov', 'avi', 'mp4'],
+      allowedExtensions: ['mov', 'avi', 'mp4', "mkv"],
     );
 
     if (result != null) {
       File file = File(result.files.single.path!);
-      _controller.launchAsFullscreen(
-        context,
-        autoplay: true,
-        dataSource: DataSource(
-          file: file,
-          type: DataSourceType.file,
-        ),
-      );
+      fileName = path.basename(file.path);
+      _controller.launchAsFullscreen(context,
+          autoplay: true,
+          dataSource: DataSource(
+            file: file,
+            type: DataSourceType.file,
+          ),
+          header: header);
     } else {
       // User canceled the picker
     }
+  }
+
+  Widget get header {
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Row(
+        children: [
+          CupertinoButton(
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // close the fullscreen
+              Navigator.pop(context);
+            },
+          ),
+          Expanded(
+            child: Text(
+              fileName,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override

@@ -34,14 +34,18 @@ class ScreenManager {
   Future<void> setWindowsFullScreen(bool state, MeeduPlayerController _) async {
     _.fullscreen.value = state;
     //print(await windowManager.isFullScreen());
+    await windowManager.ensureInitialized();
+    await windowManager.setFullScreen(state);
+    /*
     if (state) {
       await windowManager.setFullScreen(state);
     } else {
       await windowManager.setFullScreen(state);
-      Size size = await windowManager.getSize();
-      await windowManager.setSize(Size(size.width + 1, size.height + 1));
+      //Size size = await windowManager.getSize();
+      //await windowManager.setSize(Size(size.width + 1, size.height + 1));
       //windowManager.restore();
     }
+    */
   }
 
   Future<void> setOverlays(bool visible) async {
