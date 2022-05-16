@@ -16,7 +16,7 @@ import 'package:flutter_meedu_videoplayer_example/pages/player_with_header_page.
 
 void main() {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    DartVLC.initialize();
+    DartVLC.initialize(useFlutterNativeView: Platform.isWindows);
   }
 
   runApp(MyApp());

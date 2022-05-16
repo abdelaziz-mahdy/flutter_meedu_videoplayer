@@ -547,6 +547,17 @@ class MeeduPlayerController {
       }
     }
     //print('--http-referrer=' + refer);
+
+    Player player = Player(
+        id: randomNumber,
+        commandlineArguments: [
+          //"-vvv",
+          '--http-referrer=' + refer,
+          '--http-reconnect',
+        ],
+        registerTexture: false
+); // create a new video controller
+
     Player player = Player(id: randomNumber, commandlineArguments: [
       //"-vvv",
       '--http-referrer=' + refer,
@@ -555,6 +566,7 @@ class MeeduPlayerController {
       '--network-caching=60000',
       '--file-caching=60000'
     ]); // create a new video controller
+
     player = setPlayerDataSource(dataSource, player, seekTo);
     return player;
   }

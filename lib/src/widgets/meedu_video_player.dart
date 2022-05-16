@@ -85,8 +85,8 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                       return Stack(
                         fit: StackFit.expand,
                         children: [
-                          Video(
-                            player: _.videoPlayerControllerWindows,
+                          NativeVideo(
+                            player: _.videoPlayerControllerWindows!,
                             //width: 500,
                             showControls: false,
                             //height: 500,

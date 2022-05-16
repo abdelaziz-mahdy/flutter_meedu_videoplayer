@@ -20,6 +20,7 @@ dependencies:
   flutter_spinkit: ^5.1.0
   meta: ^1.7.0
   dart_vlc: ^0.2.0
+
   window_manager: ^0.2.0
   hotkey_manager: ^0.1.6
   wakelock: ^0.6.1+2
