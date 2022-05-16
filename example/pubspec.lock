@@ -85,6 +85,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
+
   dart_vlc_ffi:
     dependency: transitive
     description:
@@ -92,6 +93,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.7"
+  dio:
+    dependency: transitive
+    description:
+      name: dio
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.6"
+  dio_smart_retry:
+    dependency: transitive
+    description:
+      name: dio_smart_retry
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   fake_async:
     dependency: transitive
     description:
@@ -146,13 +161,6 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
-  flutter_native_view:
-    dependency: transitive
-    description:
-      name: flutter_native_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.1+1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -198,6 +206,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.15.0"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   js:
     dependency: transitive
     description:

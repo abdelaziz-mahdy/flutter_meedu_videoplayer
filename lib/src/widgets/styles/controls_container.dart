@@ -11,6 +11,7 @@ import 'package:flutter_meedu_videoplayer/src/widgets/rewindAndForwardLayout.dar
 class ControlsContainer extends StatelessWidget {
   final Widget child;
   bool playing = false;
+  bool gettingNotification = false;
   late Offset horizontalDragStartOffset;
   Offset _dragInitialDelta = Offset.zero;
   Offset _verticalDragStartOffset = Offset.zero;
@@ -218,6 +219,36 @@ class ControlsContainer extends StatelessWidget {
 
   Widget controlsUI(MeeduPlayerController _, BuildContext context) {
     return Stack(children: [
+      VideoCoreForwardAndRewindLayout(
+        rewind: GestureDetector(
+          onTap: () {
+            if (_.doubleTapCount.value != 0 || tappedTwice) {
+              _rewind(_);
+              tappedOnce(_, true);
+            } else {
+              tappedOnce(_, false);
+            }
+          },
+          //behavior: HitTestBehavior.opaque,
+        ),
+        forward: GestureDetector(
+          onTap: () {
+            //print("0 " + tappedTwice.toString());
+
+            if (_.doubleTapCount.value != 0 || tappedTwice) {
+              _forward(_);
+              //print("if");
+              tappedOnce(_, true);
+            } else {
+              //print("else");
+              //print("1 " + tappedTwice.toString());
+              tappedOnce(_, false);
+              //print("2 " + tappedTwice.toString());
+            }
+          },
+          //behavior: HitTestBehavior.,
+        ),
+      ),
       RxBuilder((__) {
         if (_.windows) {
           return MouseRegion(
@@ -404,39 +435,29 @@ class ControlsContainer extends StatelessWidget {
         ),
       ),
       Positioned.fill(
-        //top: 120.h,
-        //bottom: 110.h,
-        child: Container(
-          //color: Colors.red,
-          child: VideoCoreForwardAndRewindLayout(
-            rewind: GestureDetector(
-              onTap: () {
-                if (_.doubleTapCount.value != 0 || tappedTwice) {
-                  _rewind(_);
-                  tappedOnce(_, true);
-                } else {
-                  tappedOnce(_, false);
-                }
-              },
-              behavior: HitTestBehavior.deferToChild,
-            ),
-            forward: GestureDetector(
-              onTap: () {
-                //print("0 " + tappedTwice.toString());
-
-                if (_.doubleTapCount.value != 0 || tappedTwice) {
-                  _forward(_);
-                  //print("if");
-                  tappedOnce(_, true);
-                } else {
-                  //print("else");
-                  //print("1 " + tappedTwice.toString());
-                  tappedOnce(_, false);
-                  //print("2 " + tappedTwice.toString());
-                }
-              },
-              behavior: HitTestBehavior.deferToChild,
-            ),
+        bottom: MediaQuery.of(context).size.height * 0.20,
+        top: MediaQuery.of(context).size.height * 0.20,
+        child: VideoCoreForwardAndRewindLayout(
+          rewind: GestureDetector(
+            onTap: () {
+              if (_.doubleTapCount.value != 0 || tappedTwice) {
+                _rewind(_);
+                tappedOnce(_, true);
+              } else {
+                tappedOnce(_, false);
+              }
+            },
+          ),
+          forward: GestureDetector(
+            onTap: () {
+              if (_.doubleTapCount.value != 0 || tappedTwice) {
+                _forward(_);
+                tappedOnce(_, true);
+              } else {
+                tappedOnce(_, false);
+              }
+            },
+            //behavior: HitTestBehavior.,
           ),
         ),
       ),
@@ -444,50 +465,74 @@ class ControlsContainer extends StatelessWidget {
   }
 
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
-    return SafeArea(
-      child: GestureDetector(
-        onTap: () {
-          if (_.windows) {
-            if (_.doubleTapCount.value != 0 || tappedTwice) {
-              _rewind(_);
-              tappedOnce(_, true);
-            } else {
-              tappedOnce(_, false);
-            }
+    return GestureDetector(
+      onTap: () {
+        if (_.windows) {
+          if (_.doubleTapCount.value != 0 || tappedTwice) {
+            _rewind(_);
+            tappedOnce(_, true);
+          } else {
+            tappedOnce(_, false);
           }
-          _.controls = !_.showControls.value;
-          _dragInitialDelta = Offset.zero;
-        },
-        onHorizontalDragUpdate: (DragUpdateDetails details) {
-          if (!_.windows) {
-            if (!_.videoPlayerController!.value.isInitialized) {
-              return;
-            }
-            final Offset position = details.localPosition;
-            if (_dragInitialDelta == Offset.zero) {
-              final Offset delta = details.delta;
+        }
+        _.controls = !_.showControls.value;
+        _dragInitialDelta = Offset.zero;
+      },
+      onHorizontalDragUpdate: (DragUpdateDetails details) {
+        if (!_.windows) {
+          //if (!_.videoPlayerController!.value.isInitialized) {
+          //return;
+          //}
+
+          //_.controls=true;
+          final Offset position = details.localPosition;
+          if (_dragInitialDelta == Offset.zero) {
+            final Offset delta = details.delta;
+            if (details.globalPosition.dx >
+                    MediaQuery.of(context).size.width * 0.1 &&
+                ((MediaQuery.of(context).size.width -
+                            details.globalPosition.dx) >
+                        MediaQuery.of(context).size.width * 0.1 &&
+                    !gettingNotification)) {
               _forwardDragStart(position, _);
               _dragInitialDelta = delta;
+            } else {
+              print("##############out###############");
+              gettingNotification = true;
             }
+          }
+          if (!gettingNotification) {
             _forwardDragUpdate(position, _);
           }
-        },
-        onHorizontalDragEnd: (DragEndDetails details) {
-          if (!_.windows) {
-            if (!_.videoPlayerController!.value.isInitialized) {
-              return;
-            }
-            _forwardDragEnd(_);
-          }
-        },
-        onVerticalDragUpdate: (DragUpdateDetails details) {
-          if (!_.windows) {
-            if (!_.videoPlayerController!.value.isInitialized) {
-              return;
-            }
-            //_.controls=true;
-            final Offset position = details.localPosition;
-            if (_dragInitialDelta == Offset.zero) {
+        }
+
+        //_.videoPlayerController!.seekTo(position);
+      },
+      onHorizontalDragEnd: (DragEndDetails details) {
+        if (!_.windows) {
+          //if (!_.videoPlayerController!.value.isInitialized) {
+          //return;
+          //}
+          gettingNotification = false;
+          _forwardDragEnd(_);
+        }
+      },
+      onVerticalDragUpdate: (DragUpdateDetails details) {
+        if (!_.windows) {
+          //if (!_.videoPlayerController!.value.isInitialized) {
+          //return;
+          //}
+          //_.controls=true;
+
+          final Offset position = details.localPosition;
+          if (_dragInitialDelta == Offset.zero) {
+            print(details.globalPosition.dy);
+            if (details.globalPosition.dy >
+                    MediaQuery.of(context).size.height * 0.1 &&
+                ((MediaQuery.of(context).size.height -
+                        details.globalPosition.dy) >
+                    MediaQuery.of(context).size.height * 0.1) &&
+                !gettingNotification) {
               final Offset delta = details.delta;
               //if(details.globalPosition.dy<30){
               if (details.globalPosition.dx >=
@@ -500,9 +545,15 @@ class ControlsContainer extends StatelessWidget {
                   _brightnessDragStart(position, _);
                 }
                 _dragInitialDelta = delta;
+                //print("left");
               }
-              //}
             } else {
+              print("out");
+              gettingNotification = true;
+            }
+            //}
+          } else {
+            if (!gettingNotification) {
               if (isVolume) {
                 _volumeDragUpdate(position, _);
               } else {
@@ -512,32 +563,33 @@ class ControlsContainer extends StatelessWidget {
               }
             }
           }
-          //_.videoPlayerController!.seekTo(position);
-        },
-        onVerticalDragEnd: (DragEndDetails details) {
-          if (!_.windows) {
-            //if (!_.videoPlayerController!.value.isInitialized) {
-            // return;
-            //}
-            if (isVolume) {
-              _volumeDragEnd(_);
-            } else {
-              if (!_.windows) {
-                _brightnessDragEnd(_);
-              }
+        }
+        //_.videoPlayerController!.seekTo(position);
+      },
+      onVerticalDragEnd: (DragEndDetails details) {
+        if (!_.windows) {
+          //if (!_.videoPlayerController!.value.isInitialized) {
+          // return;
+          //}
+          gettingNotification = false;
+          if (isVolume) {
+            _volumeDragEnd(_);
+          } else {
+            if (!_.windows) {
+              _brightnessDragEnd(_);
             }
           }
-        },
-        child: AnimatedOpacity(
-          opacity: _.showControls.value ? 1 : 0,
+        }
+      },
+      child: AnimatedOpacity(
+        opacity: _.showControls.value ? 1 : 0,
+        duration: Duration(milliseconds: _.showControls.value ? 150 : 0),
+        child: AnimatedContainer(
           duration: Duration(milliseconds: _.showControls.value ? 150 : 0),
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: _.showControls.value ? 150 : 0),
-            color: _.showControls.value ? Colors.black38 : Colors.transparent,
-            child: AbsorbPointer(
-              absorbing: !_.showControls.value,
-              child: this.child,
-            ),
+          color: _.showControls.value ? Colors.black38 : Colors.transparent,
+          child: AbsorbPointer(
+            absorbing: !_.showControls.value,
+            child: this.child,
           ),
         ),
       ),

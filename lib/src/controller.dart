@@ -2,9 +2,12 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'package:dart_vlc/dart_vlc.dart';
+import 'package:dio/adapter.dart';
+import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:meedu/rx.dart';
@@ -13,6 +16,8 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/fullscreen_page.dart';
 import 'package:volume_controller/volume_controller.dart';
 import 'package:wakelock/wakelock.dart';
+import 'package:dio/dio.dart';
+import 'package:path/path.dart';
 
 enum ControlsStyle { primary, secondary }
 
@@ -55,7 +60,7 @@ class MeeduPlayerController {
   Rx<Duration> _duration = Rx(Duration.zero);
   Rx<int> _swipeDuration = 0.obs;
   Rx<int> doubleTapCount = 0.obs;
-  Rx<double> _currentVolume = 0.0.obs;
+  Rx<double> _currentVolume = 1.0.obs;
   Rx<double> _playbackSpeed = 1.0.obs;
   Rx<double> _currentBrightness = 0.0.obs;
   Rx<List<DurationRange>> _buffered = Rx([]);
@@ -366,9 +371,148 @@ class MeeduPlayerController {
     //await HotKeyManager.instance.unregister(_hotKey);
   }
 
+  Future<String> extractAudioAndVideoTs(
+    String m3u8, {
+    String initialSubtitle = "",
+    String Function(String quality)? formatter,
+    bool descending = true,
+  }) async {
+    Dio dio = Dio();
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+    dio.options.connectTimeout = 5 * 1000;
+
+    dio.interceptors.add(RetryInterceptor(
+      dio: dio,
+      logPrint: print, // specify log function (optional)
+      retries: 10, // retry count (optional)
+      retryDelays: const [
+        // set delays between retries (optional)
+        Duration(seconds: 1), // wait 1 sec before first retry
+        Duration(seconds: 2), // wait 2 sec before second retry
+        Duration(seconds: 3), // wait 3 sec before third retry
+      ],
+    ));
+
+//REGULAR EXPRESIONS//
+    final RegExp netRegxUrl = RegExp(r'^(http|https):\/\/([\w.]+\/?)\S*');
+    final RegExp netRegx2 = RegExp(r'(.*)\r?\/');
+    final RegExp regExpPlaylist = RegExp(
+      r"#EXT-X-STREAM-INF:(?:.*,RESOLUTION=(\d+x\d+))?,?(.*)\r?\n(.*)",
+      caseSensitive: false,
+      multiLine: true,
+    );
+    final RegExp regExpAudio = RegExp(
+      r"""^#EXT-X-MEDIA:TYPE=AUDIO(?:.*,URI="(.*m3u8.*)")""",
+      caseSensitive: false,
+      multiLine: true,
+    );
+    final RegExp regExpListOfLinks =
+        RegExp("#EXTINF:.+?\n+(.+)", multiLine: true, caseSensitive: false);
+    Response res = await dio.get(m3u8);
+    //GET m3u8 file
+    String content = "";
+    if (res.statusCode == 200) {
+      content = res.data;
+
+//Find matches
+      List<RegExpMatch> playlistMatches =
+          regExpPlaylist.allMatches(content).toList();
+      List<RegExpMatch> audioMatches = regExpAudio.allMatches(content).toList();
+      //List<RegExpMatch> ListOfLinks = regExpListOfLinks.allMatches(content).toList();
+      Map<String, List<String?>> downloadLinks = {};
+      Map<String, String> sourceUrls = {};
+
+      final List<String> audioUrls = [];
+
+      for (final RegExpMatch playlistMatch in playlistMatches) {
+        final RegExpMatch? playlist = netRegx2.firstMatch(m3u8);
+        final String sourceURL = (playlistMatch.group(3)).toString();
+        final String quality = (playlistMatch.group(1)).toString();
+        final bool isNetwork = netRegxUrl.hasMatch(sourceURL);
+        String playlistUrl = sourceURL;
+
+        if (!isNetwork) {
+          final String? dataURL = playlist!.group(0);
+          playlistUrl = "$dataURL$sourceURL";
+        }
+
+        //Find audio url
+        for (final RegExpMatch audioMatch in audioMatches) {
+          final String audio = (audioMatch.group(1)).toString();
+          final bool isNetwork = netRegxUrl.hasMatch(audio);
+          final RegExpMatch? match = netRegx2.firstMatch(playlistUrl);
+          String audioUrl = audio;
+
+          if (!isNetwork && match != null) {
+            audioUrl = "${match.group(0)}$audio";
+          }
+          audioUrls.add(audioUrl);
+        }
+
+        sourceUrls[quality] = playlistUrl;
+      }
+      //print("here");
+      List<String> qualityKeys = sourceUrls.keys.toList();
+      qualityKeys.sort((a, b) {
+        try {
+          return int.parse(a.split("x")[0])
+              .compareTo(int.parse(b.split("x")[0]));
+        } catch (_) {
+          print("error comparing qualities hls,$_");
+          return -1;
+        }
+      });
+      if (sourceUrls.isEmpty) {
+        //input was playlist
+        List<RegExpMatch> ListOfLinks =
+            regExpListOfLinks.allMatches(content).toList();
+        String baseUrl = m3u8;
+        ListOfLinks.forEach((element) {
+          final bool isNetwork = netRegxUrl.hasMatch(element.group(1) ?? "");
+          if (!isNetwork) {
+            content.replaceAll(
+                element.group(1) ?? "",
+                baseUrl.substring(0, baseUrl.lastIndexOf('/')) +
+                    "/" +
+                    (element.group(1) ?? ""));
+          }
+        });
+        return content;
+      }
+
+      //print(downloadLinks);
+      return "";
+    } else {
+      return "";
+    }
+  }
+
+  Future<DataSource> checkIfm3u8AndNoLinks(DataSource dataSource) async {
+    //final RegExp netRegxUrl = RegExp(r'^(http|https):\/\/([\w.]+\/?)\S*');
+    if (dataSource.type == DataSourceType.network &&
+        Uri.parse(dataSource.source!).path.endsWith(".m3u8")) {
+      String newContent = await extractAudioAndVideoTs(dataSource.source!);
+      if (newContent != "") {
+        final File file =
+            File(join((await getTemporaryDirectory()).path, 'hls_link.m3u8'));
+        file.writeAsStringSync(newContent);
+        dataSource.file = file;
+        dataSource.type = DataSourceType.file;
+        return dataSource;
+      }
+    }
+    return dataSource;
+  }
+
   /// create a new video_player controller
   VideoPlayerController _createVideoController(DataSource dataSource) {
     VideoPlayerController tmp; // create a new video controller
+    //dataSource = await checkIfm3u8AndNoLinks(dataSource);
     if (dataSource.type == DataSourceType.asset) {
       tmp = VideoPlayerController.asset(
         dataSource.source!,
@@ -403,6 +547,7 @@ class MeeduPlayerController {
       }
     }
     //print('--http-referrer=' + refer);
+
     Player player = Player(
         id: randomNumber,
         commandlineArguments: [
@@ -410,7 +555,18 @@ class MeeduPlayerController {
           '--http-referrer=' + refer,
           '--http-reconnect',
         ],
-        registerTexture: false); // create a new video controller
+        registerTexture: false
+); // create a new video controller
+
+    Player player = Player(id: randomNumber, commandlineArguments: [
+      //"-vvv",
+      '--http-referrer=' + refer,
+      '--http-reconnect',
+      '--sout-livehttp-caching',
+      '--network-caching=60000',
+      '--file-caching=60000'
+    ]); // create a new video controller
+
     player = setPlayerDataSource(dataSource, player, seekTo);
     return player;
   }
@@ -639,7 +795,7 @@ class MeeduPlayerController {
               .dispose(); // dispose the previous video controller
         }
       } else {
-        _videoPlayerController = _createVideoController(dataSource);
+        _videoPlayerController = await _createVideoController(dataSource);
         await _videoPlayerController!.initialize();
 
         if (oldController != null) {
