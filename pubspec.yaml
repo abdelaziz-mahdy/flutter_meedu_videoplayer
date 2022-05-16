@@ -16,10 +16,10 @@ dependencies:
   video_player: ^2.3.0
   auto_orientation: ^2.2.1
   screen_brightness: ^0.2.0
-  flutter_meedu: ^6.2.3
+  flutter_meedu: ^7.0.0
   flutter_spinkit: ^5.1.0
   meta: ^1.7.0
-  dart_vlc: ^0.1.9
+  dart_vlc: ^0.2.0
   window_manager: ^0.2.0
   hotkey_manager: ^0.1.6
   wakelock: ^0.6.1+2
@@ -32,7 +32,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
