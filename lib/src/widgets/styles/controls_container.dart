@@ -489,10 +489,10 @@ class ControlsContainer extends StatelessWidget {
           if (_dragInitialDelta == Offset.zero) {
             final Offset delta = details.delta;
             if (details.globalPosition.dx >
-                    MediaQuery.of(context).size.width * 0.05 &&
+                    MediaQuery.of(context).size.width * 0.1 &&
                 ((MediaQuery.of(context).size.width -
                             details.globalPosition.dx) >
-                        MediaQuery.of(context).size.width * 0.05 &&
+                        MediaQuery.of(context).size.width * 0.1 &&
                     !gettingNotification)) {
               _forwardDragStart(position, _);
               _dragInitialDelta = delta;
@@ -528,10 +528,10 @@ class ControlsContainer extends StatelessWidget {
           if (_dragInitialDelta == Offset.zero) {
             print(details.globalPosition.dy);
             if (details.globalPosition.dy >
-                    MediaQuery.of(context).size.height * 0.05 &&
+                    MediaQuery.of(context).size.height * 0.1 &&
                 ((MediaQuery.of(context).size.height -
                         details.globalPosition.dy) >
-                    MediaQuery.of(context).size.height * 0.05) &&
+                    MediaQuery.of(context).size.height * 0.1) &&
                 !gettingNotification) {
               final Offset delta = details.delta;
               //if(details.globalPosition.dy<30){
