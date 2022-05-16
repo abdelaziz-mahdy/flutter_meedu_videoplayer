@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu/rx.dart';
+import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/primary/primary_player_controls.dart';
@@ -43,6 +45,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return MeeduPlayerProvider(
+      controller: widget.controller,
       child: Container(
           color: Colors.black,
           width: 0.0,
@@ -85,13 +88,15 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                       return Stack(
                         fit: StackFit.expand,
                         children: [
-                          NativeVideo(
-                            player: _.videoPlayerControllerWindows!,
-                            //width: 500,
-                            showControls: false,
-                            //height: 500,
-                            playlistLength: 1,
-                          ),
+                          Platform.isWindows
+                              ? NativeVideo(
+                                  player: _.videoPlayerControllerWindows!,
+                                  showControls: false,
+                                )
+                              : Video(
+                                  player: _.videoPlayerControllerWindows!,
+                                  showControls: false,
+                                ),
                         ],
                       );
                     })
@@ -131,7 +136,6 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
               );
             },
           )),
-      controller: widget.controller,
     );
   }
 

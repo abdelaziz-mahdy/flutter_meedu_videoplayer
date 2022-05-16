@@ -8,6 +8,7 @@
 
 #include <dart_vlc/dart_vlc_plugin.h>
 #include <flutter_meedu_videoplayer/flutter_meedu_videoplayer_plugin.h>
+#include <flutter_native_view/flutter_native_view_plugin.h>
 #include <hotkey_manager/hotkey_manager_plugin.h>
 #include <window_manager/window_manager_plugin.h>
 
@@ -16,6 +17,8 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("DartVlcPlugin"));
   FlutterMeeduVideoplayerPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FlutterMeeduVideoplayerPlugin"));
+  FlutterNativeViewPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("FlutterNativeViewPlugin"));
   HotkeyManagerPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("HotkeyManagerPlugin"));
   WindowManagerPluginRegisterWithRegistrar(
