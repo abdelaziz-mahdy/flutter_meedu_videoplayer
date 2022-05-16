@@ -791,7 +791,7 @@ class MeeduPlayerController {
         await _videoPlayerController!.initialize();
 
         if (oldController != null) {
-          WidgetsBinding.instance!.addPostFrameCallback((_) async {
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
             oldController.removeListener(this._listener);
             await oldController
                 .dispose(); // dispose the previous video controller
@@ -1350,7 +1350,7 @@ class MeeduPlayerController {
     timerForTrackingMouse?.cancel();
     _timerForSeek?.cancel();
     videoFitChangedTimer?.cancel();
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       _position.value = Duration.zero;
       _timer?.cancel();
       pause();

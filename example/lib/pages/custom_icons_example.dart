@@ -32,7 +32,7 @@ class _CustomIconsExamplePageState extends State<CustomIconsExamplePage> {
       },
     );
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _init();
     });
   }

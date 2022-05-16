@@ -51,7 +51,7 @@ class _PlayBackSpeedExamplePageState extends State<PlayBackSpeedExamplePage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _init();
     });
   }

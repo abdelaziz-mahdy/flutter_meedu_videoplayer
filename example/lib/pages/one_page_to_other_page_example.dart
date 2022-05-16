@@ -30,7 +30,7 @@ class _OnePageExampleState extends State<OnePageExample> {
       },
     );
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _init();
     });
   }
@@ -124,7 +124,7 @@ class _PageTwoState extends State<PageTwo> {
       },
     );
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _init();
     });
   }

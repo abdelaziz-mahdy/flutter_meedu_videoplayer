@@ -78,8 +78,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                     RxBuilder(
                         //observables: [_.videoFit],
                         (__) {
-                      print(
-                          "NATIVE HAS BEEN REBUILT ${_.videoPlayerControllerWindows}");
+                      //print("NATIVE HAS BEEN REBUILT ${_.videoPlayerControllerWindows}");
                       _.dataStatus.status.value;
                       if (_.videoPlayerControllerWindows == null) {
                         return Text("Loading");

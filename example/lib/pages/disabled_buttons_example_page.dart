@@ -36,7 +36,7 @@ class _DisabledButtonsExampleState extends State<DisabledButtonsExample> {
       },
     );
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _init();
     });
   }

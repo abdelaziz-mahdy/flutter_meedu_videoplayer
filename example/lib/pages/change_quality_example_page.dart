@@ -64,7 +64,7 @@ class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
         _currentPosition = position; // save the video position
       },
     );
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _setDataSource();
     });
   }

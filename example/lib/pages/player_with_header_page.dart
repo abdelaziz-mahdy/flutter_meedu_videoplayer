@@ -19,7 +19,7 @@ class _PlayerWithHeaderPageState extends State<PlayerWithHeaderPage> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _init();
     });
   }
