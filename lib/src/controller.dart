@@ -239,9 +239,8 @@ class MeeduPlayerController {
           size: 30,
           color: this.colorTheme,
         );
-    if (Platform.isWindows || Platform.isLinux) {
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
       windows = true;
-      //_videoFit.value=BoxFit.cover;
     }
     //check each
     if (!windows) {
@@ -554,18 +553,11 @@ class MeeduPlayerController {
           //"-vvv",
           '--http-referrer=' + refer,
           '--http-reconnect',
+          '--sout-livehttp-caching',
+          '--network-caching=60000',
+          '--file-caching=60000'
         ],
-        registerTexture: false
-); // create a new video controller
-
-    Player player = Player(id: randomNumber, commandlineArguments: [
-      //"-vvv",
-      '--http-referrer=' + refer,
-      '--http-reconnect',
-      '--sout-livehttp-caching',
-      '--network-caching=60000',
-      '--file-caching=60000'
-    ]); // create a new video controller
+        registerTexture: !Platform.isWindows); // create a new video controller
 
     player = setPlayerDataSource(dataSource, player, seekTo);
     return player;
