@@ -13,9 +13,8 @@
 - integrated wake lock in the code
 
 
-## Setup
-1. Edit your `windows/runner/main.cpp` as required [here](https://github.com/alexmercerind/flutter_native_view#setup).
-2. Add in main 
+## Setup For windows 
+1.Add in main 
 ```dart
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     //init dart vlc
