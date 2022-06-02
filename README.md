@@ -8,7 +8,7 @@
 
 
 ## Used meedu player as a base and added (also fixed some errors)
-- swipe to increse and decrease volume 
+- swipe to increase and decrease volume 
 - swipe to seek 
 - integrated wake lock in the code
 

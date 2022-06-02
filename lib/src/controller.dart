@@ -5,19 +5,18 @@ import 'package:dart_vlc/dart_vlc.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_meedu/meedu.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:meedu/rx.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/fullscreen_page.dart';
 import 'package:volume_controller/volume_controller.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:dio/dio.dart';
-import 'package:path/path.dart';
 
 enum ControlsStyle { primary, secondary }
 
@@ -490,7 +489,7 @@ class MeeduPlayerController {
       return "";
     }
   }
-
+/*
   Future<DataSource> checkIfm3u8AndNoLinks(DataSource dataSource) async {
     //final RegExp netRegxUrl = RegExp(r'^(http|https):\/\/([\w.]+\/?)\S*');
     if (dataSource.type == DataSourceType.network &&
@@ -507,6 +506,7 @@ class MeeduPlayerController {
     }
     return dataSource;
   }
+  */
 
   /// create a new video_player controller
   VideoPlayerController _createVideoController(DataSource dataSource) {
