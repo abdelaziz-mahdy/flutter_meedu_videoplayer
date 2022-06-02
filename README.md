@@ -19,14 +19,14 @@
 ```dart
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     //init dart vlc
-    DartVLC.initialize(useFlutterNativeView: Platform.isWindows);
+    DartVLC.initialize();
     }
 ```
 Example:
 ```dart
 void main() {
 if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    DartVLC.initialize(useFlutterNativeView: Platform.isWindows);
+    DartVLC.initialize();
 }
 runApp(MyApp());
 }

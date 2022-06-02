@@ -548,16 +548,17 @@ class MeeduPlayerController {
     //print('--http-referrer=' + refer);
 
     Player player = Player(
-        id: randomNumber,
-        commandlineArguments: [
-          //"-vvv",
-          '--http-referrer=' + refer,
-          '--http-reconnect',
-          '--sout-livehttp-caching',
-          '--network-caching=60000',
-          '--file-caching=60000'
-        ],
-        registerTexture: !Platform.isWindows); // create a new video controller
+      id: randomNumber,
+      commandlineArguments: [
+        //"-vvv",
+        '--http-referrer=' + refer,
+        '--http-reconnect',
+        '--sout-livehttp-caching',
+        '--network-caching=60000',
+        '--file-caching=60000'
+      ],
+      //registerTexture: !Platform.isWindows
+    ); // create a new video controller
 
     player = setPlayerDataSource(dataSource, player, seekTo);
     return player;
