@@ -1,6 +1,6 @@
 name: flutter_meedu_videoplayer
 description: A crossplatfrom video player.
-version: 1.0.1
+version: 1.0.3
 homepage: "https://github.com/zezo357/flutter_meedu_videoplayer"
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -52,9 +52,10 @@ flutter:
         pluginClass: FlutterMeeduVideoplayerPlugin
       windows:
         pluginClass: FlutterMeeduVideoplayerPlugin
-      web:
-        pluginClass: FlutterMeeduVideoplayerWeb
-        fileName: flutter_meedu_videoplayer_web.dart
+
+      #web:
+        #pluginClass: FlutterMeeduVideoplayerWeb
+        #fileName: flutter_meedu_videoplayer_web.dart
   assets:
     - assets/icons/fast-forward.png
     - assets/icons/fullscreen.png
