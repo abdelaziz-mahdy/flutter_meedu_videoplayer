@@ -1,4 +1,7 @@
-
+## 2.0.0
+Due to dart vlc update 
+    BREAKING CHANGES
+    Removed macOS support
 ## 1.0.3
 * Removed use native view from example due to instability.
 ## 1.0.2

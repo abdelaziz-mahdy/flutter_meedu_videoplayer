@@ -2,7 +2,7 @@
 
 
 
-## Cross-platform video player 
+## Cross-platform video player (macos not included)
 - Android and Ios are using video player
 - Desktop are using dart-vlc
 
@@ -39,19 +39,19 @@ runApp(MyApp());
 
 | Features  | iOS | Android | windows | linux | macos
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| Videos from Network  | ✅  | ✅ | ✅ | ✅ | ✅ |
-| Videos from Assets  | ✅  | ✅ | ✅ | ✅ | ✅ |
-| Videos from local files  | ✅  | ✅ | ✅ | ✅ | ✅ |
-| Looping  | ✅  | ✅ | ✅ | ✅ | ✅ |
-| Autoplay  | ✅  | ✅ | ✅ | ✅ | ✅ |
-| Swipe to increase and decrease Sound  | ✅  | ✅ | ✅ | ✅ | ✅ |
-| Swipe to seek in video | ✅  | ✅ | ✅ | ✅ | ✅ |
-| Fullscreen  | ✅  | ✅ | ✅ | ✅ | ✅ |
-| Launch Player as Fullscreen  | ✅  | ✅ | ✅ | ✅ | ✅ |
-| Playback Speed  | ✅  | ✅ | ✅ | ✅ | ✅ |
-| fastForward / Rewind  | ✅  | ✅ | ✅ | ✅ | ✅ |
+| Videos from Network  | ✅  | ✅ | ✅ | ✅ | x |
+| Videos from Assets  | ✅  | ✅ | ✅ | ✅ | x |
+| Videos from local files  | ✅  | ✅ | ✅ | ✅ | x|
+| Looping  | ✅  | ✅ | ✅ | ✅ | x |
+| Autoplay  | ✅  | ✅ | ✅ | ✅ | x |
+| Swipe to increase and decrease Sound  | ✅  | ✅ | ✅ | ✅ | x|
+| Swipe to seek in video | ✅  | ✅ | ✅ | ✅ | x|
+| Fullscreen  | ✅  | ✅ | ✅ | ✅ | x |
+| Launch Player as Fullscreen  | ✅  | ✅ | ✅ | ✅ |x |
+| Playback Speed  | ✅  | ✅ | ✅ | ✅ | x |
+| fastForward / Rewind  | ✅  | ✅ | ✅ | ✅ |x |
 | srt subtitles  | ✅  | ✅ | X | X | X |
-| Customize  | partially  | partially | ✅ | ✅ | ✅ |
+| Customize  | partially  | partially | ✅ | ✅ | x |
 
 ---
 
