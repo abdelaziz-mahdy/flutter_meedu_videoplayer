@@ -971,7 +971,11 @@ class MeeduPlayerController {
   /// [enabled] if is true the video player is muted
   Future<void> setMute(bool enabled) async {
     if (enabled) {
-      _volumeBeforeMute = _videoPlayerController!.value.volume;
+      if (_videoPlayerController != null) {
+        _volumeBeforeMute = _videoPlayerController!.value.volume;
+      } else {
+        _volumeBeforeMute = _videoPlayerControllerWindows!.general.volume;
+      }
     }
     _mute.value = enabled;
     await this.setVolume(enabled ? 0 : _volumeBeforeMute);
