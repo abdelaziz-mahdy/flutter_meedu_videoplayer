@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -1199,7 +1200,7 @@ class MeeduPlayerController {
   }
 
   /// dispose de video_player controller
-  Future<void> dispose() async {
+  Future<void> dispose([AsyncCallback? restoreHotkeysCallback]) async {
     if (windows) {
       _timer?.cancel();
       _timerForVolume?.cancel();
@@ -1217,7 +1218,9 @@ class MeeduPlayerController {
       _mute.close();
       _fullscreen.close();
       _showControls.close();
-      HotKeyManager.instance.unregisterAll();
+      HotKeyManager.instance
+          .unregisterAll()
+          .then((value) => restoreHotkeysCallback?.call());
       playerStatus.status.close();
       dataStatus.status.close();
       removeWindowsListener();
@@ -1339,13 +1342,16 @@ class MeeduPlayerController {
     }
   }*/
 
-  Future<void> videoPlayerClosed() async {
+  Future<void> videoPlayerClosed(
+      [AsyncCallback? restoreHotkeysCallback]) async {
     print("Video player closed");
     fullscreen.value = false;
     resetBrightness();
     if (windows) {
       screenManager.setWindowsFullScreen(false, this);
-      HotKeyManager.instance.unregisterAll();
+      HotKeyManager.instance
+          .unregisterAll()
+          .then((value) => restoreHotkeysCallback?.call());
     } else {
       screenManager.setDefaultOverlaysAndOrientations();
     }
