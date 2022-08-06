@@ -531,6 +531,7 @@ class MeeduPlayerController {
       tmp = VideoPlayerController.file(
         dataSource.file!,
         closedCaptionFile: dataSource.closedCaptionFile,
+        httpHeaders: dataSource.httpHeaders ?? {},
       );
     }
     return tmp;

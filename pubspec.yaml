@@ -12,7 +12,11 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   volume_controller: ^2.0.3
-  video_player: ^2.3.0
+  video_player:
+    git:
+      path: ./packages/video_player/video_player
+      url: https://github.com/zezo357/plugins
+      ref: passing-httpHeaders-to-file-constructor
   auto_orientation: ^2.2.1
   screen_brightness: ^0.2.0
   flutter_meedu: ^7.0.0
@@ -28,10 +32,18 @@ dependencies:
   dio: ^4.0.4
   dio_smart_retry: ^1.2.0
   path_provider: ^2.0.6
-
+dependency_overrides:
+  video_player_android:
+    git:
+      path: ./packages/video_player/video_player_android
+      url: https://github.com/zezo357/plugins
+      ref: passing-httpHeaders-to-file-constructor
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
+
   flutter_lints: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
