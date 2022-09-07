@@ -1,3 +1,7 @@
+## 2.0.1
+[Windows] optional ability to restore app hotkeys
+[Windows] fix of null-check exception on pushing player's mute button
+both by nikitatg
 ## 2.0.0
 Due to dart vlc update 
     BREAKING CHANGES
