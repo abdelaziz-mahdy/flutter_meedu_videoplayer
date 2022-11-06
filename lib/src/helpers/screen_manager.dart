@@ -56,8 +56,8 @@ class ScreenManager {
           overlays: this.overlays);
     } else {
       //print("Closed2");
-      await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-          overlays: []);
+      // await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      //     overlays: []);
     }
     //}
   }
@@ -71,7 +71,7 @@ class ScreenManager {
         : AutoOrientation.fullAutoMode();
 
     if (hideOverLays) {
-      setOverlays(false);
+      setOverlays(true);
     }
     //AutoOrientation.landscapeAutoMode(forceSensor: true);
   }
