@@ -99,6 +99,7 @@ class _FullscreenExamplePageState extends State<FullscreenExamplePage> {
                 onPressed: () {
                   // close the fullscreen
                   Navigator.pop(context);
+                  this._meeduPlayerController.dispose();
                 },
               ),
               Expanded(

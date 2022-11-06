@@ -376,9 +376,17 @@ class ControlsContainer extends StatelessWidget {
         ),
       ),
       RxBuilder(
-        //observables: [_.showSwipeDuration],
-        //observables: [_.swipeDuration],
-        (__) => Align(
+          //observables: [_.showSwipeDuration],
+          //observables: [_.swipeDuration],
+
+          (__) {
+        final beforeCapitalLetter = RegExp(r"(?=[A-Z])");
+        final videoFitName =
+            (_.videoFit.value.name.substring(0, 1).toUpperCase() +
+                    _.videoFit.value.name.substring(1))
+                .split(beforeCapitalLetter)
+                .join(' ');
+        return Align(
           alignment: Alignment.center,
           child: AnimatedOpacity(
             duration: Duration(milliseconds: 100),
@@ -390,15 +398,15 @@ class ControlsContainer extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    _.videoFit.value.name,
+                    videoFitName,
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      }),
       RxBuilder(
           //observables: [_.showControls],
           (__) {

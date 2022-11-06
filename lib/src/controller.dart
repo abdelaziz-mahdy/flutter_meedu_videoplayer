@@ -1264,7 +1264,7 @@ class MeeduPlayerController {
 
   Future<void> getUserPreferenceForFit() async {
     prefs = await SharedPreferences.getInstance();
-    String fitValue = (await prefs?.getString('fit')) ?? "fill";
+    String fitValue = (await prefs?.getString('fit')) ?? "Fill";
     _videoFit.value = fits.firstWhere((element) => element.name == fitValue);
     print("Last fit used was ${_videoFit.value.name}");
   }
@@ -1342,9 +1342,9 @@ class MeeduPlayerController {
     }
   }*/
 
-  Future<void> videoPlayerClosed(
+  Future<void> videoPlayerToggleFromFullScreen(
       [AsyncCallback? restoreHotkeysCallback]) async {
-    print("Video player closed");
+    print("Video player toggle");
     fullscreen.value = false;
     resetBrightness();
     if (windows) {
@@ -1355,14 +1355,57 @@ class MeeduPlayerController {
     } else {
       screenManager.setDefaultOverlaysAndOrientations();
     }
-    if (onVideoPlayerClosed != null) {
-      print("Called");
-      onVideoPlayerClosed!();
-    } else {
-      print("Didnt get Called");
-    }
-    // });
+    
+      if (onVideoPlayerClosed != null) {
+        print("Toggled");
+        onVideoPlayerClosed!();
+      } else {
+        print("Didnt get Toggled");
+      }
   }
+
+  // Future<void> videoPlayerClosed(
+  //     [AsyncCallback? restoreHotkeysCallback]) async {
+  //   print("Video player closed");
+  //   fullscreen.value = false;
+  //   resetBrightness();
+  //   if (windows) {
+  //     screenManager.setWindowsFullScreen(false, this);
+  //     HotKeyManager.instance
+  //         .unregisterAll()
+  //         .then((value) => restoreHotkeysCallback?.call());
+  //   } else {
+  //     screenManager.setDefaultOverlaysAndOrientations();
+  //   }
+  //   _timer?.cancel();
+  //   _timerForVolume?.cancel();
+  //   _timerForGettingVolume?.cancel();
+  //   timerForTrackingMouse?.cancel();
+  //   _timerForSeek?.cancel();
+  //   videoFitChangedTimer?.cancel();
+  //   WidgetsBinding.instance.addPostFrameCallback((_) async {
+  //     _position.value = Duration.zero;
+  //     _timer?.cancel();
+  //     pause();
+  //     Wakelock.disable();
+  //     if (windows) {
+  //       removeWindowsListener();
+  //       _videoPlayerControllerWindows?.dispose();
+  //       _videoPlayerControllerWindows = null;
+  //     } else {
+  //       _videoPlayerController?.removeListener(this._listener);
+  //       await _videoPlayerController?.dispose();
+  //       _videoPlayerController = null;
+  //     }
+  //     //disposeVideoPlayerController();
+  //     if (onVideoPlayerClosed != null) {
+  //       print("Called");
+  //       onVideoPlayerClosed!();
+  //     } else {
+  //       print("Didnt get Called");
+  //     }
+  //   });
+  // }
 
   static MeeduPlayerController of(BuildContext context) {
     return context
