@@ -1355,34 +1355,13 @@ class MeeduPlayerController {
     } else {
       screenManager.setDefaultOverlaysAndOrientations();
     }
-    _timer?.cancel();
-    _timerForVolume?.cancel();
-    _timerForGettingVolume?.cancel();
-    timerForTrackingMouse?.cancel();
-    _timerForSeek?.cancel();
-    videoFitChangedTimer?.cancel();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      _position.value = Duration.zero;
-      _timer?.cancel();
-      pause();
-      Wakelock.disable();
-      if (windows) {
-        removeWindowsListener();
-        _videoPlayerControllerWindows?.dispose();
-        _videoPlayerControllerWindows = null;
-      } else {
-        _videoPlayerController?.removeListener(this._listener);
-        await _videoPlayerController?.dispose();
-        _videoPlayerController = null;
-      }
-      //disposeVideoPlayerController();
-      if (onVideoPlayerClosed != null) {
-        print("Called");
-        onVideoPlayerClosed!();
-      } else {
-        print("Didnt get Called");
-      }
-    });
+    if (onVideoPlayerClosed != null) {
+      print("Called");
+      onVideoPlayerClosed!();
+    } else {
+      print("Didnt get Called");
+    }
+    // });
   }
 
   static MeeduPlayerController of(BuildContext context) {
