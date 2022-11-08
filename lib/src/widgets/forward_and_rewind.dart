@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/rewindAndForwardLayout.dart';
+import 'package:flutter_meedu_videoplayer/src/widgets/rewind_and_forward_layout.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/ripple_side.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/transitions.dart';
 

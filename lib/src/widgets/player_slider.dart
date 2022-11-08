@@ -12,21 +12,19 @@ class PlayerSlider extends StatelessWidget {
     return Stack(
       alignment: Alignment.centerLeft,
       children: [
-        Container(
-          child: LayoutBuilder(builder: (ctx, constraints) {
-            return RxBuilder(
-              //observables: [_.buffered, _.duration],
-              (__) {
-                return AnimatedContainer(
-                  duration: Duration(milliseconds: 300),
-                  color: Colors.white30,
-                  width: constraints.maxWidth * _.bufferedPercent.value,
-                  height: 3,
-                );
-              },
-            );
-          }),
-        ),
+        LayoutBuilder(builder: (ctx, constraints) {
+          return RxBuilder(
+            //observables: [_.buffered, _.duration],
+            (__) {
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                color: Colors.white30,
+                width: constraints.maxWidth * _.bufferedPercent.value,
+                height: 3,
+              );
+            },
+          );
+        }),
         RxBuilder(
           //observables: [_.sliderPosition, _.duration],
           (__) {
@@ -36,10 +34,10 @@ class PlayerSlider extends StatelessWidget {
               return Container();
             }
             return Container(
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 maxHeight: 30,
               ),
-              padding: EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: 8),
               alignment: Alignment.center,
               child: SliderTheme(
                 data: SliderThemeData(
@@ -47,7 +45,8 @@ class PlayerSlider extends StatelessWidget {
                   thumbColor: _.colorTheme,
                   activeTrackColor: _.colorTheme,
                   trackHeight: 10,
-                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 4.0),
+                  thumbShape:
+                      const RoundSliderThumbShape(enabledThumbRadius: 4.0),
                 ),
                 child: Slider(
                   min: 0,
@@ -84,7 +83,7 @@ class MSliderTrackShape extends RoundedRectSliderTrackShape {
     bool isEnabled = false,
     bool isDiscrete = false,
   }) {
-    final double trackHeight = 1;
+    const double trackHeight = 1;
     final double trackLeft = offset.dx;
     final double trackTop =
         offset.dy + (parentBox.size.height - trackHeight) / 2 + 4;

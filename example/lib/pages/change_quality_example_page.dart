@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class Quality {
 }
 
 class ChangeQualityExamplePage extends StatefulWidget {
-  ChangeQualityExamplePage({Key? key}) : super(key: key);
+  const ChangeQualityExamplePage({Key? key}) : super(key: key);
 
   @override
   _ChangeQualityExamplePageState createState() =>
@@ -22,11 +23,13 @@ class ChangeQualityExamplePage extends StatefulWidget {
 
 class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
   final _controller = MeeduPlayerController(
-    screenManager: ScreenManager(
-      forceLandScapeInFullscreen: false,
-    ),
-  );
-
+      screenManager: const ScreenManager(
+        forceLandScapeInFullscreen: false,
+      ),
+      enabledButtons:
+          EnabledButtons(playBackSpeed: Platform.isAndroid || Platform.isIOS),
+      controlsStyle: ControlsStyle.secondary);
+  bool _isHovered = false;
   final _qualities = [
     Quality(
       url:
@@ -46,7 +49,7 @@ class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
   ];
 
   /// listener for the video quality
-  ValueNotifier<Quality?> _quality = ValueNotifier(null);
+  final ValueNotifier<Quality?> _quality = ValueNotifier(null);
 
   Duration _currentPosition = Duration.zero; // to save the video position
 
@@ -85,7 +88,7 @@ class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
           (index) {
             final quality = _qualities[index];
             return CupertinoActionSheetAction(
-              child: Text("${quality.label}"),
+              child: Text(quality.label),
               onPressed: () {
                 _quality.value = quality; // change the video quality
                 _setDataSource(); // update the datasource
@@ -96,7 +99,7 @@ class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
         ),
         cancelButton: CupertinoActionSheetAction(
           onPressed: () => Navigator.pop(_),
-          child: Text("Cancel"),
+          child: const Text("Cancel"),
           isDestructiveAction: true,
         ),
       ),
@@ -127,22 +130,33 @@ class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
             // creates a responsive fontSize using the size of video container
             final double fontSize = responsive.ip(3);
 
-            return CupertinoButton(
-              padding: EdgeInsets.all(5),
-              minSize: 25,
-              child: ValueListenableBuilder<Quality?>(
-                valueListenable: this._quality,
-                builder: (context, Quality? quality, child) {
-                  return Text(
-                    "${quality!.label}",
-                    style: TextStyle(
-                      fontSize: fontSize > 18 ? 18 : fontSize,
-                      color: Colors.white,
-                    ),
-                  );
-                },
-              ),
+            return TextButton(
               onPressed: _onChangeVideoQuality,
+              onHover: (isHovered) {
+                setState(() {
+                  _isHovered = isHovered;
+                });
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: _isHovered
+                      ? Colors.grey.withOpacity(0.1)
+                      : Colors.transparent,
+                ),
+                padding: EdgeInsets.all(responsive.ip(7) * 0.2),
+                child: ValueListenableBuilder<Quality?>(
+                  valueListenable: _quality,
+                  builder: (context, Quality? quality, child) {
+                    return Text(
+                      quality!.label,
+                      style: TextStyle(
+                        fontSize: fontSize > 18 ? 18 : fontSize,
+                        color: Colors.white,
+                      ),
+                    );
+                  },
+                ),
+              ),
             );
           },
         ),

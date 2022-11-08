@@ -5,6 +5,7 @@ import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 import 'package:flutter_meedu_videoplayer/src/helpers/utils.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/fullscreen_button.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/mute_sound_button.dart';
+import 'package:flutter_meedu_videoplayer/src/widgets/play_back_speed.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/play_pause_button.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/player_slider.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/video_fit_button.dart';
@@ -23,7 +24,7 @@ class SecondaryBottomControls extends StatelessWidget {
       fontSize: fontSize > 15 ? 15 : fontSize,
     );
 
-    final tmp = responsive.ip(8);
+    final tmp = responsive.ip(7);
     final buttonsSize = tmp < 40.0 ? tmp : 40.0;
 
     return Positioned(
@@ -35,19 +36,19 @@ class SecondaryBottomControls extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Transform.translate(
-            offset: Offset(0, 4),
-            child: PlayerSlider(),
+            offset: const Offset(0, 4),
+            child: const PlayerSlider(),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  SizedBox(width: 5),
+                  const SizedBox(width: 4),
                   PlayPauseButton(
                     size: buttonsSize,
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 4),
                   RxBuilder(
                     //observables: [_.duration, _.position],
                     (__) {
@@ -61,7 +62,7 @@ class SecondaryBottomControls extends StatelessWidget {
                             "${printDuration(_.position.value)} / ${printDuration(_.duration.value)}";
                       }
                       return Padding(
-                        padding: EdgeInsets.only(right: 5),
+                        padding: const EdgeInsets.only(right: 4),
                         child: Text(
                           text,
                           style: textStyle,
@@ -83,25 +84,24 @@ class SecondaryBottomControls extends StatelessWidget {
                   //   size: buttonsSize,
                   //   iconPath: 'assets/icons/fast-forward.png',
                   // ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 4),
                 ],
               ),
               Row(
                 children: [
                   if (_.bottomRight != null) ...[
                     _.bottomRight!,
-                    SizedBox(width: 10)
                   ],
                   //if (_.enabledButtons.pip) PipButton(responsive: responsive),
                   if (_.enabledButtons.videoFit)
                     VideoFitButton(responsive: responsive),
+                  if (_.enabledButtons.playBackSpeed)
+                    PlayBackSpeedButton(
+                        responsive: responsive, textStyle: textStyle),
                   if (_.enabledButtons.muteAndSound)
                     MuteSoundButton(responsive: responsive),
                   if (_.enabledButtons.fullscreen) ...[
-                    FullscreenButton(
-                      size: buttonsSize,
-                    ),
-                    SizedBox(width: 5),
+                    FullscreenButton(responsive: responsive),
                   ],
                 ],
               )

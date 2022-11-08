@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
@@ -29,7 +26,7 @@ class MeeduVideoPlayer extends StatefulWidget {
     Responsive responsive,
   )? customIcons;
 
-  MeeduVideoPlayer({
+  const MeeduVideoPlayer({
     Key? key,
     required this.controller,
     this.header,
@@ -59,16 +56,15 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
               );
 
               if (widget.customIcons != null) {
-                _.customIcons = this.widget.customIcons!(responsive);
+                _.customIcons = widget.customIcons!(responsive);
               }
 
               if (widget.header != null) {
-                _.header = this.widget.header!(context, _, responsive);
+                _.header = widget.header!(context, _, responsive);
               }
 
               if (widget.bottomRight != null) {
-                _.bottomRight =
-                    this.widget.bottomRight!(context, _, responsive);
+                _.bottomRight = widget.bottomRight!(context, _, responsive);
               }
 
               return Stack(
@@ -81,7 +77,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                       //print("NATIVE HAS BEEN REBUILT ${_.videoPlayerControllerWindows}");
                       _.dataStatus.status.value;
                       if (_.videoPlayerControllerWindows == null) {
-                        return Text("Loading");
+                        return const Text("Loading");
                       }
 
                       return Stack(
@@ -121,8 +117,9 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                             height: _.videoPlayerController != null
                                 ? _.videoPlayerController!.value.size.height
                                 : 480,
-                            child:_.videoPlayerController != null ? VideoPlayer(_.videoPlayerController!)
-                            : Container(),
+                            child: _.videoPlayerController != null
+                                ? VideoPlayer(_.videoPlayerController!)
+                                : Container(),
                           ),
                         ),
                       );
@@ -159,7 +156,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
 class MeeduPlayerProvider extends InheritedWidget {
   final MeeduPlayerController controller;
 
-  MeeduPlayerProvider({
+  const MeeduPlayerProvider({
     Key? key,
     required Widget child,
     required this.controller,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 class PlayBackSpeedExamplePage extends StatefulWidget {
-  PlayBackSpeedExamplePage({Key? key}) : super(key: key);
+  const PlayBackSpeedExamplePage({Key? key}) : super(key: key);
 
   @override
   _PlayBackSpeedExamplePageState createState() =>
@@ -12,12 +12,12 @@ class PlayBackSpeedExamplePage extends StatefulWidget {
 
 class _PlayBackSpeedExamplePageState extends State<PlayBackSpeedExamplePage> {
   final _controller = MeeduPlayerController(
-    screenManager: ScreenManager(
+    screenManager: const ScreenManager(
       forceLandScapeInFullscreen: false,
     ),
   );
 
-  ValueNotifier<double> _playbackSpeed = ValueNotifier(1);
+  final ValueNotifier<double> _playbackSpeed = ValueNotifier(1);
 
   void _onPlaybackSpeed() {
     final options = [0.2, 0.5, 1.0, 2.0, 4.0];
@@ -41,7 +41,7 @@ class _PlayBackSpeedExamplePageState extends State<PlayBackSpeedExamplePage> {
         ),
         cancelButton: CupertinoActionSheetAction(
           onPressed: () => Navigator.pop(_),
-          child: Text("Cancel"),
+          child: const Text("Cancel"),
           isDestructiveAction: true,
         ),
       ),
@@ -86,10 +86,10 @@ class _PlayBackSpeedExamplePageState extends State<PlayBackSpeedExamplePage> {
             final double fontSize = responsive.ip(3);
 
             return CupertinoButton(
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               minSize: 25,
               child: ValueListenableBuilder<double>(
-                valueListenable: this._playbackSpeed,
+                valueListenable: _playbackSpeed,
                 builder: (context, double speed, child) {
                   return Text(
                     "$speed x",

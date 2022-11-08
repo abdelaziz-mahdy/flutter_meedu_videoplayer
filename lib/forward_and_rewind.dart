@@ -13,15 +13,15 @@ class ForwardAndRewindStyle {
     BorderRadius? borderRadius,
     Color? ripple,
     this.spaceBeetweenBarAndText = 10,
-  })  : this.bar = bar ?? BarStyle.forward(),
-        this.padding = padding ?? EdgeInsets.all(10),
-        this.backgroundColor =
-            backgroundColor ?? Colors.black.withOpacity(0.28),
-        this.ripple = ripple ?? Colors.white.withOpacity(0.28),
-        this.borderRadius =
-            borderRadius ?? BorderRadius.all(Radius.circular(10)),
-        this.rewind = rewind ?? Icon(Icons.fast_rewind, color: Colors.white),
-        this.forward = forward ?? Icon(Icons.fast_forward, color: Colors.white);
+  })  : bar = bar ?? BarStyle.forward(),
+        padding = padding ?? const EdgeInsets.all(10),
+        backgroundColor = backgroundColor ?? Colors.black.withOpacity(0.28),
+        ripple = ripple ?? Colors.white.withOpacity(0.28),
+        borderRadius =
+            borderRadius ?? const BorderRadius.all(Radius.circular(10)),
+        rewind = rewind ?? const Icon(Icons.fast_rewind, color: Colors.white),
+        forward =
+            forward ?? const Icon(Icons.fast_forward, color: Colors.white);
 
   /// The icon that appears momentarily when you double tap
   ///

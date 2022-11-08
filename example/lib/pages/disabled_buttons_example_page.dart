@@ -5,7 +5,7 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:wakelock/wakelock.dart';
 
 class DisabledButtonsExample extends StatefulWidget {
-  DisabledButtonsExample({Key? key}) : super(key: key);
+  const DisabledButtonsExample({Key? key}) : super(key: key);
 
   @override
   _DisabledButtonsExampleState createState() => _DisabledButtonsExampleState();
@@ -14,7 +14,7 @@ class DisabledButtonsExample extends StatefulWidget {
 class _DisabledButtonsExampleState extends State<DisabledButtonsExample> {
   final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.primary,
-    enabledButtons: EnabledButtons(
+    enabledButtons: const EnabledButtons(
       fullscreen: false,
       pip: false,
     ),

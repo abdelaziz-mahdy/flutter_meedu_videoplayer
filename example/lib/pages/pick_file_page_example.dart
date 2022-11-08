@@ -6,7 +6,7 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:path/path.dart' as path;
 
 class PickFileExamplePage extends StatefulWidget {
-  PickFileExamplePage({Key? key}) : super(key: key);
+  const PickFileExamplePage({Key? key}) : super(key: key);
 
   @override
   _PickFileExamplePageState createState() => _PickFileExamplePageState();
@@ -14,7 +14,7 @@ class PickFileExamplePage extends StatefulWidget {
 
 class _PickFileExamplePageState extends State<PickFileExamplePage> {
   final _controller = MeeduPlayerController(
-    screenManager: ScreenManager(forceLandScapeInFullscreen: false),
+    screenManager: const ScreenManager(forceLandScapeInFullscreen: false),
   );
   String fileName = "";
   @override
@@ -46,11 +46,11 @@ class _PickFileExamplePageState extends State<PickFileExamplePage> {
 
   Widget get header {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Row(
         children: [
           CupertinoButton(
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
@@ -62,7 +62,7 @@ class _PickFileExamplePageState extends State<PickFileExamplePage> {
           Expanded(
             child: Text(
               fileName,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
               ),
             ),
@@ -77,8 +77,8 @@ class _PickFileExamplePageState extends State<PickFileExamplePage> {
     return Scaffold(
       body: Center(
         child: TextButton(
-          child: Text("Pick video file"),
-          onPressed: this._onPickFile,
+          child: const Text("Pick video file"),
+          onPressed: _onPickFile,
         ),
       ),
     );

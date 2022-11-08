@@ -27,11 +27,11 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
               right: 0,
               top: 0,
               child: Padding(
-                padding: EdgeInsets.only(top: 10.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: _.header!,
               ),
             ),
-          Container(
+          SizedBox(
             height: context.mediaQuerySize.height,
             width: context.mediaQuerySize.width,
           ),
@@ -48,7 +48,7 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
                   iconPath: 'assets/icons/rewind.png',
                   customIcon: _.customIcons.rewind,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 8),
               ],
               if (_.enabledButtons.playPauseAndRepeat)
                 RxBuilder(
@@ -68,7 +68,7 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
                   }
                 }),
               if (_.enabledButtons.rewindAndfastForward) ...[
-                SizedBox(width: 10),
+                const SizedBox(width: 8),
                 PlayerButton(
                   onPressed: _.fastForward,
                   iconColor: Colors.white,
@@ -84,6 +84,7 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
           PrimaryBottomControls(
             responsive: responsive,
           ),
+
         ],
       ),
     );

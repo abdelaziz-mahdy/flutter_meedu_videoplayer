@@ -26,7 +26,7 @@ class MuteSoundButton extends StatelessWidget {
       }
 
       return PlayerButton(
-        size: responsive.ip(_.fullscreen.value ? 5 : 7),
+        size: responsive.ip(_.fullscreen.value ? 4 : 6),
         circle: false,
         backgrounColor: Colors.transparent,
         iconColor: Colors.white,

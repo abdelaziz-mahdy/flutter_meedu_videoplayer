@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 
 import 'player_button.dart';
 
 class FullscreenButton extends StatelessWidget {
-  final double size;
-  const FullscreenButton({Key? key, this.size = 30}) : super(key: key);
+  final Responsive responsive;
+  const FullscreenButton({Key? key, required this.responsive})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class FullscreenButton extends StatelessWidget {
           customIcon = _.customIcons.fullscreen;
         }
         return PlayerButton(
-          size: size,
+          size: responsive.ip(_.fullscreen.value ? 4: 6),
           circle: false,
           backgrounColor: Colors.transparent,
           iconColor: Colors.white,
@@ -30,19 +32,11 @@ class FullscreenButton extends StatelessWidget {
           customIcon: customIcon,
           onPressed: () {
             if (_.fullscreen.value) {
-              // exit to fullscreen
-              if (_.windows) {
-                _.screenManager.setWindowsFullScreen(false, _);
-              } else {
-                Navigator.pop(context);
-              }
+              Navigator.pop(context);
             } else {
-              if (_.windows) {
-                _.screenManager.setWindowsFullScreen(true, _);
-              } else {
-                _.goToFullscreen(context);
-              }
+              _.goToFullscreen(context);
             }
+            // }
           },
         );
       },

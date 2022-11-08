@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 class BasicExamplePage extends StatefulWidget {
-  BasicExamplePage({Key? key}) : super(key: key);
+  const BasicExamplePage({Key? key}) : super(key: key);
 
   @override
   _BasicExamplePageState createState() => _BasicExamplePageState();
@@ -12,7 +12,7 @@ class BasicExamplePage extends StatefulWidget {
 
 class _BasicExamplePageState extends State<BasicExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
-    controlsStyle: ControlsStyle.primary,
+    controlsStyle: ControlsStyle.secondary,
   );
 
   StreamSubscription? _playerEventSubs;

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
-import 'package:dart_vlc/dart_vlc.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:flutter/foundation.dart';
@@ -9,10 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:video_player/video_player.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/fullscreen_page.dart';
 import 'package:volume_controller/volume_controller.dart';
@@ -55,26 +52,26 @@ class MeeduPlayerController {
   String? tag;
 
   // OBSERVABLES
-  Rx<Duration> _position = Rx(Duration.zero);
-  Rx<Duration> _sliderPosition = Rx(Duration.zero);
-  Rx<Duration> _duration = Rx(Duration.zero);
-  Rx<int> _swipeDuration = 0.obs;
+  final Rx<Duration> _position = Rx(Duration.zero);
+  final Rx<Duration> _sliderPosition = Rx(Duration.zero);
+  final Rx<Duration> _duration = Rx(Duration.zero);
+  final Rx<int> _swipeDuration = 0.obs;
   Rx<int> doubleTapCount = 0.obs;
-  Rx<double> _currentVolume = 1.0.obs;
-  Rx<double> _playbackSpeed = 1.0.obs;
-  Rx<double> _currentBrightness = 0.0.obs;
-  Rx<List<DurationRange>> _buffered = Rx([]);
+  final Rx<double> _currentVolume = 1.0.obs;
+  final Rx<double> _playbackSpeed = 1.0.obs;
+  final Rx<double> _currentBrightness = 0.0.obs;
+  final Rx<List<DurationRange>> _buffered = Rx([]);
   Rx<double> bufferedPercent = Rx(0.0);
-  Rx<bool> _closedCaptionEnabled = false.obs;
-  Rx<bool> _mute = false.obs;
-  Rx<bool> _fullscreen = false.obs;
-  Rx<bool> _showControls = true.obs;
-  Rx<bool> _showSwipeDuration = false.obs;
-  Rx<bool> _showVolumeStatus = false.obs;
-  Rx<bool> _showBrightnessStatus = false.obs;
+  final Rx<bool> _closedCaptionEnabled = false.obs;
+  final Rx<bool> _mute = false.obs;
+  final Rx<bool> _fullscreen = false.obs;
+  final Rx<bool> _showControls = true.obs;
+  final Rx<bool> _showSwipeDuration = false.obs;
+  final Rx<bool> _showVolumeStatus = false.obs;
+  final Rx<bool> _showBrightnessStatus = false.obs;
 
   Rx<bool> videoFitChanged = false.obs;
-  Rx<BoxFit> _videoFit = Rx(BoxFit.fill);
+  final Rx<BoxFit> _videoFit = Rx(BoxFit.fill);
   //Rx<double> scale = 1.0.obs;
   Rx<bool> rewindIcons = false.obs;
   Rx<bool> forwardIcons = false.obs;
@@ -233,11 +230,11 @@ class MeeduPlayerController {
     getUserPreferenceForFit();
 
     _errorText = errorText;
-    this.tag = DateTime.now().microsecondsSinceEpoch.toString();
+    tag = DateTime.now().microsecondsSinceEpoch.toString();
     this.loadingWidget = loadingWidget ??
         SpinKitWave(
           size: 30,
-          color: this.colorTheme,
+          color: colorTheme,
         );
     if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
       windows = true;
@@ -271,7 +268,7 @@ class MeeduPlayerController {
     //}
   }
   Future<void> registerHotKeys() async {
-    if (HotKeyManager.instance.registeredHotKeyList.length == 0) {
+    if (HotKeyManager.instance.registeredHotKeyList.isEmpty) {
       HotKey arrowUP = HotKey(
         KeyCode.arrowUp,
         scope: HotKeyScope.inapp,
@@ -322,14 +319,14 @@ class MeeduPlayerController {
         arrowRight,
         keyDownHandler: (hotKey) {
           print('onKeyDown+${hotKey.toJson()}');
-          seekTo(position.value + Duration(seconds: 5));
+          seekTo(position.value + const Duration(seconds: 5));
         },
       );
       await HotKeyManager.instance.register(
         arrowLeft,
         keyDownHandler: (hotKey) {
           print('onKeyDown+${hotKey.toJson()}');
-          seekTo(position.value - Duration(seconds: 5));
+          seekTo(position.value - const Duration(seconds: 5));
         },
       );
 
@@ -468,19 +465,16 @@ class MeeduPlayerController {
       });
       if (sourceUrls.isEmpty) {
         //input was playlist
-        List<RegExpMatch> ListOfLinks =
+        List<RegExpMatch> listOfLinks =
             regExpListOfLinks.allMatches(content).toList();
         String baseUrl = m3u8;
-        ListOfLinks.forEach((element) {
+        for (var element in listOfLinks) {
           final bool isNetwork = netRegxUrl.hasMatch(element.group(1) ?? "");
           if (!isNetwork) {
-            content.replaceAll(
-                element.group(1) ?? "",
-                baseUrl.substring(0, baseUrl.lastIndexOf('/')) +
-                    "/" +
-                    (element.group(1) ?? ""));
+            content.replaceAll(element.group(1) ?? "",
+                "${baseUrl.substring(0, baseUrl.lastIndexOf('/'))}/${element.group(1) ?? ""}");
           }
-        });
+        }
         return content;
       }
 
@@ -552,7 +546,7 @@ class MeeduPlayerController {
       id: randomNumber,
       commandlineArguments: [
         //"-vvv",
-        '--http-referrer=' + refer,
+        '--http-referrer=$refer',
         '--http-reconnect',
         '--sout-livehttp-caching',
         '--network-caching=60000',
@@ -577,7 +571,7 @@ class MeeduPlayerController {
       player.open(
         Media.network(
           dataSource.source!,
-          timeout: Duration(seconds: 10),
+          timeout: const Duration(seconds: 10),
           //startTime: seekTo
         ),
         autoStart: _autoplay,
@@ -602,12 +596,12 @@ class MeeduPlayerController {
     Duration seekTo = Duration.zero,
   }) async {
     if (seekTo != Duration.zero) {
-      print("Called seek function to" + seekTo.toString());
+      print("Called seek function to$seekTo");
       await this.seekTo(seekTo);
     }
 
     // if the playbackSpeed is not the default value
-    if (_playbackSpeed != 1.0) {
+    if (_playbackSpeed.value != 1.0) {
       await setPlaybackSpeed(_playbackSpeed.value);
     }
 
@@ -617,7 +611,7 @@ class MeeduPlayerController {
 
     if (_autoplay) {
       // if the autoplay is enabled
-      await this.play();
+      await play();
     }
   }
 
@@ -635,64 +629,56 @@ class MeeduPlayerController {
   void _listener({Player? player}) {
     if (player != null) {
       dataStatus.status.stream.listen((event) {
-        print("dataStatus " + event.toString());
+        print("dataStatus $event");
       });
-      if (postionStream == null) {
-        postionStream = player.positionStream.listen((event) {
-          _duration.value = _videoPlayerControllerWindows!.position.duration!;
-          _position.value = event.position!;
-          if (_duration.value.inSeconds != 0) {
-            if (dataStatus.status.value == DataStatus.loading) {
-              dataStatus.status.value = DataStatus.loaded;
-            }
+      postionStream ??= player.positionStream.listen((event) {
+        _duration.value = _videoPlayerControllerWindows!.position.duration!;
+        _position.value = event.position!;
+        if (_duration.value.inSeconds != 0) {
+          if (dataStatus.status.value == DataStatus.loading) {
+            dataStatus.status.value = DataStatus.loaded;
           }
-          if (!_isSliderMoving) {
-            _sliderPosition.value = event.position!;
-          }
-          // check if the player has been finished
-          if (_position.value.inSeconds >= duration.value.inSeconds &&
-              !playerStatus.stopped) {
+        }
+        if (!_isSliderMoving) {
+          _sliderPosition.value = event.position!;
+        }
+        // check if the player has been finished
+        if (_position.value.inSeconds >= duration.value.inSeconds &&
+            !playerStatus.stopped) {
+          playerStatus.status.value = PlayerStatus.stopped;
+        }
+      });
+      volumeStream ??= player.generalStream.listen((GeneralState state) {
+        volume.value = state.volume;
+        //state.rate;
+      });
+      playBackStream ??= player.playbackStream.listen((event) {
+        if (event.isPlaying) {
+          playerStatus.status.value = PlayerStatus.playing;
+        } else {
+          if (event.isCompleted) {
             playerStatus.status.value = PlayerStatus.stopped;
-          }
-        });
-      }
-      if (volumeStream == null) {
-        volumeStream = player.generalStream.listen((GeneralState state) {
-          volume.value = state.volume;
-          //state.rate;
-        });
-      }
-      if (playBackStream == null) {
-        playBackStream = player.playbackStream.listen((event) {
-          if (event.isPlaying) {
-            playerStatus.status.value = PlayerStatus.playing;
           } else {
-            if (event.isCompleted) {
-              playerStatus.status.value = PlayerStatus.stopped;
-            } else {
-              playerStatus.status.value = PlayerStatus.paused;
-            }
+            playerStatus.status.value = PlayerStatus.paused;
           }
-        });
-      }
-      if (bufferStream == null) {
-        bufferStream = player.bufferingProgressStream.listen((event) {
-          bufferedPercent.value = (event / 100);
-          _buffered.value = [
-            (DurationRange(
-                Duration.zero,
-                Duration(
-                    seconds: (bufferedPercent.value * _duration.value.inSeconds)
-                        .round())))
-          ];
-          isBuffering.value =
-              (playerStatus.status.value == PlayerStatus.playing) &&
-                  (event != 100);
-          //print("p0 "+event.toString());
-          //print("p1 "+position.value.inSeconds.toString());
-          //print("p2 "+_buffered.value.last.end.inSeconds.toString());
-        });
-      }
+        }
+      });
+      bufferStream ??= player.bufferingProgressStream.listen((event) {
+        bufferedPercent.value = (event / 100);
+        _buffered.value = [
+          (DurationRange(
+              Duration.zero,
+              Duration(
+                  seconds: (bufferedPercent.value * _duration.value.inSeconds)
+                      .round())))
+        ];
+        isBuffering.value =
+            (playerStatus.status.value == PlayerStatus.playing) &&
+                (event != 100);
+        //print("p0 "+event.toString());
+        //print("p1 "+position.value.inSeconds.toString());
+        //print("p2 "+_buffered.value.last.end.inSeconds.toString());
+      });
 
       // set the current video position
 
@@ -760,13 +746,13 @@ class MeeduPlayerController {
       if (windows) {
         if (_videoPlayerControllerWindows != null &&
             _videoPlayerControllerWindows!.playback.isPlaying) {
-          await this.pause(notify: false);
+          await pause(notify: false);
         }
       } else {
         // if we are playing a video
         if (_videoPlayerController != null &&
             _videoPlayerController!.value.isPlaying) {
-          await this.pause(notify: false);
+          await pause(notify: false);
         }
       }
 
@@ -789,12 +775,12 @@ class MeeduPlayerController {
               .dispose(); // dispose the previous video controller
         }
       } else {
-        _videoPlayerController = await _createVideoController(dataSource);
+        _videoPlayerController = _createVideoController(dataSource);
         await _videoPlayerController!.initialize();
 
         if (oldController != null) {
           WidgetsBinding.instance.addPostFrameCallback((_) async {
-            oldController.removeListener(this._listener);
+            oldController.removeListener(_listener);
             await oldController
                 .dispose(); // dispose the previous video controller
           });
@@ -813,14 +799,12 @@ class MeeduPlayerController {
 
         await _initializePlayer(seekTo: seekTo);
         // listen the video player events
-        _videoPlayerController!.addListener(this._listener);
+        _videoPlayerController!.addListener(_listener);
       }
     } catch (e, s) {
       print(e);
       print(s);
-      if (_errorText == null) {
-        _errorText = _videoPlayerController!.value.errorDescription;
-      }
+      _errorText ??= _videoPlayerController!.value.errorDescription;
       dataStatus.status.value = DataStatus.error;
     }
   }
@@ -872,10 +856,10 @@ class MeeduPlayerController {
       } else {
         if (windows) {
           _videoPlayerControllerWindows
-              ?.seek(duration.value - Duration(milliseconds: 100));
+              ?.seek(duration.value - const Duration(milliseconds: 100));
         } else {
           await _videoPlayerController
-              ?.seekTo(duration.value - Duration(milliseconds: 100));
+              ?.seekTo(duration.value - const Duration(milliseconds: 100));
         }
       }
       if (playerStatus.stopped) {
@@ -884,7 +868,7 @@ class MeeduPlayerController {
     } else {
       _timerForSeek?.cancel();
       _timerForSeek =
-          Timer.periodic(Duration(milliseconds: 200), (Timer t) async {
+          Timer.periodic(const Duration(milliseconds: 200), (Timer t) async {
         //_timerForSeek = null;
         print("SEEK CALLED");
         if (duration.value.inSeconds != 0) {
@@ -897,10 +881,10 @@ class MeeduPlayerController {
           } else {
             if (windows) {
               _videoPlayerControllerWindows
-                  ?.seek(duration.value - Duration(milliseconds: 100));
+                  ?.seek(duration.value - const Duration(milliseconds: 100));
             } else {
               await _videoPlayerController
-                  ?.seekTo(duration.value - Duration(milliseconds: 100));
+                  ?.seekTo(duration.value - const Duration(milliseconds: 100));
             }
           }
           if (playerStatus.stopped) {
@@ -979,7 +963,7 @@ class MeeduPlayerController {
       }
     }
     _mute.value = enabled;
-    await this.setVolume(enabled ? 0 : _volumeBeforeMute);
+    await setVolume(enabled ? 0 : _volumeBeforeMute);
   }
 
   /// fast Forward (10 seconds)
@@ -1015,21 +999,21 @@ class MeeduPlayerController {
         try {
           _currentVolume.value = _videoPlayerControllerWindows!.general.volume;
         } catch (e) {
-          print("currentVolume " + e.toString());
+          print("currentVolume $e");
           //throw 'Failed to get current volume';
           //return 0;
         }
       } else {
         _timerForGettingVolume?.cancel();
         _timerForGettingVolume =
-            Timer.periodic(Duration(milliseconds: 250), (Timer t) async {
+            Timer.periodic(const Duration(milliseconds: 250), (Timer t) async {
           _timerForGettingVolume = null;
           if (duration.value.inSeconds != 0) {
             try {
               _currentVolume.value =
                   _videoPlayerControllerWindows!.general.volume;
             } catch (e) {
-              print("currentVolume " + e.toString());
+              print("currentVolume $e");
               //throw 'Failed to get current volume';
               //return 0;
             }
@@ -1040,7 +1024,7 @@ class MeeduPlayerController {
       try {
         _currentVolume.value = await VolumeController().getVolume();
       } catch (e) {
-        print("currentVolume " + e.toString());
+        print("currentVolume $e");
         //throw 'Failed to get current brightness';
         //return 0;
       }
@@ -1077,7 +1061,7 @@ class MeeduPlayerController {
         showVolumeStatus.value = true;
         _videoPlayerControllerWindows!.setVolume(volumeNew);
         _timerForVolume?.cancel();
-        _timerForVolume = Timer(Duration(milliseconds: 500), () {
+        _timerForVolume = Timer(const Duration(milliseconds: 500), () {
           showVolumeStatus.value = false;
           _timerForVolume = null;
         });
@@ -1128,17 +1112,17 @@ class MeeduPlayerController {
   void _hideTaskControls() {
     //print("_hideTaskControls called");
     if (windows) {
-      _timer = Timer(Duration(seconds: 2), () {
-        this.controls = false;
+      _timer = Timer(const Duration(seconds: 2), () {
+        controls = false;
         _timer = null;
         swipeDuration.value = 0;
         showSwipeDuration.value = false;
         mouseMoveInitial = 0;
       });
     } else {
-      _timer = Timer(Duration(seconds: 5), () {
+      _timer = Timer(const Duration(seconds: 5), () {
         print("hidden");
-        this.controls = false;
+        controls = false;
         _timer = null;
         swipeDuration.value = 0;
         showSwipeDuration.value = false;
@@ -1245,7 +1229,7 @@ class MeeduPlayerController {
         _showControls.close();
         playerStatus.status.close();
         dataStatus.status.close();
-        _videoPlayerController?.removeListener(this._listener);
+        _videoPlayerController?.removeListener(_listener);
         await _videoPlayerController?.dispose();
         _videoPlayerController = null;
       }
@@ -1264,7 +1248,7 @@ class MeeduPlayerController {
 
   Future<void> getUserPreferenceForFit() async {
     prefs = await SharedPreferences.getInstance();
-    String fitValue = (await prefs?.getString('fit')) ?? "Fill";
+    String fitValue = (prefs?.getString('fit')) ?? "Fill";
     _videoFit.value = fits.firstWhere((element) => element.name == fitValue);
     print("Last fit used was ${_videoFit.value.name}");
   }
@@ -1276,9 +1260,9 @@ class MeeduPlayerController {
 
   Future<void> getUserPreferenceForBrightness() async {
     prefs = await SharedPreferences.getInstance();
-    double BrightnessValue = (await prefs?.getDouble('brightness')) ?? 0.5;
-    setBrightness(BrightnessValue);
-    print("Last Brightness used was ${BrightnessValue}");
+    double brightnessValue = (prefs?.getDouble('brightness')) ?? 0.5;
+    setBrightness(brightnessValue);
+    print("Last Brightness used was $brightnessValue");
   }
 
   /// Toggle Change the videofit accordingly
@@ -1291,7 +1275,7 @@ class MeeduPlayerController {
       _videoFit.value = fits[0];
     }
     print(_videoFit.value);
-    videoFitChangedTimer = Timer(Duration(seconds: 1), () {
+    videoFitChangedTimer = Timer(const Duration(seconds: 1), () {
       print("hidden videoFit Changed");
       videoFitChangedTimer = null;
       videoFitChanged.value = false;
@@ -1355,13 +1339,13 @@ class MeeduPlayerController {
     } else {
       screenManager.setDefaultOverlaysAndOrientations();
     }
-    
-      if (onVideoPlayerClosed != null) {
-        print("Toggled");
-        onVideoPlayerClosed!();
-      } else {
-        print("Didnt get Toggled");
-      }
+
+    if (onVideoPlayerClosed != null) {
+      print("Toggled");
+      onVideoPlayerClosed!();
+    } else {
+      print("Didnt get Toggled");
+    }
   }
 
   // Future<void> videoPlayerClosed(
