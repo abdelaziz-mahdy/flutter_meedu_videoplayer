@@ -24,7 +24,7 @@ class FullscreenButton extends StatelessWidget {
           customIcon = _.customIcons.fullscreen;
         }
         return PlayerButton(
-          size: responsive.ip(_.fullscreen.value ? 4: 6),
+          size: responsive.ip(_.fullscreen.value ? 5: 7),
           circle: false,
           backgrounColor: Colors.transparent,
           iconColor: Colors.white,

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter_meedu/ui.dart';
 
@@ -271,7 +272,7 @@ class ControlsContainer extends StatelessWidget {
                       Container(
                         height:
                             _.volume.value * context.mediaQuerySize.height / 2,
-                        color: Colors.blue,
+                        color: _.colorTheme,
                       ),
                       Container(
                           padding: const EdgeInsets.all(5),
@@ -310,7 +311,7 @@ class ControlsContainer extends StatelessWidget {
                         height: _.brightness.value *
                             context.mediaQuerySize.height /
                             2,
-                        color: Colors.blue,
+                        color: _.colorTheme,
                       ),
                       Container(
                           padding: const EdgeInsets.all(5),
@@ -590,7 +591,7 @@ class ControlsContainer extends StatelessWidget {
         duration: Duration(milliseconds: _.showControls.value ? 150 : 0),
         child: AnimatedContainer(
           duration: Duration(milliseconds: _.showControls.value ? 150 : 0),
-          color: _.showControls.value ? Colors.black38 : Colors.transparent,
+          color: _.showControls.value && !Platform.isWindows ? Colors.black38 : Colors.transparent,
           child: AbsorbPointer(
             absorbing: !_.showControls.value,
             child: child,

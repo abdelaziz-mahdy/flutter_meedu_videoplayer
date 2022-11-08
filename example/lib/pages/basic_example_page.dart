@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
@@ -13,6 +14,7 @@ class BasicExamplePage extends StatefulWidget {
 class _BasicExamplePageState extends State<BasicExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.secondary,
+    enabledButtons: EnabledButtons(muteAndSound: !Platform.isAndroid || !Platform.isIOS)
   );
 
   StreamSubscription? _playerEventSubs;

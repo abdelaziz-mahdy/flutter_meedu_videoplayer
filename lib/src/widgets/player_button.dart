@@ -28,16 +28,14 @@ class _PlayerButtonState extends State<PlayerButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.size,
-      height: widget.size,
-      decoration: BoxDecoration(
-        color:
-            _isHovered ? Colors.grey.withOpacity(0.2) : widget.backgrounColor,
-        shape: widget.circle ? BoxShape.circle : BoxShape.rectangle,
-      ),
+    return Material(
+      color: Colors.transparent,
       child: InkWell(
         onTap: widget.onPressed,
+        radius: 32,
+        splashColor: Colors.grey.withOpacity(0.2),
+        highlightColor: Colors.grey.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(32),
         onHover: (isHovered) {
           setState(() {
             _isHovered = isHovered;
@@ -45,10 +43,18 @@ class _PlayerButtonState extends State<PlayerButton> {
         },
         child: widget.customIcon ??
             Container(
-              padding: EdgeInsets.all(widget.size * 0.3),
+              padding: EdgeInsets.all(widget.size * 0.5),
+              decoration: BoxDecoration(
+                color: _isHovered
+                    ? Colors.grey.withOpacity(0.2)
+                    : widget.backgrounColor,
+                shape: BoxShape.circle,
+              ),
               child: Image.asset(
                 widget.iconPath,
                 color: widget.iconColor,
+                width: widget.size*0.7,
+                height: widget.size*0.7,
                 package: 'flutter_meedu_videoplayer',
               ),
             ),

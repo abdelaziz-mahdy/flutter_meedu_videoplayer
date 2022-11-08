@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
@@ -44,11 +46,11 @@ class SecondaryBottomControls extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const SizedBox(width: 4),
-                  PlayPauseButton(
-                    size: buttonsSize,
-                  ),
-                  const SizedBox(width: 4),
+                  // const SizedBox(width: 4),
+                  // PlayPauseButton(
+                  //   size: buttonsSize,
+                  // ),
+                  const SizedBox(width: 16),
                   RxBuilder(
                     //observables: [_.duration, _.position],
                     (__) {
@@ -98,7 +100,7 @@ class SecondaryBottomControls extends StatelessWidget {
                   if (_.enabledButtons.playBackSpeed)
                     PlayBackSpeedButton(
                         responsive: responsive, textStyle: textStyle),
-                  if (_.enabledButtons.muteAndSound)
+                  if (_.enabledButtons.muteAndSound )
                     MuteSoundButton(responsive: responsive),
                   if (_.enabledButtons.fullscreen) ...[
                     FullscreenButton(responsive: responsive),

@@ -44,9 +44,11 @@ class PlayerSlider extends StatelessWidget {
                   trackShape: MSliderTrackShape(),
                   thumbColor: _.colorTheme,
                   activeTrackColor: _.colorTheme,
-                  trackHeight: 10,
+                  activeTickMarkColor: Colors.transparent,
+                  inactiveTickMarkColor: Colors.transparent,
+                  trackHeight: 32,
                   thumbShape:
-                      const RoundSliderThumbShape(enabledThumbRadius: 4.0),
+                      const RoundSliderThumbShape(enabledThumbRadius: 6.0),
                 ),
                 child: Slider(
                   min: 0,
