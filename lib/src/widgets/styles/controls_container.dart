@@ -56,7 +56,7 @@ class ControlsContainer extends StatelessWidget {
       tappedTwice = true;
       _.controls = !_.showControls.value;
       _tappedOnce?.cancel();
-      _tappedOnce = Timer(Duration(milliseconds: 300), () {
+      _tappedOnce = Timer(const Duration(milliseconds: 300), () {
         print("_____________________hidden here 0____________________________");
         tappedTwice = false;
         //_dragInitialDelta = Offset.zero;
@@ -96,7 +96,7 @@ class ControlsContainer extends StatelessWidget {
       }
 
       _doubleTapToSeekTimer?.cancel();
-      _doubleTapToSeekTimer = Timer(Duration(milliseconds: 500), () {
+      _doubleTapToSeekTimer = Timer(const Duration(milliseconds: 500), () {
         playing = controller.playerStatus.playing;
         controller.videoSeekToNextSeconds(
             _defaultSeekAmount * controller.doubleTapCount.value, playing);
@@ -141,7 +141,7 @@ class ControlsContainer extends StatelessWidget {
         volume <= 1 &&
         differenceOfExists((controller.volume.value * 100).round(),
             (volume * 100).round(), 2)) {
-      print("Volume" + volume.toString());
+      print("Volume$volume");
       //print("current ${(controller.volume.value*100).round()}");
       //print("new ${(volume*100).round()}");
       controller.setVolume(volume);
@@ -195,7 +195,7 @@ class ControlsContainer extends StatelessWidget {
         brightness <= 1 &&
         differenceOfExists((controller.brightness.value * 100).round(),
             (brightness * 100).round(), 2)) {
-      print("brightness " + brightness.toString());
+      print("brightness $brightness");
       //brightness
       controller.setBrightness(brightness);
     }
@@ -249,6 +249,83 @@ class ControlsContainer extends StatelessWidget {
           //behavior: HitTestBehavior.,
         ),
       ),
+      RxBuilder(
+        //observables: [_.volume],
+        (__) => AnimatedOpacity(
+          duration: const Duration(milliseconds: 100),
+          opacity: _.showVolumeStatus.value ? 1 : 0,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: SizedBox(
+                  height: context.mediaQuerySize.height / 2,
+                  width: 35,
+                  child: Stack(
+                    alignment: AlignmentDirectional.bottomCenter,
+                    children: [
+                      Container(color: Colors.black38),
+                      Container(
+                        height:
+                            _.volume.value * context.mediaQuerySize.height / 2,
+                        color: Colors.blue,
+                      ),
+                      Container(
+                          padding: const EdgeInsets.all(5),
+                          child: const Icon(
+                            Icons.music_note,
+                            color: Colors.white,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      RxBuilder(
+        //observables: [_.volume],
+        (__) => AnimatedOpacity(
+          duration: const Duration(milliseconds: 100),
+          opacity: _.showBrightnessStatus.value ? 1 : 0,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: SizedBox(
+                  height: context.mediaQuerySize.height / 2,
+                  width: 35,
+                  child: Stack(
+                    alignment: AlignmentDirectional.bottomCenter,
+                    children: [
+                      Container(color: Colors.black38),
+                      Container(
+                        height: _.brightness.value *
+                            context.mediaQuerySize.height /
+                            2,
+                        color: Colors.blue,
+                      ),
+                      Container(
+                          padding: const EdgeInsets.all(5),
+                          child: const Icon(
+                            Icons.wb_sunny,
+                            color: Colors.white,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
       RxBuilder((__) {
         if (_.windows) {
           return MouseRegion(
@@ -269,89 +346,12 @@ class ControlsContainer extends StatelessWidget {
         }
       }),
       RxBuilder(
-        //observables: [_.volume],
-        (__) => AnimatedOpacity(
-          duration: Duration(milliseconds: 100),
-          opacity: _.showVolumeStatus.value ? 1 : 0,
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Container(
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.all(10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  height: context.mediaQuerySize.height / 2,
-                  width: 35,
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomCenter,
-                    children: [
-                      Container(color: Colors.black38),
-                      Container(
-                        height:
-                            _.volume.value * context.mediaQuerySize.height / 2,
-                        color: Colors.blue,
-                      ),
-                      Container(
-                          padding: EdgeInsets.all(5),
-                          child: Icon(
-                            Icons.music_note,
-                            color: Colors.white,
-                          )),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-      RxBuilder(
-        //observables: [_.volume],
-        (__) => AnimatedOpacity(
-          duration: Duration(milliseconds: 100),
-          opacity: _.showBrightnessStatus.value ? 1 : 0,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.all(10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  height: context.mediaQuerySize.height / 2,
-                  width: 35,
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomCenter,
-                    children: [
-                      Container(color: Colors.black38),
-                      Container(
-                        height: _.brightness.value *
-                            context.mediaQuerySize.height /
-                            2,
-                        color: Colors.blue,
-                      ),
-                      Container(
-                          padding: EdgeInsets.all(5),
-                          child: Icon(
-                            Icons.wb_sunny,
-                            color: Colors.white,
-                          )),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-      RxBuilder(
         //observables: [_.showSwipeDuration],
         //observables: [_.swipeDuration],
         (__) => Align(
           alignment: Alignment.center,
           child: AnimatedOpacity(
-            duration: Duration(milliseconds: 100),
+            duration: const Duration(milliseconds: 100),
             opacity: _.showSwipeDuration.value ? 1 : 0,
             child: Visibility(
               visible: _.showSwipeDuration.value,
@@ -361,13 +361,9 @@ class ControlsContainer extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     _.swipeDuration.value > 0
-                        ? "+ " +
-                            printDuration(
-                                Duration(seconds: _.swipeDuration.value))
-                        : "- " +
-                            printDuration(
-                                Duration(seconds: _.swipeDuration.value)),
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                        ? "+ ${printDuration(Duration(seconds: _.swipeDuration.value))}"
+                        : "- ${printDuration(Duration(seconds: _.swipeDuration.value))}",
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
               ),
@@ -381,7 +377,7 @@ class ControlsContainer extends StatelessWidget {
         (__) => Align(
           alignment: Alignment.center,
           child: AnimatedOpacity(
-            duration: Duration(milliseconds: 100),
+            duration: const Duration(milliseconds: 100),
             opacity: _.videoFitChanged.value ? 1 : 0,
             child: Visibility(
               visible: _.videoFitChanged.value,
@@ -390,8 +386,9 @@ class ControlsContainer extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    _.videoFit.value.name,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    _.videoFit.value.name[0].toUpperCase() +
+                        _.videoFit.value.name.substring(1),
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
               ),
@@ -407,7 +404,7 @@ class ControlsContainer extends StatelessWidget {
           return Center(
               child: Text(
             _.errorText!,
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ));
         } else {
           return Container();
@@ -589,7 +586,7 @@ class ControlsContainer extends StatelessWidget {
           color: _.showControls.value ? Colors.black38 : Colors.transparent,
           child: AbsorbPointer(
             absorbing: !_.showControls.value,
-            child: this.child,
+            child: child,
           ),
         ),
       ),

@@ -102,7 +102,7 @@ class MeeduPlayerController {
   ];
 
   // GETS
-  StreamSubscription? postionStream;
+  StreamSubscription? positionStream;
   StreamSubscription? volumeStream;
   StreamSubscription? playBackStream;
   StreamSubscription? bufferStream;
@@ -623,14 +623,14 @@ class MeeduPlayerController {
   }
 
   Future<void> removeWindowsListener() async {
-    await postionStream?.cancel();
+    await positionStream?.cancel();
     await volumeStream?.cancel();
     await playBackStream?.cancel();
     await bufferStream?.cancel();
-    postionStream = null;
-    volumeStream = null;
-    playBackStream = null;
-    bufferStream = null;
+    //positionStream = null;
+    //volumeStream = null;
+    //playBackStream = null;
+    //bufferStream = null;
   }
 
   void _listener({Player? player}) {
@@ -638,8 +638,8 @@ class MeeduPlayerController {
       dataStatus.status.stream.listen((event) {
         print("dataStatus " + event.toString());
       });
-      if (postionStream == null) {
-        postionStream = player.positionStream.listen((event) {
+      if (positionStream == null) {
+        positionStream = player.positionStream.listen((event) {
           _duration.value = _videoPlayerControllerWindows!.position.duration!;
           _position.value = event.position!;
           if (_duration.value.inSeconds != 0) {
@@ -761,13 +761,13 @@ class MeeduPlayerController {
       if (windows) {
         if (_videoPlayerControllerWindows != null &&
             _videoPlayerControllerWindows!.playback.isPlaying) {
-          await this.pause(notify: false);
+          await pause(notify: false);
         }
       } else {
         // if we are playing a video
         if (_videoPlayerController != null &&
             _videoPlayerController!.value.isPlaying) {
-          await this.pause(notify: false);
+          await pause(notify: false);
         }
       }
 
@@ -790,12 +790,12 @@ class MeeduPlayerController {
               .dispose(); // dispose the previous video controller
         }
       } else {
-        _videoPlayerController = await _createVideoController(dataSource);
+        _videoPlayerController = _createVideoController(dataSource);
         await _videoPlayerController!.initialize();
 
         if (oldController != null) {
           WidgetsBinding.instance.addPostFrameCallback((_) async {
-            oldController.removeListener(this._listener);
+            oldController.removeListener(_listener);
             await oldController
                 .dispose(); // dispose the previous video controller
           });
@@ -908,7 +908,7 @@ class MeeduPlayerController {
             play();
           }
           t.cancel();
-          _timerForSeek = null;
+          //_timerForSeek = null;
         }
       });
     }
@@ -1024,11 +1024,12 @@ class MeeduPlayerController {
         _timerForGettingVolume?.cancel();
         _timerForGettingVolume =
             Timer.periodic(Duration(milliseconds: 250), (Timer t) async {
-          _timerForGettingVolume = null;
+          //_timerForGettingVolume = null;
           if (duration.value.inSeconds != 0) {
             try {
               _currentVolume.value =
                   _videoPlayerControllerWindows!.general.volume;
+              t.cancel();
             } catch (e) {
               print("currentVolume " + e.toString());
               //throw 'Failed to get current volume';
@@ -1080,7 +1081,7 @@ class MeeduPlayerController {
         _timerForVolume?.cancel();
         _timerForVolume = Timer(Duration(milliseconds: 500), () {
           showVolumeStatus.value = false;
-          _timerForVolume = null;
+          //_timerForVolume = null;
         });
       } catch (e) {
         print(e);
@@ -1131,7 +1132,7 @@ class MeeduPlayerController {
     if (windows) {
       _timer = Timer(Duration(seconds: 2), () {
         this.controls = false;
-        _timer = null;
+        //_timer = null;
         swipeDuration.value = 0;
         showSwipeDuration.value = false;
         mouseMoveInitial = 0;
@@ -1140,7 +1141,7 @@ class MeeduPlayerController {
       _timer = Timer(Duration(seconds: 5), () {
         print("hidden");
         this.controls = false;
-        _timer = null;
+        //_timer = null;
         swipeDuration.value = 0;
         showSwipeDuration.value = false;
       });
@@ -1294,7 +1295,7 @@ class MeeduPlayerController {
     print(_videoFit.value);
     videoFitChangedTimer = Timer(Duration(seconds: 1), () {
       print("hidden videoFit Changed");
-      videoFitChangedTimer = null;
+      //videoFitChangedTimer = null;
       videoFitChanged.value = false;
       setUserPreferenceForFit();
     });

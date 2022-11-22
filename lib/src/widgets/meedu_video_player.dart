@@ -121,7 +121,8 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                             height: _.videoPlayerController != null
                                 ? _.videoPlayerController!.value.size.height
                                 : 480,
-                            child: VideoPlayer(_.videoPlayerController!),
+                            child:_.videoPlayerController != null ? VideoPlayer(_.videoPlayerController!)
+                            : Container(),
                           ),
                         ),
                       );

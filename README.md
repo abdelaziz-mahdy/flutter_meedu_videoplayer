@@ -12,6 +12,14 @@
 - swipe to seek 
 - integrated wake lock in the code
 
+# NOTE use this in pubspec.yaml if you want last version of vlc libs 
+```
+dependency_overrides:
+  dart_vlc:
+      git:
+        url: https://github.com/alexmercerind/dart_vlc.git
+        ref: master
+```
 
 ## Setup For windows 
 1.Add in main 
