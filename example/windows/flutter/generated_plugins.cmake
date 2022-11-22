@@ -7,6 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   flutter_meedu_videoplayer
   flutter_native_view
   hotkey_manager
+  screen_brightness_windows
   screen_retriever
   window_manager
 )

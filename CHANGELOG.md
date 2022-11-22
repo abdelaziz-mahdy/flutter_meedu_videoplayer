@@ -1,3 +1,7 @@
+## 2.0.2
+* initial videoPlayer with null fixed
+* button sizing improved
+* windows window overflow fixed(when returning from full screen)
 ## 2.0.1
 [Windows] optional ability to restore app hotkeys
 [Windows] fix of null-check exception on pushing player's mute button

@@ -760,13 +760,13 @@ class MeeduPlayerController {
       if (windows) {
         if (_videoPlayerControllerWindows != null &&
             _videoPlayerControllerWindows!.playback.isPlaying) {
-          await this.pause(notify: false);
+          await pause(notify: false);
         }
       } else {
         // if we are playing a video
         if (_videoPlayerController != null &&
             _videoPlayerController!.value.isPlaying) {
-          await this.pause(notify: false);
+          await pause(notify: false);
         }
       }
 
@@ -789,12 +789,12 @@ class MeeduPlayerController {
               .dispose(); // dispose the previous video controller
         }
       } else {
-        _videoPlayerController = await _createVideoController(dataSource);
+        _videoPlayerController =  _createVideoController(dataSource);
         await _videoPlayerController!.initialize();
 
         if (oldController != null) {
           WidgetsBinding.instance.addPostFrameCallback((_) async {
-            oldController.removeListener(this._listener);
+            oldController.removeListener(_listener);
             await oldController
                 .dispose(); // dispose the previous video controller
           });

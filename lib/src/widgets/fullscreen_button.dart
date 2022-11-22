@@ -24,7 +24,7 @@ class FullscreenButton extends StatelessWidget {
         return PlayerButton(
           size: size,
           circle: false,
-          backgrounColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
           iconColor: Colors.white,
           iconPath: iconPath,
           customIcon: customIcon,

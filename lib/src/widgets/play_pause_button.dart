@@ -34,7 +34,7 @@ class PlayPauseButton extends StatelessWidget {
           customIcon = _.customIcons.play;
         }
         return PlayerButton(
-          backgrounColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
           iconColor: Colors.white,
           onPressed: () {
             if (_.playerStatus.playing) {

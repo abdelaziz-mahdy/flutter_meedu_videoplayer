@@ -6,6 +6,9 @@ class Responsive {
   Responsive(this.width, this.height) {
     inch = math.sqrt((width * width) + (height * height));
   }
+  double iconSize(bool fullscreen) {
+    return ip(fullscreen ? 5 : 10);
+  }
 
   double ip(double percent) {
     return inch * percent / 100;

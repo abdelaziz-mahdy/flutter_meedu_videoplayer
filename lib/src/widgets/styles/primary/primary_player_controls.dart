@@ -42,9 +42,9 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
               if (_.enabledButtons.rewindAndfastForward) ...[
                 PlayerButton(
                   onPressed: _.rewind,
-                  size: responsive.ip(_.fullscreen.value ? 8 : 12),
+                  size: responsive.iconSize(_.fullscreen.value),
                   iconColor: Colors.white,
-                  backgrounColor: Colors.transparent,
+                  backgroundColor: Colors.transparent,
                   iconPath: 'assets/icons/rewind.png',
                   customIcon: _.customIcons.rewind,
                 ),
@@ -61,7 +61,7 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
                       !_.dataStatus.loading &&
                       !_.isBuffering.value) {
                     return PlayPauseButton(
-                      size: responsive.ip(_.fullscreen.value ? 8 : 13),
+                      size: responsive.iconSize(_.fullscreen.value),
                     );
                   } else {
                     return Container();
@@ -72,8 +72,8 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
                 PlayerButton(
                   onPressed: _.fastForward,
                   iconColor: Colors.white,
-                  backgrounColor: Colors.transparent,
-                  size: responsive.ip(_.fullscreen.value ? 8 : 12),
+                  backgroundColor: Colors.transparent,
+                  size: responsive.iconSize(_.fullscreen.value),
                   iconPath: 'assets/icons/fast-forward.png',
                   customIcon: _.customIcons.fastForward,
                 ),
