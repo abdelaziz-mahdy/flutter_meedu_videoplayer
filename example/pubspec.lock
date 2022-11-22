@@ -74,11 +74,9 @@ packages:
   dart_vlc:
     dependency: transitive
     description:
-      path: "."
-      ref: master
-      resolved-ref: "7ecd7235763b88faf0334e85b0bf0161f1ceee5d"
-      url: "https://github.com/alexmercerind/dart_vlc.git"
-    source: git
+      name: dart_vlc
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.3.0"
   dart_vlc_ffi:
     dependency: transitive
