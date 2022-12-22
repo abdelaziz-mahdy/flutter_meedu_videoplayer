@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
@@ -15,10 +14,8 @@ import 'package:flutter_meedu_videoplayer_example/pages/playback_speed_example_p
 import 'package:flutter_meedu_videoplayer_example/pages/player_with_header_page.dart';
 
 void main() {
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    DartVLC.initialize();
-  }
 
+  initDartVlc();
   runApp(MyApp());
 }
 

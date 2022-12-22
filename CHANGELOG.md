@@ -1,3 +1,6 @@
+## 2.0.3
+* separated init dart vlc to try fixing ffi for web
+
 ## 2.0.2
 * initial videoPlayer with null fixed
 * button sizing improved
