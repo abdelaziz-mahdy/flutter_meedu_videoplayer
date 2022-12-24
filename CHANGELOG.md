@@ -1,3 +1,6 @@
+## 2.0.5
+* fixed dart vlc initialize
+
 ## 2.0.4
 * updated dart vlc version
 
