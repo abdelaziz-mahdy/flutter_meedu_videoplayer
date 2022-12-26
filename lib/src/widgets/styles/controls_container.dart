@@ -218,247 +218,279 @@ class ControlsContainer extends StatelessWidget {
   }
 
   Widget controlsUI(MeeduPlayerController _, BuildContext context) {
-    return Stack(children: [
-      VideoCoreForwardAndRewindLayout(
-        rewind: GestureDetector(
-          onTap: () {
-            if (_.doubleTapCount.value != 0 || tappedTwice) {
-              _rewind(_);
-              tappedOnce(_, true);
-            } else {
-              tappedOnce(_, false);
-            }
-          },
-          //behavior: HitTestBehavior.opaque,
-        ),
-        forward: GestureDetector(
-          onTap: () {
-            //print("0 " + tappedTwice.toString());
+    return Directionality(
+      textDirection: TextDirection.ltr, /// this for support rtl Langue like Arbic
+      child: Stack(
+        children: [
 
-            if (_.doubleTapCount.value != 0 || tappedTwice) {
-              _forward(_);
-              //print("if");
-              tappedOnce(_, true);
-            } else {
-              //print("else");
-              //print("1 " + tappedTwice.toString());
-              tappedOnce(_, false);
-              //print("2 " + tappedTwice.toString());
-            }
-          },
-          //behavior: HitTestBehavior.,
-        ),
-      ),
-      RxBuilder(
-        //observables: [_.volume],
-        (__) => AnimatedOpacity(
-          duration: const Duration(milliseconds: 100),
-          opacity: _.showVolumeStatus.value ? 1 : 0,
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.all(10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: SizedBox(
-                  height: context.mediaQuerySize.height / 2,
-                  width: 35,
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomCenter,
-                    children: [
-                      Container(color: Colors.black38),
-                      Container(
-                        height:
+          //     VideoCoreForwardAndRewindLayout(
+          //       rewind: GestureDetector(
+          //         onTap: () {
+          //       if (_.doubleTapCount.value != 0 || tappedTwice) {
+          //         _rewind(_);
+          //         tappedOnce(_, true);
+          //       } else {
+          //         tappedOnce(_, false);
+          //       }
+          //     },
+          //     //behavior: HitTestBehavior.opaque,
+          //   ),
+          //   forward: GestureDetector(
+          //     onTap: () {
+          //       //print("0 " + tappedTwice.toString());
+          //
+          //       if (_.doubleTapCount.value != 0 || tappedTwice) {
+          //         _forward(_);
+          //         //print("if");
+          //         tappedOnce(_, true);
+          //       } else {
+          //         //print("else");
+          //         //print("1 " + tappedTwice.toString());
+          //         tappedOnce(_, false);
+          //         //print("2 " + tappedTwice.toString());
+          //       }
+          //     },
+          //     //behavior: HitTestBehavior.,
+          //   ),
+          // ),
+
+
+          /// [VolumeStatus]
+          RxBuilder(
+            //observables: [_.volume],
+                (__) => AnimatedOpacity(
+              duration: const Duration(milliseconds: 100),
+              opacity: _.showVolumeStatus.value ? 1 : 0,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: SizedBox(
+                      height: context.mediaQuerySize.height / 2,
+                      width: 35,
+                      child: Stack(
+                        alignment: AlignmentDirectional.bottomCenter,
+                        children: [
+                          Container(color: Colors.black38),
+                          Container(
+                            height:
                             _.volume.value * context.mediaQuerySize.height / 2,
-                        color: Colors.blue,
+                            color: Colors.blue,
+                          ),
+                          Container(
+                              padding: const EdgeInsets.all(5),
+                              child: const Icon(
+                                Icons.music_note,
+                                color: Colors.white,
+                              )),
+                        ],
                       ),
-                      Container(
-                          padding: const EdgeInsets.all(5),
-                          child: const Icon(
-                            Icons.music_note,
-                            color: Colors.white,
-                          )),
-                    ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
-      RxBuilder(
-        //observables: [_.volume],
-        (__) => AnimatedOpacity(
-          duration: const Duration(milliseconds: 100),
-          opacity: _.showBrightnessStatus.value ? 1 : 0,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.all(10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: SizedBox(
-                  height: context.mediaQuerySize.height / 2,
-                  width: 35,
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomCenter,
-                    children: [
-                      Container(color: Colors.black38),
-                      Container(
-                        height: _.brightness.value *
-                            context.mediaQuerySize.height /
-                            2,
-                        color: Colors.blue,
+
+          /// [BrightnessStatus]
+          RxBuilder(
+            //observables: [_.volume],
+                (__) => AnimatedOpacity(
+              duration: const Duration(milliseconds: 100),
+              opacity: _.showBrightnessStatus.value ? 1 : 0,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: SizedBox(
+                      height: context.mediaQuerySize.height / 2,
+                      width: 35,
+                      child: Stack(
+                        alignment: AlignmentDirectional.bottomCenter,
+                        children: [
+                          Container(color: Colors.black38),
+                          Container(
+                            height: _.brightness.value *
+                                context.mediaQuerySize.height /
+                                2,
+                            color: Colors.blue,
+                          ),
+                          Container(
+                              padding: const EdgeInsets.all(5),
+                              child: const Icon(
+                                Icons.wb_sunny,
+                                color: Colors.white,
+                              )),
+                        ],
                       ),
-                      Container(
-                          padding: const EdgeInsets.all(5),
-                          child: const Icon(
-                            Icons.wb_sunny,
-                            color: Colors.white,
-                          )),
-                    ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
-      RxBuilder((__) {
-        if (_.windows) {
-          return MouseRegion(
-              cursor: _.showControls.value
-                  ? SystemMouseCursors.basic
-                  : SystemMouseCursors.none,
-              onHover: (___) {
-                //print(___.delta);
-                if (_.mouseMoveInitial < const Offset(75, 75).distance) {
-                  _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
+
+          RxBuilder((__) {
+            if (_.windows) {
+              return MouseRegion(
+                  cursor: _.showControls.value
+                      ? SystemMouseCursors.basic
+                      : SystemMouseCursors.none,
+                  onHover: (___) {
+                    //print(___.delta);
+                    if (_.mouseMoveInitial < const Offset(75, 75).distance) {
+                      _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
+                    } else {
+                      _.controls = true;
+                    }
+                  },
+                  child: videoControls(_, context));
+            } else {
+              return videoControls(_, context);
+            }
+          }),
+          RxBuilder(
+            //observables: [_.showSwipeDuration],
+            //observables: [_.swipeDuration],
+                (__) => Align(
+              alignment: Alignment.center,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 100),
+                opacity: _.showSwipeDuration.value ? 1 : 0,
+                child: Visibility(
+                  visible: _.showSwipeDuration.value,
+                  child: Container(
+                    color: Colors.grey[900],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        _.swipeDuration.value > 0
+                            ? "+ ${printDuration(Duration(seconds: _.swipeDuration.value))}"
+                            : "- ${printDuration(Duration(seconds: _.swipeDuration.value))}",
+                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          /// [VideoFitStatus]
+          RxBuilder(
+            //observables: [_.showSwipeDuration],
+            //observables: [_.swipeDuration],
+                (__) => Align(
+              alignment: Alignment.center,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 100),
+                opacity: _.videoFitChanged.value ? 1 : 0,
+                child: Visibility(
+                  visible: _.videoFitChanged.value,
+                  child: Container(
+                    color: Colors.grey[900],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        _.videoFit.value.name[0].toUpperCase() +
+                            _.videoFit.value.name.substring(1),
+                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          /// [DataStatus] source error handler
+          RxBuilder(
+            //observables: [_.showControls],
+                  (__) {
+                _.dataStatus.status.value;
+                if (_.dataStatus.error) {
+                  return Center(
+                      child: Text(
+                        _.errorText!,
+                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                      ));
                 } else {
-                  _.controls = true;
+                  return Container();
                 }
-              },
-              child: videoControls(_, context));
-        } else {
-          return videoControls(_, context);
-        }
-      }),
-      RxBuilder(
-        //observables: [_.showSwipeDuration],
-        //observables: [_.swipeDuration],
-        (__) => Align(
-          alignment: Alignment.center,
-          child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 100),
-            opacity: _.showSwipeDuration.value ? 1 : 0,
-            child: Visibility(
-              visible: _.showSwipeDuration.value,
-              child: Container(
-                color: Colors.grey[900],
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    _.swipeDuration.value > 0
-                        ? "+ ${printDuration(Duration(seconds: _.swipeDuration.value))}"
-                        : "- ${printDuration(Duration(seconds: _.swipeDuration.value))}",
-                    style: const TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
+              }),
+
+          /// [DataStatus] source loading & buffering handler
+          RxBuilder(
+            //observables: [_.showControls],
+                  (__) {
+                _.dataStatus.status.value;
+                if (_.dataStatus.loading || _.isBuffering.value) {
+                  return Center(
+                    child: _.loadingWidget,
+                  );
+                } else {
+                  return Container();
+                }
+              }),
+
+
+          RxBuilder(
+            //observables: [_.showControls],
+                (__) => VideoCoreForwardAndRewind(
+              showRewind: _.rewindIcons.value,
+              showForward: _.forwardIcons.value,
+              rewindSeconds: _defaultSeekAmount * _.doubleTapCount.value,
+              forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
+            ),
+          ),
+
+
+          /// [ForwardAndRewind] doubleTap  handler
+          Positioned.fill(
+            bottom: MediaQuery.of(context).size.height * 0.20,
+            top: MediaQuery.of(context).size.height * 0.20,
+            child: VideoCoreForwardAndRewindLayout(
+              rewind: GestureDetector(
+                onDoubleTap: () {
+                  _rewind(_);
+                  tappedOnce(_, true);
+                },
+                // onTap: () {
+                //   if (_.doubleTapCount.value != 0 || tappedTwice) {
+                //     _rewind(_);
+                //     tappedOnce(_, true);
+                //   } else {
+                //     tappedOnce(_, false);
+                //   }
+                // },
+              ),
+              forward: GestureDetector(
+                onDoubleTap: () {
+                  _forward(_);
+                  tappedOnce(_, true);
+                },
+                // onTap: () {
+                //   if (_.doubleTapCount.value != 0 || tappedTwice) {
+                //     _forward(_);
+                //     tappedOnce(_, true);
+                //   } else {
+                //     tappedOnce(_, false);
+                //   }
+                // },
+                //behavior: HitTestBehavior.,
               ),
             ),
           ),
-        ),
-      ),
-      RxBuilder(
-        //observables: [_.showSwipeDuration],
-        //observables: [_.swipeDuration],
-        (__) => Align(
-          alignment: Alignment.center,
-          child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 100),
-            opacity: _.videoFitChanged.value ? 1 : 0,
-            child: Visibility(
-              visible: _.videoFitChanged.value,
-              child: Container(
-                color: Colors.grey[900],
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    _.videoFit.value.name[0].toUpperCase() +
-                        _.videoFit.value.name.substring(1),
-                    style: const TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-      RxBuilder(
-          //observables: [_.showControls],
-          (__) {
-        _.dataStatus.status.value;
-        if (_.dataStatus.error) {
-          return Center(
-              child: Text(
-            _.errorText!,
-            style: const TextStyle(color: Colors.white, fontSize: 16),
-          ));
-        } else {
-          return Container();
-        }
-      }),
-      RxBuilder(
-          //observables: [_.showControls],
-          (__) {
-        _.dataStatus.status.value;
-        if (_.dataStatus.loading || _.isBuffering.value) {
-          return Center(
-            child: _.loadingWidget,
-          );
-        } else {
-          return Container();
-        }
-      }),
-      RxBuilder(
-        //observables: [_.showControls],
-        (__) => VideoCoreForwardAndRewind(
-          showRewind: _.rewindIcons.value,
-          showForward: _.forwardIcons.value,
-          rewindSeconds: _defaultSeekAmount * _.doubleTapCount.value,
-          forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
-        ),
-      ),
-      Positioned.fill(
-        bottom: MediaQuery.of(context).size.height * 0.20,
-        top: MediaQuery.of(context).size.height * 0.20,
-        child: VideoCoreForwardAndRewindLayout(
-          rewind: GestureDetector(
-            onTap: () {
-              if (_.doubleTapCount.value != 0 || tappedTwice) {
-                _rewind(_);
-                tappedOnce(_, true);
-              } else {
-                tappedOnce(_, false);
-              }
-            },
-          ),
-          forward: GestureDetector(
-            onTap: () {
-              if (_.doubleTapCount.value != 0 || tappedTwice) {
-                _forward(_);
-                tappedOnce(_, true);
-              } else {
-                tappedOnce(_, false);
-              }
-            },
-            //behavior: HitTestBehavior.,
-          ),
-        ),
-      ),
-    ]);
+
+
+        ]),
+    );
   }
 
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
