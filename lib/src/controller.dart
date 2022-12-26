@@ -31,6 +31,9 @@ class MeeduPlayerController {
   /// Screen Manager to define the overlays and device orientation when the player enters in fullscreen mode
   final ScreenManager screenManager;
 
+  /// [fitBoxs] to define the BoxFits  when the VideoFit changed  
+  final List<BoxFit> fitBoxs;
+
   /// use this class to change the default icons with your custom icons
   CustomIcons customIcons;
 
@@ -92,13 +95,13 @@ class MeeduPlayerController {
   Timer? videoFitChangedTimer;
   Rx<bool> bufferingVideoDuration = false.obs;
   void Function()? onVideoPlayerClosed;
-  List<BoxFit> fits = [
+  List<BoxFit> fits = fitBoxs.isNotEmpty ? fitBoxs : [
     BoxFit.contain,
-    BoxFit.cover,
     BoxFit.fill,
-    BoxFit.fitHeight,
     BoxFit.fitWidth,
-    BoxFit.scaleDown
+    BoxFit.fitHeight,
+    BoxFit.cover,
+    BoxFit.scaleDown,
   ];
 
   // GETS
@@ -217,6 +220,7 @@ class MeeduPlayerController {
   /// [errorText] message to show when the load process failed
   MeeduPlayerController({
     this.screenManager = const ScreenManager(),
+    this.fitBoxs = const [],
     this.colorTheme = Colors.redAccent,
     Widget? loadingWidget,
     this.controlsEnabled = true,
@@ -1148,8 +1152,7 @@ class MeeduPlayerController {
   }
 
   /// show the player in fullscreen mode
-  Future<void> goToFullscreen(
-    BuildContext context, {
+  Future<void> goToFullscreen( BuildContext context, {
     bool applyOverlaysAndOrientations = true,
   }) async {
     if (applyOverlaysAndOrientations) {
@@ -1160,12 +1163,19 @@ class MeeduPlayerController {
       }
     }
     _fullscreen.value = true;
-    final route = MaterialPageRoute(
-      builder: (_) {
+    final route = PageRouteBuilder(
+      opaque: false,
+      fullscreenDialog: true,
+      pageBuilder: (_, __, ___) {
         return MeeduPlayerFullscreenPage(controller: this);
       },
     );
 
+    // final route = MaterialPageRoute(
+    //   builder: (_) {
+    //     return MeeduPlayerFullscreenPage(controller: this);
+    //   },
+    // );
     await Navigator.push(context, route);
   }
 
@@ -1228,6 +1238,7 @@ class MeeduPlayerController {
       _videoPlayerControllerWindows?.dispose();
       _videoPlayerControllerWindows = null;
     } else {
+      screenManager.setDefaultOverlaysAndOrientations();
       if (_videoPlayerController != null) {
         _timer?.cancel();
         _timerForVolume?.cancel();
@@ -1343,9 +1354,8 @@ class MeeduPlayerController {
     }
   }*/
 
-  Future<void> videoPlayerClosed(
-      [AsyncCallback? restoreHotkeysCallback]) async {
-    print("Video player closed");
+  /// on back from [fallscreen] mode 
+  Future<void> onFullscreenClose( [AsyncCallback? restoreHotkeysCallback] ) async {
     fullscreen.value = false;
     resetBrightness();
     if (windows) {
@@ -1356,6 +1366,14 @@ class MeeduPlayerController {
     } else {
       screenManager.setDefaultOverlaysAndOrientations();
     }
+  }
+
+  
+  Future<void> videoPlayerClosed(
+      [AsyncCallback? restoreHotkeysCallback]) async {
+    print("Video player closed");
+    await onFullscreenClose();
+
     _timer?.cancel();
     _timerForVolume?.cancel();
     _timerForGettingVolume?.cancel();
@@ -1386,6 +1404,7 @@ class MeeduPlayerController {
     });
   }
 
+  
   static MeeduPlayerController of(BuildContext context) {
     return context
         .dependOnInheritedWidgetOfExactType<MeeduPlayerProvider>()!
