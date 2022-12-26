@@ -38,8 +38,21 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
 
           Row(
             mainAxisSize: MainAxisSize.min,
+            textDirection: TextDirection.ltr,
             children: [
               if (_.enabledButtons.rewindAndfastForward) ...[
+                // RxBuilder(
+                //         (__){
+                //       return PlayerButton(
+                //         onPressed: _.rewind,
+                //         size: responsive.iconSize(_.fullscreen.value),
+                //         iconColor: Colors.white,
+                //         backgroundColor: Colors.transparent,
+                //         iconPath: 'assets/icons/rewind.png',
+                //         customIcon: _.customIcons.rewind,
+                //       );
+                //     }
+                // ),
                 PlayerButton(
                   onPressed: _.rewind,
                   size: responsive.iconSize(_.fullscreen.value),
@@ -69,6 +82,18 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
                 }),
               if (_.enabledButtons.rewindAndfastForward) ...[
                 SizedBox(width: 10),
+                // RxBuilder(
+                //     (__){
+                //       return PlayerButton(
+                //         onPressed: _.fastForward,
+                //         iconColor: Colors.white,
+                //         backgroundColor: Colors.transparent,
+                //         size: responsive.iconSize(_.fullscreen.value),
+                //         iconPath: 'assets/icons/fast-forward.png',
+                //         customIcon: _.customIcons.fastForward,
+                //       ) ;
+                //     }
+                // ),
                 PlayerButton(
                   onPressed: _.fastForward,
                   iconColor: Colors.white,
