@@ -26,10 +26,10 @@ class ScreenManager {
 
   /// set the default orientations and overlays after exit of fullscreen
   Future<void> setDefaultOverlaysAndOrientations() async {
-    //await SystemChrome.setPreferredOrientations(this.orientations);
+    await SystemChrome.setPreferredOrientations(orientations);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: this.overlays);
-    AutoOrientation.portraitAutoMode();
+        overlays: overlays);
+    // AutoOrientation.portraitAutoMode();
   }
 
   Future<void> setWindowsFullScreen(bool state, MeeduPlayerController _) async {
@@ -57,7 +57,7 @@ class ScreenManager {
     if (visible) {
       await SystemChrome.setEnabledSystemUIMode(
           edgeToedge ? SystemUiMode.edgeToEdge : SystemUiMode.immersive,
-          overlays: this.overlays);
+          overlays: overlays);
     } else {
       //print("Closed2");
       await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
@@ -70,7 +70,7 @@ class ScreenManager {
   Future<void> setFullScreenOverlaysAndOrientations({
     hideOverLays = true,
   }) async {
-    this.forceLandScapeInFullscreen
+    forceLandScapeInFullscreen
         ? AutoOrientation.landscapeAutoMode(forceSensor: true)
         : AutoOrientation.fullAutoMode();
 

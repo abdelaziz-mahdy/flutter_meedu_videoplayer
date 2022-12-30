@@ -2,6 +2,8 @@
 * Converted to using video player platform interface (using package video_player_dart_vlc)
 * fixed web build
 * initDartVlc now is initVideoPlayerDartVlcIfNeeded
+* when full screen closed disabled the forced portrait orientation 
+* fixed bug where video player were disposed when closing full screen
 
 ## 2.0.5
 * fixed dart vlc initialize

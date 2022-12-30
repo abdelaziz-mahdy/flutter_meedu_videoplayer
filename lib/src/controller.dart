@@ -213,6 +213,14 @@ class MeeduPlayerController {
     this.controlsStyle = ControlsStyle.primary,
     this.header,
     this.bottomRight,
+    this.fits=const [
+    BoxFit.contain,
+    BoxFit.cover,
+    BoxFit.fill,
+    BoxFit.fitHeight,
+    BoxFit.fitWidth,
+    BoxFit.scaleDown
+  ],
     //this.pipEnabled = false,
     //this.showPipButton = false,
     this.customIcons = const CustomIcons(),
@@ -755,8 +763,10 @@ class MeeduPlayerController {
       }
     }
     _fullscreen.value = true;
-    final route = MaterialPageRoute(
-      builder: (_) {
+    final route = PageRouteBuilder(
+      opaque: false,
+      fullscreenDialog: true,
+      pageBuilder: (_, __, ___) {
         return MeeduPlayerFullscreenPage(controller: this);
       },
     );
@@ -903,6 +913,7 @@ class MeeduPlayerController {
     }
     //
   }
+
   /*
   ///// listener for pip changes
 
@@ -913,10 +924,9 @@ class MeeduPlayerController {
       _pipContextToFullscreen = null;
     }
   }*/
-
-  Future<void> videoPlayerClosed(
+  Future<void> onFullscreenClose(
       [AsyncCallback? restoreHotkeysCallback]) async {
-    print("Video player closed");
+    print("Fullscreen Closed");
     fullscreen.value = false;
     resetBrightness();
 
@@ -932,6 +942,12 @@ class MeeduPlayerController {
         screenManager.setDefaultOverlaysAndOrientations();
       }
     }
+  }
+
+  Future<void> videoPlayerClosed(
+      [AsyncCallback? restoreHotkeysCallback]) async {
+    print("Video player closed");
+    await onFullscreenClose(restoreHotkeysCallback);
 
     _timer?.cancel();
     _timerForVolume?.cancel();
