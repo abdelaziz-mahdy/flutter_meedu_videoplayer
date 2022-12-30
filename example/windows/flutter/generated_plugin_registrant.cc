@@ -8,6 +8,7 @@
 
 #include <dart_vlc/dart_vlc_plugin.h>
 #include <flutter_meedu_videoplayer/flutter_meedu_videoplayer_plugin.h>
+#include <fullscreen_window/fullscreen_window_plugin_c_api.h>
 #include <hotkey_manager/hotkey_manager_plugin.h>
 #include <screen_brightness_windows/screen_brightness_windows_plugin.h>
 #include <screen_retriever/screen_retriever_plugin.h>
@@ -18,6 +19,8 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("DartVlcPlugin"));
   FlutterMeeduVideoplayerPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FlutterMeeduVideoplayerPlugin"));
+  FullscreenWindowPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("FullscreenWindowPluginCApi"));
   HotkeyManagerPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("HotkeyManagerPlugin"));
   ScreenBrightnessWindowsPluginRegisterWithRegistrar(

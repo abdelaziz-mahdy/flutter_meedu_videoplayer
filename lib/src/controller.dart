@@ -47,26 +47,26 @@ class MeeduPlayerController {
   String? tag;
 
   // OBSERVABLES
-  Rx<Duration> _position = Rx(Duration.zero);
-  Rx<Duration> _sliderPosition = Rx(Duration.zero);
-  Rx<Duration> _duration = Rx(Duration.zero);
-  Rx<int> _swipeDuration = 0.obs;
+  final Rx<Duration> _position = Rx(Duration.zero);
+  final Rx<Duration> _sliderPosition = Rx(Duration.zero);
+  final Rx<Duration> _duration = Rx(Duration.zero);
+  final Rx<int> _swipeDuration = 0.obs;
   Rx<int> doubleTapCount = 0.obs;
-  Rx<double> _currentVolume = 1.0.obs;
-  Rx<double> _playbackSpeed = 1.0.obs;
-  Rx<double> _currentBrightness = 0.0.obs;
-  Rx<List<DurationRange>> _buffered = Rx([]);
+  final Rx<double> _currentVolume = 1.0.obs;
+  final Rx<double> _playbackSpeed = 1.0.obs;
+  final Rx<double> _currentBrightness = 0.0.obs;
+  final Rx<List<DurationRange>> _buffered = Rx([]);
   Rx<double> bufferedPercent = Rx(0.0);
-  Rx<bool> _closedCaptionEnabled = false.obs;
-  Rx<bool> _mute = false.obs;
-  Rx<bool> _fullscreen = false.obs;
-  Rx<bool> _showControls = true.obs;
-  Rx<bool> _showSwipeDuration = false.obs;
-  Rx<bool> _showVolumeStatus = false.obs;
-  Rx<bool> _showBrightnessStatus = false.obs;
+  final Rx<bool> _closedCaptionEnabled = false.obs;
+  final Rx<bool> _mute = false.obs;
+  final Rx<bool> _fullscreen = false.obs;
+  final Rx<bool> _showControls = true.obs;
+  final Rx<bool> _showSwipeDuration = false.obs;
+  final Rx<bool> _showVolumeStatus = false.obs;
+  final Rx<bool> _showBrightnessStatus = false.obs;
 
   Rx<bool> videoFitChanged = false.obs;
-  Rx<BoxFit> _videoFit = Rx(BoxFit.fill);
+  final Rx<BoxFit> _videoFit = Rx(BoxFit.fill);
   //Rx<double> scale = 1.0.obs;
   Rx<bool> rewindIcons = false.obs;
   Rx<bool> forwardIcons = false.obs;
@@ -222,11 +222,11 @@ class MeeduPlayerController {
     getUserPreferenceForFit();
 
     _errorText = errorText;
-    this.tag = DateTime.now().microsecondsSinceEpoch.toString();
+    tag = DateTime.now().microsecondsSinceEpoch.toString();
     this.loadingWidget = loadingWidget ??
         SpinKitWave(
           size: 30,
-          color: this.colorTheme,
+          color: colorTheme,
         );
     if (UniversalPlatform.isWindows ||
         UniversalPlatform.isLinux ||
@@ -263,7 +263,8 @@ class MeeduPlayerController {
     //}
   }
   Future<void> registerHotKeys() async {
-    if (HotKeyManager.instance.registeredHotKeyList.length == 0) {
+    if (HotKeyManager.instance.registeredHotKeyList.isEmpty &&
+        !UniversalPlatform.isWeb) {
       HotKey arrowUP = HotKey(
         KeyCode.arrowUp,
         scope: HotKeyScope.inapp,
@@ -314,14 +315,14 @@ class MeeduPlayerController {
         arrowRight,
         keyDownHandler: (hotKey) {
           print('onKeyDown+${hotKey.toJson()}');
-          seekTo(position.value + Duration(seconds: 5));
+          seekTo(position.value + const Duration(seconds: 5));
         },
       );
       await HotKeyManager.instance.register(
         arrowLeft,
         keyDownHandler: (hotKey) {
           print('onKeyDown+${hotKey.toJson()}');
-          seekTo(position.value - Duration(seconds: 5));
+          seekTo(position.value - const Duration(seconds: 5));
         },
       );
 
@@ -371,13 +372,11 @@ class MeeduPlayerController {
         dataSource.source!,
         closedCaptionFile: dataSource.closedCaptionFile,
         package: dataSource.package,
-
       );
     } else if (dataSource.type == DataSourceType.network) {
       tmp = VideoPlayerController.network(
         dataSource.source!,
         formatHint: dataSource.formatHint,
-
         closedCaptionFile: dataSource.closedCaptionFile,
         httpHeaders: dataSource.httpHeaders ?? {},
       );
@@ -410,19 +409,8 @@ class MeeduPlayerController {
 
     if (_autoplay) {
       // if the autoplay is enabled
-      await this.play();
+      await play();
     }
-  }
-
-  Future<void> removeWindowsListener() async {
-    await positionStream?.cancel();
-    await volumeStream?.cancel();
-    await playBackStream?.cancel();
-    await bufferStream?.cancel();
-    //positionStream = null;
-    //volumeStream = null;
-    //playBackStream = null;
-    //bufferStream = null;
   }
 
   void _listener() {
@@ -501,11 +489,11 @@ class MeeduPlayerController {
 
       await _initializePlayer(seekTo: seekTo);
       // listen the video player events
-      _videoPlayerController!.addListener(this._listener);
+      _videoPlayerController!.addListener(_listener);
     } catch (e, s) {
       print(e);
       print(s);
-      _errorText ??= _videoPlayerController!.value.errorDescription??"$e";
+      _errorText ??= _videoPlayerController!.value.errorDescription ?? "$e";
       dataStatus.status.value = DataStatus.error;
     }
   }
@@ -544,7 +532,7 @@ class MeeduPlayerController {
         await _videoPlayerController?.seekTo(position);
       } else {
         await _videoPlayerController
-            ?.seekTo(duration.value - Duration(milliseconds: 100));
+            ?.seekTo(duration.value - const Duration(milliseconds: 100));
       }
       if (playerStatus.stopped) {
         play();
@@ -552,7 +540,7 @@ class MeeduPlayerController {
     } else {
       _timerForSeek?.cancel();
       _timerForSeek =
-          Timer.periodic(Duration(milliseconds: 200), (Timer t) async {
+          Timer.periodic(const Duration(milliseconds: 200), (Timer t) async {
         //_timerForSeek = null;
         print("SEEK CALLED");
         if (duration.value.inSeconds != 0) {
@@ -560,7 +548,7 @@ class MeeduPlayerController {
             await _videoPlayerController?.seekTo(position);
           } else {
             await _videoPlayerController
-                ?.seekTo(duration.value - Duration(milliseconds: 100));
+                ?.seekTo(duration.value - const Duration(milliseconds: 100));
           }
           if (playerStatus.stopped) {
             play();
@@ -590,11 +578,8 @@ class MeeduPlayerController {
   ///   possible that your specific video cannot be slowed down, in which case
   ///   the plugin also reports errors.
   Future<void> setPlaybackSpeed(double speed) async {
-    if (windows) {
-    } else {
-      await _videoPlayerController?.setPlaybackSpeed(speed);
-      _playbackSpeed.value = speed;
-    }
+    await _videoPlayerController?.setPlaybackSpeed(speed);
+    _playbackSpeed.value = speed;
   }
 
   Future<void> togglePlaybackSpeed() async {
@@ -634,7 +619,7 @@ class MeeduPlayerController {
       _volumeBeforeMute = _videoPlayerController!.value.volume;
     }
     _mute.value = enabled;
-    await this.setVolume(enabled ? 0 : _volumeBeforeMute);
+    await setVolume(enabled ? 0 : _volumeBeforeMute);
   }
 
   /// fast Forward (10 seconds)
@@ -665,14 +650,15 @@ class MeeduPlayerController {
   }
 
   Future<void> getCurrentVolume() async {
-    try {
-      _currentVolume.value = await VolumeController().getVolume();
-    } catch (e) {
-      print("currentVolume " + e.toString());
-      //throw 'Failed to get current brightness';
-      //return 0;
+    if (!windows) {
+      try {
+        _currentVolume.value = await VolumeController().getVolume();
+      } catch (e) {
+        print("currentVolume " + e.toString());
+        //throw 'Failed to get current brightness';
+        //return 0;
+      }
     }
-
     //return 0;
   }
 
@@ -734,17 +720,17 @@ class MeeduPlayerController {
   void _hideTaskControls() {
     //print("_hideTaskControls called");
     if (windows) {
-      _timer = Timer(Duration(seconds: 2), () {
-        this.controls = false;
+      _timer = Timer(const Duration(seconds: 2), () {
+        controls = false;
         //_timer = null;
         swipeDuration.value = 0;
         showSwipeDuration.value = false;
         mouseMoveInitial = 0;
       });
     } else {
-      _timer = Timer(Duration(seconds: 5), () {
+      _timer = Timer(const Duration(seconds: 5), () {
         print("hidden");
-        this.controls = false;
+        controls = false;
         //_timer = null;
         swipeDuration.value = 0;
         showSwipeDuration.value = false;
@@ -758,10 +744,14 @@ class MeeduPlayerController {
     bool applyOverlaysAndOrientations = true,
   }) async {
     if (applyOverlaysAndOrientations) {
-      if (windows) {
-        screenManager.setWindowsFullScreen(true, this);
+      if (UniversalPlatform.isWeb) {
+        screenManager.setWebFullScreen(true, this);
       } else {
-        screenManager.setFullScreenOverlaysAndOrientations();
+        if (windows) {
+          screenManager.setWindowsFullScreen(true, this);
+        } else {
+          screenManager.setDefaultOverlaysAndOrientations();
+        }
       }
     }
     _fullscreen.value = true;
@@ -807,53 +797,33 @@ class MeeduPlayerController {
 
   /// dispose de video_player controller
   Future<void> dispose([AsyncCallback? restoreHotkeysCallback]) async {
-    if (windows) {
-      _timer?.cancel();
-      _timerForVolume?.cancel();
-      _timerForGettingVolume?.cancel();
-      timerForTrackingMouse?.cancel();
-      _timerForSeek?.cancel();
-      videoFitChangedTimer?.cancel();
+    _timer?.cancel();
+    _timerForVolume?.cancel();
+    _timerForGettingVolume?.cancel();
+    timerForTrackingMouse?.cancel();
+    _timerForSeek?.cancel();
+    videoFitChangedTimer?.cancel();
 
-      _position.close();
-      _playerEventSubs?.cancel();
-      _sliderPosition.close();
-      _duration.close();
-      _buffered.close();
-      _closedCaptionEnabled.close();
-      _mute.close();
-      _fullscreen.close();
-      _showControls.close();
+    _position.close();
+    _playerEventSubs?.cancel();
+    _sliderPosition.close();
+    _duration.close();
+    _buffered.close();
+    _closedCaptionEnabled.close();
+    _mute.close();
+    _fullscreen.close();
+    _showControls.close();
+    if (windows && !UniversalPlatform.isWeb) {
       HotKeyManager.instance
           .unregisterAll()
           .then((value) => restoreHotkeysCallback?.call());
-      playerStatus.status.close();
-      dataStatus.status.close();
-      removeWindowsListener();
-    } else {
-      if (_videoPlayerController != null) {
-        _timer?.cancel();
-        _timerForVolume?.cancel();
-        _timerForGettingVolume?.cancel();
-        timerForTrackingMouse?.cancel();
-        _timerForSeek?.cancel();
-        videoFitChangedTimer?.cancel();
-        _position.close();
-        _playerEventSubs?.cancel();
-        _sliderPosition.close();
-        _duration.close();
-        _buffered.close();
-        _closedCaptionEnabled.close();
-        _mute.close();
-        _fullscreen.close();
-        _showControls.close();
-        playerStatus.status.close();
-        dataStatus.status.close();
-        _videoPlayerController?.removeListener(this._listener);
-        await _videoPlayerController?.dispose();
-        _videoPlayerController = null;
-      }
     }
+    playerStatus.status.close();
+    dataStatus.status.close();
+
+    _videoPlayerController?.removeListener(_listener);
+    await _videoPlayerController?.dispose();
+    _videoPlayerController = null;
   }
 
   /// enable or diable the visibility of ClosedCaptionFile
@@ -895,7 +865,7 @@ class MeeduPlayerController {
       _videoFit.value = fits[0];
     }
     print(_videoFit.value);
-    videoFitChangedTimer = Timer(Duration(seconds: 1), () {
+    videoFitChangedTimer = Timer(const Duration(seconds: 1), () {
       print("hidden videoFit Changed");
       //videoFitChangedTimer = null;
       videoFitChanged.value = false;
@@ -949,14 +919,20 @@ class MeeduPlayerController {
     print("Video player closed");
     fullscreen.value = false;
     resetBrightness();
-    if (windows) {
-      screenManager.setWindowsFullScreen(false, this);
-      HotKeyManager.instance
-          .unregisterAll()
-          .then((value) => restoreHotkeysCallback?.call());
+
+    if (UniversalPlatform.isWeb) {
+      screenManager.setWebFullScreen(false, this);
     } else {
-      screenManager.setDefaultOverlaysAndOrientations();
+      if (windows) {
+        screenManager.setWindowsFullScreen(false, this);
+        HotKeyManager.instance
+            .unregisterAll()
+            .then((value) => restoreHotkeysCallback?.call());
+      } else {
+        screenManager.setDefaultOverlaysAndOrientations();
+      }
     }
+
     _timer?.cancel();
     _timerForVolume?.cancel();
     _timerForGettingVolume?.cancel();
@@ -968,13 +944,11 @@ class MeeduPlayerController {
       _timer?.cancel();
       pause();
       Wakelock.disable();
-      if (windows) {
-        removeWindowsListener();
-      } else {
-        _videoPlayerController?.removeListener(this._listener);
-        await _videoPlayerController?.dispose();
-        _videoPlayerController = null;
-      }
+
+      _videoPlayerController?.removeListener(_listener);
+      await _videoPlayerController?.dispose();
+      _videoPlayerController = null;
+
       //disposeVideoPlayerController();
       if (onVideoPlayerClosed != null) {
         print("Called");

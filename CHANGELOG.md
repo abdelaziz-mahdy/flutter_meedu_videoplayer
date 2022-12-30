@@ -1,3 +1,8 @@
+## 2.1.0
+* Converted to using video player platform interface (using package video_player_dart_vlc)
+* fixed web build
+* initDartVlc now is initVideoPlayerDartVlcIfNeeded
+
 ## 2.0.5
 * fixed dart vlc initialize
 

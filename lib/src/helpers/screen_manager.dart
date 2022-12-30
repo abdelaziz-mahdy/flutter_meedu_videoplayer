@@ -4,6 +4,7 @@ import 'package:auto_orientation/auto_orientation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:fullscreen_window/fullscreen_window.dart';
 
 class ScreenManager {
   /// [orientations] the device orientation after exit of the fullscreen
@@ -45,6 +46,10 @@ class ScreenManager {
       await windowManager.setSize(Size(size.width + 1, size.height + 1));
       //windowManager.restore();
     }
+  }
+  Future<void> setWebFullScreen(bool state, MeeduPlayerController _) async {
+    _.fullscreen.value = state;
+    FullScreenWindow.setFullScreen(state);
   }
 
   Future<void> setOverlays(bool visible) async {

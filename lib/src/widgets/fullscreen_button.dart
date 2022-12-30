@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 import 'player_button.dart';
 
@@ -30,17 +31,25 @@ class FullscreenButton extends StatelessWidget {
           customIcon: customIcon,
           onPressed: () {
             if (_.fullscreen.value) {
-              // exit to fullscreen
-              if (_.windows) {
-                _.screenManager.setWindowsFullScreen(false, _);
+// exit to fullscreen
+              if (UniversalPlatform.isWeb) {
+                _.screenManager.setWebFullScreen(false, _);
               } else {
-                Navigator.pop(context);
+                if (_.windows) {
+                  _.screenManager.setWindowsFullScreen(false, _);
+                } else {
+                  Navigator.pop(context);
+                }
               }
             } else {
-              if (_.windows) {
-                _.screenManager.setWindowsFullScreen(true, _);
+              if (UniversalPlatform.isWeb) {
+                _.screenManager.setWebFullScreen(true, _);
               } else {
-                _.goToFullscreen(context);
+                if (_.windows) {
+                  _.screenManager.setWindowsFullScreen(true, _);
+                } else {
+                  _.goToFullscreen(context);
+                }
               }
             }
           },

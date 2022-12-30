@@ -1,6 +1,6 @@
 name: flutter_meedu_videoplayer
 description: A crossplatfrom video player.
-version: 2.0.5
+version: 2.1.0
 homepage: "https://github.com/zezo357/flutter_meedu_videoplayer"
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -19,8 +19,10 @@ dependencies:
   flutter_spinkit: ^5.1.0
   meta: ^1.7.0
   universal_platform: ^1.0.0+1
+  fullscreen_window: ^1.0.4
 
-  video_player_dart_vlc: ^0.0.1
+  video_player_dart_vlc: ^0.1.0
+    # path: ../video_player_dart_vlc
 
   window_manager: ^0.2.0
   hotkey_manager: ^0.1.6

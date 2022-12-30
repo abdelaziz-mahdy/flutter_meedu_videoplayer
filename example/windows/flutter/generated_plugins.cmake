@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   dart_vlc
   flutter_meedu_videoplayer
+  fullscreen_window
   hotkey_manager
   screen_brightness_windows
   screen_retriever
