@@ -77,14 +77,14 @@ packages:
       name: dart_vlc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "0.4.0"
   dart_vlc_ffi:
     dependency: transitive
     description:
       name: dart_vlc_ffi
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.8"
+    version: "0.2.0+1"
   dio:
     dependency: transitive
     description:
@@ -98,7 +98,7 @@ packages:
       name: dio_smart_retry
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.3.2"
+    version: "1.4.0"
   fake_async:
     dependency: transitive
     description:
@@ -112,7 +112,7 @@ packages:
       name: ffi
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.1"
+    version: "2.0.1"
   file:
     dependency: transitive
     description:
@@ -126,7 +126,7 @@ packages:
       name: file_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.6.1"
+    version: "5.2.4"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -138,28 +138,21 @@ packages:
       name: flutter_lints
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.4"
+    version: "2.0.1"
   flutter_meedu:
     dependency: transitive
     description:
       name: flutter_meedu
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.0.0+1"
+    version: "8.1.1"
   flutter_meedu_videoplayer:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "2.0.2"
-  flutter_native_view:
-    dependency: transitive
-    description:
-      name: flutter_native_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2"
+    version: "2.1.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -184,6 +177,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  fullscreen_window:
+    dependency: transitive
+    description:
+      name: fullscreen_window
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   helpers:
     dependency: transitive
     description:
@@ -225,7 +225,7 @@ packages:
       name: lints
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "2.0.1"
   matcher:
     dependency: transitive
     description:
@@ -246,7 +246,7 @@ packages:
       name: meedu
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.2.0+1"
+    version: "7.2.2"
   meta:
     dependency: transitive
     description:
@@ -274,7 +274,7 @@ packages:
       name: path_provider_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.21"
+    version: "2.0.22"
   path_provider_ios:
     dependency: transitive
     description:
@@ -309,7 +309,7 @@ packages:
       name: path_provider_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.7"
+    version: "2.1.3"
   platform:
     dependency: transitive
     description:
@@ -407,7 +407,7 @@ packages:
       name: shared_preferences_linux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   shared_preferences_macos:
     dependency: transitive
     description:
@@ -435,7 +435,7 @@ packages:
       name: shared_preferences_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -459,6 +459,13 @@ packages:
     dependency: transitive
     description:
       name: stream_channel
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
+  stream_transform:
+    dependency: transitive
+    description:
+      name: stream_transform
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
@@ -490,6 +497,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.1"
+  universal_platform:
+    dependency: transitive
+    description:
+      name: universal_platform
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0+1"
   uuid:
     dependency: transitive
     description:
@@ -510,49 +524,56 @@ packages:
       name: video_player
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.4.8"
+    version: "2.4.10"
   video_player_android:
     dependency: transitive
     description:
       name: video_player_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.9"
+    version: "2.3.10"
   video_player_avfoundation:
     dependency: transitive
     description:
       name: video_player_avfoundation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.7"
+    version: "2.3.8"
+  video_player_dart_vlc:
+    dependency: transitive
+    description:
+      name: video_player_dart_vlc
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   video_player_platform_interface:
     dependency: transitive
     description:
       name: video_player_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.1.4"
+    version: "6.0.1"
   video_player_web:
     dependency: transitive
     description:
       name: video_player_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.12"
+    version: "2.0.13"
   visibility_detector:
     dependency: "direct main"
     description:
       name: visibility_detector
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.2"
+    version: "0.3.3"
   volume_controller:
     dependency: transitive
     description:
       name: volume_controller
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.6"
   wakelock:
     dependency: transitive
     description:
@@ -587,21 +608,21 @@ packages:
       name: wakelock_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.1"
   win32:
     dependency: transitive
     description:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.1"
+    version: "3.1.3"
   window_manager:
     dependency: transitive
     description:
       name: window_manager
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.7"
+    version: "0.2.8"
   xdg_directories:
     dependency: transitive
     description:
@@ -610,5 +631,5 @@ packages:
     source: hosted
     version: "0.2.0+2"
 sdks:
-  dart: ">=2.17.0 <3.0.0"
-  flutter: ">=2.10.0"
+  dart: ">=2.18.5 <3.0.0"
+  flutter: ">=3.0.0"

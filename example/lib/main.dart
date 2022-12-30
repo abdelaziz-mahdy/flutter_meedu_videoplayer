@@ -1,4 +1,4 @@
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_page.dart';
@@ -15,7 +15,9 @@ import 'package:flutter_meedu_videoplayer_example/pages/player_with_header_page.
 
 void main() {
 
-  initDartVlc();
+
+  initVideoPlayerDartVlcIfNeeded();
+  
   runApp(MyApp());
 }
 

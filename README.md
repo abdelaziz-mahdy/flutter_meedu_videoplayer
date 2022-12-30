@@ -16,12 +16,14 @@
 ## Setup For windows 
 1.Add in main 
 ```dart
-  initDartVlc();
+  initVideoPlayerDartVlcIfNeeded();
+
 ```
 Example:
 ```dart
 void main() {
-initDartVlc();
+  initVideoPlayerDartVlcIfNeeded();
+
 runApp(MyApp());
 }
 ```
@@ -32,21 +34,21 @@ runApp(MyApp());
 <img src="https://darwin-morocho.github.io/flutter-meedu-player/assets/full.gif" alt="meedu_player" width="300" />
 <img src="https://user-images.githubusercontent.com/15864336/94494352-9924d100-01b4-11eb-9c0f-54c88868331b.png" alt="meedu_player" width="300" />
 
-| Features  | iOS | Android | windows | linux | macos
-| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| Videos from Network  | ✅  | ✅ | ✅ | ✅ | x |
-| Videos from Assets  | ✅  | ✅ | ✅ | ✅ | x |
-| Videos from local files  | ✅  | ✅ | ✅ | ✅ | x|
-| Looping  | ✅  | ✅ | ✅ | ✅ | x |
-| Autoplay  | ✅  | ✅ | ✅ | ✅ | x |
-| Swipe to increase and decrease Sound  | ✅  | ✅ | ✅ | ✅ | x|
-| Swipe to seek in video | ✅  | ✅ | ✅ | ✅ | x|
-| Fullscreen  | ✅  | ✅ | ✅ | ✅ | x |
-| Launch Player as Fullscreen  | ✅  | ✅ | ✅ | ✅ |x |
-| Playback Speed  | ✅  | ✅ | ✅ | ✅ | x |
-| fastForward / Rewind  | ✅  | ✅ | ✅ | ✅ |x |
-| srt subtitles  | ✅  | ✅ | X | X | X |
-| Customize  | partially  | partially | ✅ | ✅ | x |
+| Features  | iOS | Android | windows | linux | macos | web
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| Videos from Network  | ✅  | ✅ | ✅ | ✅ | x | ✅
+| Videos from Assets  | ✅  | ✅ | ✅ | ✅ | x | ✅
+| Videos from local files  | ✅  | ✅ | ✅ | ✅ | x | ✅
+| Looping  | ✅  | ✅ | x | x | x | x
+| AutoPlay  | ✅  | ✅ | ✅ | ✅ | x | ✅
+| Swipe to increase and decrease Sound  | ✅  | ✅ | x | x | x | x |
+| Swipe to seek in video | ✅  | ✅ | x | x | x | x |
+| FullScreen  | ✅  | ✅ | ✅ | ✅ | x | ✅ |
+| Launch Player as FullScreen  | ✅  | ✅ | ✅ | ✅ | x | ✅ |
+| Playback Speed  | ✅  | ✅ | ✅ | ✅ | x | ✅ |
+| fastForward / Rewind  | ✅  | ✅ | ✅ | ✅ |x | ✅ |
+| srt subtitles  | ✅  | ✅ | x | x | x | x
+| Customize  | partially  | partially | partially | partially | x | partially
 
 ---
 

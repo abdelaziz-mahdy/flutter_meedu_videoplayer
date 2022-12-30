@@ -27,7 +27,6 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
 
   @override
   void dispose() {
-    // The next line disables the wakelock again.
     _playerEventSubs?.cancel();
     _meeduPlayerController.dispose();
     super.dispose();
