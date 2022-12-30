@@ -17,14 +17,12 @@
 1.Add in main 
 ```dart
   initVideoPlayerDartVlcIfNeeded();
-
 ```
 Example:
 ```dart
 void main() {
   initVideoPlayerDartVlcIfNeeded();
-
-runApp(MyApp());
+  runApp(MyApp());
 }
 ```
 
