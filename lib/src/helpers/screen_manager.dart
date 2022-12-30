@@ -4,6 +4,7 @@ import 'package:auto_orientation/auto_orientation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:fullscreen_window/fullscreen_window.dart';
 
 class ScreenManager {
   /// [orientations] the device orientation after exit of the fullscreen
@@ -25,10 +26,10 @@ class ScreenManager {
 
   /// set the default orientations and overlays after exit of fullscreen
   Future<void> setDefaultOverlaysAndOrientations() async {
-    //await SystemChrome.setPreferredOrientations(this.orientations);
+    await SystemChrome.setPreferredOrientations(orientations);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: this.overlays);
-    AutoOrientation.portraitAutoMode();
+        overlays: overlays);
+    // AutoOrientation.portraitAutoMode();
   }
 
   Future<void> setWindowsFullScreen(bool state, MeeduPlayerController _) async {
@@ -46,13 +47,17 @@ class ScreenManager {
       //windowManager.restore();
     }
   }
+  Future<void> setWebFullScreen(bool state, MeeduPlayerController _) async {
+    _.fullscreen.value = state;
+    FullScreenWindow.setFullScreen(state);
+  }
 
   Future<void> setOverlays(bool visible) async {
     //await SystemChrome.setPreferredOrientations(this.orientations);
     if (visible) {
       await SystemChrome.setEnabledSystemUIMode(
           edgeToedge ? SystemUiMode.edgeToEdge : SystemUiMode.immersive,
-          overlays: this.overlays);
+          overlays: overlays);
     } else {
       //print("Closed2");
       await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
@@ -65,7 +70,7 @@ class ScreenManager {
   Future<void> setFullScreenOverlaysAndOrientations({
     hideOverLays = true,
   }) async {
-    this.forceLandScapeInFullscreen
+    forceLandScapeInFullscreen
         ? AutoOrientation.landscapeAutoMode(forceSensor: true)
         : AutoOrientation.fullAutoMode();
 
