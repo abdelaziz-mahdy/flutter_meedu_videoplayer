@@ -1,6 +1,6 @@
 name: flutter_meedu_videoplayer
 description: A cross Platform video player that uses video_player for android and ios and web, video_player_dart_vlc for windows and linux.
-version: 2.1.1
+version: 2.2.0
 homepage: "https://github.com/zezo357/flutter_meedu_videoplayer"
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -28,7 +28,6 @@ dependencies:
   # flutter_volume_controller: ^1.2.2
 
   window_manager: ^0.2.0
-  hotkey_manager: ^0.1.6
   wakelock: ^0.6.1+2
   shared_preferences: ^2.0.13
   helpers: ^1.1.4

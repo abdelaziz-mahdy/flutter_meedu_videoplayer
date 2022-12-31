@@ -61,7 +61,8 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
   Widget build(BuildContext context) {
     return CallbackShortcuts(
       bindings: activatorsToCallBacks(widget.controller),
-      child: ExcludeFocus(
+      child: Focus(
+        autofocus: true,
         child: MeeduPlayerProvider(
           controller: widget.controller,
           child: Container(
@@ -89,43 +90,45 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                         this.widget.bottomRight!(context, _, responsive);
                   }
 
-                  return Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      RxBuilder(
-                          //observables: [_.videoFit],
-                          (__) {
-                        _.dataStatus.status.value;
-                        print("Fit is ${widget.controller.videoFit.value}");
-                        return SizedBox.expand(
-                          child: FittedBox(
-                            fit: widget.controller.videoFit.value,
-                            child: SizedBox(
-                              width: _.videoPlayerController != null
-                                  ? _.videoPlayerController!.value.size.width
-                                  : 640,
-                              height: _.videoPlayerController != null
-                                  ? _.videoPlayerController!.value.size.height
-                                  : 480,
-                              child: _.videoPlayerController != null
-                                  ? VideoPlayer(_.videoPlayerController!)
-                                  : Container(),
+                  return ExcludeFocus(
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        RxBuilder(
+                            //observables: [_.videoFit],
+                            (__) {
+                          _.dataStatus.status.value;
+                          print("Fit is ${widget.controller.videoFit.value}");
+                          return SizedBox.expand(
+                            child: FittedBox(
+                              fit: widget.controller.videoFit.value,
+                              child: SizedBox(
+                                width: _.videoPlayerController != null
+                                    ? _.videoPlayerController!.value.size.width
+                                    : 640,
+                                height: _.videoPlayerController != null
+                                    ? _.videoPlayerController!.value.size.height
+                                    : 480,
+                                child: _.videoPlayerController != null
+                                    ? VideoPlayer(_.videoPlayerController!)
+                                    : Container(),
+                              ),
                             ),
+                          );
+                        }),
+                        ClosedCaptionView(responsive: responsive),
+                        if (_.controlsEnabled &&
+                            _.controlsStyle == ControlsStyle.primary)
+                          PrimaryVideoPlayerControls(
+                            responsive: responsive,
                           ),
-                        );
-                      }),
-                      ClosedCaptionView(responsive: responsive),
-                      if (_.controlsEnabled &&
-                          _.controlsStyle == ControlsStyle.primary)
-                        PrimaryVideoPlayerControls(
-                          responsive: responsive,
-                        ),
-                      if (_.controlsEnabled &&
-                          _.controlsStyle == ControlsStyle.secondary)
-                        SecondaryVideoPlayerControls(
-                          responsive: responsive,
-                        ),
-                    ],
+                        if (_.controlsEnabled &&
+                            _.controlsStyle == ControlsStyle.secondary)
+                          SecondaryVideoPlayerControls(
+                            responsive: responsive,
+                          ),
+                      ],
+                    ),
                   );
                 },
               )),
