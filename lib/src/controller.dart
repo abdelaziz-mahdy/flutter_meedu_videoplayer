@@ -79,6 +79,7 @@ class MeeduPlayerController {
   Timer? _timer;
   Timer? _timerForSeek;
   Timer? _timerForVolume;
+  Timer? _timerForShowingVolume;
   Timer? _timerForGettingVolume;
   Timer? timerForTrackingMouse;
   Timer? videoFitChangedTimer;
@@ -213,14 +214,14 @@ class MeeduPlayerController {
     this.controlsStyle = ControlsStyle.primary,
     this.header,
     this.bottomRight,
-    this.fits=const [
-    BoxFit.contain,
-    BoxFit.cover,
-    BoxFit.fill,
-    BoxFit.fitHeight,
-    BoxFit.fitWidth,
-    BoxFit.scaleDown
-  ],
+    this.fits = const [
+      BoxFit.contain,
+      BoxFit.cover,
+      BoxFit.fill,
+      BoxFit.fitHeight,
+      BoxFit.fitWidth,
+      BoxFit.scaleDown
+    ],
     //this.pipEnabled = false,
     //this.showPipButton = false,
     this.customIcons = const CustomIcons(),
@@ -627,7 +628,7 @@ class MeeduPlayerController {
       _volumeBeforeMute = _videoPlayerController!.value.volume;
     }
     _mute.value = enabled;
-    await setVolume(enabled ? 0 : _volumeBeforeMute);
+    await setVolume(enabled ? 0 : _volumeBeforeMute, videoPlayerVolume: true);
   }
 
   /// fast Forward (10 seconds)
@@ -658,7 +659,9 @@ class MeeduPlayerController {
   }
 
   Future<void> getCurrentVolume() async {
-    if (!windows) {
+    if (windows) {
+      _currentVolume.value = _videoPlayerController?.value.volume ?? 0;
+    } else {
       try {
         _currentVolume.value = await VolumeController().getVolume();
       } catch (e) {
@@ -686,16 +689,32 @@ class MeeduPlayerController {
   /// Sets the audio volume
   /// [volume] indicates a value between 0.0 (silent) and 1.0 (full volume) on a
   /// linear scale.
-  Future<void> setVolume(double volumeNew) async {
-    //assert(volumeNew >= 0.0 && volumeNew <= 1.0); // validate the param
-    try {
+  Future<void> setVolume(double volumeNew,
+      {bool videoPlayerVolume = false}) async {
+    if (volumeNew >= 0.0 && volumeNew <= 1.0) {
       volume.value = volumeNew;
-      VolumeController().setVolume(volumeNew, showSystemUI: false);
-    } catch (_) {
-      print(_);
+      if (windows || videoPlayerVolume) {
+        print("volume is $volumeNew");
+        await _videoPlayerController?.setVolume(volumeNew);
+        volumeUpdated();
+      } else {
+        try {
+          VolumeController().setVolume(volumeNew, showSystemUI: false);
+        } catch (_) {
+          print(_);
+        }
+      }
     }
 
-    //await _videoPlayerController?.setVolume(volume);
+    //
+  }
+
+  void volumeUpdated() {
+    showVolumeStatus.value = true;
+    _timerForShowingVolume?.cancel();
+    _timerForShowingVolume = Timer(const Duration(seconds: 1), () {
+      showVolumeStatus.value = false;
+    });
   }
 
   Future<void> resetBrightness() async {

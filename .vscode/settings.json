@@ -1,3 +1,6 @@
 {
-    "dart.debugExternalPackageLibraries": true
+    "dart.debugExternalPackageLibraries": true,
+    "cSpell.words": [
+        "Meedu"
+    ]
 }
