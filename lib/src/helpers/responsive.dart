@@ -7,7 +7,7 @@ class Responsive {
     inch = math.sqrt((width * width) + (height * height));
   }
   double iconSize(bool fullscreen) {
-    return ip(fullscreen ? 5 : 10);
+    return ip(fullscreen ? 7 : 9);
   }
 
   double ip(double percent) {
