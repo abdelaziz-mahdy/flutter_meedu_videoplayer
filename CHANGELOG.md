@@ -1,3 +1,6 @@
+## 2.1.3
+* fixed web
+
 ## 2.1.2
 * fixed video player volume on windows causing errors
 * fixed focus in windows and add ui for changing volume in windows
