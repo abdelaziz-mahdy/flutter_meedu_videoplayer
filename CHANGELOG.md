@@ -1,3 +1,7 @@
+
+## 3.0.0
+* removed hotkey manger dependence to use flutter shortcuts widget (to work on web)
+  
 ## 2.1.3
 * fixed web
 

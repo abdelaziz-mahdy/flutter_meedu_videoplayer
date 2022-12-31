@@ -4,8 +4,26 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/primary/primary_player_controls.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/secondary/secondary_player_controls.dart';
+import '../helpers/shortcuts/intent_action_map.dart';
+
+import '../helpers/shortcuts/short_cuts_map.dart';
 
 import 'closed_caption_view.dart';
+
+/// An ActionDispatcher that logs all the actions that it invokes.
+class LoggingActionDispatcher extends ActionDispatcher {
+  @override
+  Object? invokeAction(
+    covariant Action<Intent> action,
+    covariant Intent intent, [
+    BuildContext? context,
+  ]) {
+    print('Action invoked: $action($intent) from $context');
+    super.invokeAction(action, intent, context);
+
+    return null;
+  }
+}
 
 class MeeduVideoPlayer extends StatefulWidget {
   final MeeduPlayerController controller;
@@ -41,74 +59,80 @@ class MeeduVideoPlayer extends StatefulWidget {
 class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
   @override
   Widget build(BuildContext context) {
-    return ExcludeFocus(
-      child: MeeduPlayerProvider(
-        controller: widget.controller,
-        child: Container(
-            color: Colors.black,
-            width: 0.0,
-            height: 0.0,
-            child: LayoutBuilder(
-              builder: (ctx, constraints) {
-                MeeduPlayerController _ = widget.controller;
-                final responsive = Responsive(
-                  constraints.maxWidth,
-                  constraints.maxHeight,
-                );
+    return CallbackShortcuts(
+      bindings: activatorsToCallBacks(widget.controller),
+      child: Focus(
+        autofocus: true,
+        child: MeeduPlayerProvider(
+          controller: widget.controller,
+          child: Container(
+              color: Colors.black,
+              width: 0.0,
+              height: 0.0,
+              child: LayoutBuilder(
+                builder: (ctx, constraints) {
+                  MeeduPlayerController _ = widget.controller;
+                  final responsive = Responsive(
+                    constraints.maxWidth,
+                    constraints.maxHeight,
+                  );
 
-                if (widget.customIcons != null) {
-                  _.customIcons = this.widget.customIcons!(responsive);
-                }
+                  if (widget.customIcons != null) {
+                    _.customIcons = this.widget.customIcons!(responsive);
+                  }
 
-                if (widget.header != null) {
-                  _.header = this.widget.header!(context, _, responsive);
-                }
+                  if (widget.header != null) {
+                    _.header = this.widget.header!(context, _, responsive);
+                  }
 
-                if (widget.bottomRight != null) {
-                  _.bottomRight =
-                      this.widget.bottomRight!(context, _, responsive);
-                }
+                  if (widget.bottomRight != null) {
+                    _.bottomRight =
+                        this.widget.bottomRight!(context, _, responsive);
+                  }
 
-                return Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    RxBuilder(
-                        //observables: [_.videoFit],
-                        (__) {
-                      _.dataStatus.status.value;
-                      print("Fit is ${widget.controller.videoFit.value}");
-                      return SizedBox.expand(
-                        child: FittedBox(
-                          fit: widget.controller.videoFit.value,
-                          child: SizedBox(
-                            width: _.videoPlayerController != null
-                                ? _.videoPlayerController!.value.size.width
-                                : 640,
-                            height: _.videoPlayerController != null
-                                ? _.videoPlayerController!.value.size.height
-                                : 480,
-                            child: _.videoPlayerController != null
-                                ? VideoPlayer(_.videoPlayerController!)
-                                : Container(),
+                  return ExcludeFocus(
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        RxBuilder(
+                            //observables: [_.videoFit],
+                            (__) {
+                          _.dataStatus.status.value;
+                          print("Fit is ${widget.controller.videoFit.value}");
+                          return SizedBox.expand(
+                            child: FittedBox(
+                              fit: widget.controller.videoFit.value,
+                              child: SizedBox(
+                                width: _.videoPlayerController != null
+                                    ? _.videoPlayerController!.value.size.width
+                                    : 640,
+                                height: _.videoPlayerController != null
+                                    ? _.videoPlayerController!.value.size.height
+                                    : 480,
+                                child: _.videoPlayerController != null
+                                    ? VideoPlayer(_.videoPlayerController!)
+                                    : Container(),
+                              ),
+                            ),
+                          );
+                        }),
+                        ClosedCaptionView(responsive: responsive),
+                        if (_.controlsEnabled &&
+                            _.controlsStyle == ControlsStyle.primary)
+                          PrimaryVideoPlayerControls(
+                            responsive: responsive,
                           ),
-                        ),
-                      );
-                    }),
-                    ClosedCaptionView(responsive: responsive),
-                    if (_.controlsEnabled &&
-                        _.controlsStyle == ControlsStyle.primary)
-                      PrimaryVideoPlayerControls(
-                        responsive: responsive,
-                      ),
-                    if (_.controlsEnabled &&
-                        _.controlsStyle == ControlsStyle.secondary)
-                      SecondaryVideoPlayerControls(
-                        responsive: responsive,
-                      ),
-                  ],
-                );
-              },
-            )),
+                        if (_.controlsEnabled &&
+                            _.controlsStyle == ControlsStyle.secondary)
+                          SecondaryVideoPlayerControls(
+                            responsive: responsive,
+                          ),
+                      ],
+                    ),
+                  );
+                },
+              )),
+        ),
       ),
     );
   }

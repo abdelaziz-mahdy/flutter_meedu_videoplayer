@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
@@ -271,106 +270,7 @@ class MeeduPlayerController {
     //_pipAvailable.value = false;
     //}
   }
-  Future<void> registerHotKeys() async {
-    if (HotKeyManager.instance.registeredHotKeyList.isEmpty &&
-        !UniversalPlatform.isWeb) {
-      HotKey arrowUP = HotKey(
-        KeyCode.arrowUp,
-        scope: HotKeyScope.inapp,
-      );
-      HotKey arrowDown = HotKey(
-        KeyCode.arrowDown,
-        scope: HotKeyScope.inapp,
-      );
-      HotKey arrowRight = HotKey(
-        KeyCode.arrowRight,
-        scope: HotKeyScope.inapp,
-      );
-      HotKey arrowLeft = HotKey(
-        KeyCode.arrowLeft,
-        scope: HotKeyScope.inapp,
-      );
-      HotKey escape = HotKey(
-        KeyCode.escape,
-        scope: HotKeyScope.inapp,
-      );
-      HotKey enter = HotKey(
-        KeyCode.enter,
-        scope: HotKeyScope.inapp,
-      );
-      HotKey spaceBar = HotKey(
-        KeyCode.space,
-        scope: HotKeyScope.inapp,
-      );
-      HotKey dot = HotKey(
-        KeyCode.numpadDecimal,
-        scope: HotKeyScope.inapp,
-      );
-      await HotKeyManager.instance.register(
-        arrowUP,
-        keyDownHandler: (hotKey) {
-          print('onKeyDown+${hotKey.toJson()}');
-          setVolume(volume.value + 0.05);
-        },
-      );
-      await HotKeyManager.instance.register(
-        arrowDown,
-        keyDownHandler: (hotKey) {
-          print('onKeyDown+${hotKey.toJson()}');
-          setVolume(volume.value - 0.05);
-        },
-      );
-      await HotKeyManager.instance.register(
-        arrowRight,
-        keyDownHandler: (hotKey) {
-          print('onKeyDown+${hotKey.toJson()}');
-          seekTo(position.value + const Duration(seconds: 5));
-        },
-      );
-      await HotKeyManager.instance.register(
-        arrowLeft,
-        keyDownHandler: (hotKey) {
-          print('onKeyDown+${hotKey.toJson()}');
-          seekTo(position.value - const Duration(seconds: 5));
-        },
-      );
 
-      await HotKeyManager.instance.register(
-        escape,
-        keyDownHandler: (hotKey) {
-          print('onKeyDown+${hotKey.toJson()}');
-          screenManager.setWindowsFullScreen(false, this);
-        },
-      );
-      await HotKeyManager.instance.register(
-        enter,
-        keyDownHandler: (hotKey) {
-          print('onKeyDown+${hotKey.toJson()}');
-          screenManager.setWindowsFullScreen(!_fullscreen.value, this);
-        },
-      );
-      await HotKeyManager.instance.register(
-        spaceBar,
-        keyDownHandler: (hotKey) {
-          print('onKeyDown+${hotKey.toJson()}');
-          if (playerStatus.playing) {
-            pause();
-          } else {
-            play();
-          }
-        },
-      );
-      await HotKeyManager.instance.register(
-        dot,
-        keyDownHandler: (hotKey) {
-          toggleVideoFit();
-        },
-      );
-    } else {
-      print("hotkeys are registered ");
-    }
-    //await HotKeyManager.instance.unregister(_hotKey);
-  }
 
   /// create a new video_player controller
   VideoPlayerController _createVideoController(DataSource dataSource) {
@@ -534,15 +434,17 @@ class MeeduPlayerController {
 
   /// seek the current video position
   Future<void> seekTo(Duration position) async {
+    if (position >= duration.value) {
+      position = duration.value - const Duration(milliseconds: 100);
+    }
+    if (position < Duration.zero) {
+      position = Duration.zero;
+    }
     _position.value = position;
     print("duration in seek function is ${duration.value.toString()}");
     if (duration.value.inSeconds != 0) {
-      if (position <= duration.value) {
-        await _videoPlayerController?.seekTo(position);
-      } else {
-        await _videoPlayerController
-            ?.seekTo(duration.value - const Duration(milliseconds: 100));
-      }
+      await _videoPlayerController?.seekTo(position);
+
       if (playerStatus.stopped) {
         play();
       }
@@ -553,12 +455,8 @@ class MeeduPlayerController {
         //_timerForSeek = null;
         print("SEEK CALLED");
         if (duration.value.inSeconds != 0) {
-          if (position <= duration.value) {
-            await _videoPlayerController?.seekTo(position);
-          } else {
-            await _videoPlayerController
-                ?.seekTo(duration.value - const Duration(milliseconds: 100));
-          }
+          await _videoPlayerController?.seekTo(position);
+
           if (playerStatus.stopped) {
             play();
           }
@@ -815,9 +713,7 @@ class MeeduPlayerController {
       looping: looping,
       seekTo: seekTo,
     );
-    if (windows) {
-      registerHotKeys();
-    }
+
     if (!windows) {
       getUserPreferenceForBrightness();
     }
@@ -825,7 +721,7 @@ class MeeduPlayerController {
   }
 
   /// dispose de video_player controller
-  Future<void> dispose([AsyncCallback? restoreHotkeysCallback]) async {
+  Future<void> dispose() async {
     _timer?.cancel();
     _timerForVolume?.cancel();
     _timerForGettingVolume?.cancel();
@@ -842,11 +738,7 @@ class MeeduPlayerController {
     _mute.close();
     _fullscreen.close();
     _showControls.close();
-    if (windows && !UniversalPlatform.isWeb) {
-      HotKeyManager.instance
-          .unregisterAll()
-          .then((value) => restoreHotkeysCallback?.call());
-    }
+
     playerStatus.status.close();
     dataStatus.status.close();
 
@@ -944,7 +836,7 @@ class MeeduPlayerController {
     }
   }*/
   Future<void> onFullscreenClose(
-      [AsyncCallback? restoreHotkeysCallback]) async {
+) async {
     print("Fullscreen Closed");
     fullscreen.value = false;
     resetBrightness();
@@ -954,9 +846,7 @@ class MeeduPlayerController {
     } else {
       if (windows) {
         screenManager.setWindowsFullScreen(false, this);
-        HotKeyManager.instance
-            .unregisterAll()
-            .then((value) => restoreHotkeysCallback?.call());
+       
       } else {
         screenManager.setDefaultOverlaysAndOrientations();
       }
@@ -964,9 +854,9 @@ class MeeduPlayerController {
   }
 
   Future<void> videoPlayerClosed(
-      [AsyncCallback? restoreHotkeysCallback]) async {
+      ) async {
     print("Video player closed");
-    await onFullscreenClose(restoreHotkeysCallback);
+    await onFullscreenClose();
 
     _timer?.cancel();
     _timerForVolume?.cancel();
