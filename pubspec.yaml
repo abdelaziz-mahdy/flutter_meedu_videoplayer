@@ -61,8 +61,8 @@ flutter:
         pluginClass: FlutterMeeduVideoplayerPlugin
       linux:
         pluginClass: FlutterMeeduVideoplayerPlugin
-      web:
-        pluginClass: FlutterMeeduVideoplayerPlugin
+      # web:
+      #   pluginClass: FlutterMeeduVideoplayerPlugin
       #web:
         #pluginClass: FlutterMeeduVideoplayerWeb
         #fileName: flutter_meedu_videoplayer_web.dart
