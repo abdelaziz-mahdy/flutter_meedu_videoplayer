@@ -1,3 +1,11 @@
+## 2.1.2
+* fixed video player volume on windows causing errors
+* fixed focus in windows and add ui for changing volume in windows
+* improved initiation 
+
+## 2.1.1
+* improved description
+ 
 ## 2.1.0
 * Converted to using video player platform interface (using package video_player_dart_vlc)
 * fixed web build

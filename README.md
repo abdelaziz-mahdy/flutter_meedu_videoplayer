@@ -2,9 +2,9 @@
 
 
 
-## Cross-platform video player (web,macos not included)
-- Android and Ios are using video player
-- Desktop are using dart-vlc
+## Cross-platform video player (macos not included)
+- Android and Ios and web are using video player
+- windows and linux are using dart-vlc
 
 
 ## Used meedu player as a base and added (also fixed some errors)
@@ -16,12 +16,12 @@
 ## Setup For windows 
 1.Add in main 
 ```dart
-  initVideoPlayerDartVlcIfNeeded();
+initMeeduPlayer();
 ```
 Example:
 ```dart
 void main() {
-  initVideoPlayerDartVlcIfNeeded();
+  initMeeduPlayer();
   runApp(MyApp());
 }
 ```

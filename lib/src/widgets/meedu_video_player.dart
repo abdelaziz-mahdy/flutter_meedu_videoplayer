@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
@@ -42,37 +41,37 @@ class MeeduVideoPlayer extends StatefulWidget {
 class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
   @override
   Widget build(BuildContext context) {
-    return MeeduPlayerProvider(
-      controller: widget.controller,
-      child: Container(
-          color: Colors.black,
-          width: 0.0,
-          height: 0.0,
-          child: LayoutBuilder(
-            builder: (ctx, constraints) {
-              MeeduPlayerController _ = widget.controller;
-              final responsive = Responsive(
-                constraints.maxWidth,
-                constraints.maxHeight,
-              );
+    return ExcludeFocus(
+      child: MeeduPlayerProvider(
+        controller: widget.controller,
+        child: Container(
+            color: Colors.black,
+            width: 0.0,
+            height: 0.0,
+            child: LayoutBuilder(
+              builder: (ctx, constraints) {
+                MeeduPlayerController _ = widget.controller;
+                final responsive = Responsive(
+                  constraints.maxWidth,
+                  constraints.maxHeight,
+                );
 
-              if (widget.customIcons != null) {
-                _.customIcons = this.widget.customIcons!(responsive);
-              }
+                if (widget.customIcons != null) {
+                  _.customIcons = this.widget.customIcons!(responsive);
+                }
 
-              if (widget.header != null) {
-                _.header = this.widget.header!(context, _, responsive);
-              }
+                if (widget.header != null) {
+                  _.header = this.widget.header!(context, _, responsive);
+                }
 
-              if (widget.bottomRight != null) {
-                _.bottomRight =
-                    this.widget.bottomRight!(context, _, responsive);
-              }
+                if (widget.bottomRight != null) {
+                  _.bottomRight =
+                      this.widget.bottomRight!(context, _, responsive);
+                }
 
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                
+                return Stack(
+                  alignment: Alignment.center,
+                  children: [
                     RxBuilder(
                         //observables: [_.videoFit],
                         (__) {
@@ -88,27 +87,29 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                             height: _.videoPlayerController != null
                                 ? _.videoPlayerController!.value.size.height
                                 : 480,
-                            child:_.videoPlayerController != null ? VideoPlayer(_.videoPlayerController!)
-                            : Container(),
+                            child: _.videoPlayerController != null
+                                ? VideoPlayer(_.videoPlayerController!)
+                                : Container(),
                           ),
                         ),
                       );
                     }),
-                  ClosedCaptionView(responsive: responsive),
-                  if (_.controlsEnabled &&
-                      _.controlsStyle == ControlsStyle.primary)
-                    PrimaryVideoPlayerControls(
-                      responsive: responsive,
-                    ),
-                  if (_.controlsEnabled &&
-                      _.controlsStyle == ControlsStyle.secondary)
-                    SecondaryVideoPlayerControls(
-                      responsive: responsive,
-                    ),
-                ],
-              );
-            },
-          )),
+                    ClosedCaptionView(responsive: responsive),
+                    if (_.controlsEnabled &&
+                        _.controlsStyle == ControlsStyle.primary)
+                      PrimaryVideoPlayerControls(
+                        responsive: responsive,
+                      ),
+                    if (_.controlsEnabled &&
+                        _.controlsStyle == ControlsStyle.secondary)
+                      SecondaryVideoPlayerControls(
+                        responsive: responsive,
+                      ),
+                  ],
+                );
+              },
+            )),
+      ),
     );
   }
 

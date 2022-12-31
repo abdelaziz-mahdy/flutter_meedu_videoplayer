@@ -14,10 +14,7 @@ import 'package:flutter_meedu_videoplayer_example/pages/playback_speed_example_p
 import 'package:flutter_meedu_videoplayer_example/pages/player_with_header_page.dart';
 
 void main() {
-
-
-  initVideoPlayerDartVlcIfNeeded();
-  
+  initMeeduPlayer();
   runApp(MyApp());
 }
 

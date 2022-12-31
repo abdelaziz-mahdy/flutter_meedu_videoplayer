@@ -152,7 +152,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "2.1.0"
+    version: "2.1.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -545,7 +545,7 @@ packages:
       name: video_player_dart_vlc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0"
+    version: "0.1.2"
   video_player_platform_interface:
     dependency: transitive
     description:
