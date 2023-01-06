@@ -28,7 +28,6 @@ dependencies:
   video_player_dart_vlc: ^0.1.2
   # video_player_dart_vlc:
   #   path: ../video_player_dart_vlc
-  volume_controller: ^2.0.3
   # flutter_volume_controller: ^1.2.2
 
   window_manager: ^0.2.0
