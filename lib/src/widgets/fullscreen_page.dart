@@ -4,10 +4,10 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 class MeeduPlayerFullscreenPage extends StatefulWidget {
   final MeeduPlayerController controller;
-
-  const MeeduPlayerFullscreenPage({Key? key, required this.controller})
+  final bool disposePlayer;
+  const MeeduPlayerFullscreenPage(
+      {Key? key, required this.controller, required this.disposePlayer})
       : super(key: key);
-
   @override
   _MeeduPlayerFullscreenPageState createState() =>
       _MeeduPlayerFullscreenPageState();
@@ -44,8 +44,11 @@ class _MeeduPlayerFullscreenPageState extends State<MeeduPlayerFullscreenPage> {
   @override
   Future<void> dispose() async {
     print("disposed");
-    // widget.controller.videoPlayerClosed();
-    widget.controller.onFullscreenClose();
+        if (widget.disposePlayer){
+    widget.controller.videoPlayerClosed();
+    }else{
+      widget.controller.onFullscreenClose();
+    }
     super.dispose();
   }
 }
