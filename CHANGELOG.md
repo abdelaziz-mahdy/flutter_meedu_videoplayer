@@ -1,4 +1,5 @@
-
+## 3.0.1
+* fixed dispose player when launched in full screen mode
 ## 3.0.0
 * removed hotkey manger dependence to use flutter shortcuts widget (to work on web)
   

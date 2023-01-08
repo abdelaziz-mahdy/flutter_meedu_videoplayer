@@ -667,6 +667,7 @@ class MeeduPlayerController {
   Future<void> goToFullscreen(
     BuildContext context, {
     bool applyOverlaysAndOrientations = true,
+    bool disposePlayer=false
   }) async {
     if (applyOverlaysAndOrientations) {
       if (UniversalPlatform.isWeb) {
@@ -684,7 +685,7 @@ class MeeduPlayerController {
       opaque: false,
       fullscreenDialog: true,
       pageBuilder: (_, __, ___) {
-        return MeeduPlayerFullscreenPage(controller: this);
+        return MeeduPlayerFullscreenPage(controller: this,disposePlayer: disposePlayer,);
       },
     );
 
@@ -717,7 +718,7 @@ class MeeduPlayerController {
     if (!windows) {
       getUserPreferenceForBrightness();
     }
-    await goToFullscreen(context);
+    await goToFullscreen(context,disposePlayer: true);
   }
 
   /// dispose de video_player controller
