@@ -677,7 +677,7 @@ class MeeduPlayerController {
         if (windows) {
           screenManager.setWindowsFullScreen(true, this);
         } else {
-          screenManager.setDefaultOverlaysAndOrientations();
+          screenManager.setFullScreenOverlaysAndOrientations();
         }
       }
     }
