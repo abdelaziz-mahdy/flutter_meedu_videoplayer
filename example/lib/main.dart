@@ -6,6 +6,7 @@ import 'package:flutter_meedu_videoplayer_example/pages/change_quality_example_p
 import 'package:flutter_meedu_videoplayer_example/pages/custom_icons_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/disabled_buttons_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/fullscreen_example_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/gridview_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/listview_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/network_with_subtitle_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/one_page_to_other_page_example.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         "custom-icons": (_) => CustomIconsExamplePage(),
         "disabled-buttons": (_) => DisabledButtonsExample(),
         "listview": (_) => ListViewExample(),
+        "gridview": (_) => GridViewExample(),
       },
     );
   }
@@ -124,6 +126,12 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushNamed(context, 'listview');
             },
             child: Text("ListView"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, 'gridview');
+            },
+            child: Text("GridView"),
           )
         ],
       ),

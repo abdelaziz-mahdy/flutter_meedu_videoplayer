@@ -4,6 +4,7 @@ import 'package:flutter_meedu/ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 import 'package:flutter_meedu_videoplayer/src/helpers/utils.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/forward_and_rewind.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/rewindAndForwardLayout.dart';
@@ -33,9 +34,10 @@ class ControlsContainer extends StatelessWidget {
   final ValueNotifier<double> _currentBrightness = ValueNotifier<double>(1.0);
   //final double _minScale = 1.0;
   //double _initialScale = 1.0, _maxScale = 1.0;
-
+  final Responsive responsive;
   //Duration swipeDuration=Duration(seconds: 0);
-  ControlsContainer({Key? key, required this.child}) : super(key: key);
+  ControlsContainer({Key? key, required this.child, required this.responsive})
+      : super(key: key);
   //------------------------------------//
   //FORWARD AND REWIND (DRAG HORIZONTAL)//
   //------------------------------------//
@@ -220,6 +222,7 @@ class ControlsContainer extends StatelessWidget {
   Widget controlsUI(MeeduPlayerController _, BuildContext context) {
     return Stack(children: [
       VideoCoreForwardAndRewindLayout(
+        responsive: responsive,
         rewind: GestureDetector(
           onTap: () {
             if (_.doubleTapCount.value != 0 || tappedTwice) {
@@ -262,15 +265,14 @@ class ControlsContainer extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: SizedBox(
-                  height: context.mediaQuerySize.height / 2,
+                  height: responsive.height / 2,
                   width: 35,
                   child: Stack(
                     alignment: AlignmentDirectional.bottomCenter,
                     children: [
                       Container(color: Colors.black38),
                       Container(
-                        height:
-                            _.volume.value * context.mediaQuerySize.height / 2,
+                        height: _.volume.value * responsive.height / 2,
                         color: Colors.blue,
                       ),
                       Container(
@@ -300,16 +302,14 @@ class ControlsContainer extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: SizedBox(
-                  height: context.mediaQuerySize.height / 2,
+                  height: responsive.height / 2,
                   width: 35,
                   child: Stack(
                     alignment: AlignmentDirectional.bottomCenter,
                     children: [
                       Container(color: Colors.black38),
                       Container(
-                        height: _.brightness.value *
-                            context.mediaQuerySize.height /
-                            2,
+                        height: _.brightness.value * responsive.height / 2,
                         color: Colors.blue,
                       ),
                       Container(
@@ -425,6 +425,7 @@ class ControlsContainer extends StatelessWidget {
       RxBuilder(
         //observables: [_.showControls],
         (__) => VideoCoreForwardAndRewind(
+          responsive: responsive,
           showRewind: _.rewindIcons.value,
           showForward: _.forwardIcons.value,
           rewindSeconds: _defaultSeekAmount * _.doubleTapCount.value,
@@ -432,9 +433,10 @@ class ControlsContainer extends StatelessWidget {
         ),
       ),
       Positioned.fill(
-        bottom: MediaQuery.of(context).size.height * 0.20,
-        top: MediaQuery.of(context).size.height * 0.20,
+        bottom: responsive.height * 0.20,
+        top: responsive.height * 0.20,
         child: VideoCoreForwardAndRewindLayout(
+          responsive: responsive,
           rewind: GestureDetector(
             onTap: () {
               if (_.doubleTapCount.value != 0 || tappedTwice) {
@@ -485,11 +487,9 @@ class ControlsContainer extends StatelessWidget {
           final Offset position = details.localPosition;
           if (_dragInitialDelta == Offset.zero) {
             final Offset delta = details.delta;
-            if (details.globalPosition.dx >
-                    MediaQuery.of(context).size.width * 0.1 &&
-                ((MediaQuery.of(context).size.width -
-                            details.globalPosition.dx) >
-                        MediaQuery.of(context).size.width * 0.1 &&
+            if (details.globalPosition.dx > responsive.width * 0.1 &&
+                ((responsive.width - details.globalPosition.dx) >
+                        responsive.width * 0.1 &&
                     !gettingNotification)) {
               _forwardDragStart(position, _);
               _dragInitialDelta = delta;
@@ -524,16 +524,13 @@ class ControlsContainer extends StatelessWidget {
           final Offset position = details.localPosition;
           if (_dragInitialDelta == Offset.zero) {
             print(details.globalPosition.dy);
-            if (details.globalPosition.dy >
-                    MediaQuery.of(context).size.height * 0.1 &&
-                ((MediaQuery.of(context).size.height -
-                        details.globalPosition.dy) >
-                    MediaQuery.of(context).size.height * 0.1) &&
+            if (details.globalPosition.dy > responsive.height * 0.1 &&
+                ((responsive.height - details.globalPosition.dy) >
+                    responsive.height * 0.1) &&
                 !gettingNotification) {
               final Offset delta = details.delta;
               //if(details.globalPosition.dy<30){
-              if (details.globalPosition.dx >=
-                  MediaQuery.of(context).size.width / 2) {
+              if (details.globalPosition.dx >= responsive.width / 2) {
                 _volumeDragStart(position, _);
                 _dragInitialDelta = delta;
                 //print("right");

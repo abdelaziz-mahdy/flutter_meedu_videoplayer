@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/rewindAndForwardLayout.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/ripple_side.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/transitions.dart';
 
 class VideoCoreForwardAndRewind extends StatelessWidget {
-  const VideoCoreForwardAndRewind({
-    Key? key,
-    required this.showRewind,
-    required this.showForward,
-    required this.forwardSeconds,
-    required this.rewindSeconds,
-  }) : super(key: key);
+  const VideoCoreForwardAndRewind(
+      {Key? key,
+      required this.showRewind,
+      required this.showForward,
+      required this.forwardSeconds,
+      required this.rewindSeconds,
+      required this.responsive})
+      : super(key: key);
 
   final bool showRewind, showForward;
   final int rewindSeconds, forwardSeconds;
-
+  final Responsive responsive;
   @override
   Widget build(BuildContext context) {
     return VideoCoreForwardAndRewindLayout(
+      responsive: responsive,
       rewind: CustomOpacityTransition(
         visible: showRewind,
         child: ForwardAndRewindRippleSide(

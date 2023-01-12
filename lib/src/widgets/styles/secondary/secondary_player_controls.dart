@@ -13,6 +13,7 @@ class SecondaryVideoPlayerControls extends StatelessWidget {
   Widget build(BuildContext context) {
     final _ = MeeduPlayerController.of(context);
     return ControlsContainer(
+      responsive: responsive,
       child: Stack(
         children: [
           // RENDER A CUSTOM HEADER

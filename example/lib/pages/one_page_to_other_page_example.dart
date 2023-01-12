@@ -56,7 +56,7 @@ class _OnePageExampleState extends State<OnePageExample> {
       DataSource(
         type: DataSourceType.network,
         source:
-            "https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4",
+            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
       ),
       autoplay: true,
     );

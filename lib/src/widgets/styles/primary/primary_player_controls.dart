@@ -17,6 +17,7 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
     final _ = MeeduPlayerController.of(context);
 
     return ControlsContainer(
+      responsive: responsive,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -32,8 +33,8 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
               ),
             ),
           Container(
-            height: context.mediaQuerySize.height,
-            width: context.mediaQuerySize.width,
+            height: responsive.height,
+            width: responsive.width,
           ),
 
           Row(

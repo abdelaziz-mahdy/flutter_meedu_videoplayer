@@ -1,3 +1,6 @@
+## 3.0.2
+* fixed width errors in grid view 
+* added grid view example and updated links
 ## 3.0.1
 * fixed dispose player when launched in full screen mode
 * fixed wrong Orientation when launch as full screen

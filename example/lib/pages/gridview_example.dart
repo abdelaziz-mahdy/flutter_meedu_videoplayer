@@ -3,25 +3,28 @@ import 'package:flutter/services.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-class ListViewExample extends StatefulWidget {
-  ListViewExample({Key? key}) : super(key: key);
+class GridViewExample extends StatefulWidget {
+  GridViewExample({Key? key}) : super(key: key);
 
   @override
-  _ListViewExampleState createState() => _ListViewExampleState();
+  _GridViewExampleState createState() => _GridViewExampleState();
 }
 
-class _ListViewExampleState extends State<ListViewExample>
+class _GridViewExampleState extends State<GridViewExample>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
       appBar: AppBar(),
-      body: ListView.builder(
-        itemBuilder: (_, index) => 
-          VideoItem(
-            uniqueKey: "$index",
-          
+      body: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 500,
+            childAspectRatio: 16 / 9,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5),
+        itemBuilder: (_, index) => VideoItem(
+          uniqueKey: "$index",
         ),
         itemCount: 6,
       ),
