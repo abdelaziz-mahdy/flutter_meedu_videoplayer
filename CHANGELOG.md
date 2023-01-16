@@ -1,3 +1,6 @@
+## 3.0.3
+* fix linux (by https://github.com/secanonm)
+
 ## 3.0.2
 * fixed width errors in grid view 
 * added grid view example and updated links
