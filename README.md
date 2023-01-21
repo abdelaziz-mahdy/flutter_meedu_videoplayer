@@ -24,8 +24,8 @@
 | Videos from local files  | ✅  | ✅ | ✅ | ✅ | x | ✅
 | Looping  | ✅  | ✅ | x | x | x | x
 | AutoPlay  | ✅  | ✅ | ✅ | ✅ | x | ✅
-| Swipe to increase and decrease Sound  | ✅  | ✅ | x | x | x | x |
-| Swipe to seek in video | ✅  | ✅ | x | x | x | x |
+| Swipe to increase and decrease Sound  | ✅  | ✅ | keyboard arrows | keyboard arrows | x | keyboard arrows |
+| Swipe to seek in video | ✅  | ✅ | keyboard arrows | keyboard arrows | x | keyboard arrows |
 | FullScreen  | ✅  | ✅ | ✅ | ✅ | x | ✅ |
 | Launch Player as FullScreen  | ✅  | ✅ | ✅ | ✅ | x | ✅ |
 | Playback Speed  | ✅  | ✅ | ✅ | ✅ | x | ✅ |

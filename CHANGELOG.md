@@ -1,3 +1,5 @@
+## 3.0.4
+* add linux docs (by https://github.com/secanonm)
 ## 3.0.3
 * fix linux (by https://github.com/secanonm)
 
