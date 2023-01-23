@@ -13,7 +13,7 @@ class DisabledButtonsExample extends StatefulWidget {
 
 class _DisabledButtonsExampleState extends State<DisabledButtonsExample> {
   final _meeduPlayerController = MeeduPlayerController(
-    controlsStyle: ControlsStyle.primary,
+    controlsStyle: ControlsStyle.primary,manageWakeLock: false,
     enabledButtons: EnabledButtons(
       fullscreen: false,
       pip: false,

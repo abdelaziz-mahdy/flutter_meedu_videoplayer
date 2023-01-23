@@ -13,6 +13,7 @@ class PlayerWithHeaderPage extends StatefulWidget {
 class _PlayerWithHeaderPageState extends State<PlayerWithHeaderPage> {
   MeeduPlayerController _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.secondary,
+    manageWakeLock: false
   );
 
   @override

@@ -1,3 +1,6 @@
+## 3.0.5
+* disabled WakeLock on linux
+* added manageWakeLock to constructor incase someone wants to disable WakeLock
 ## 3.0.4
 * add linux docs (by https://github.com/secanonm)
 ## 3.0.3

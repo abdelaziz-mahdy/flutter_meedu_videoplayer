@@ -11,7 +11,7 @@ class OnePageExample extends StatefulWidget {
 
 class _OnePageExampleState extends State<OnePageExample> {
   MeeduPlayerController? _meeduPlayerController = MeeduPlayerController(
-    controlsStyle: ControlsStyle.secondary,
+    controlsStyle: ControlsStyle.secondary,manageWakeLock: false
   );
 
   StreamSubscription? _playerEventSubs;

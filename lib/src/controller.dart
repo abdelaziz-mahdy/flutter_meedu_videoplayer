@@ -179,6 +179,7 @@ class MeeduPlayerController {
       _closedCaptionEnabled.stream;
 
   bool windows = false;
+  bool manageWakeLock = true;
 
   /// [isInPipMode] is true if pip mode is enabled
   //Rx<bool> get isInPipMode => _pipManager.isInPipMode;
@@ -203,12 +204,14 @@ class MeeduPlayerController {
   /// [screenManager] the device orientations and overlays
   /// [placeholder] widget to show when the player is loading a video
   /// [controlsEnabled] if the player must show the player controls
+  /// [manageWakeLock] if the player should use wakelock
   /// [errorText] message to show when the load process failed
   MeeduPlayerController({
     this.screenManager = const ScreenManager(),
     this.colorTheme = Colors.redAccent,
     Widget? loadingWidget,
     this.controlsEnabled = true,
+    this.manageWakeLock=true,
     String? errorText,
     this.controlsStyle = ControlsStyle.primary,
     this.header,
@@ -252,9 +255,13 @@ class MeeduPlayerController {
     _playerEventSubs = onPlayerStatusChanged.listen(
       (PlayerStatus status) {
         if (status == PlayerStatus.playing) {
-          Wakelock.enable();
+          if (manageWakeLock&&!UniversalPlatform.isLinux) {
+            Wakelock.enable();
+          }
         } else {
-          Wakelock.disable();
+          if (manageWakeLock&&!UniversalPlatform.isLinux) {
+            Wakelock.disable();
+          }
         }
       },
     );
@@ -270,7 +277,6 @@ class MeeduPlayerController {
     //_pipAvailable.value = false;
     //}
   }
-
 
   /// create a new video_player controller
   VideoPlayerController _createVideoController(DataSource dataSource) {
@@ -664,11 +670,9 @@ class MeeduPlayerController {
   }
 
   /// show the player in fullscreen mode
-  Future<void> goToFullscreen(
-    BuildContext context, {
-    bool applyOverlaysAndOrientations = true,
-    bool disposePlayer=false
-  }) async {
+  Future<void> goToFullscreen(BuildContext context,
+      {bool applyOverlaysAndOrientations = true,
+      bool disposePlayer = false}) async {
     if (applyOverlaysAndOrientations) {
       if (UniversalPlatform.isWeb) {
         screenManager.setWebFullScreen(true, this);
@@ -685,7 +689,10 @@ class MeeduPlayerController {
       opaque: false,
       fullscreenDialog: true,
       pageBuilder: (_, __, ___) {
-        return MeeduPlayerFullscreenPage(controller: this,disposePlayer: disposePlayer,);
+        return MeeduPlayerFullscreenPage(
+          controller: this,
+          disposePlayer: disposePlayer,
+        );
       },
     );
 
@@ -718,7 +725,7 @@ class MeeduPlayerController {
     if (!windows) {
       getUserPreferenceForBrightness();
     }
-    await goToFullscreen(context,disposePlayer: true);
+    await goToFullscreen(context, disposePlayer: true);
   }
 
   /// dispose de video_player controller
@@ -836,8 +843,7 @@ class MeeduPlayerController {
       _pipContextToFullscreen = null;
     }
   }*/
-  Future<void> onFullscreenClose(
-) async {
+  Future<void> onFullscreenClose() async {
     print("Fullscreen Closed");
     fullscreen.value = false;
     resetBrightness();
@@ -847,15 +853,13 @@ class MeeduPlayerController {
     } else {
       if (windows) {
         screenManager.setWindowsFullScreen(false, this);
-       
       } else {
         screenManager.setDefaultOverlaysAndOrientations();
       }
     }
   }
 
-  Future<void> videoPlayerClosed(
-      ) async {
+  Future<void> videoPlayerClosed() async {
     print("Video player closed");
     await onFullscreenClose();
 
@@ -869,7 +873,9 @@ class MeeduPlayerController {
       _position.value = Duration.zero;
       _timer?.cancel();
       pause();
-      Wakelock.disable();
+      if (manageWakeLock&&!UniversalPlatform.isLinux) {
+        Wakelock.disable();
+      }
 
       _videoPlayerController?.removeListener(_listener);
       await _videoPlayerController?.dispose();
