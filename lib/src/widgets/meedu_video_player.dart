@@ -78,20 +78,21 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                   );
 
                   if (widget.customIcons != null) {
-                    _.customIcons = this.widget.customIcons!(responsive);
+                    _.customIcons = widget.customIcons!(responsive);
                   }
 
                   if (widget.header != null) {
-                    _.header = this.widget.header!(context, _, responsive);
+                    _.header = widget.header!(context, _, responsive);
                   }
 
                   if (widget.bottomRight != null) {
-                    _.bottomRight =
-                        this.widget.bottomRight!(context, _, responsive);
+                    _.bottomRight = widget.bottomRight!(context, _, responsive);
                   }
 
                   return ExcludeFocus(
                     child: Stack(
+                      // clipBehavior: Clip.hardEdge,
+                      // fit: StackFit.loose,
                       alignment: Alignment.center,
                       children: [
                         RxBuilder(
@@ -99,8 +100,11 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                             (__) {
                           _.dataStatus.status.value;
                           print("Fit is ${widget.controller.videoFit.value}");
-                          return SizedBox.expand(
+                          // print(
+                          //     "constraints.maxWidth ${constraints.maxWidth}");
+                          return Positioned.fill(
                             child: FittedBox(
+                              // clipBehavior: Clip.hardEdge,
                               fit: widget.controller.videoFit.value,
                               child: SizedBox(
                                 width: _.videoPlayerController != null

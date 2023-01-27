@@ -1,3 +1,9 @@
+## 3.1.1
+* Fixed fit overflow
+* Fixed 3.1.0 portrait duration overflow
+## 3.1.0
+* portrait fixed view (by https://github.com/andrezanna)
+* updated window_manager to 0.3.0
 ## 3.0.5
 * disabled WakeLock on linux
 * added manageWakeLock to constructor incase someone wants to disable WakeLock

@@ -49,7 +49,7 @@ class _PortraitExamplePageState extends State<PortraitExamplePage> {
       appBar: AppBar(),
       body: SafeArea(
         child: AspectRatio(
-          aspectRatio: 9/16,
+          aspectRatio: 9 / 16,
           child: MeeduVideoPlayer(
             controller: _meeduPlayerController,
           ),

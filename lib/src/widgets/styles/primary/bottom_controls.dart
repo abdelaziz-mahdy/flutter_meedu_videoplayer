@@ -22,40 +22,44 @@ class PrimaryBottomControls extends StatelessWidget {
       color: Colors.white,
       fontSize: fontSize > 16 ? 16 : fontSize,
     );
-    var durationControls = Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
-      RxBuilder(
-          //observables: [_.duration, _.position],
-          (__) {
-        return Text(
-          _.duration.value.inMinutes >= 60
-              ? printDurationWithHours(_.position.value)
-              : printDuration(_.position.value),
-          style: textStyle,
-        );
-      }),
-      // END VIDEO POSITION
-      SizedBox(width: 10),
-      (responsive.height / responsive.width > 1)
-          ? ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width * 0.6),
-              child: PlayerSlider())
-          : Expanded(child: PlayerSlider()),
-      SizedBox(width: 10),
-      // START VIDEO DURATION
-      RxBuilder(
-        //observables: [_.duration],
-        (__) => Text(
-          _.duration.value.inMinutes >= 60
-              ? printDurationWithHours(_.duration.value)
-              : printDuration(_.duration.value),
-          style: textStyle,
-        ),
-      ),
-    ]);
+    Widget durationControls = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            RxBuilder(
+                //observables: [_.duration, _.position],
+                (__) {
+              return Text(
+                _.duration.value.inMinutes >= 60
+                    ? printDurationWithHours(_.position.value)
+                    : printDuration(_.position.value),
+                style: textStyle,
+              );
+            }),
+            // END VIDEO POSITION
+            const SizedBox(width: 10),
+            const Expanded(
+              child: PlayerSlider(),
+            ),
+            const SizedBox(width: 10),
+            // START VIDEO DURATION
+            RxBuilder(
+              //observables: [_.duration],
+              (__) => Text(
+                _.duration.value.inMinutes >= 60
+                    ? printDurationWithHours(_.duration.value)
+                    : printDuration(_.duration.value),
+                style: textStyle,
+              ),
+            ),
+          ]),
+    );
     // END VIDEO DURATION
-    var otherControls = Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
-      if (_.bottomRight != null) ...[_.bottomRight!, SizedBox(width: 5)],
+    Widget otherControls =
+        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      if (_.bottomRight != null) ...[_.bottomRight!, const SizedBox(width: 5)],
 
       //if (_.enabledButtons.pip) PipButton(responsive: responsive),
 
