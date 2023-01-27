@@ -13,6 +13,7 @@ import 'package:flutter_meedu_videoplayer_example/pages/one_page_to_other_page_e
 import 'package:flutter_meedu_videoplayer_example/pages/pick_file_page_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/playback_speed_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/player_with_header_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/portrait_example_page.dart';
 
 void main() {
   initMeeduPlayer();
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         "disabled-buttons": (_) => DisabledButtonsExample(),
         "listview": (_) => ListViewExample(),
         "gridview": (_) => GridViewExample(),
+        "portrait": (_) => PortraitExamplePage(),
       },
     );
   }
@@ -132,6 +134,12 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushNamed(context, 'gridview');
             },
             child: Text("GridView"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, 'portrait');
+            },
+            child: Text("Portrait"),
           )
         ],
       ),
