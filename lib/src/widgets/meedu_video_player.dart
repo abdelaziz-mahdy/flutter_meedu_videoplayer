@@ -6,8 +6,6 @@ import 'package:flutter_meedu_videoplayer/src/widgets/styles/primary/primary_pla
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/secondary/secondary_player_controls.dart';
 import '../helpers/shortcuts/intent_action_map.dart';
 
-import '../helpers/shortcuts/short_cuts_map.dart';
-
 import 'closed_caption_view.dart';
 
 /// An ActionDispatcher that logs all the actions that it invokes.
@@ -44,7 +42,7 @@ class MeeduVideoPlayer extends StatefulWidget {
     Responsive responsive,
   )? customIcons;
 
-  MeeduVideoPlayer({
+  const MeeduVideoPlayer({
     Key? key,
     required this.controller,
     this.header,
@@ -155,7 +153,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
 class MeeduPlayerProvider extends InheritedWidget {
   final MeeduPlayerController controller;
 
-  MeeduPlayerProvider({
+  const MeeduPlayerProvider({
     Key? key,
     required Widget child,
     required this.controller,

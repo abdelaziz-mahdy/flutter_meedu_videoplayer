@@ -4,17 +4,15 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:wakelock/wakelock.dart';
 
 class PlayerWithHeaderPage extends StatefulWidget {
-  PlayerWithHeaderPage({Key? key}) : super(key: key);
+  const PlayerWithHeaderPage({Key? key}) : super(key: key);
 
   @override
   _PlayerWithHeaderPageState createState() => _PlayerWithHeaderPageState();
 }
 
 class _PlayerWithHeaderPageState extends State<PlayerWithHeaderPage> {
-  MeeduPlayerController _meeduPlayerController = MeeduPlayerController(
-    controlsStyle: ControlsStyle.secondary,
-    manageWakeLock: false
-  );
+  final MeeduPlayerController _meeduPlayerController = MeeduPlayerController(
+      controlsStyle: ControlsStyle.secondary, manageWakeLock: false);
 
   @override
   void initState() {
@@ -57,7 +55,7 @@ class _PlayerWithHeaderPageState extends State<PlayerWithHeaderPage> {
               final double fontSize = responsive.ip(3);
 
               return Container(
-                padding: EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 10),
                 color: Colors.black12,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,8 +69,8 @@ class _PlayerWithHeaderPageState extends State<PlayerWithHeaderPage> {
                       ),
                     ),
                     CupertinoButton(
-                      padding: EdgeInsets.all(5),
-                      child: Icon(
+                      padding: const EdgeInsets.all(5),
+                      child: const Icon(
                         CupertinoIcons.share,
                         color: Colors.white,
                       ),

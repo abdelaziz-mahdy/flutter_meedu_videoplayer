@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:auto_orientation/auto_orientation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
@@ -47,6 +45,7 @@ class ScreenManager {
       //windowManager.restore();
     }
   }
+
   Future<void> setWebFullScreen(bool state, MeeduPlayerController _) async {
     _.fullscreen.value = state;
     FullScreenWindow.setFullScreen(state);

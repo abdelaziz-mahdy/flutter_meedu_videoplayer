@@ -35,19 +35,19 @@ class SecondaryBottomControls extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Transform.translate(
-            offset: Offset(0, 4),
-            child: PlayerSlider(),
+            offset: const Offset(0, 4),
+            child: const PlayerSlider(),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   PlayPauseButton(
                     size: buttonsSize,
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   RxBuilder(
                     //observables: [_.duration, _.position],
                     (__) {
@@ -61,7 +61,7 @@ class SecondaryBottomControls extends StatelessWidget {
                             "${printDuration(_.position.value)} / ${printDuration(_.duration.value)}";
                       }
                       return Padding(
-                        padding: EdgeInsets.only(right: 5),
+                        padding: const EdgeInsets.only(right: 5),
                         child: Text(
                           text,
                           style: textStyle,
@@ -83,14 +83,14 @@ class SecondaryBottomControls extends StatelessWidget {
                   //   size: buttonsSize,
                   //   iconPath: 'assets/icons/fast-forward.png',
                   // ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                 ],
               ),
               Row(
                 children: [
                   if (_.bottomRight != null) ...[
                     _.bottomRight!,
-                    SizedBox(width: 10)
+                    const SizedBox(width: 10)
                   ],
                   //if (_.enabledButtons.pip) PipButton(responsive: responsive),
                   if (_.enabledButtons.videoFit)
@@ -101,7 +101,7 @@ class SecondaryBottomControls extends StatelessWidget {
                     FullscreenButton(
                       size: buttonsSize,
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                   ],
                 ],
               )

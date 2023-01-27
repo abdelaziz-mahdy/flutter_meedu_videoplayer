@@ -1,3 +1,6 @@
+## 3.1.2
+* Fixed Dart warnings
+* Fixed formatting
 ## 3.1.1
 * Fixed fit overflow
 * Fixed 3.1.0 portrait duration overflow

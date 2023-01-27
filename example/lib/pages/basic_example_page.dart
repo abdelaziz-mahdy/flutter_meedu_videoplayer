@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 class BasicExamplePage extends StatefulWidget {
-  BasicExamplePage({Key? key}) : super(key: key);
+  const BasicExamplePage({Key? key}) : super(key: key);
 
   @override
   _BasicExamplePageState createState() => _BasicExamplePageState();

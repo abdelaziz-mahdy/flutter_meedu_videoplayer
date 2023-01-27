@@ -4,7 +4,7 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class GridViewExample extends StatefulWidget {
-  GridViewExample({Key? key}) : super(key: key);
+  const GridViewExample({Key? key}) : super(key: key);
 
   @override
   _GridViewExampleState createState() => _GridViewExampleState();
@@ -37,7 +37,7 @@ class _GridViewExampleState extends State<GridViewExample>
 
 class VideoItem extends StatefulWidget {
   final String uniqueKey;
-  VideoItem({Key? key, required this.uniqueKey}) : super(key: key);
+  const VideoItem({Key? key, required this.uniqueKey}) : super(key: key);
 
   @override
   _VideoItemState createState() => _VideoItemState();
@@ -45,13 +45,13 @@ class VideoItem extends StatefulWidget {
 
 class _VideoItemState extends State<VideoItem>
     with AutomaticKeepAliveClientMixin {
-  MeeduPlayerController _controller = MeeduPlayerController(
-    screenManager: ScreenManager(orientations: [
+  final MeeduPlayerController _controller = MeeduPlayerController(
+    screenManager: const ScreenManager(orientations: [
       DeviceOrientation.portraitUp,
     ]),
   );
 
-  ValueNotifier<bool> _visible = ValueNotifier(true);
+  final ValueNotifier<bool> _visible = ValueNotifier(true);
 
   @override
   void initState() {

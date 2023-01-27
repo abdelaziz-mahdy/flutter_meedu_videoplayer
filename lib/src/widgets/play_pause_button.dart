@@ -21,7 +21,7 @@ class PlayPauseButton extends StatelessWidget {
       //],
       (__) {
         if (_.isBuffering.value) {
-          return CupertinoButton(child: _.loadingWidget!, onPressed: _.pause);
+          return CupertinoButton(onPressed: _.pause, child: _.loadingWidget!);
         }
 
         String iconPath = 'assets/icons/repeat.png';

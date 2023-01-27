@@ -30,14 +30,14 @@ class BarStyle {
     Color? buffered,
     Color? background,
     BorderRadius? borderRadius,
-  })  : this.width = double.infinity,
-        this.identifier = dot ?? Colors.white,
-        this.color = color ?? Color(0xFF295acc),
-        this.secondBackground = buffered ?? Colors.white.withOpacity(0.3),
-        this.background = background ?? Colors.white.withOpacity(0.2),
-        this.borderRadius =
-            borderRadius ?? BorderRadius.all(Radius.circular(5)),
-        this.identifierWidth = dotSize;
+  })  : width = double.infinity,
+        identifier = dot ?? Colors.white,
+        color = color ?? const Color(0xFF295acc),
+        secondBackground = buffered ?? Colors.white.withOpacity(0.3),
+        background = background ?? Colors.white.withOpacity(0.2),
+        borderRadius =
+            borderRadius ?? const BorderRadius.all(Radius.circular(5)),
+        identifierWidth = dotSize;
 
   /// The **[borderRadius]** that the VolumeBar will have
   ///
@@ -52,13 +52,13 @@ class BarStyle {
     Color? color,
     Color? background,
     BorderRadius? borderRadius,
-  })  : this.identifier = Colors.transparent,
-        this.color = color ?? Colors.white,
-        this.secondBackground = Colors.transparent,
-        this.background = background ?? Colors.white.withOpacity(0.2),
-        this.borderRadius =
-            borderRadius ?? BorderRadius.all(Radius.circular(5)),
-        this.identifierWidth = 0.0;
+  })  : identifier = Colors.transparent,
+        color = color ?? Colors.white,
+        secondBackground = Colors.transparent,
+        background = background ?? Colors.white.withOpacity(0.2),
+        borderRadius =
+            borderRadius ?? const BorderRadius.all(Radius.circular(5)),
+        identifierWidth = 0.0;
 
   BarStyle.forward({
     this.width = 120,
@@ -68,11 +68,11 @@ class BarStyle {
     Color? identifier,
     double identifierWidth = 2.0,
     BorderRadius? borderRadius,
-  })  : this.identifier = identifier ?? Colors.red,
-        this.color = color ?? Colors.white,
-        this.secondBackground = Colors.transparent,
-        this.background = background ?? Colors.white.withOpacity(0.2),
-        this.borderRadius =
-            borderRadius ?? BorderRadius.all(Radius.circular(5)),
-        this.identifierWidth = identifierWidth;
+  })  : identifier = identifier ?? Colors.red,
+        color = color ?? Colors.white,
+        secondBackground = Colors.transparent,
+        background = background ?? Colors.white.withOpacity(0.2),
+        borderRadius =
+            borderRadius ?? const BorderRadius.all(Radius.circular(5)),
+        identifierWidth = identifierWidth;
 }

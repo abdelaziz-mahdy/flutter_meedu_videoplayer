@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 class PortraitExamplePage extends StatefulWidget {
-  PortraitExamplePage({Key? key}) : super(key: key);
+  const PortraitExamplePage({Key? key}) : super(key: key);
 
   @override
   _PortraitExamplePageState createState() => _PortraitExamplePageState();

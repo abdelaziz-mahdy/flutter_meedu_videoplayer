@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PlayerButton extends StatelessWidget {
@@ -23,7 +22,7 @@ class PlayerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      style: TextButton.styleFrom(minimumSize: Size(20, 20)),
+      style: TextButton.styleFrom(minimumSize: const Size(20, 20)),
       //padding: EdgeInsets.zero,
       //minSize: 20,
       onPressed: onPressed,

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -211,7 +210,7 @@ class MeeduPlayerController {
     this.colorTheme = Colors.redAccent,
     Widget? loadingWidget,
     this.controlsEnabled = true,
-    this.manageWakeLock=true,
+    this.manageWakeLock = true,
     String? errorText,
     this.controlsStyle = ControlsStyle.primary,
     this.header,
@@ -255,11 +254,11 @@ class MeeduPlayerController {
     _playerEventSubs = onPlayerStatusChanged.listen(
       (PlayerStatus status) {
         if (status == PlayerStatus.playing) {
-          if (manageWakeLock&&!UniversalPlatform.isLinux) {
+          if (manageWakeLock && !UniversalPlatform.isLinux) {
             Wakelock.enable();
           }
         } else {
-          if (manageWakeLock&&!UniversalPlatform.isLinux) {
+          if (manageWakeLock && !UniversalPlatform.isLinux) {
             Wakelock.disable();
           }
         }
@@ -309,7 +308,7 @@ class MeeduPlayerController {
     Duration seekTo = Duration.zero,
   }) async {
     if (seekTo != Duration.zero) {
-      print("Called seek function to" + seekTo.toString());
+      print("Called seek function to$seekTo");
       await this.seekTo(seekTo);
     }
 
@@ -569,7 +568,7 @@ class MeeduPlayerController {
       try {
         _currentVolume.value = await VolumeController().getVolume();
       } catch (e) {
-        print("currentVolume " + e.toString());
+        print("currentVolume $e");
         //throw 'Failed to get current brightness';
         //return 0;
       }
@@ -767,7 +766,7 @@ class MeeduPlayerController {
 
   Future<void> getUserPreferenceForFit() async {
     prefs = await SharedPreferences.getInstance();
-    String fitValue = (await prefs?.getString('fit')) ?? "fill";
+    String fitValue = (prefs?.getString('fit')) ?? "fill";
     _videoFit.value = fits.firstWhere((element) => element.name == fitValue);
     print("Last fit used was ${_videoFit.value.name}");
   }
@@ -779,9 +778,9 @@ class MeeduPlayerController {
 
   Future<void> getUserPreferenceForBrightness() async {
     prefs = await SharedPreferences.getInstance();
-    double BrightnessValue = (await prefs?.getDouble('brightness')) ?? 0.5;
+    double BrightnessValue = (prefs?.getDouble('brightness')) ?? 0.5;
     setBrightness(BrightnessValue);
-    print("Last Brightness used was ${BrightnessValue}");
+    print("Last Brightness used was $BrightnessValue");
   }
 
   /// Toggle Change the videofit accordingly
@@ -873,7 +872,7 @@ class MeeduPlayerController {
       _position.value = Duration.zero;
       _timer?.cancel();
       pause();
-      if (manageWakeLock&&!UniversalPlatform.isLinux) {
+      if (manageWakeLock && !UniversalPlatform.isLinux) {
         Wakelock.disable();
       }
 

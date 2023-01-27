@@ -24,16 +24,16 @@ class ForwardAndRewindRippleSide extends StatelessWidget {
           : _RippleRightPainter(ripple!),
       child: Padding(
         padding: side == RippleSide.left
-            ? EdgeInsets.only(right: 10)
-            : EdgeInsets.only(left: 10),
+            ? const EdgeInsets.only(right: 10)
+            : const EdgeInsets.only(left: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             side == RippleSide.left
-                ? Icon(Icons.fast_rewind, color: Colors.white)
-                : Icon(Icons.fast_forward, color: Colors.white),
+                ? const Icon(Icons.fast_rewind, color: Colors.white)
+                : const Icon(Icons.fast_forward, color: Colors.white),
             Text(text,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
                     fontWeight: FontWeight.bold)),

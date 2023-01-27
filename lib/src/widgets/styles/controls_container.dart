@@ -26,7 +26,7 @@ class ControlsContainer extends StatelessWidget {
   double _onDragStartBrightness = 1;
   bool isVolume = false;
   //bool gettingNotification = false;
-  int _defaultSeekAmount = -10;
+  final int _defaultSeekAmount = -10;
   Timer? _doubleTapToSeekTimer;
   Timer? _tappedOnce;
   bool tappedTwice = false;
