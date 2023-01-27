@@ -22,7 +22,7 @@ class PrimaryBottomControls extends StatelessWidget {
       color: Colors.white,
       fontSize: fontSize > 16 ? 16 : fontSize,
     );
-    var main = Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
+    var durationControls = Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
       RxBuilder(
           //observables: [_.duration, _.position],
           (__) {
@@ -54,7 +54,7 @@ class PrimaryBottomControls extends StatelessWidget {
       ),
     ]);
     // END VIDEO DURATION
-    var second = Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
+    var otherControls = Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
       if (_.bottomRight != null) ...[_.bottomRight!, SizedBox(width: 5)],
 
       //if (_.enabledButtons.pip) PipButton(responsive: responsive),
@@ -78,11 +78,11 @@ class PrimaryBottomControls extends StatelessWidget {
           ? Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               runAlignment: WrapAlignment.spaceAround,
-              children: [main, second],
+              children: [durationControls, otherControls],
             )
           : Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [Expanded(child:main), second],
+              children: [Expanded(child: durationControls), otherControls],
             ),
     );
   }
