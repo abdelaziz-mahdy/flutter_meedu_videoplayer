@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
-class BasicExamplePage extends StatefulWidget {
-  const BasicExamplePage({Key? key}) : super(key: key);
+class PortraitExamplePage extends StatefulWidget {
+  const PortraitExamplePage({Key? key}) : super(key: key);
 
   @override
-  _BasicExamplePageState createState() => _BasicExamplePageState();
+  _PortraitExamplePageState createState() => _PortraitExamplePageState();
 }
 
-class _BasicExamplePageState extends State<BasicExamplePage> {
+class _PortraitExamplePageState extends State<PortraitExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.primary,
   );
@@ -49,7 +49,7 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
       appBar: AppBar(),
       body: SafeArea(
         child: AspectRatio(
-          aspectRatio: 16 / 9,
+          aspectRatio: 9 / 16,
           child: MeeduVideoPlayer(
             controller: _meeduPlayerController,
           ),

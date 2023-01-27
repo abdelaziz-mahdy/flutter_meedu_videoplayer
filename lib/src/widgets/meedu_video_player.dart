@@ -6,8 +6,6 @@ import 'package:flutter_meedu_videoplayer/src/widgets/styles/primary/primary_pla
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/secondary/secondary_player_controls.dart';
 import '../helpers/shortcuts/intent_action_map.dart';
 
-import '../helpers/shortcuts/short_cuts_map.dart';
-
 import 'closed_caption_view.dart';
 
 /// An ActionDispatcher that logs all the actions that it invokes.
@@ -44,7 +42,7 @@ class MeeduVideoPlayer extends StatefulWidget {
     Responsive responsive,
   )? customIcons;
 
-  MeeduVideoPlayer({
+  const MeeduVideoPlayer({
     Key? key,
     required this.controller,
     this.header,
@@ -78,20 +76,21 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                   );
 
                   if (widget.customIcons != null) {
-                    _.customIcons = this.widget.customIcons!(responsive);
+                    _.customIcons = widget.customIcons!(responsive);
                   }
 
                   if (widget.header != null) {
-                    _.header = this.widget.header!(context, _, responsive);
+                    _.header = widget.header!(context, _, responsive);
                   }
 
                   if (widget.bottomRight != null) {
-                    _.bottomRight =
-                        this.widget.bottomRight!(context, _, responsive);
+                    _.bottomRight = widget.bottomRight!(context, _, responsive);
                   }
 
                   return ExcludeFocus(
                     child: Stack(
+                      // clipBehavior: Clip.hardEdge,
+                      // fit: StackFit.loose,
                       alignment: Alignment.center,
                       children: [
                         RxBuilder(
@@ -99,8 +98,11 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                             (__) {
                           _.dataStatus.status.value;
                           print("Fit is ${widget.controller.videoFit.value}");
-                          return SizedBox.expand(
+                          // print(
+                          //     "constraints.maxWidth ${constraints.maxWidth}");
+                          return Positioned.fill(
                             child: FittedBox(
+                              // clipBehavior: Clip.hardEdge,
                               fit: widget.controller.videoFit.value,
                               child: SizedBox(
                                 width: _.videoPlayerController != null
@@ -151,7 +153,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
 class MeeduPlayerProvider extends InheritedWidget {
   final MeeduPlayerController controller;
 
-  MeeduPlayerProvider({
+  const MeeduPlayerProvider({
     Key? key,
     required Widget child,
     required this.controller,

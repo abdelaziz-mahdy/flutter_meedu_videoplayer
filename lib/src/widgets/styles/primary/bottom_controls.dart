@@ -22,58 +22,72 @@ class PrimaryBottomControls extends StatelessWidget {
       color: Colors.white,
       fontSize: fontSize > 16 ? 16 : fontSize,
     );
+    Widget durationControls = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            RxBuilder(
+                //observables: [_.duration, _.position],
+                (__) {
+              return Text(
+                _.duration.value.inMinutes >= 60
+                    ? printDurationWithHours(_.position.value)
+                    : printDuration(_.position.value),
+                style: textStyle,
+              );
+            }),
+            // END VIDEO POSITION
+            const SizedBox(width: 10),
+            const Expanded(
+              child: PlayerSlider(),
+            ),
+            const SizedBox(width: 10),
+            // START VIDEO DURATION
+            RxBuilder(
+              //observables: [_.duration],
+              (__) => Text(
+                _.duration.value.inMinutes >= 60
+                    ? printDurationWithHours(_.duration.value)
+                    : printDuration(_.duration.value),
+                style: textStyle,
+              ),
+            ),
+          ]),
+    );
+    // END VIDEO DURATION
+    Widget otherControls =
+        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      if (_.bottomRight != null) ...[_.bottomRight!, const SizedBox(width: 5)],
+
+      //if (_.enabledButtons.pip) PipButton(responsive: responsive),
+
+      if (_.enabledButtons.videoFit) VideoFitButton(responsive: responsive),
+      if (_.enabledButtons.playBackSpeed)
+        PlayBackSpeedButton(responsive: responsive, textStyle: textStyle),
+      if (_.enabledButtons.muteAndSound)
+        MuteSoundButton(responsive: responsive),
+
+      if (_.enabledButtons.fullscreen)
+        FullscreenButton(
+          size: responsive.ip(_.fullscreen.value ? 5 : 7),
+        )
+    ]);
     return Positioned(
       left: 5,
       right: 0,
       bottom: 20,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // START VIDEO POSITION
-          RxBuilder(
-              //observables: [_.duration, _.position],
-              (__) {
-            return Text(
-              _.duration.value.inMinutes >= 60
-                  ? printDurationWithHours(_.position.value)
-                  : printDuration(_.position.value),
-              style: textStyle,
-            );
-          }),
-          // END VIDEO POSITION
-          SizedBox(width: 10),
-          Expanded(
-            child: PlayerSlider(),
-          ),
-          SizedBox(width: 10),
-          // START VIDEO DURATION
-          RxBuilder(
-            //observables: [_.duration],
-            (__) => Text(
-              _.duration.value.inMinutes >= 60
-                  ? printDurationWithHours(_.duration.value)
-                  : printDuration(_.duration.value),
-              style: textStyle,
-            ),
-          ),
-          // END VIDEO DURATION
-          SizedBox(width: 15),
-          if (_.bottomRight != null) ...[_.bottomRight!, SizedBox(width: 5)],
-
-          //if (_.enabledButtons.pip) PipButton(responsive: responsive),
-
-          if (_.enabledButtons.videoFit) VideoFitButton(responsive: responsive),
-          if (_.enabledButtons.playBackSpeed)
-            PlayBackSpeedButton(responsive: responsive, textStyle: textStyle),
-          if (_.enabledButtons.muteAndSound)
-            MuteSoundButton(responsive: responsive),
-
-          if (_.enabledButtons.fullscreen)
-            FullscreenButton(
-              size: responsive.ip(_.fullscreen.value ? 5 : 7),
+      child: (responsive.height / responsive.width > 1)
+          ? Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              runAlignment: WrapAlignment.spaceAround,
+              children: [durationControls, otherControls],
             )
-        ],
-      ),
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [Expanded(child: durationControls), otherControls],
+            ),
     );
   }
 }

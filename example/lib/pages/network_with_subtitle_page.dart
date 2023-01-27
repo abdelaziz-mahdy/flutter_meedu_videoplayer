@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 class NetworkWithSubtitlesPage extends StatefulWidget {
+  const NetworkWithSubtitlesPage({Key? key}) : super(key: key);
+
   @override
   _NetworkWithSubtitlesPageState createState() =>
       _NetworkWithSubtitlesPageState();
@@ -11,7 +13,7 @@ class NetworkWithSubtitlesPage extends StatefulWidget {
 class _NetworkWithSubtitlesPageState extends State<NetworkWithSubtitlesPage> {
   late MeeduPlayerController _controller;
 
-  ValueNotifier<bool> _subtitlesEnabled = ValueNotifier(true);
+  final ValueNotifier<bool> _subtitlesEnabled = ValueNotifier(true);
 
   @override
   void initState() {
@@ -19,12 +21,12 @@ class _NetworkWithSubtitlesPageState extends State<NetworkWithSubtitlesPage> {
     _controller = MeeduPlayerController(
       controlsStyle: ControlsStyle.primary,
     );
-    this._setDataSource();
+    _setDataSource();
   }
 
   @override
   void dispose() {
-    this._controller.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -34,7 +36,7 @@ class _NetworkWithSubtitlesPageState extends State<NetworkWithSubtitlesPage> {
         source:
             'https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4',
         type: DataSourceType.network,
-        closedCaptionFile: this._loadCaptions(),
+        closedCaptionFile: _loadCaptions(),
       ),
       autoplay: true,
     );
@@ -49,7 +51,7 @@ class _NetworkWithSubtitlesPageState extends State<NetworkWithSubtitlesPage> {
         .loadString('assets/captions.srt');
     */
     // in srt format
-    final String fileContents = '''
+    const String fileContents = '''
 0
 00:00:02,170 --> 00:00:04,136
 Emo, close your eyes
@@ -111,16 +113,16 @@ Great
         child: AspectRatio(
           aspectRatio: 16 / 9,
           child: MeeduVideoPlayer(
-            controller: this._controller,
+            controller: _controller,
             bottomRight: (ctx, controller, responsive) {
               // creates a responsive fontSize using the size of video container
               final double fontSize = responsive.ip(3);
 
               return CupertinoButton(
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 minSize: 25,
                 child: ValueListenableBuilder(
-                  valueListenable: this._subtitlesEnabled,
+                  valueListenable: _subtitlesEnabled,
                   builder: (BuildContext context, bool enabled, _) {
                     return Text(
                       "CC",
@@ -135,9 +137,7 @@ Great
                 ),
                 onPressed: () {
                   _subtitlesEnabled.value = !_subtitlesEnabled.value;
-                  this
-                      ._controller
-                      .onClosedCaptionEnabled(_subtitlesEnabled.value);
+                  _controller.onClosedCaptionEnabled(_subtitlesEnabled.value);
                 },
               );
             },

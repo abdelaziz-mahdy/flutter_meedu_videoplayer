@@ -5,7 +5,7 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:wakelock/wakelock.dart';
 
 class DisabledButtonsExample extends StatefulWidget {
-  DisabledButtonsExample({Key? key}) : super(key: key);
+  const DisabledButtonsExample({Key? key}) : super(key: key);
 
   @override
   _DisabledButtonsExampleState createState() => _DisabledButtonsExampleState();
@@ -14,7 +14,8 @@ class DisabledButtonsExample extends StatefulWidget {
 class _DisabledButtonsExampleState extends State<DisabledButtonsExample> {
   final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.primary,
-    enabledButtons: EnabledButtons(
+    manageWakeLock: false,
+    enabledButtons: const EnabledButtons(
       fullscreen: false,
       pip: false,
     ),
@@ -55,7 +56,7 @@ class _DisabledButtonsExampleState extends State<DisabledButtonsExample> {
       DataSource(
         type: DataSourceType.network,
         source:
-            "https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4",
+            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
       ),
       autoplay: true,
     );

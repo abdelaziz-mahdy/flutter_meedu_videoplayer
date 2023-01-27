@@ -5,14 +5,15 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:wakelock/wakelock.dart';
 
 class OnePageExample extends StatefulWidget {
+  const OnePageExample({Key? key}) : super(key: key);
+
   @override
   _OnePageExampleState createState() => _OnePageExampleState();
 }
 
 class _OnePageExampleState extends State<OnePageExample> {
   MeeduPlayerController? _meeduPlayerController = MeeduPlayerController(
-    controlsStyle: ControlsStyle.secondary,
-  );
+      controlsStyle: ControlsStyle.secondary, manageWakeLock: false);
 
   StreamSubscription? _playerEventSubs;
 
@@ -56,7 +57,7 @@ class _OnePageExampleState extends State<OnePageExample> {
       DataSource(
         type: DataSourceType.network,
         source:
-            "https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4",
+            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
       ),
       autoplay: true,
     );
@@ -64,7 +65,7 @@ class _OnePageExampleState extends State<OnePageExample> {
 
   Future<void> _gotTo() async {
     final route = MaterialPageRoute(
-      builder: (_) => PageTwo(),
+      builder: (_) => const PageTwo(),
     );
     Navigator.pushReplacement(context, route);
   }
@@ -73,7 +74,7 @@ class _OnePageExampleState extends State<OnePageExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Page 1"),
+        title: const Text("Page 1"),
       ),
       body: SafeArea(
         child: Column(
@@ -84,10 +85,10 @@ class _OnePageExampleState extends State<OnePageExample> {
                 controller: _meeduPlayerController!,
               ),
             ),
-            SizedBox(height: 2),
+            const SizedBox(height: 2),
             TextButton(
-              onPressed: this._gotTo,
-              child: Text("Page 2"),
+              onPressed: _gotTo,
+              child: const Text("Page 2"),
             ),
           ],
         ),
@@ -97,7 +98,7 @@ class _OnePageExampleState extends State<OnePageExample> {
 }
 
 class PageTwo extends StatefulWidget {
-  PageTwo({Key? key}) : super(key: key);
+  const PageTwo({Key? key}) : super(key: key);
 
   @override
   _PageTwoState createState() => _PageTwoState();
@@ -153,7 +154,7 @@ class _PageTwoState extends State<PageTwo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Page 2"),
+        title: const Text("Page 2"),
       ),
       body: SafeArea(
         child: AspectRatio(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 class PlayBackSpeedExamplePage extends StatefulWidget {
-  PlayBackSpeedExamplePage({Key? key}) : super(key: key);
+  const PlayBackSpeedExamplePage({Key? key}) : super(key: key);
 
   @override
   _PlayBackSpeedExamplePageState createState() =>
@@ -12,12 +12,12 @@ class PlayBackSpeedExamplePage extends StatefulWidget {
 
 class _PlayBackSpeedExamplePageState extends State<PlayBackSpeedExamplePage> {
   final _controller = MeeduPlayerController(
-    screenManager: ScreenManager(
+    screenManager: const ScreenManager(
       forceLandScapeInFullscreen: false,
     ),
   );
 
-  ValueNotifier<double> _playbackSpeed = ValueNotifier(1);
+  final ValueNotifier<double> _playbackSpeed = ValueNotifier(1);
 
   void _onPlaybackSpeed() {
     final options = [0.2, 0.5, 1.0, 2.0, 4.0];
@@ -41,8 +41,8 @@ class _PlayBackSpeedExamplePageState extends State<PlayBackSpeedExamplePage> {
         ),
         cancelButton: CupertinoActionSheetAction(
           onPressed: () => Navigator.pop(_),
-          child: Text("Cancel"),
           isDestructiveAction: true,
+          child: const Text("Cancel"),
         ),
       ),
     );
@@ -67,7 +67,7 @@ class _PlayBackSpeedExamplePageState extends State<PlayBackSpeedExamplePage> {
       DataSource(
         type: DataSourceType.network,
         source:
-            "https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4",
+            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
       ),
       autoplay: true,
     );
@@ -86,10 +86,11 @@ class _PlayBackSpeedExamplePageState extends State<PlayBackSpeedExamplePage> {
             final double fontSize = responsive.ip(3);
 
             return CupertinoButton(
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               minSize: 25,
+              onPressed: _onPlaybackSpeed,
               child: ValueListenableBuilder<double>(
-                valueListenable: this._playbackSpeed,
+                valueListenable: _playbackSpeed,
                 builder: (context, double speed, child) {
                   return Text(
                     "$speed x",
@@ -100,7 +101,6 @@ class _PlayBackSpeedExamplePageState extends State<PlayBackSpeedExamplePage> {
                   );
                 },
               ),
-              onPressed: _onPlaybackSpeed,
             );
           },
         ),

@@ -5,7 +5,7 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:wakelock/wakelock.dart';
 
 class CustomIconsExamplePage extends StatefulWidget {
-  CustomIconsExamplePage({Key? key}) : super(key: key);
+  const CustomIconsExamplePage({Key? key}) : super(key: key);
 
   @override
   _CustomIconsExamplePageState createState() => _CustomIconsExamplePageState();
@@ -13,8 +13,7 @@ class CustomIconsExamplePage extends StatefulWidget {
 
 class _CustomIconsExamplePageState extends State<CustomIconsExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
-    controlsStyle: ControlsStyle.primary,
-  );
+      controlsStyle: ControlsStyle.primary, manageWakeLock: false);
 
   StreamSubscription? _playerEventSubs;
 
@@ -51,7 +50,7 @@ class _CustomIconsExamplePageState extends State<CustomIconsExamplePage> {
       DataSource(
         type: DataSourceType.network,
         source:
-            "https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4",
+            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
       ),
       autoplay: true,
     );

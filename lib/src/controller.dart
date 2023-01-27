@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -72,7 +71,7 @@ class MeeduPlayerController {
   // NO OBSERVABLES
   bool _isSliderMoving = false;
   bool _looping = false;
-  bool _autoplay = false;
+  bool _autoPlay = false;
   double _volumeBeforeMute = 0;
   double mouseMoveInitial = 0;
   Timer? _timer;
@@ -172,13 +171,14 @@ class MeeduPlayerController {
   bool get looping => _looping;
 
   /// [autoPlay] is true if the player has enabled the autoplay
-  bool get autoplay => _autoplay;
+  bool get autoplay => _autoPlay;
 
   Rx<bool> get closedCaptionEnabled => _closedCaptionEnabled;
   Stream<bool> get onClosedCaptionEnabledChanged =>
       _closedCaptionEnabled.stream;
 
   bool windows = false;
+  bool manageWakeLock = true;
 
   /// [isInPipMode] is true if pip mode is enabled
   //Rx<bool> get isInPipMode => _pipManager.isInPipMode;
@@ -203,12 +203,14 @@ class MeeduPlayerController {
   /// [screenManager] the device orientations and overlays
   /// [placeholder] widget to show when the player is loading a video
   /// [controlsEnabled] if the player must show the player controls
+  /// [manageWakeLock] if the player should use wakelock
   /// [errorText] message to show when the load process failed
   MeeduPlayerController({
     this.screenManager = const ScreenManager(),
     this.colorTheme = Colors.redAccent,
     Widget? loadingWidget,
     this.controlsEnabled = true,
+    this.manageWakeLock = true,
     String? errorText,
     this.controlsStyle = ControlsStyle.primary,
     this.header,
@@ -252,9 +254,13 @@ class MeeduPlayerController {
     _playerEventSubs = onPlayerStatusChanged.listen(
       (PlayerStatus status) {
         if (status == PlayerStatus.playing) {
-          Wakelock.enable();
+          if (manageWakeLock && !UniversalPlatform.isLinux) {
+            Wakelock.enable();
+          }
         } else {
-          Wakelock.disable();
+          if (manageWakeLock && !UniversalPlatform.isLinux) {
+            Wakelock.disable();
+          }
         }
       },
     );
@@ -270,7 +276,6 @@ class MeeduPlayerController {
     //_pipAvailable.value = false;
     //}
   }
-
 
   /// create a new video_player controller
   VideoPlayerController _createVideoController(DataSource dataSource) {
@@ -304,12 +309,12 @@ class MeeduPlayerController {
     Duration seekTo = Duration.zero,
   }) async {
     if (seekTo != Duration.zero) {
-      print("Called seek function to" + seekTo.toString());
+      print("Called seek function to$seekTo");
       await this.seekTo(seekTo);
     }
 
     // if the playbackSpeed is not the default value
-    if (_playbackSpeed != 1.0) {
+    if (_playbackSpeed.value != 1.0) {
       await setPlaybackSpeed(_playbackSpeed.value);
     }
 
@@ -317,8 +322,8 @@ class MeeduPlayerController {
       await setLooping(_looping);
     }
 
-    if (_autoplay) {
-      // if the autoplay is enabled
+    if (_autoPlay) {
+      // if the autoPlay is enabled
       await play();
     }
   }
@@ -366,7 +371,7 @@ class MeeduPlayerController {
     Duration seekTo = Duration.zero,
   }) async {
     try {
-      _autoplay = autoplay;
+      _autoPlay = autoplay;
       _looping = looping;
       dataStatus.status.value = DataStatus.loading;
 
@@ -564,7 +569,7 @@ class MeeduPlayerController {
       try {
         _currentVolume.value = await VolumeController().getVolume();
       } catch (e) {
-        print("currentVolume " + e.toString());
+        print("currentVolume $e");
         //throw 'Failed to get current brightness';
         //return 0;
       }
@@ -665,11 +670,9 @@ class MeeduPlayerController {
   }
 
   /// show the player in fullscreen mode
-  Future<void> goToFullscreen(
-    BuildContext context, {
-    bool applyOverlaysAndOrientations = true,
-    bool disposePlayer=false
-  }) async {
+  Future<void> goToFullscreen(BuildContext context,
+      {bool applyOverlaysAndOrientations = true,
+      bool disposePlayer = false}) async {
     if (applyOverlaysAndOrientations) {
       if (UniversalPlatform.isWeb) {
         screenManager.setWebFullScreen(true, this);
@@ -677,7 +680,7 @@ class MeeduPlayerController {
         if (windows) {
           screenManager.setWindowsFullScreen(true, this);
         } else {
-          screenManager.setDefaultOverlaysAndOrientations();
+          screenManager.setFullScreenOverlaysAndOrientations();
         }
       }
     }
@@ -686,7 +689,10 @@ class MeeduPlayerController {
       opaque: false,
       fullscreenDialog: true,
       pageBuilder: (_, __, ___) {
-        return MeeduPlayerFullscreenPage(controller: this,disposePlayer: disposePlayer,);
+        return MeeduPlayerFullscreenPage(
+          controller: this,
+          disposePlayer: disposePlayer,
+        );
       },
     );
 
@@ -719,7 +725,7 @@ class MeeduPlayerController {
     if (!windows) {
       getUserPreferenceForBrightness();
     }
-    await goToFullscreen(context,disposePlayer: true);
+    await goToFullscreen(context, disposePlayer: true);
   }
 
   /// dispose de video_player controller
@@ -761,7 +767,7 @@ class MeeduPlayerController {
 
   Future<void> getUserPreferenceForFit() async {
     prefs = await SharedPreferences.getInstance();
-    String fitValue = (await prefs?.getString('fit')) ?? "fill";
+    String fitValue = (prefs?.getString('fit')) ?? "fill";
     _videoFit.value = fits.firstWhere((element) => element.name == fitValue);
     print("Last fit used was ${_videoFit.value.name}");
   }
@@ -773,9 +779,9 @@ class MeeduPlayerController {
 
   Future<void> getUserPreferenceForBrightness() async {
     prefs = await SharedPreferences.getInstance();
-    double BrightnessValue = (await prefs?.getDouble('brightness')) ?? 0.5;
+    double BrightnessValue = (prefs?.getDouble('brightness')) ?? 0.5;
     setBrightness(BrightnessValue);
-    print("Last Brightness used was ${BrightnessValue}");
+    print("Last Brightness used was $BrightnessValue");
   }
 
   /// Toggle Change the videofit accordingly
@@ -837,8 +843,7 @@ class MeeduPlayerController {
       _pipContextToFullscreen = null;
     }
   }*/
-  Future<void> onFullscreenClose(
-) async {
+  Future<void> onFullscreenClose() async {
     print("Fullscreen Closed");
     fullscreen.value = false;
     resetBrightness();
@@ -848,15 +853,13 @@ class MeeduPlayerController {
     } else {
       if (windows) {
         screenManager.setWindowsFullScreen(false, this);
-       
       } else {
         screenManager.setDefaultOverlaysAndOrientations();
       }
     }
   }
 
-  Future<void> videoPlayerClosed(
-      ) async {
+  Future<void> videoPlayerClosed() async {
     print("Video player closed");
     await onFullscreenClose();
 
@@ -870,7 +873,9 @@ class MeeduPlayerController {
       _position.value = Duration.zero;
       _timer?.cancel();
       pause();
-      Wakelock.disable();
+      if (manageWakeLock && !UniversalPlatform.isLinux) {
+        Wakelock.disable();
+      }
 
       _videoPlayerController?.removeListener(_listener);
       await _videoPlayerController?.dispose();

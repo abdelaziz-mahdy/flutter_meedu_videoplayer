@@ -13,7 +13,7 @@ class Quality {
 }
 
 class ChangeQualityExamplePage extends StatefulWidget {
-  ChangeQualityExamplePage({Key? key}) : super(key: key);
+  const ChangeQualityExamplePage({Key? key}) : super(key: key);
 
   @override
   _ChangeQualityExamplePageState createState() =>
@@ -22,7 +22,7 @@ class ChangeQualityExamplePage extends StatefulWidget {
 
 class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
   final _controller = MeeduPlayerController(
-    screenManager: ScreenManager(
+    screenManager: const ScreenManager(
       forceLandScapeInFullscreen: false,
     ),
   );
@@ -46,7 +46,7 @@ class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
   ];
 
   /// listener for the video quality
-  ValueNotifier<Quality?> _quality = ValueNotifier(null);
+  final ValueNotifier<Quality?> _quality = ValueNotifier(null);
 
   Duration _currentPosition = Duration.zero; // to save the video position
 
@@ -85,7 +85,7 @@ class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
           (index) {
             final quality = _qualities[index];
             return CupertinoActionSheetAction(
-              child: Text("${quality.label}"),
+              child: Text(quality.label),
               onPressed: () {
                 _quality.value = quality; // change the video quality
                 _setDataSource(); // update the datasource
@@ -96,8 +96,8 @@ class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
         ),
         cancelButton: CupertinoActionSheetAction(
           onPressed: () => Navigator.pop(_),
-          child: Text("Cancel"),
           isDestructiveAction: true,
+          child: const Text("Cancel"),
         ),
       ),
     );
@@ -128,13 +128,14 @@ class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
             final double fontSize = responsive.ip(3);
 
             return CupertinoButton(
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               minSize: 25,
+              onPressed: _onChangeVideoQuality,
               child: ValueListenableBuilder<Quality?>(
-                valueListenable: this._quality,
+                valueListenable: _quality,
                 builder: (context, Quality? quality, child) {
                   return Text(
-                    "${quality!.label}",
+                    quality!.label,
                     style: TextStyle(
                       fontSize: fontSize > 18 ? 18 : fontSize,
                       color: Colors.white,
@@ -142,7 +143,6 @@ class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
                   );
                 },
               ),
-              onPressed: _onChangeVideoQuality,
             );
           },
         ),

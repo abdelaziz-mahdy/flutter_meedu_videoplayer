@@ -3,21 +3,26 @@ import 'package:flutter/services.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-class ListViewExample extends StatefulWidget {
-  const ListViewExample({Key? key}) : super(key: key);
+class GridViewExample extends StatefulWidget {
+  const GridViewExample({Key? key}) : super(key: key);
 
   @override
-  _ListViewExampleState createState() => _ListViewExampleState();
+  _GridViewExampleState createState() => _GridViewExampleState();
 }
 
-class _ListViewExampleState extends State<ListViewExample>
+class _GridViewExampleState extends State<GridViewExample>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
       appBar: AppBar(),
-      body: ListView.builder(
+      body: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 500,
+            childAspectRatio: 16 / 9,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5),
         itemBuilder: (_, index) => VideoItem(
           uniqueKey: "$index",
         ),
@@ -56,12 +61,6 @@ class _VideoItemState extends State<VideoItem>
         source:
             'https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov',
         type: DataSourceType.network,
-        httpHeaders: {
-          // u can change the link to  ur referr
-          "Referer": "https://google.com/",
-          // also u can change the user agent since exo player sometimes is blocked
-          "User-Agent": "animdl/1.5.84",
-        },
       ),
       autoplay: false,
     );

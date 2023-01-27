@@ -13,7 +13,7 @@ const videos = [
 ];
 
 class FullscreenExamplePage extends StatefulWidget {
-  FullscreenExamplePage({Key? key}) : super(key: key);
+  const FullscreenExamplePage({Key? key}) : super(key: key);
 
   @override
   _FullscreenExamplePageState createState() => _FullscreenExamplePageState();
@@ -69,7 +69,7 @@ class _FullscreenExamplePageState extends State<FullscreenExamplePage> {
           onPressed: hasNext
               ? () {
                   currentIndex.value++;
-                  this._set();
+                  _set();
                 }
               : null,
           child: Text(
@@ -88,11 +88,11 @@ class _FullscreenExamplePageState extends State<FullscreenExamplePage> {
       valueListenable: currentIndex,
       builder: (_, int index, __) {
         return Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Row(
             children: [
               CupertinoButton(
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back,
                   color: Colors.white,
                 ),
@@ -104,7 +104,7 @@ class _FullscreenExamplePageState extends State<FullscreenExamplePage> {
               Expanded(
                 child: Text(
                   videos[index],
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                 ),
@@ -126,21 +126,21 @@ class _FullscreenExamplePageState extends State<FullscreenExamplePage> {
       );
 
       // launch the player in fullscreen mode
-      await this._meeduPlayerController.launchAsFullscreen(
-            context,
-            dataSource: _dataSource!,
-            autoplay: true,
-            header: header,
-            bottomRight: nextButton,
-          );
+      await _meeduPlayerController.launchAsFullscreen(
+        context,
+        dataSource: _dataSource!,
+        autoplay: true,
+        header: header,
+        bottomRight: nextButton,
+      );
     } else {
       // update the player with new datasource and it doesn't re-launch the player
-      await this._meeduPlayerController.setDataSource(
-            _dataSource!.copyWith(
-              source: videos[index],
-            ),
-            seekTo: Duration.zero,
-          );
+      await _meeduPlayerController.setDataSource(
+        _dataSource!.copyWith(
+          source: videos[index],
+        ),
+        seekTo: Duration.zero,
+      );
     }
   }
 
@@ -154,7 +154,7 @@ class _FullscreenExamplePageState extends State<FullscreenExamplePage> {
           (index) => ListTile(
             onTap: () {
               currentIndex.value = index;
-              this._set();
+              _set();
             },
             title: Text("video ${index + 1}"),
           ),

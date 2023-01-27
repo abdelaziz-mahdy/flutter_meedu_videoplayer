@@ -13,15 +13,16 @@ class SecondaryVideoPlayerControls extends StatelessWidget {
   Widget build(BuildContext context) {
     final _ = MeeduPlayerController.of(context);
     return ControlsContainer(
+      responsive: responsive,
       child: Stack(
         children: [
           // RENDER A CUSTOM HEADER
           if (_.header != null)
             Positioned(
-              child: _.header!,
               left: 0,
               right: 0,
               top: 0,
+              child: _.header!,
             ),
           SecondaryBottomControls(
             responsive: responsive,

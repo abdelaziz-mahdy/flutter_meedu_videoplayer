@@ -1,5 +1,26 @@
+## 3.1.2
+* Fixed Dart warnings
+* Fixed formatting
+## 3.1.1
+* Fixed fit overflow
+* Fixed 3.1.0 portrait duration overflow
+## 3.1.0
+* portrait fixed view (by https://github.com/andrezanna)
+* updated window_manager to 0.3.0
+## 3.0.5
+* disabled WakeLock on linux
+* added manageWakeLock to constructor incase someone wants to disable WakeLock
+## 3.0.4
+* add linux docs (by https://github.com/secanonm)
+## 3.0.3
+* fix linux (by https://github.com/secanonm)
+
+## 3.0.2
+* fixed width errors in grid view 
+* added grid view example and updated links
 ## 3.0.1
 * fixed dispose player when launched in full screen mode
+* fixed wrong Orientation when launch as full screen
 ## 3.0.0
 * removed hotkey manger dependence to use flutter shortcuts widget (to work on web)
   
