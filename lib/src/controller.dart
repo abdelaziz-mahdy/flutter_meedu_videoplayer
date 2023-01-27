@@ -71,7 +71,7 @@ class MeeduPlayerController {
   // NO OBSERVABLES
   bool _isSliderMoving = false;
   bool _looping = false;
-  bool _autoplay = false;
+  bool _autoPlay = false;
   double _volumeBeforeMute = 0;
   double mouseMoveInitial = 0;
   Timer? _timer;
@@ -171,7 +171,7 @@ class MeeduPlayerController {
   bool get looping => _looping;
 
   /// [autoPlay] is true if the player has enabled the autoplay
-  bool get autoplay => _autoplay;
+  bool get autoplay => _autoPlay;
 
   Rx<bool> get closedCaptionEnabled => _closedCaptionEnabled;
   Stream<bool> get onClosedCaptionEnabledChanged =>
@@ -313,7 +313,7 @@ class MeeduPlayerController {
     }
 
     // if the playbackSpeed is not the default value
-    if (_playbackSpeed != 1.0) {
+    if (_playbackSpeed.value != 1.0) {
       await setPlaybackSpeed(_playbackSpeed.value);
     }
 
@@ -321,8 +321,8 @@ class MeeduPlayerController {
       await setLooping(_looping);
     }
 
-    if (_autoplay) {
-      // if the autoplay is enabled
+    if (_autoPlay) {
+      // if the autoPlay is enabled
       await play();
     }
   }
@@ -370,7 +370,7 @@ class MeeduPlayerController {
     Duration seekTo = Duration.zero,
   }) async {
     try {
-      _autoplay = autoplay;
+      _autoPlay = autoplay;
       _looping = looping;
       dataStatus.status.value = DataStatus.loading;
 
