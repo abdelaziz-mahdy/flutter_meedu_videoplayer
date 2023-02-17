@@ -31,8 +31,8 @@ dependencies:
   wakelock: ^0.6.1+2
   shared_preferences: ^2.0.13
   helpers: ^1.1.4
-  dio: ^4.0.4
-  dio_smart_retry: ^1.2.0
+  dio: ^5.0.0
+  dio_smart_retry: ^5.0.0
   path_provider: ^2.0.6
 
 dev_dependencies:
@@ -65,8 +65,8 @@ flutter:
       # web:
       #   pluginClass: FlutterMeeduVideoplayerPlugin
       #web:
-        #pluginClass: FlutterMeeduVideoplayerWeb
-        #fileName: flutter_meedu_videoplayer_web.dart
+      #pluginClass: FlutterMeeduVideoplayerWeb
+      #fileName: flutter_meedu_videoplayer_web.dart
   assets:
     - assets/icons/fast-forward.png
     - assets/icons/fullscreen.png
