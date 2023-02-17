@@ -12,11 +12,7 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   volume_controller: ^2.0.3
-  video_player:
-    git:
-      path: ./packages/video_player/video_player
-      url: https://github.com/zezo357/plugins
-      ref: passing-httpHeaders-to-file-constructor
+
   auto_orientation: ^2.2.1
   screen_brightness: ^0.2.0
   flutter_meedu: ^8.0.0+1
@@ -38,6 +34,11 @@ dependencies:
   dio_smart_retry: ^1.2.0
   path_provider: ^2.0.6
 dependency_overrides:
+  video_player:
+    git:
+      path: ./packages/video_player/video_player
+      url: https://github.com/zezo357/plugins
+      ref: passing-httpHeaders-to-file-constructor
   video_player_android:
     git:
       path: ./packages/video_player/video_player_android

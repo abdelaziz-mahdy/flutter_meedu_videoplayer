@@ -551,18 +551,20 @@ packages:
   video_player:
     dependency: transitive
     description:
-      name: video_player
-      sha256: "59f7f31c919c59cbedd37c617317045f5f650dc0eeb568b0b0de9a36472bdb28"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.5.1"
+      path: "packages/video_player/video_player"
+      ref: passing-httpHeaders-to-file-constructor
+      resolved-ref: "315d460d9e47643a15bf4a581f1da3f50e83fa47"
+      url: "https://github.com/zezo357/plugins"
+    source: git
+    version: "2.5.2"
   video_player_android:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: video_player_android
-      sha256: "984388511230bac63feb53b2911a70e829fe0976b6b2213f5c579c4e0a882db3"
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/video_player/video_player_android"
+      ref: passing-httpHeaders-to-file-constructor
+      resolved-ref: "315d460d9e47643a15bf4a581f1da3f50e83fa47"
+      url: "https://github.com/zezo357/plugins"
+    source: git
     version: "2.3.10"
   video_player_avfoundation:
     dependency: transitive
