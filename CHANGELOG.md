@@ -1,43 +1,70 @@
+## 3.2.0
+
+* Using video player 2.6.0
+* Adding http headers to videos played by files (to fix m3u8 files)
+
 ## 3.1.3
-* removed dependency on dio.
+
+* Removed dependency on dio.
+  
 ## 3.1.2
+
 * Fixed Dart warnings
 * Fixed formatting
+  
 ## 3.1.1
+
 * Fixed fit overflow
 * Fixed 3.1.0 portrait duration overflow
+  
 ## 3.1.0
-* portrait fixed view (by https://github.com/andrezanna)
-* updated window_manager to 0.3.0
+
+* Portrait fixed view (by https://github.com/andrezanna)
+* Updated window_manager to 0.3.0
+  
 ## 3.0.5
-* disabled WakeLock on linux
-* added manageWakeLock to constructor incase someone wants to disable WakeLock
+
+* Disabled WakeLock on linux
+* Added manageWakeLock to constructor incase someone wants to disable WakeLock
+  
 ## 3.0.4
-* add linux docs (by https://github.com/secanonm)
+
+* Add linux docs (by https://github.com/secanonm)
+  
 ## 3.0.3
-* fix linux (by https://github.com/secanonm)
+
+* Fix linux (by https://github.com/secanonm)
 
 ## 3.0.2
-* fixed width errors in grid view 
-* added grid view example and updated links
+
+* Fixed width errors in grid view 
+* Added grid view example and updated links
+  
 ## 3.0.1
-* fixed dispose player when launched in full screen mode
-* fixed wrong Orientation when launch as full screen
+
+* Fixed dispose player when launched in full screen mode
+* Fixed wrong Orientation when launch as full screen
+  
 ## 3.0.0
-* removed hotkey manger dependence to use flutter shortcuts widget (to work on web)
+
+* Removed hotkey manger dependence to use flutter shortcuts widget (to work on web)
   
 ## 2.1.3
-* fixed web
+
+* Fixed web
 
 ## 2.1.2
-* fixed video player volume on windows causing errors
-* fixed focus in windows and add ui for changing volume in windows
-* improved initiation 
+
+* Fixed video player volume on windows causing errors
+* Fixed focus in windows and add ui for changing volume in windows
+* Improved initiation 
 
 ## 2.1.1
-* improved description
+
+* Improved description
  
 ## 2.1.0
+
 * Converted to using video player platform interface (using package video_player_dart_vlc)
 * fixed web build
 * initDartVlc now is initVideoPlayerDartVlcIfNeeded

@@ -56,6 +56,12 @@ class _VideoItemState extends State<VideoItem>
         source:
             'https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov',
         type: DataSourceType.network,
+        httpHeaders: {
+          // u can change the link to  ur referr
+          "Referer": "https://google.com/",
+          // also u can change the user agent since exo player sometimes is blocked
+          "User-Agent": "test User-Agent",
+        },
       ),
       autoplay: false,
     );
