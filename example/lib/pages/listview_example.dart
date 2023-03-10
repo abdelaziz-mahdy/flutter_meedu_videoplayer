@@ -60,7 +60,7 @@ class _VideoItemState extends State<VideoItem>
           // u can change the link to  ur referr
           "Referer": "https://google.com/",
           // also u can change the user agent since exo player sometimes is blocked
-          "User-Agent": "animdl/1.5.84",
+          "User-Agent": "test User-Agent",
         },
       ),
       autoplay: false,

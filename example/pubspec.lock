@@ -525,14 +525,13 @@ packages:
     source: hosted
     version: "2.6.0"
   video_player_android:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "packages/video_player/video_player_android"
-      ref: passing-httpHeaders-to-file-constructor
-      resolved-ref: "315d460d9e47643a15bf4a581f1da3f50e83fa47"
-      url: "https://github.com/zezo357/plugins"
-    source: git
-    version: "2.3.10"
+      name: video_player_android
+      sha256: "056920e0fa1a8393922a10c8b398b85f40a86b5e46be07097f193d98e163121b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
   video_player_avfoundation:
     dependency: transitive
     description:
