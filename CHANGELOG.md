@@ -1,3 +1,8 @@
+## 4.0.0
+
+* Converted to using media_kit instead of dart_vlc.
+
+
 ## 3.2.0
 
 * Using video player 2.6.0

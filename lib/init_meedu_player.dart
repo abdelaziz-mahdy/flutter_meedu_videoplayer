@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
-Future<void> initMeeduPlayer() async {
+Future<void> initMeeduPlayer({bool iosUseMediaKit = false}) async {
   WidgetsFlutterBinding.ensureInitialized();
   // if (UniversalPlatform.isWindows ||
   //     UniversalPlatform.isLinux ||
@@ -9,5 +9,5 @@ Future<void> initMeeduPlayer() async {
 
   // }
 
-  initVideoPlayerDartVlcIfNeeded();
+  initVideoPlayerMediaKitIfNeeded(iosUseMediaKit:iosUseMediaKit);
 }
