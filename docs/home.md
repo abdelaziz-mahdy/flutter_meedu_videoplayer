@@ -45,7 +45,7 @@ Add the following to your `pubspec.yaml`:
 
 ```
 dependencies:
-  flutter_meedu_videoplayer: ^${$.var.version}
+  flutter_meedu_videoplayer: ^3.2.0
 ```
 
 ---
