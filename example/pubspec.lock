@@ -623,9 +623,10 @@ packages:
   video_player_media_kit:
     dependency: transitive
     description:
-      path: "../../video_player_media_kit"
-      relative: true
-    source: path
+      name: video_player_media_kit
+      sha256: bcb809b81a24d55fe3928f7da91213e865cd5575f23384981f22590e7cfe24e0
+      url: "https://pub.dev"
+    source: hosted
     version: "0.0.2"
   video_player_platform_interface:
     dependency: transitive
