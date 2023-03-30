@@ -124,7 +124,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.0.3"
+    version: "4.0.6"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -624,10 +624,10 @@ packages:
     dependency: transitive
     description:
       name: video_player_media_kit
-      sha256: bcb809b81a24d55fe3928f7da91213e865cd5575f23384981f22590e7cfe24e0
+      sha256: e4b6d962965f19417fab0d600b73f68b25292eeb687fa2ccacae44e99b363fdd
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.3"
   video_player_platform_interface:
     dependency: transitive
     description:
@@ -725,5 +725,5 @@ packages:
     source: hosted
     version: "0.2.0+3"
 sdks:
-  dart: ">=2.19.5 <3.0.0"
+  dart: ">=2.18.0 <3.0.0"
   flutter: ">=3.7.0"

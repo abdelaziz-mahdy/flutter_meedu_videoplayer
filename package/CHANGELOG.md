@@ -1,3 +1,11 @@
+## 4.0.6
+
+* Fixing pub points by using new video_player_media_kit.
+  
+## 4.0.5
+
+* Fixing pub points.
+  
 ## 4.0.4
 
 * Fixing pub points.
