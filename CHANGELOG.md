@@ -1,3 +1,7 @@
+## 4.0.1
+
+* Fixing pub points.
+
 ## 4.0.0
 
 * Converted to using media_kit instead of dart_vlc.
