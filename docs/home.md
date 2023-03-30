@@ -1,8 +1,8 @@
 # meedu_player
 
-<a target="blank" href="https://pub.dev/packages/meedu_player"><img src="https://img.shields.io/pub/v/meedu_player?include_prereleases&style=flat-square"/></a>
-<img src="https://img.shields.io/github/last-commit/the-meedu-app/flutter-meedu-player/master?style=flat-square"/>
-<img src="https://img.shields.io/github/license/the-meedu-app/flutter-meedu-player?style=flat-square"/>
+<a target="blank" href="https://pub.dev/packages/flutter_meedu_videoplayer"><img src="https://img.shields.io/pub/v/flutter_meedu_videoplayer?include_prereleases&style=flat-square"/></a>
+<img src="https://img.shields.io/github/last-commit/zezo357/flutter_meedu_videoplayer/master?style=flat-square"/>
+<img src="https://img.shields.io/github/license/zezo357/flutter_meedu_videoplayer?style=flat-square"/>
 
 > Modern video player UI for [video_player](https://pub.dev/packages/video_player)
 
@@ -16,26 +16,26 @@
 <br/>
 <br/>
 
-| Features  | iOS | Android |
-| ------------- | ------------- | ------------- |
-| Videos from Network  | ✅  | ✅ |
-| Videos from Assets  | ✅  | ✅ |
-| Videos from local files  | ✅  | ✅ |
-| Looping  | ✅  | ✅ |
-| Autoplay  | ✅  | ✅ |
-| Mute / Sound  | ✅  | ✅ |
-| Fullscreen  | ✅  | ✅ |
-| Launch Player as Fullscreen  | ✅  | ✅ |
-| Playback Speed  | ✅  | ✅ |
-| fastForward / Rewind  | ✅  | ✅ |
-| srt subtitles  | ✅  | ✅ |
-| Customize  | partially  | partially |
-| Picture in Picture  | ❌  | ✅ |
+| Features  | iOS | Android | windows | linux | macos | web|
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| Videos from Network  | ✅  | ✅ | ✅ | ✅ | x | ✅|
+| Videos from Assets  | ✅  | ✅ | ✅ | ✅ | x | ✅|
+| Videos from local files  | ✅  | ✅ | ✅ | ✅ | x | ✅
+| Looping  | ✅  | ✅ | x | x | x | x
+| AutoPlay  | ✅  | ✅ | ✅ | ✅ | x | ✅
+| Swipe to increase and decrease Sound  | ✅  | ✅ | keyboard arrows | keyboard arrows | x | keyboard arrows |
+| Swipe to seek in video | ✅  | ✅ | keyboard arrows | keyboard arrows | x | keyboard arrows |
+| FullScreen  | ✅  | ✅ | ✅ | ✅ | x | ✅ |
+| Launch Player as FullScreen  | ✅  | ✅ | ✅ | ✅ | x | ✅ |
+| Playback Speed  | ✅  | ✅ | ✅ | ✅ | x | ✅ |
+| fastForward / Rewind  | ✅  | ✅ | ✅ | ✅ |x | ✅ |
+| srt subtitles  | ✅  | ✅ | x | x | x | x
+| Customize  | partially  | partially | partially | partially | x | partially
+
+---
+
 
 <br/>
-
-> For correctly works don't use a device simulator (iOS) or emulator (Android)
-
 
 
 
@@ -45,7 +45,7 @@ Add the following to your `pubspec.yaml`:
 
 ```
 dependencies:
-  meedu_player: ^${$.var.version}
+  flutter_meedu_videoplayer: ^${$.var.version}
 ```
 
 ---
