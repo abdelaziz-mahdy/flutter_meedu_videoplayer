@@ -1,3 +1,7 @@
+## 4.0.2
+
+* Added macos support in read me.
+  
 ## 4.0.1
 
 * Fixing pub points.
@@ -5,7 +9,6 @@
 ## 4.0.0
 
 * Converted to using media_kit instead of dart_vlc.
-
 
 ## 3.2.0
 
