@@ -67,8 +67,9 @@ flutter:
         pluginClass: FlutterMeeduVideoplayerPlugin
       macos:
         pluginClass: FlutterMeeduVideoplayerPlugin
-      # web:
-      #   pluginClass: FlutterMeeduVideoplayerPlugin
+      web:
+        pluginClass: FlutterMeeduVideoplayerPlugin
+        fileName: meedu_player.dart
       # web:
       #   pluginClass: FlutterMeeduVideoplayerPlugin
       #web:

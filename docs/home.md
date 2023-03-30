@@ -16,23 +16,26 @@
 <br/>
 <br/>
 
+
 | Features  | iOS | Android | windows | linux | macos | web|
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| Videos from Network  | ✅  | ✅ | ✅ | ✅ | x | ✅|
-| Videos from Assets  | ✅  | ✅ | ✅ | ✅ | x | ✅|
-| Videos from local files  | ✅  | ✅ | ✅ | ✅ | x | ✅
+| Videos from Network  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅|
+| Videos from Assets  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅|
+| Videos from local files  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅
 | Looping  | ✅  | ✅ | x | x | x | x
-| AutoPlay  | ✅  | ✅ | ✅ | ✅ | x | ✅
-| Swipe to increase and decrease Sound  | ✅  | ✅ | keyboard arrows | keyboard arrows | x | keyboard arrows |
-| Swipe to seek in video | ✅  | ✅ | keyboard arrows | keyboard arrows | x | keyboard arrows |
-| FullScreen  | ✅  | ✅ | ✅ | ✅ | x | ✅ |
-| Launch Player as FullScreen  | ✅  | ✅ | ✅ | ✅ | x | ✅ |
-| Playback Speed  | ✅  | ✅ | ✅ | ✅ | x | ✅ |
-| fastForward / Rewind  | ✅  | ✅ | ✅ | ✅ |x | ✅ |
+| AutoPlay  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅
+| Swipe to increase and decrease Sound  | ✅  | ✅ | keyboard arrows | keyboard arrows | ✅ | keyboard arrows |
+| Swipe to seek in video | ✅  | ✅ | keyboard arrows | keyboard arrows | ✅ | keyboard arrows |
+| FullScreen  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Launch Player as FullScreen  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Playback Speed  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
+| fastForward / Rewind  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
 | srt subtitles  | ✅  | ✅ | x | x | x | x
 | Customize  | partially  | partially | partially | partially | x | partially
 
 ---
+
+
 
 
 <br/>
