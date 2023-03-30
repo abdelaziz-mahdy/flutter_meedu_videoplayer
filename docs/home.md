@@ -10,7 +10,7 @@
 <img src="assets/q2.gif" alt="meedu_player" width="160" />
 <br/>
 <img src="assets/full.gif" alt="meedu_player" width="300" />
-<img src="https://user-images.githubusercontent.com/15864336/94494352-9924d100-01b4-11eb-9c0f-54c88868331b.png" alt="meedu_player" width="300" />
+<img src="assets/playing_video.png" alt="meedu_player" width="300" />
 
 
 <br/>
