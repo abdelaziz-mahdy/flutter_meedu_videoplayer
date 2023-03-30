@@ -1,3 +1,7 @@
+## 4.0.3
+
+* Fixing pub points.
+
 ## 4.0.2
 
 * Added macos support in read me.
