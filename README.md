@@ -7,11 +7,11 @@
   <caption><h4>Demo</h4></caption>
   <tbody>
     <tr>
-      <td rowspan="2"><img src="https://darwin-morocho.github.io/flutter-meedu-player/assets/q2.gif" alt="meedu_player" width="160" /></td>     
-      <td><img src="https://darwin-morocho.github.io/flutter-meedu-player/assets/full.gif" alt="meedu_player" width="300" /></td>      
+      <td rowspan="2"><img src="https://zezo357.github.io/flutter_meedu_videoplayer/assets/q2.gif" alt="meedu_player" width="160" /></td>     
+      <td><img src="https://zezo357.github.io/flutter_meedu_videoplayer/assets/full.gif" alt="meedu_player" width="300" /></td>      
     </tr>   
     <tr>
-      <td><img src="https://user-images.githubusercontent.com/15864336/94494352-9924d100-01b4-11eb-9c0f-54c88868331b.png" alt="meedu_player" width="300" /></td>     
+      <td><img src="https://zezo357.github.io/flutter_meedu_videoplayer/assets/playing_video.png" alt="meedu_player" width="300" /></td>     
     </tr>  
   </tbody>
 </table>
@@ -82,7 +82,7 @@ sudo dnf install vlc-devel
 
 
 
-👋 👉 <b>[Complete documentation here](https://player.meedu.app)</b>
+👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_videoplayer/)</b>
 
 
 

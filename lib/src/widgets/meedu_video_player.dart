@@ -100,17 +100,33 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                           print("Fit is ${widget.controller.videoFit.value}");
                           // print(
                           //     "constraints.maxWidth ${constraints.maxWidth}");
+                          // print(
+                          //     "width ${_.videoPlayerController?.value.size.width}");
+                          // print(
+                          //     "videoPlayerController ${_.videoPlayerController}");
                           return Positioned.fill(
                             child: FittedBox(
                               // clipBehavior: Clip.hardEdge,
                               fit: widget.controller.videoFit.value,
                               child: SizedBox(
                                 width: _.videoPlayerController != null
-                                    ? _.videoPlayerController!.value.size.width
+                                    ? _.videoPlayerController!.value.size
+                                                .width !=
+                                            0
+                                        ? _.videoPlayerController!.value.size
+                                            .width
+                                        : 640
                                     : 640,
                                 height: _.videoPlayerController != null
-                                    ? _.videoPlayerController!.value.size.height
+                                    ? _.videoPlayerController!.value.size
+                                                .height !=
+                                            0
+                                        ? _.videoPlayerController!.value.size
+                                            .height
+                                        : 480
                                     : 480,
+                                // width: 640,
+                                // height: 480,
                                 child: _.videoPlayerController != null
                                     ? VideoPlayer(_.videoPlayerController!)
                                     : Container(),
