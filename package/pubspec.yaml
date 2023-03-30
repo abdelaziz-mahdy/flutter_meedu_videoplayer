@@ -69,7 +69,7 @@ flutter:
         pluginClass: FlutterMeeduVideoplayerPlugin
       web:
         pluginClass: FlutterMeeduVideoplayerPlugin
-        fileName: meedu_player.dart
+        fileName: meedu_player_web.dart
       # web:
       #   pluginClass: FlutterMeeduVideoplayerPlugin
       #web:

@@ -1,3 +1,7 @@
+## 4.0.7
+
+* Fixed web build errors.
+  
 ## 4.0.6
 
 * Fixing pub points by using new video_player_media_kit.
