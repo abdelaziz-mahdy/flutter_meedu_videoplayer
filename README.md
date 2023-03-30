@@ -1,8 +1,8 @@
 # flutter_meedu_videoplayer
 
-### Cross-platform video player (macos not included)
+### Cross-platform video player
 - For Android, Ios and Web we are using video player
-- For Windows and Linux we are using dart-vlc.
+- For Windows and Linux and macos we are using media_kit.
 <table>
   <caption><h4>Demo</h4></caption>
   <tbody>
@@ -46,39 +46,33 @@ void main() {
 ```
 
 
-## Setup
+# Setup
 
 ### Windows
 
-Everything is already set up.
+Everything ready.
 
 ### Linux
 
-For using this plugin on Linux, you must have [VLC](https://www.videolan.org) & [libVLC](https://www.videolan.org/vlc/libvlc.html) installed.
+System shared libraries from distribution specific user-installed packages are used by-default. You can install these as follows.
 
-**On Ubuntu/Debian:**
-
-```bash
-sudo apt-get install vlc
-```
+#### Ubuntu / Debian
 
 ```bash
-sudo apt-get install libvlc-dev
+sudo apt install libmpv-dev mpv
 ```
 
-**On Fedora:**
+#### Packaging
 
-```bash
-sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-```
+There are other ways to bundle these within your app package e.g. within Snap or Flatpak. Few examples:
 
-```bash
-sudo dnf install vlc
-```
+- [Celluloid](https://github.com/celluloid-player/celluloid/blob/master/flatpak/io.github.celluloid_player.Celluloid.json)
+- [VidCutter](https://github.com/ozmartian/vidcutter/tree/master/_packaging)
 
-```bash
-sudo dnf install vlc-devel
-```
+### macOS
+
+Everything ready.
+
 
 
 
