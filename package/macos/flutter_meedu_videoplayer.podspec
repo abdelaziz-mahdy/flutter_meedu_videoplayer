@@ -1,13 +1,13 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
-# Run `pod lib lint package.podspec` to validate before publishing.
+# Run `pod lib lint flutter_meedu_videoplayer.podspec` to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'package'
+  s.name             = 'flutter_meedu_videoplayer'
   s.version          = '0.0.1'
-  s.summary          = 'A new Flutter plugin project.'
+  s.summary          = 'A new Flutter project.'
   s.description      = <<-DESC
-A new Flutter plugin project.
+A new Flutter project.
                        DESC
   s.homepage         = 'http://example.com'
   s.license          = { :file => '../LICENSE' }
