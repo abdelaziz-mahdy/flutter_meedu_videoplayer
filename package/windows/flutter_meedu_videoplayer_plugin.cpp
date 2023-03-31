@@ -1,4 +1,4 @@
-#include "include/flutter_meedu_videoplayer/flutter_meedu_videoplayer_plugin.h"
+#include "flutter_meedu_videoplayer_plugin.h"
 
 // This must be included before many other Windows headers.
 #include <windows.h>
@@ -10,26 +10,10 @@
 #include <flutter/plugin_registrar_windows.h>
 #include <flutter/standard_method_codec.h>
 
-#include <map>
 #include <memory>
 #include <sstream>
 
-namespace {
-
-class FlutterMeeduVideoplayerPlugin : public flutter::Plugin {
- public:
-  static void RegisterWithRegistrar(flutter::PluginRegistrarWindows *registrar);
-
-  FlutterMeeduVideoplayerPlugin();
-
-  virtual ~FlutterMeeduVideoplayerPlugin();
-
- private:
-  // Called when a method is called on this plugin's channel from Dart.
-  void HandleMethodCall(
-      const flutter::MethodCall<flutter::EncodableValue> &method_call,
-      std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result);
-};
+namespace flutter_meedu_videoplayer {
 
 // static
 void FlutterMeeduVideoplayerPlugin::RegisterWithRegistrar(
@@ -72,11 +56,4 @@ void FlutterMeeduVideoplayerPlugin::HandleMethodCall(
   }
 }
 
-}  // namespace
-
-void FlutterMeeduVideoplayerPluginRegisterWithRegistrar(
-    FlutterDesktopPluginRegistrarRef registrar) {
-  FlutterMeeduVideoplayerPlugin::RegisterWithRegistrar(
-      flutter::PluginRegistrarManager::GetInstance()
-          ->GetRegistrar<flutter::PluginRegistrarWindows>(registrar));
-}
+}  // namespace flutter_meedu_videoplayer
