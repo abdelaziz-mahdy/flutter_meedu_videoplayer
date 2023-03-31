@@ -35,7 +35,16 @@ dependencies:
   # dio: ^5.0.0
   # dio_smart_retry: ^5.0.0
   path_provider: ^2.0.6
-
+  media_kit: ^0.0.2
+  # For video rendering.
+  media_kit_video: ^0.0.2
+  # Enables support for higher number of concurrent instances. Optional.
+  media_kit_native_event_loop: ^1.0.1
+  # Pick based on your requirements / platform:
+  media_kit_libs_windows_video: ^1.0.1          # Windows package for video (& audio) native libraries.
+  media_kit_libs_ios_video: ^1.0.0              # iOS package for video (& audio) native libraries.
+  media_kit_libs_macos_video: ^1.0.0            # macOS package for video (& audio) native libraries.
+  media_kit_libs_linux: ^1.0.1                  # Linux dependency package.
 # dependency_overrides:
 #   media_kit:
 #     git:
