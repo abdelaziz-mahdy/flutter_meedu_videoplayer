@@ -18,6 +18,18 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter build apk --verbose
+  web:
+    name: Web
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "true"
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+      - run: flutter pub get
+      - run: flutter build web --verbose
   windows:
     name: Windows
     runs-on: windows-latest
