@@ -36,27 +36,27 @@ dependencies:
   # dio_smart_retry: ^5.0.0
   path_provider: ^2.0.6
 
-dependency_overrides:
-  media_kit:
-    git:
-      url: https://github.com/birros/media_kit
-      ref: fix/fix-darwin-libs
-      path: ./media_kit
-  media_kit_video:
-    git:
-      url: https://github.com/birros/media_kit
-      ref: fix/fix-darwin-libs
-      path: ./media_kit_video
-  media_kit_libs_macos_video:
-    git:
-      url: https://github.com/birros/media_kit
-      ref: fix/fix-darwin-libs
-      path: ./media_kit_libs_macos_video
-  media_kit_native_event_loop:
-    git:
-      url: https://github.com/birros/media_kit
-      ref: fix/fix-darwin-libs
-      path: ./media_kit_native_event_loop
+# dependency_overrides:
+#   media_kit:
+#     git:
+#       url: https://github.com/birros/media_kit
+#       ref: fix/fix-darwin-libs
+#       path: ./media_kit
+#   media_kit_video:
+#     git:
+#       url: https://github.com/birros/media_kit
+#       ref: fix/fix-darwin-libs
+#       path: ./media_kit_video
+#   media_kit_libs_macos_video:
+#     git:
+#       url: https://github.com/birros/media_kit
+#       ref: fix/fix-darwin-libs
+#       path: ./media_kit_libs_macos_video
+#   media_kit_native_event_loop:
+#     git:
+#       url: https://github.com/birros/media_kit
+#       ref: fix/fix-darwin-libs
+#       path: ./media_kit_native_event_loop
 
 
 dev_dependencies:
