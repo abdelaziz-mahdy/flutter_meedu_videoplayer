@@ -35,7 +35,7 @@ class FullscreenButton extends StatelessWidget {
               if (UniversalPlatform.isWeb) {
                 _.screenManager.setWebFullScreen(false, _);
               } else {
-                if (_.windows) {
+                if (_.desktopOrWeb) {
                   _.screenManager.setWindowsFullScreen(false, _);
                 } else {
                   Navigator.pop(context);
@@ -45,7 +45,7 @@ class FullscreenButton extends StatelessWidget {
               if (UniversalPlatform.isWeb) {
                 _.screenManager.setWebFullScreen(true, _);
               } else {
-                if (_.windows) {
+                if (_.desktopOrWeb) {
                   _.screenManager.setWindowsFullScreen(true, _);
                 } else {
                   _.goToFullscreen(context);

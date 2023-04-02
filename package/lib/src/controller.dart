@@ -176,8 +176,14 @@ class MeeduPlayerController {
   Rx<bool> get closedCaptionEnabled => _closedCaptionEnabled;
   Stream<bool> get onClosedCaptionEnabledChanged =>
       _closedCaptionEnabled.stream;
+  
+  /// for defining that video player is working on desktop or web
+  bool desktopOrWeb = false;
+  
+  /// controls if widgets inside videoplayer should get focus or not
+  final bool excludeFocus;
 
-  bool windows = false;
+  ///if the player should use wakelock
   bool manageWakeLock = true;
 
   /// [isInPipMode] is true if pip mode is enabled
@@ -211,6 +217,7 @@ class MeeduPlayerController {
     Widget? loadingWidget,
     this.controlsEnabled = true,
     this.manageWakeLock = true,
+    this.excludeFocus=true,
     String? errorText,
     this.controlsStyle = ControlsStyle.primary,
     this.header,
@@ -242,10 +249,10 @@ class MeeduPlayerController {
         UniversalPlatform.isLinux ||
         UniversalPlatform.isMacOS ||
         UniversalPlatform.isWeb) {
-      windows = true;
+      desktopOrWeb = true;
     }
     //check each
-    if (!windows) {
+    if (!desktopOrWeb) {
       VolumeController().listener((newVolume) {
         volume.value = newVolume;
       });
@@ -550,7 +557,7 @@ class MeeduPlayerController {
   }
 
   Future<void> getCurrentBrightness() async {
-    if (!windows) {
+    if (!desktopOrWeb) {
       try {
         _currentBrightness.value = await ScreenBrightness().current;
       } catch (e) {
@@ -563,7 +570,7 @@ class MeeduPlayerController {
   }
 
   Future<void> getCurrentVolume() async {
-    if (windows) {
+    if (desktopOrWeb) {
       _currentVolume.value = _videoPlayerController?.value.volume ?? 0;
     } else {
       try {
@@ -578,7 +585,7 @@ class MeeduPlayerController {
   }
 
   Future<void> setBrightness(double brightnes) async {
-    if (!windows) {
+    if (!desktopOrWeb) {
       try {
         brightness.value = brightnes;
         ScreenBrightness().setScreenBrightness(brightnes);
@@ -597,7 +604,7 @@ class MeeduPlayerController {
       {bool videoPlayerVolume = false}) async {
     if (volumeNew >= 0.0 && volumeNew <= 1.0) {
       volume.value = volumeNew;
-      if (windows || videoPlayerVolume) {
+      if (desktopOrWeb || videoPlayerVolume) {
         print("volume is $volumeNew");
         await _videoPlayerController?.setVolume(volumeNew);
         volumeUpdated();
@@ -622,7 +629,7 @@ class MeeduPlayerController {
   }
 
   Future<void> resetBrightness() async {
-    if (!windows) {
+    if (!desktopOrWeb) {
       try {
         await ScreenBrightness().resetScreenBrightness();
       } catch (e) {
@@ -650,7 +657,7 @@ class MeeduPlayerController {
   /// create a tasks to hide controls after certain time
   void _hideTaskControls() {
     //print("_hideTaskControls called");
-    if (windows) {
+    if (desktopOrWeb) {
       _timer = Timer(const Duration(seconds: 2), () {
         controls = false;
         //_timer = null;
@@ -677,7 +684,7 @@ class MeeduPlayerController {
       if (UniversalPlatform.isWeb) {
         screenManager.setWebFullScreen(true, this);
       } else {
-        if (windows) {
+        if (desktopOrWeb) {
           screenManager.setWindowsFullScreen(true, this);
         } else {
           screenManager.setFullScreenOverlaysAndOrientations();
@@ -722,7 +729,7 @@ class MeeduPlayerController {
       seekTo: seekTo,
     );
 
-    if (!windows) {
+    if (!desktopOrWeb) {
       getUserPreferenceForBrightness();
     }
     await goToFullscreen(context, disposePlayer: true);
@@ -851,7 +858,7 @@ class MeeduPlayerController {
     if (UniversalPlatform.isWeb) {
       screenManager.setWebFullScreen(false, this);
     } else {
-      if (windows) {
+      if (desktopOrWeb) {
         screenManager.setWindowsFullScreen(false, this);
       } else {
         screenManager.setDefaultOverlaysAndOrientations();

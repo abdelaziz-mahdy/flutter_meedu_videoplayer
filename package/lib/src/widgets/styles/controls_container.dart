@@ -73,7 +73,7 @@ class ControlsContainer extends StatelessWidget {
 
   void _showRewindAndForward(
       int index, MeeduPlayerController controller) async {
-    if (controller.windows) {
+    if (controller.desktopOrWeb) {
       controller.screenManager
           .setWindowsFullScreen(!controller.fullscreen.value, controller);
     } else {
@@ -327,7 +327,7 @@ class ControlsContainer extends StatelessWidget {
         ),
       ),
       RxBuilder((__) {
-        if (_.windows) {
+        if (_.desktopOrWeb) {
           return MouseRegion(
               cursor: _.showControls.value
                   ? SystemMouseCursors.basic
@@ -466,7 +466,7 @@ class ControlsContainer extends StatelessWidget {
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (_.windows) {
+        if (_.desktopOrWeb) {
           if (_.doubleTapCount.value != 0 || tappedTwice) {
             _rewind(_);
             tappedOnce(_, true);
@@ -478,7 +478,7 @@ class ControlsContainer extends StatelessWidget {
         _dragInitialDelta = Offset.zero;
       },
       onHorizontalDragUpdate: (DragUpdateDetails details) {
-        if (!_.windows) {
+        if (!_.desktopOrWeb) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           //return;
           //}
@@ -506,7 +506,7 @@ class ControlsContainer extends StatelessWidget {
         //_.videoPlayerController!.seekTo(position);
       },
       onHorizontalDragEnd: (DragEndDetails details) {
-        if (!_.windows) {
+        if (!_.desktopOrWeb) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           //return;
           //}
@@ -515,7 +515,7 @@ class ControlsContainer extends StatelessWidget {
         }
       },
       onVerticalDragUpdate: (DragUpdateDetails details) {
-        if (!_.windows) {
+        if (!_.desktopOrWeb) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           //return;
           //}
@@ -535,7 +535,7 @@ class ControlsContainer extends StatelessWidget {
                 _dragInitialDelta = delta;
                 //print("right");
               } else {
-                if (!_.windows) {
+                if (!_.desktopOrWeb) {
                   _brightnessDragStart(position, _);
                 }
                 _dragInitialDelta = delta;
@@ -551,7 +551,7 @@ class ControlsContainer extends StatelessWidget {
               if (isVolume) {
                 _volumeDragUpdate(position, _);
               } else {
-                if (!_.windows) {
+                if (!_.desktopOrWeb) {
                   _brightnessDragUpdate(position, _);
                 }
               }
@@ -561,7 +561,7 @@ class ControlsContainer extends StatelessWidget {
         //_.videoPlayerController!.seekTo(position);
       },
       onVerticalDragEnd: (DragEndDetails details) {
-        if (!_.windows) {
+        if (!_.desktopOrWeb) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           // return;
           //}
@@ -569,7 +569,7 @@ class ControlsContainer extends StatelessWidget {
           if (isVolume) {
             _volumeDragEnd(_);
           } else {
-            if (!_.windows) {
+            if (!_.desktopOrWeb) {
               _brightnessDragEnd(_);
             }
           }

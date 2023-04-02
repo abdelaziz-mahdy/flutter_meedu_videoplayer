@@ -3,7 +3,10 @@
 * screenManager
   * edgetoedge now is systemUiMode and is using SystemUiMode enum
   * added hideSystemOverlay option to enable and disable hiding system overlays
-* 
+* MeeduPlayerController 
+  * variable windows to desktopOrWeb 
+  * added excludeFocus variable (controls if widgets inside videoplayer should get focus or not)
+* Updated License
   
 
 ## 4.0.8

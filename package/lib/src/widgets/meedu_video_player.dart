@@ -88,6 +88,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                   }
 
                   return ExcludeFocus(
+                    excluding: _.excludeFocus,
                     child: Stack(
                       // clipBehavior: Clip.hardEdge,
                       // fit: StackFit.loose,
