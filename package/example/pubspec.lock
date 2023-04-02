@@ -629,10 +629,10 @@ packages:
     dependency: transitive
     description:
       name: video_player_media_kit
-      sha256: e4b6d962965f19417fab0d600b73f68b25292eeb687fa2ccacae44e99b363fdd
+      sha256: "7f0e78c96e9d9e333ec2bac2f4e3546e66ed768ba6e1f684897e5a1c76cb9cf2"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.4"
   video_player_platform_interface:
     dependency: transitive
     description:
