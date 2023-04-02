@@ -37,7 +37,7 @@ class ScreenManager {
 
   Future<void> setWindowsFullScreen(bool state, MeeduPlayerController _) async {
     _.fullscreen.value = state;
-    //print(await windowManager.isFullScreen());
+    //customDebugPrint(await windowManager.isFullScreen());
     await windowManager.ensureInitialized();
     //await windowManager.setFullScreen(state);
 
@@ -63,7 +63,7 @@ class ScreenManager {
             systemUiMode ?? SystemUiMode.immersive,
             overlays: overlays);
       } else {
-        //print("Closed2");
+        //customDebugPrint("Closed2");
         await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
             overlays: []);
       }

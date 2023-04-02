@@ -187,13 +187,20 @@ class MeeduPlayerController {
   final bool excludeFocus;
 
   ///if the player should use wakelock
-  bool manageWakeLock = true;
+  final bool manageWakeLock;
+
+  /// if the player should manage Brightness
+  final bool manageBrightness;
+
+  /// if the player should show Logs
+  final bool showLogs;
 
   /// [isInPipMode] is true if pip mode is enabled
   //Rx<bool> get isInPipMode => _pipManager.isInPipMode;
   //Stream<bool?> get onPipModeChanged => _pipManager.isInPipMode.stream;
 
   Rx<bool> isBuffering = false.obs;
+
   SharedPreferences? prefs;
 
   /// returns the os version
@@ -220,6 +227,9 @@ class MeeduPlayerController {
     Widget? loadingWidget,
     this.controlsEnabled = true,
     this.manageWakeLock = true,
+    this.manageBrightness = true,
+    //TODOOOOOOO:
+    this.showLogs = true,
     this.excludeFocus = true,
     String? errorText,
     this.controlsStyle = ControlsStyle.primary,
@@ -240,6 +250,9 @@ class MeeduPlayerController {
     this.enabledControls = const EnabledControls(),
     this.onVideoPlayerClosed,
   }) {
+    if (!manageBrightness) {
+      enabledControls = enabledControls.copyWith(brightnessSwipes: false);
+    }
     getUserPreferenceForFit();
 
     _errorText = errorText;
@@ -256,7 +269,7 @@ class MeeduPlayerController {
       desktopOrWeb = true;
     }
     //check each
-    if (!desktopOrWeb) {
+    if (!desktopOrWeb && enabledControls.volumeSwipes) {
       VolumeController().listener((newVolume) {
         volume.value = newVolume;
       });
@@ -315,12 +328,18 @@ class MeeduPlayerController {
     return tmp;
   }
 
+  void customDebugPrint(Object? object) {
+    if (showLogs) {
+      print(object);
+    }
+  }
+
   /// initialize the video_player controller and load the data source
   Future _initializePlayer({
     Duration seekTo = Duration.zero,
   }) async {
     if (seekTo != Duration.zero) {
-      print("Called seek function to$seekTo");
+      customDebugPrint("Called seek function to$seekTo");
       await this.seekTo(seekTo);
     }
 
@@ -407,7 +426,7 @@ class MeeduPlayerController {
       }
 
       // set the video duration
-      print("Duration is ${_videoPlayerController!.value.duration}");
+      customDebugPrint("Duration is ${_videoPlayerController!.value.duration}");
       _duration.value = _videoPlayerController!.value.duration;
 
       /// notify that video was loaded
@@ -417,8 +436,8 @@ class MeeduPlayerController {
       // listen the video player events
       _videoPlayerController!.addListener(_listener);
     } catch (e, s) {
-      print(e);
-      print(s);
+      customDebugPrint(e);
+      customDebugPrint(s);
       _errorText ??= _videoPlayerController!.value.errorDescription ?? "$e";
       dataStatus.status.value = DataStatus.error;
     }
@@ -458,7 +477,8 @@ class MeeduPlayerController {
       position = Duration.zero;
     }
     _position.value = position;
-    print("duration in seek function is ${duration.value.toString()}");
+    customDebugPrint(
+        "duration in seek function is ${duration.value.toString()}");
     if (duration.value.inSeconds != 0) {
       await _videoPlayerController?.seekTo(position);
 
@@ -470,7 +490,7 @@ class MeeduPlayerController {
       _timerForSeek =
           Timer.periodic(const Duration(milliseconds: 200), (Timer t) async {
         //_timerForSeek = null;
-        print("SEEK CALLED");
+        customDebugPrint("SEEK CALLED");
         if (duration.value.inSeconds != 0) {
           await _videoPlayerController?.seekTo(position);
 
@@ -561,11 +581,11 @@ class MeeduPlayerController {
   }
 
   Future<void> getCurrentBrightness() async {
-    if (!desktopOrWeb) {
+    if (!desktopOrWeb && manageBrightness) {
       try {
         _currentBrightness.value = await ScreenBrightness().current;
       } catch (e) {
-        print(e);
+        customDebugPrint(e);
         throw 'Failed to get current brightness';
         //return 0;
       }
@@ -580,7 +600,7 @@ class MeeduPlayerController {
       try {
         _currentVolume.value = await VolumeController().getVolume();
       } catch (e) {
-        print("currentVolume $e");
+        customDebugPrint("currentVolume $e");
         //throw 'Failed to get current brightness';
         //return 0;
       }
@@ -589,13 +609,16 @@ class MeeduPlayerController {
   }
 
   Future<void> setBrightness(double brightnes) async {
+    if (!manageBrightness) {
+      return;
+    }
     if (!desktopOrWeb) {
       try {
         brightness.value = brightnes;
         ScreenBrightness().setScreenBrightness(brightnes);
         setUserPreferenceForBrightness();
       } catch (e) {
-        print(e);
+        customDebugPrint(e);
         throw 'Failed to set brightness';
       }
     }
@@ -609,14 +632,14 @@ class MeeduPlayerController {
     if (volumeNew >= 0.0 && volumeNew <= 1.0) {
       volume.value = volumeNew;
       if (desktopOrWeb || videoPlayerVolume) {
-        print("volume is $volumeNew");
+        customDebugPrint("volume is $volumeNew");
         await _videoPlayerController?.setVolume(volumeNew);
         volumeUpdated();
       } else {
         try {
           VolumeController().setVolume(volumeNew, showSystemUI: false);
         } catch (_) {
-          print(_);
+          customDebugPrint(_);
         }
       }
     }
@@ -633,11 +656,14 @@ class MeeduPlayerController {
   }
 
   Future<void> resetBrightness() async {
+    if (!manageBrightness) {
+      return;
+    }
     if (!desktopOrWeb) {
       try {
         await ScreenBrightness().resetScreenBrightness();
       } catch (e) {
-        print(e);
+        customDebugPrint(e);
         throw 'Failed to reset brightness';
       }
     }
@@ -645,12 +671,12 @@ class MeeduPlayerController {
 
   /// show or hide the player controls
   set controls(bool visible) {
-    //print("controls called");
+    //customDebugPrint("controls called");
     if (fullscreen.value) {
-      //print("Closed");
+      //customDebugPrint("Closed");
       screenManager.setOverlays(visible);
     }
-    //print(visible);
+    //customDebugPrint(visible);
     _showControls.value = visible;
     _timer?.cancel();
     if (visible) {
@@ -660,7 +686,7 @@ class MeeduPlayerController {
 
   /// create a tasks to hide controls after certain time
   void _hideTaskControls() {
-    //print("_hideTaskControls called");
+    //customDebugPrint("_hideTaskControls called");
     if (desktopOrWeb) {
       _timer = Timer(const Duration(seconds: 2), () {
         controls = false;
@@ -671,7 +697,7 @@ class MeeduPlayerController {
       });
     } else {
       _timer = Timer(const Duration(seconds: 5), () {
-        print("hidden");
+        customDebugPrint("hidden");
         controls = false;
         //_timer = null;
         swipeDuration.value = 0;
@@ -733,7 +759,7 @@ class MeeduPlayerController {
       seekTo: seekTo,
     );
 
-    if (!desktopOrWeb) {
+    if (!desktopOrWeb && manageBrightness) {
       getUserPreferenceForBrightness();
     }
     await goToFullscreen(context, disposePlayer: true);
@@ -780,7 +806,7 @@ class MeeduPlayerController {
     prefs = await SharedPreferences.getInstance();
     String fitValue = (prefs?.getString('fit')) ?? "fill";
     _videoFit.value = fits.firstWhere((element) => element.name == fitValue);
-    print("Last fit used was ${_videoFit.value.name}");
+    customDebugPrint("Last fit used was ${_videoFit.value.name}");
   }
 
   Future<void> setUserPreferenceForBrightness() async {
@@ -792,7 +818,7 @@ class MeeduPlayerController {
     prefs = await SharedPreferences.getInstance();
     double BrightnessValue = (prefs?.getDouble('brightness')) ?? 0.5;
     setBrightness(BrightnessValue);
-    print("Last Brightness used was $BrightnessValue");
+    customDebugPrint("Last Brightness used was $BrightnessValue");
   }
 
   /// Toggle Change the videofit accordingly
@@ -804,9 +830,9 @@ class MeeduPlayerController {
     } else {
       _videoFit.value = fits[0];
     }
-    print(_videoFit.value);
+    customDebugPrint(_videoFit.value);
     videoFitChangedTimer = Timer(const Duration(seconds: 1), () {
-      print("hidden videoFit Changed");
+      customDebugPrint("hidden videoFit Changed");
       //videoFitChangedTimer = null;
       videoFitChanged.value = false;
       setUserPreferenceForFit();
@@ -855,7 +881,7 @@ class MeeduPlayerController {
     }
   }*/
   Future<void> onFullscreenClose() async {
-    print("Fullscreen Closed");
+    customDebugPrint("Fullscreen Closed");
     fullscreen.value = false;
     resetBrightness();
 
@@ -871,7 +897,7 @@ class MeeduPlayerController {
   }
 
   Future<void> videoPlayerClosed() async {
-    print("Video player closed");
+    customDebugPrint("Video player closed");
     await onFullscreenClose();
 
     _timer?.cancel();
@@ -894,10 +920,10 @@ class MeeduPlayerController {
 
       //disposeVideoPlayerController();
       if (onVideoPlayerClosed != null) {
-        print("Called");
+        customDebugPrint("Called");
         onVideoPlayerClosed!();
       } else {
-        print("Didnt get Called");
+        customDebugPrint("Didnt get Called");
       }
     });
   }

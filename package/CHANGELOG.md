@@ -2,18 +2,20 @@
 
 * screenManager
   * edgetoedge now is systemUiMode and is using SystemUiMode enum
-  * added hideSystemOverlay option to enable and disable hiding system overlays
+  * Added hideSystemOverlay option to enable and disable hiding system overlays
 * MeeduPlayerController 
-  * variable windows to desktopOrWeb 
-  * added excludeFocus variable (controls if widgets inside videoplayer should get focus or not)
-  * added enabledControls in which gesture controls can be disabled 
-    * default 
-      * EnabledControls({
-            this.seekSwipes = true,
-            this.volumeSwipes=true,
-            this.doubleTapToSeek=true,
-            this.desktopDoubleTapToFullScreen=true
-        });
+  * Variable windows to desktopOrWeb 
+  * Added excludeFocus variable (controls if widgets inside videoplayer should get focus or not)
+  * Added enabledControls in which gesture controls can be disabled 
+    * Defaults
+      * this.seekSwipes = true
+      * this.volumeSwipes=true
+      * this.doubleTapToSeek=true
+      * this.desktopDoubleTapToFullScreen=true
+  * Added showLogs to be able to show and hide package logs
+  * Added manageBrightness to make disable handling of brightness
+* Fixed replay
+
 * Updated License
 
   

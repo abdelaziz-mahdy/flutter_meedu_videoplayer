@@ -59,7 +59,8 @@ class ControlsContainer extends StatelessWidget {
       _.controls = !_.showControls.value;
       _tappedOnce?.cancel();
       _tappedOnce = Timer(const Duration(milliseconds: 300), () {
-        print("_____________________hidden here 0____________________________");
+        _.customDebugPrint(
+            "_____________________hidden here 0____________________________");
         tappedTwice = false;
         //_dragInitialDelta = Offset.zero;
       });
@@ -102,7 +103,7 @@ class ControlsContainer extends StatelessWidget {
         playing = controller.playerStatus.playing;
         controller.videoSeekToNextSeconds(
             _defaultSeekAmount * controller.doubleTapCount.value, playing);
-        print("tapped is false here");
+        controller.customDebugPrint("tapped is false here");
         tappedTwice = false;
         controller.rewindIcons.value = false;
         controller.forwardIcons.value = false;
@@ -143,9 +144,9 @@ class ControlsContainer extends StatelessWidget {
         volume <= 1 &&
         differenceOfExists((controller.volume.value * 100).round(),
             (volume * 100).round(), 2)) {
-      print("Volume$volume");
-      //print("current ${(controller.volume.value*100).round()}");
-      //print("new ${(volume*100).round()}");
+      controller.customDebugPrint("Volume$volume");
+      //customDebugPrint("current ${(controller.volume.value*100).round()}");
+      //customDebugPrint("new ${(volume*100).round()}");
       controller.setVolume(volume);
     }
   }
@@ -172,13 +173,13 @@ class ControlsContainer extends StatelessWidget {
         valueToCompareTo == 0 ||
         valueToCompareTo == 100;
     bool minus = originalValue - difference > valueToCompareTo;
-    //print("originalValue"+(originalValue).toString());
-    //print("valueToCompareTo"+(valueToCompareTo).toString());
-    //print("originalValue+difference"+(originalValue+difference).toString());
-    //print("originalValue-difference"+(originalValue-difference).toString());
-    //print("plus "+plus.toString());
-    //print("minus "+minus.toString());
-    //print("______________________________________");
+    //customDebugPrint("originalValue"+(originalValue).toString());
+    //customDebugPrint("valueToCompareTo"+(valueToCompareTo).toString());
+    //customDebugPrint("originalValue+difference"+(originalValue+difference).toString());
+    //customDebugPrint("originalValue-difference"+(originalValue-difference).toString());
+    //customDebugPrint("plus "+plus.toString());
+    //customDebugPrint("minus "+minus.toString());
+    //customDebugPrint("______________________________________");
     if (plus || minus) {
       return true;
     } else {
@@ -190,14 +191,14 @@ class ControlsContainer extends StatelessWidget {
       Offset globalPosition, MeeduPlayerController controller) {
     double diff = _verticalDragStartOffset.dy - globalPosition.dy;
     double brightness = (diff / 500) + _onDragStartBrightness;
-    //print("New");
-    //print((controller.brightness.value*100).round());
-    //print((brightness*100).round());
+    //customDebugPrint("New");
+    //customDebugPrint((controller.brightness.value*100).round());
+    //customDebugPrint((brightness*100).round());
     if (brightness >= 0 &&
         brightness <= 1 &&
         differenceOfExists((controller.brightness.value * 100).round(),
             (brightness * 100).round(), 2)) {
-      print("brightness $brightness");
+      controller.customDebugPrint("brightness $brightness");
       //brightness
       controller.setBrightness(brightness);
     }
@@ -236,17 +237,17 @@ class ControlsContainer extends StatelessWidget {
         ),
         forward: GestureDetector(
           onTap: () {
-            //print("0 " + tappedTwice.toString());
+            //customDebugPrint("0 " + tappedTwice.toString());
 
             if (_.doubleTapCount.value != 0 || tappedTwice) {
               _forward(_);
-              //print("if");
+              //customDebugPrint("if");
               tappedOnce(_, true);
             } else {
-              //print("else");
-              //print("1 " + tappedTwice.toString());
+              //customDebugPrint("else");
+              //customDebugPrint("1 " + tappedTwice.toString());
               tappedOnce(_, false);
-              //print("2 " + tappedTwice.toString());
+              //customDebugPrint("2 " + tappedTwice.toString());
             }
           },
           //behavior: HitTestBehavior.,
@@ -333,7 +334,7 @@ class ControlsContainer extends StatelessWidget {
                   ? SystemMouseCursors.basic
                   : SystemMouseCursors.none,
               onHover: (___) {
-                //print(___.delta);
+                //customDebugPrint(___.delta);
                 if (_.mouseMoveInitial < const Offset(75, 75).distance) {
                   _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
                 } else {
@@ -472,7 +473,7 @@ class ControlsContainer extends StatelessWidget {
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (_.desktopOrWeb&& _.enabledControls.desktopDoubleTapToFullScreen) {
+        if (_.desktopOrWeb && _.enabledControls.desktopDoubleTapToFullScreen) {
           if (_.doubleTapCount.value != 0 || tappedTwice) {
             _rewind(_);
             tappedOnce(_, true);
@@ -500,7 +501,7 @@ class ControlsContainer extends StatelessWidget {
               _forwardDragStart(position, _);
               _dragInitialDelta = delta;
             } else {
-              print("##############out###############");
+              _.customDebugPrint("##############out###############");
               gettingNotification = true;
             }
           }
@@ -512,7 +513,7 @@ class ControlsContainer extends StatelessWidget {
         //_.videoPlayerController!.seekTo(position);
       },
       onHorizontalDragEnd: (DragEndDetails details) {
-        if (!_.desktopOrWeb&& _.enabledControls.seekSwipes) {
+        if (!_.desktopOrWeb && _.enabledControls.seekSwipes) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           //return;
           //}
@@ -521,7 +522,7 @@ class ControlsContainer extends StatelessWidget {
         }
       },
       onVerticalDragUpdate: (DragUpdateDetails details) {
-        if (!_.desktopOrWeb&& _.enabledControls.volumeSwipes) {
+        if (!_.desktopOrWeb) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           //return;
           //}
@@ -529,7 +530,7 @@ class ControlsContainer extends StatelessWidget {
 
           final Offset position = details.localPosition;
           if (_dragInitialDelta == Offset.zero) {
-            print(details.globalPosition.dy);
+            _.customDebugPrint(details.globalPosition.dy);
             if (details.globalPosition.dy > responsive.height * 0.1 &&
                 ((responsive.height - details.globalPosition.dy) >
                     responsive.height * 0.1) &&
@@ -539,25 +540,25 @@ class ControlsContainer extends StatelessWidget {
               if (details.globalPosition.dx >= responsive.width / 2) {
                 _volumeDragStart(position, _);
                 _dragInitialDelta = delta;
-                //print("right");
+                //customDebugPrint("right");
               } else {
                 if (!_.desktopOrWeb) {
                   _brightnessDragStart(position, _);
                 }
                 _dragInitialDelta = delta;
-                //print("left");
+                //customDebugPrint("left");
               }
             } else {
-              print("out");
+              _.customDebugPrint("out");
               gettingNotification = true;
             }
             //}
           } else {
             if (!gettingNotification) {
-              if (isVolume) {
+              if (isVolume && _.enabledControls.volumeSwipes) {
                 _volumeDragUpdate(position, _);
               } else {
-                if (!_.desktopOrWeb) {
+                if (!_.desktopOrWeb && _.enabledControls.brightnessSwipes) {
                   _brightnessDragUpdate(position, _);
                 }
               }
@@ -567,15 +568,15 @@ class ControlsContainer extends StatelessWidget {
         //_.videoPlayerController!.seekTo(position);
       },
       onVerticalDragEnd: (DragEndDetails details) {
-        if (!_.desktopOrWeb&& _.enabledControls.volumeSwipes) {
+        if (!_.desktopOrWeb) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           // return;
           //}
           gettingNotification = false;
-          if (isVolume) {
+          if (isVolume && _.enabledControls.volumeSwipes) {
             _volumeDragEnd(_);
           } else {
-            if (!_.desktopOrWeb) {
+            if (!_.desktopOrWeb && _.enabledControls.brightnessSwipes) {
               _brightnessDragEnd(_);
             }
           }

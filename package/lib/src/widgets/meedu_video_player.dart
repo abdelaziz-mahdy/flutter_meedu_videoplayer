@@ -16,7 +16,7 @@ class LoggingActionDispatcher extends ActionDispatcher {
     covariant Intent intent, [
     BuildContext? context,
   ]) {
-    print('Action invoked: $action($intent) from $context');
+    // customDebugPrint('Action invoked: $action($intent) from $context');
     super.invokeAction(action, intent, context);
 
     return null;
@@ -98,12 +98,13 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                             //observables: [_.videoFit],
                             (__) {
                           _.dataStatus.status.value;
-                          print("Fit is ${widget.controller.videoFit.value}");
-                          // print(
+                          _.customDebugPrint(
+                              "Fit is ${widget.controller.videoFit.value}");
+                          // customDebugPrint(
                           //     "constraints.maxWidth ${constraints.maxWidth}");
-                          // print(
+                          // customDebugPrint(
                           //     "width ${_.videoPlayerController?.value.size.width}");
-                          // print(
+                          // customDebugPrint(
                           //     "videoPlayerController ${_.videoPlayerController}");
                           return Positioned.fill(
                             child: FittedBox(
