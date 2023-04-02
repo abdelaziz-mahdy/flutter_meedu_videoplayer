@@ -96,7 +96,7 @@ flutter:
         pluginClass: FlutterMeeduVideoplayerPluginCApi
       web:
         pluginClass: FlutterMeeduVideoplayerWeb
-        fileName: meedu_player.dart
+        fileName: flutter_meedu_videoplayer_web.dart
 
       # web:
       #   pluginClass: FlutterMeeduVideoplayerPlugin
