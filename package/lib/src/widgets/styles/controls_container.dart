@@ -439,6 +439,9 @@ class ControlsContainer extends StatelessWidget {
           responsive: responsive,
           rewind: GestureDetector(
             onTap: () {
+              if (!_.enabledControls.doubleTapToSeek) {
+                return;
+              }
               if (_.doubleTapCount.value != 0 || tappedTwice) {
                 _rewind(_);
                 tappedOnce(_, true);
@@ -449,6 +452,9 @@ class ControlsContainer extends StatelessWidget {
           ),
           forward: GestureDetector(
             onTap: () {
+              if (!_.enabledControls.doubleTapToSeek) {
+                return;
+              }
               if (_.doubleTapCount.value != 0 || tappedTwice) {
                 _forward(_);
                 tappedOnce(_, true);
@@ -466,7 +472,7 @@ class ControlsContainer extends StatelessWidget {
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (_.desktopOrWeb) {
+        if (_.desktopOrWeb&& _.enabledControls.desktopDoubleTapToFullScreen) {
           if (_.doubleTapCount.value != 0 || tappedTwice) {
             _rewind(_);
             tappedOnce(_, true);
@@ -478,7 +484,7 @@ class ControlsContainer extends StatelessWidget {
         _dragInitialDelta = Offset.zero;
       },
       onHorizontalDragUpdate: (DragUpdateDetails details) {
-        if (!_.desktopOrWeb) {
+        if (!_.desktopOrWeb && _.enabledControls.seekSwipes) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           //return;
           //}
@@ -506,7 +512,7 @@ class ControlsContainer extends StatelessWidget {
         //_.videoPlayerController!.seekTo(position);
       },
       onHorizontalDragEnd: (DragEndDetails details) {
-        if (!_.desktopOrWeb) {
+        if (!_.desktopOrWeb&& _.enabledControls.seekSwipes) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           //return;
           //}
@@ -515,7 +521,7 @@ class ControlsContainer extends StatelessWidget {
         }
       },
       onVerticalDragUpdate: (DragUpdateDetails details) {
-        if (!_.desktopOrWeb) {
+        if (!_.desktopOrWeb&& _.enabledControls.volumeSwipes) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           //return;
           //}
@@ -561,7 +567,7 @@ class ControlsContainer extends StatelessWidget {
         //_.videoPlayerController!.seekTo(position);
       },
       onVerticalDragEnd: (DragEndDetails details) {
-        if (!_.desktopOrWeb) {
+        if (!_.desktopOrWeb&& _.enabledControls.volumeSwipes) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           // return;
           //}

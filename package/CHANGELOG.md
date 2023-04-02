@@ -6,7 +6,16 @@
 * MeeduPlayerController 
   * variable windows to desktopOrWeb 
   * added excludeFocus variable (controls if widgets inside videoplayer should get focus or not)
+  * added enabledControls in which gesture controls can be disabled 
+    * default 
+      * EnabledControls({
+            this.seekSwipes = true,
+            this.volumeSwipes=true,
+            this.doubleTapToSeek=true,
+            this.desktopDoubleTapToFullScreen=true
+        });
 * Updated License
+
   
 
 ## 4.0.8

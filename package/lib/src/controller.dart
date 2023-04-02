@@ -27,6 +27,9 @@ class MeeduPlayerController {
   /// use this class to hide some buttons in the player
   EnabledButtons enabledButtons;
 
+  /// use this class to disable controls in the player
+  EnabledControls enabledControls;
+
   /// the playerStatus to notify the player events like paused,playing or stopped
   /// [playerStatus] has a [status] observable
   final MeeduPlayerStatus playerStatus = MeeduPlayerStatus();
@@ -176,10 +179,10 @@ class MeeduPlayerController {
   Rx<bool> get closedCaptionEnabled => _closedCaptionEnabled;
   Stream<bool> get onClosedCaptionEnabledChanged =>
       _closedCaptionEnabled.stream;
-  
+
   /// for defining that video player is working on desktop or web
   bool desktopOrWeb = false;
-  
+
   /// controls if widgets inside videoplayer should get focus or not
   final bool excludeFocus;
 
@@ -217,7 +220,7 @@ class MeeduPlayerController {
     Widget? loadingWidget,
     this.controlsEnabled = true,
     this.manageWakeLock = true,
-    this.excludeFocus=true,
+    this.excludeFocus = true,
     String? errorText,
     this.controlsStyle = ControlsStyle.primary,
     this.header,
@@ -234,6 +237,7 @@ class MeeduPlayerController {
     //this.showPipButton = false,
     this.customIcons = const CustomIcons(),
     this.enabledButtons = const EnabledButtons(),
+    this.enabledControls = const EnabledControls(),
     this.onVideoPlayerClosed,
   }) {
     getUserPreferenceForFit();
