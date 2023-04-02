@@ -3,7 +3,6 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  flutter_meedu_videoplayer
   fullscreen_window
   media_kit_video
   screen_brightness_windows
