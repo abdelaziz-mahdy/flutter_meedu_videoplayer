@@ -1,3 +1,8 @@
+## 4.0.8
+
+* Fixed macos&ios errors and added steps to readme for it
+
+
 ## 4.0.7
 
 * Fixed web build errors.
