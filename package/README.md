@@ -69,6 +69,8 @@ There are other ways to bundle these within your app package e.g. within Snap or
 - [Celluloid](https://github.com/celluloid-player/celluloid/blob/master/flatpak/io.github.celluloid_player.Celluloid.json)
 - [VidCutter](https://github.com/ozmartian/vidcutter/tree/master/_packaging)
 
+
+## Note: macos is not tested (if you have any problems open an issue)
 ### macOS
 
 Due to media_kit compilation fails these needs to be added (thats a workaround for now until this fix is released)
