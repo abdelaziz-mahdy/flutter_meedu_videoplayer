@@ -462,9 +462,9 @@ class MeeduPlayerController {
     if (duration.value.inSeconds != 0) {
       await _videoPlayerController?.seekTo(position);
 
-      if (playerStatus.stopped) {
-        play();
-      }
+      // if (playerStatus.stopped) {
+      //   play();
+      // }
     } else {
       _timerForSeek?.cancel();
       _timerForSeek =
@@ -474,9 +474,9 @@ class MeeduPlayerController {
         if (duration.value.inSeconds != 0) {
           await _videoPlayerController?.seekTo(position);
 
-          if (playerStatus.stopped) {
-            play();
-          }
+          // if (playerStatus.stopped) {
+          //   play();
+          // }
           t.cancel();
           //_timerForSeek = null;
         }
