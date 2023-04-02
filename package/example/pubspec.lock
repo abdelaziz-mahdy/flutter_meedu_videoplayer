@@ -224,20 +224,22 @@ packages:
     source: hosted
     version: "0.2.0"
   media_kit:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: media_kit
-      sha256: baaaaa025bffba908e9b4a1c824181a8b3ce44bbf77c82be1728427dbaa848d4
-      url: "https://pub.dev"
-    source: hosted
+      path: media_kit
+      ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
+      resolved-ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
+      url: "https://github.com/zezo357/media_kit"
+    source: git
     version: "0.0.2"
   media_kit_libs_ios_video:
-    dependency: transitive
+    dependency: "direct main"
     description:
-      name: media_kit_libs_ios_video
-      sha256: "8d253d50ff83afbfb9d64afd1684d437312195d1eedb6d3e4270d5c30757f004"
-      url: "https://pub.dev"
-    source: hosted
+      path: media_kit_libs_ios_video
+      ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
+      resolved-ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
+      url: "https://github.com/zezo357/media_kit"
+    source: git
     version: "1.0.0"
   media_kit_libs_linux:
     dependency: transitive
@@ -248,12 +250,13 @@ packages:
     source: hosted
     version: "1.0.1"
   media_kit_libs_macos_video:
-    dependency: transitive
+    dependency: "direct main"
     description:
-      name: media_kit_libs_macos_video
-      sha256: "3942001bdb1f555d17d28be56d10082c23921535f3fd5509c945a0bf94189fdc"
-      url: "https://pub.dev"
-    source: hosted
+      path: media_kit_libs_macos_video
+      ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
+      resolved-ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
+      url: "https://github.com/zezo357/media_kit"
+    source: git
     version: "1.0.0"
   media_kit_libs_windows_video:
     dependency: transitive
@@ -264,20 +267,22 @@ packages:
     source: hosted
     version: "1.0.1"
   media_kit_native_event_loop:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: media_kit_native_event_loop
-      sha256: "2b38c83a4c98100d65c92a1bf382247f101dc7534685186e27bedb7b20fcc272"
-      url: "https://pub.dev"
-    source: hosted
+      path: media_kit_native_event_loop
+      ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
+      resolved-ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
+      url: "https://github.com/zezo357/media_kit"
+    source: git
     version: "1.0.1"
   media_kit_video:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: media_kit_video
-      sha256: f9987d92182f42852fa77e5ca98d11a91482b9f45f7a559ca3453f258026041b
-      url: "https://pub.dev"
-    source: hosted
+      path: media_kit_video
+      ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
+      resolved-ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
+      url: "https://github.com/zezo357/media_kit"
+    source: git
     version: "0.0.2"
   meedu:
     dependency: transitive
@@ -726,4 +731,4 @@ packages:
     version: "1.0.0"
 sdks:
   dart: ">=2.18.0 <3.0.0"
-  flutter: ">=3.7.0"
+  flutter: ">=3.3.0"

@@ -71,8 +71,48 @@ There are other ways to bundle these within your app package e.g. within Snap or
 
 ### macOS
 
-Everything ready.
+Due to media_kit compilation fails these needs to be added (thats a workaround for now until this fix is released)
 
+```yaml
+dependency_overrides:
+  media_kit:
+    git:
+      url: https://github.com/zezo357/media_kit
+      ref: 6fc3720bea0b162262c9dc48e655b34cfa66903f
+      path: ./media_kit
+  media_kit_video:
+    git:
+      url: https://github.com/zezo357/media_kit
+      ref: 6fc3720bea0b162262c9dc48e655b34cfa66903f
+      path: ./media_kit_video
+  media_kit_libs_ios_video:
+    git:
+      url: https://github.com/zezo357/media_kit
+      ref: 6fc3720bea0b162262c9dc48e655b34cfa66903f
+      path: ./media_kit_libs_ios_video
+  media_kit_native_event_loop:
+    git:
+      url: https://github.com/zezo357/media_kit
+      ref: 6fc3720bea0b162262c9dc48e655b34cfa66903f
+      path: ./media_kit_native_event_loop
+  media_kit_libs_macos_video:
+    git:
+      url: https://github.com/zezo357/media_kit
+      ref: 6fc3720bea0b162262c9dc48e655b34cfa66903f
+      path: ./media_kit_libs_macos_video
+```
+
+
+### iOS (replace original video_player with media_kit one)
+
+1. set IPHONEOS_DEPLOYMENT_TARGET to 13.0 in `ios\Runner.xcodeproj\project.pbxproj`
+2. Just add this package in case you set iosUseMediaKit to true in initMeeduPlayer
+
+```yaml
+dependencies:
+  ...
+  media_kit_libs_ios_video: ^1.0.0         # iOS package for video (& audio) native libraries.
+```
 
 
 

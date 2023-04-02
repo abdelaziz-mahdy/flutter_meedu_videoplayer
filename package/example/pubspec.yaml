@@ -34,7 +34,32 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-
+dependency_overrides:
+  media_kit:
+    git:
+      url: https://github.com/zezo357/media_kit
+      ref: 6fc3720bea0b162262c9dc48e655b34cfa66903f
+      path: ./media_kit
+  media_kit_video:
+    git:
+      url: https://github.com/zezo357/media_kit
+      ref: 6fc3720bea0b162262c9dc48e655b34cfa66903f
+      path: ./media_kit_video
+  media_kit_libs_ios_video:
+    git:
+      url: https://github.com/zezo357/media_kit
+      ref: 6fc3720bea0b162262c9dc48e655b34cfa66903f
+      path: ./media_kit_libs_ios_video
+  media_kit_native_event_loop:
+    git:
+      url: https://github.com/zezo357/media_kit
+      ref: 6fc3720bea0b162262c9dc48e655b34cfa66903f
+      path: ./media_kit_native_event_loop
+  media_kit_libs_macos_video:
+    git:
+      url: https://github.com/zezo357/media_kit
+      ref: 6fc3720bea0b162262c9dc48e655b34cfa66903f
+      path: ./media_kit_libs_macos_video
 dev_dependencies:
   flutter_test:
     sdk: flutter
