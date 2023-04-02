@@ -1,3 +1,11 @@
+## 4.0.9
+
+* screenManager
+  * edgetoedge now is systemUiMode and is using SystemUiMode enum
+  * added hideSystemOverlay option to enable and disable hiding system overlays
+* 
+  
+
 ## 4.0.8
 
 * Fixed macos&ios errors and added steps to readme for it

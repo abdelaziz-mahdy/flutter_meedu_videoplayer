@@ -14,13 +14,18 @@ class ScreenManager {
   /// when the player is in fullscreen mode if forceLandScapeInFullscreen the player only show the landscape mode
   final bool forceLandScapeInFullscreen;
 
-  final bool edgeToedge;
+  ///how system overlay are handled hidden
+  final SystemUiMode? systemUiMode;
+
+  ///if system overlays should be hidden or not
+  final bool hideSystemOverlay;
 
   const ScreenManager(
       {this.orientations = DeviceOrientation.values,
       this.overlays = SystemUiOverlay.values,
       this.forceLandScapeInFullscreen = true,
-      this.edgeToedge = false});
+      this.systemUiMode,
+      this.hideSystemOverlay = true});
 
   /// set the default orientations and overlays after exit of fullscreen
   Future<void> setDefaultOverlaysAndOrientations() async {
@@ -52,17 +57,17 @@ class ScreenManager {
   }
 
   Future<void> setOverlays(bool visible) async {
-    //await SystemChrome.setPreferredOrientations(this.orientations);
-    if (visible) {
-      await SystemChrome.setEnabledSystemUIMode(
-          edgeToedge ? SystemUiMode.edgeToEdge : SystemUiMode.immersive,
-          overlays: overlays);
-    } else {
-      //print("Closed2");
-      await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-          overlays: []);
+    if (hideSystemOverlay) {
+      if (visible) {
+        await SystemChrome.setEnabledSystemUIMode(
+            systemUiMode ?? SystemUiMode.immersive,
+            overlays: overlays);
+      } else {
+        //print("Closed2");
+        await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+            overlays: []);
+      }
     }
-    //}
   }
 
   /// hide the statusBar and the navigation bar, set only landscape mode only if forceLandScapeInFullscreen is true
