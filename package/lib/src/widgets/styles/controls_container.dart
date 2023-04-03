@@ -538,11 +538,13 @@ class ControlsContainer extends StatelessWidget {
               final Offset delta = details.delta;
               //if(details.globalPosition.dy<30){
               if (details.globalPosition.dx >= responsive.width / 2) {
-                _volumeDragStart(position, _);
+                if (_.enabledControls.volumeSwipes) {
+                  _volumeDragStart(position, _);
+                }
                 _dragInitialDelta = delta;
                 //customDebugPrint("right");
               } else {
-                if (!_.desktopOrWeb) {
+                if (!_.desktopOrWeb && _.enabledControls.brightnessSwipes) {
                   _brightnessDragStart(position, _);
                 }
                 _dragInitialDelta = delta;

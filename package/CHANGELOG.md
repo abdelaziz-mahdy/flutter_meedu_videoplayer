@@ -8,14 +8,20 @@
   * Added excludeFocus variable (controls if widgets inside videoplayer should get focus or not)
   * Added enabledControls in which gesture controls can be disabled 
     * Defaults
-      * this.seekSwipes = true
-      * this.volumeSwipes=true
-      * this.doubleTapToSeek=true
-      * this.desktopDoubleTapToFullScreen=true
+      * this.escapeKeyCloseFullScreen = true,
+      * this.numPadDecimalKeyToggleFit = true,
+      * this.enterKeyOpensFullScreen = true,
+      * this.spaceKeyTogglePlay = true,
+      * this.volumeArrows = true,
+      * this.seekArrows = true,
+      * this.seekSwipes = true,
+      * this.volumeSwipes = true,
+      * this.brightnessSwipes = true,
+      * this.doubleTapToSeek = true,
+      * this.desktopDoubleTapToFullScreen = true
   * Added showLogs to be able to show and hide package logs
   * Added manageBrightness to make disable handling of brightness
 * Fixed replay
-
 * Updated License
 
   

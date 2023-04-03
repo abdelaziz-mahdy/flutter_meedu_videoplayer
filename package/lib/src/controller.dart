@@ -247,7 +247,7 @@ class MeeduPlayerController {
     //this.showPipButton = false,
     this.customIcons = const CustomIcons(),
     this.enabledButtons = const EnabledButtons(),
-    this.enabledControls = const EnabledControls(),
+    this.enabledControls = const EnabledControls(  ),
     this.onVideoPlayerClosed,
   }) {
     if (!manageBrightness) {
