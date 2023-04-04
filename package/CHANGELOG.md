@@ -23,7 +23,7 @@
   * Added manageBrightness to make disable handling of brightness
 * Fixed replay
 * Updated License
-
+* Fixed ios simulator crash
   
 
 ## 4.0.8
