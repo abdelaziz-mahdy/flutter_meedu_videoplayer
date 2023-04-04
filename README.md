@@ -83,8 +83,8 @@ There are other ways to bundle these within your app package e.g. within Snap or
 
 Everything ready.
 
+The minimum supported macOS version is 11.0,set MACOSX_DEPLOYMENT_TARGET = 11.0 `macos\Runner.xcodeproj\project.pbxproj`
 
-The minimum supported macOS version is 11.0
 
 Also, during the build phase, the following warnings are not critical and cannot be silenced:
 
@@ -112,7 +112,7 @@ Also, during the build phase, the following warnings are not critical and cannot
 ```yaml
 dependencies:
   ...
-  media_kit_libs_ios_video: ^1.0.1         # iOS package for video (& audio) native libraries.
+  media_kit_libs_ios_video: ^1.0.2         # iOS package for video (& audio) native libraries.
 ```
 
 Also, software rendering is forced in the iOS simulator, due to an incompatibility with OpenGL ES.
