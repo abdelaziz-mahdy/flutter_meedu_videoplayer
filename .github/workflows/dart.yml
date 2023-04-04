@@ -19,6 +19,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
+          cache: true
       - run: flutter pub get
       - run: flutter build apk --verbose
   web:
@@ -31,6 +32,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
+          cache: true
       - run: flutter pub get
       - run: flutter build web --verbose
   windows:
@@ -43,6 +45,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
+          cache: true
       - run: flutter pub get
       - run: flutter build windows --verbose
   linux:
@@ -57,6 +60,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
+          cache: true
       - run: flutter pub get
       - run: flutter build linux --verbose
 
@@ -70,6 +74,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
+          cache: true
       - run: flutter pub get
       - run: cd macos && pod install && cd ..
       - run: flutter build macos --verbose
@@ -84,6 +89,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
+          cache: true
       - run: flutter pub get
       - run: flutter build ios --verbose --no-codesign
 

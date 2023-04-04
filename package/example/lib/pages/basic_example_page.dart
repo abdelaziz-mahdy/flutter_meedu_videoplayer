@@ -12,8 +12,9 @@ class BasicExamplePage extends StatefulWidget {
 
 class _BasicExamplePageState extends State<BasicExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
-    controlsStyle: ControlsStyle.primary,
-  );
+      controlsStyle: ControlsStyle.primary,
+      enabledControls: EnabledControls(
+          seekSwipes: false, volumeSwipes: false, brightnessSwipes: false));
 
   StreamSubscription? _playerEventSubs;
 

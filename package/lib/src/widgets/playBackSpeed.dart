@@ -23,7 +23,7 @@ class PlayBackSpeedButton extends StatelessWidget {
               EdgeInsets.all(responsive.ip(_.fullscreen.value ? 5 : 7) * 0.25),
         ),
         onPressed: () {
-          print("s");
+          _.customDebugPrint("s");
           _.togglePlaybackSpeed();
         },
         child: Text(

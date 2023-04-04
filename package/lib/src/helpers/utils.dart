@@ -10,7 +10,7 @@ String printDuration(Duration? duration) {
   String twoDigitMinutes = twoDigits(duration.inMinutes).replaceAll("-", "");
   String twoDigitSeconds =
       twoDigits(duration.inSeconds.remainder(60)).replaceAll("-", "");
-  //print(duration.inSeconds.remainder(60));
+  //customDebugPrint(duration.inSeconds.remainder(60));
   return "$twoDigitMinutes:$twoDigitSeconds";
 }
 

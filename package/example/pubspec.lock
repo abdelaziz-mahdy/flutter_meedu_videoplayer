@@ -124,7 +124,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.0.7"
+    version: "4.0.9-dev.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -224,22 +224,20 @@ packages:
     source: hosted
     version: "0.2.0"
   media_kit:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: media_kit
-      ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
-      resolved-ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
-      url: "https://github.com/zezo357/media_kit"
-    source: git
+      name: media_kit
+      sha256: baaaaa025bffba908e9b4a1c824181a8b3ce44bbf77c82be1728427dbaa848d4
+      url: "https://pub.dev"
+    source: hosted
     version: "0.0.2"
   media_kit_libs_ios_video:
     dependency: "direct main"
     description:
-      path: media_kit_libs_ios_video
-      ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
-      resolved-ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
-      url: "https://github.com/zezo357/media_kit"
-    source: git
+      name: media_kit_libs_ios_video
+      sha256: "8d253d50ff83afbfb9d64afd1684d437312195d1eedb6d3e4270d5c30757f004"
+      url: "https://pub.dev"
+    source: hosted
     version: "1.0.0"
   media_kit_libs_linux:
     dependency: transitive
@@ -252,11 +250,10 @@ packages:
   media_kit_libs_macos_video:
     dependency: "direct main"
     description:
-      path: media_kit_libs_macos_video
-      ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
-      resolved-ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
-      url: "https://github.com/zezo357/media_kit"
-    source: git
+      name: media_kit_libs_macos_video
+      sha256: "3942001bdb1f555d17d28be56d10082c23921535f3fd5509c945a0bf94189fdc"
+      url: "https://pub.dev"
+    source: hosted
     version: "1.0.0"
   media_kit_libs_windows_video:
     dependency: transitive
@@ -267,22 +264,20 @@ packages:
     source: hosted
     version: "1.0.1"
   media_kit_native_event_loop:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: media_kit_native_event_loop
-      ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
-      resolved-ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
-      url: "https://github.com/zezo357/media_kit"
-    source: git
+      name: media_kit_native_event_loop
+      sha256: "2b38c83a4c98100d65c92a1bf382247f101dc7534685186e27bedb7b20fcc272"
+      url: "https://pub.dev"
+    source: hosted
     version: "1.0.1"
   media_kit_video:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: media_kit_video
-      ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
-      resolved-ref: "6fc3720bea0b162262c9dc48e655b34cfa66903f"
-      url: "https://github.com/zezo357/media_kit"
-    source: git
+      name: media_kit_video
+      sha256: f9987d92182f42852fa77e5ca98d11a91482b9f45f7a559ca3453f258026041b
+      url: "https://pub.dev"
+    source: hosted
     version: "0.0.2"
   meedu:
     dependency: transitive
@@ -448,34 +443,34 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences
-      sha256: "78528fd87d0d08ffd3e69551173c026e8eacc7b7079c82eb6a77413957b7e394"
+      sha256: "858aaa72d8f61637d64e776aca82e1c67e6d9ee07979123c5d17115031c1b13b"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.20"
+    version: "2.1.0"
   shared_preferences_android:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: ad423a80fe7b4e48b50d6111b3ea1027af0e959e49d485712e134863d9c1c521
+      sha256: "8304d8a1f7d21a429f91dee552792249362b68a331ac5c3c1caf370f658873f6"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.17"
+    version: "2.1.0"
   shared_preferences_foundation:
     dependency: transitive
     description:
       name: shared_preferences_foundation
-      sha256: "1e755f8583229f185cfca61b1d80fb2344c9d660e1c69ede5450d8f478fa5310"
+      sha256: cf2a42fb20148502022861f71698db12d937c7459345a1bdaa88fc91a91b3603
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.5"
+    version: "2.2.0"
   shared_preferences_linux:
     dependency: transitive
     description:
       name: shared_preferences_linux
-      sha256: "3a59ed10890a8409ad0faad7bb2957dab4b92b8fbe553257b05d30ed8af2c707"
+      sha256: "9d387433ca65717bbf1be88f4d5bb18f10508917a8fa2fb02e0fd0d7479a9afa"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.5"
+    version: "2.2.0"
   shared_preferences_platform_interface:
     dependency: transitive
     description:
@@ -488,18 +483,18 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_web
-      sha256: "0dc2633f215a3d4aa3184c9b2c5766f4711e4e5a6b256e62aafee41f89f1bfb8"
+      sha256: "74083203a8eae241e0de4a0d597dbedab3b8fef5563f33cf3c12d7e93c655ca5"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.6"
+    version: "2.1.0"
   shared_preferences_windows:
     dependency: transitive
     description:
       name: shared_preferences_windows
-      sha256: "71bcd669bb9cdb6b39f22c4a7728b6d49e934f6cba73157ffa5a54f1eed67436"
+      sha256: "5e588e2efef56916a3b229c3bfe81e6a525665a454519ca51dbcc4236a274173"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.5"
+    version: "2.2.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -731,4 +726,4 @@ packages:
     version: "1.0.0"
 sdks:
   dart: ">=2.18.0 <3.0.0"
-  flutter: ">=3.3.0"
+  flutter: ">=3.7.0"
