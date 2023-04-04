@@ -24,6 +24,7 @@
 * Fixed replay
 * Updated License
 * Fixed ios simulator crash
+* Updated readme with new media_kit setup for macos and ios
   
 
 ## 4.0.8
