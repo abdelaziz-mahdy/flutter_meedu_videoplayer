@@ -29,6 +29,6 @@ jobs:
         run: flutter build web
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@latest
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: package/example/build/web
