@@ -12,8 +12,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      my_secret: ${{secrets.PAT}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -22,7 +20,7 @@ jobs:
         env:
           my_secret: ${{secrets.commit_secret}}
         run: |
-          git clone https://${{secrets.commit_secret}}@github.com/zezo357/flutter_meedu_videoplayer_example.git
+          git clone https://${{secrets.GITHUB_TOKEN}}@github.com/zezo357/flutter_meedu_videoplayer_example.git
           
       - name: Set up Flutter
         uses: subosito/flutter-action@v1
