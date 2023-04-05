@@ -36,7 +36,7 @@ jobs:
           git config --global user.email zezoh3358@gmail.com
           git config --global user.name Abdelaziz
           git status
-          git remote add origin https://${{secrets.PAT}}@github.com/zezo357/flutter_meedu_videoplayer_example
+          git remote add origin https://${{secrets.PAT}}@github.com/zezo357/flutter_meedu_videoplayer_example.git
           git add --all
           git commit -m "update"
           git push origin master -f
