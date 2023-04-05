@@ -10,14 +10,14 @@ jobs:
     name: android_docker
     runs-on: ubuntu-latest
     container:
-      image: cirrusci/flutter:stable
+      image: ghcr.io/cirruslabs/flutter:3.7.9
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install dependencies
         run: flutter pub get
-      - name: Build and test
-        run: flutter build web
+      - name: Build
+        run: flutter build apk --verbose
   android:
     name: Android
     runs-on: windows-latest
