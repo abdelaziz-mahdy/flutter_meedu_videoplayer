@@ -17,10 +17,8 @@ jobs:
         uses: actions/checkout@v2
         
       - name: test clone demo web app
-        env:
-          my_secret: ${{secrets.commit_secret}}
         run: |
-          git clone https://${{secrets.GITHUB_TOKEN}}@github.com/zezo357/flutter_meedu_videoplayer_example.git
+          git clone https://${{secrets.USER_NAME}}:${{secrets.PAT}}@github.com/zezo357/flutter_meedu_videoplayer_example.git
           
       - name: Set up Flutter
         uses: subosito/flutter-action@v1
@@ -34,16 +32,13 @@ jobs:
         run: flutter build web
         
       - name: Deploy demo web app
-        env:
-          PAT: ${{ secrets.PAT }}
         run: |
-          git clone https://$PAT@github.com/zezo357/flutter_meedu_videoplayer_example.git
           cd build/web
           git init
-          git config --global user.email zezoh3358@gmail.com
+          git config --global user.email ${{secrets.EMAIL}}
           git config --global user.name Abdelaziz
           git status
-          git remote add origin https://$PAT@github.com/zezo357/flutter_meedu_videoplayer_example.git
+          git remote add origin https://${{secrets.USER_NAME}}:${{secrets.PAT}}@github.com/zezo357/flutter_meedu_videoplayer_example.git
           git add --all
           git commit -m "update"
           git push origin HEAD:gh-pages
