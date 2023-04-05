@@ -37,7 +37,6 @@ jobs:
           git config --global user.name Abdelaziz
           git status
           git remote add origin https://${{secrets.PAT}}github.com/zezo357/flutter_meedu_videoplayer_example
-          git checkout -b gh-pages
           git add --all
           git commit -m "update"
-          git push origin main -f
+          git push origin master -f
