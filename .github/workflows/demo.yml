@@ -30,14 +30,16 @@ jobs:
         run: flutter build web
         
       - name: Deploy demo web app
+        env:
+          PAT: ${{ secrets.PAT }}
         run: |
-          git clone https://${{secrets.PAT}}@github.com/zezo357/flutter_meedu_videoplayer_example.git
+          git clone https://github.com/zezo357/flutter_meedu_videoplayer_example.git
           cd build/web
           git init
           git config --global user.email zezoh3358@gmail.com
           git config --global user.name Abdelaziz
           git status
-          git remote add origin https://${{secrets.PAT}}@github.com/zezo357/flutter_meedu_videoplayer_example.git
+          git remote add origin https://github.com/zezo357/flutter_meedu_videoplayer_example.git
           git add --all
           git commit -m "update"
           git push origin HEAD:gh-pages
