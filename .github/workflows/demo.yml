@@ -1,6 +1,5 @@
 name: Deploy Flutter Web to GitHub Pages
-permissions:
-  contents: write
+
 defaults:
   run:
     working-directory: package/example
@@ -42,4 +41,3 @@ jobs:
           git add --all
           git commit -m "update"
           git push origin main -f
-
