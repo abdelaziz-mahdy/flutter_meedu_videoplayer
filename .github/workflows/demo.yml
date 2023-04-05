@@ -29,8 +29,8 @@ jobs:
       - name: Build web app
         run: flutter build web
         
-      - name: deploy demo web app
-      - run: |
+      - name: Deploy demo web app
+        run: |
           cd build/web
           git init
           git config --global user.email zezoh3358@gmail.com
