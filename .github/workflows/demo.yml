@@ -13,6 +13,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      my_secret: ${{secrets.PAT}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -27,8 +29,17 @@ jobs:
 
       - name: Build web app
         run: flutter build web
+        
+      - name: deploy demo web app
+      - run: |
+          cd build/web
+          git init
+          git config --global user.email zezoh3358@gmail.com
+          git config --global user.name Abdelaziz
+          git status
+          git remote add origin https://${{secrets.PAT}}github.com/zezo357/flutter_meedu_videoplayer_example
+          git checkout -b gh-pages
+          git add --all
+          git commit -m "update"
+          git push origin main -f
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: package/example/build/web
