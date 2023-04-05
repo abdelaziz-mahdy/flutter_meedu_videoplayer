@@ -41,5 +41,5 @@ jobs:
           git remote add origin https://${{secrets.USER_NAME}}:${{secrets.PAT}}@github.com/zezo357/flutter_meedu_videoplayer_example.git
           git add --all
           git commit -m "update"
-          git push origin HEAD:gh-pages
+          git push origin HEAD:main
 
