@@ -12,7 +12,7 @@
 - For Android, Ios and Web we are using video player
 - For Windows and Linux and macos we are using media_kit.
 <table>
-  <caption><h4>Demo</h4></caption>
+  <caption><h4>Demo https://zezo357.github.io/flutter_meedu_videoplayer_example/</h4></caption>
   <tbody>
     <tr>
       <td rowspan="2"><img src="https://zezo357.github.io/flutter_meedu_videoplayer/assets/q2.gif" alt="meedu_player" width="160" /></td>     
@@ -25,6 +25,7 @@
 </table>
 
 
+
 | Features  | iOS | Android | windows | linux | macos | web|
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Videos from Network  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅|
@@ -32,14 +33,14 @@
 | Videos from local files  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅
 | Looping  | ✅  | ✅ | x | x | x | x
 | AutoPlay  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅
-| Swipe to increase and decrease Sound  | ✅  | ✅ | keyboard arrows | keyboard arrows | ✅ | keyboard arrows |
-| Swipe to seek in video | ✅  | ✅ | keyboard arrows | keyboard arrows | ✅ | keyboard arrows |
+| Swipe to increase and decrease Sound  | ✅  | ✅ | keyboard arrows | keyboard arrows | keyboard arrows | keyboard arrows |
+| Swipe to seek in video | ✅  | ✅ | keyboard arrows | keyboard arrows | keyboard arrows | keyboard arrows |
 | FullScreen  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Launch Player as FullScreen  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Playback Speed  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
 | fastForward / Rewind  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
-| srt subtitles  | ✅  | ✅ | x | x | x | x
-| Customize  | partially  | partially | partially | partially | x | partially
+| srt subtitles  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅
+| Customize  | partially  | partially | partially | partially | partially | partially
 
 ---
 
