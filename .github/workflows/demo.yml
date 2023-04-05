@@ -1,5 +1,8 @@
 name: Deploy Flutter Web to GitHub Pages
 
+defaults:
+  run:
+    working-directory: package/example
 on:
   push:
     branches:
