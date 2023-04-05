@@ -31,6 +31,7 @@ jobs:
         
       - name: Deploy demo web app
         run: |
+          git clone https://${{secrets.PAT}}@github.com/zezo357/flutter_meedu_videoplayer_example.git
           cd build/web
           git init
           git config --global user.email zezoh3358@gmail.com
