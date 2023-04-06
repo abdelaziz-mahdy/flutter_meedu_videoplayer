@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_page.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_meedu_videoplayer_example/pages/pick_file_page_example.d
 import 'package:flutter_meedu_videoplayer_example/pages/playback_speed_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/player_with_header_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/portrait_example_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/yotube_page_example.dart';
 
 void main() {
   initMeeduPlayer();
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
         "listview": (_) => const ListViewExample(),
         "gridview": (_) => const GridViewExample(),
         "portrait": (_) => const PortraitExamplePage(),
+        "youtube": (_) => const YoutubeExamplePage(),
       },
     );
   }
@@ -141,6 +144,17 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushNamed(context, 'portrait');
             },
             child: const Text("Portrait"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, 'youtube');
+            },
+            child: kIsWeb
+                ? Text(
+                    "Youtube Example doesnt work on web",
+                    style: TextStyle(color: Colors.red),
+                  )
+                : Text("Youtube"),
           )
         ],
       ),

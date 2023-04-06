@@ -37,20 +37,18 @@ class FullscreenButton extends StatelessWidget {
               } else {
                 if (_.desktopOrWeb) {
                   _.screenManager.setWindowsFullScreen(false, _);
-                } else {
-                  Navigator.pop(context);
                 }
               }
+              Navigator.pop(context);
             } else {
               if (UniversalPlatform.isWeb) {
                 _.screenManager.setWebFullScreen(true, _);
               } else {
                 if (_.desktopOrWeb) {
                   _.screenManager.setWindowsFullScreen(true, _);
-                } else {
-                  _.goToFullscreen(context);
                 }
               }
+              _.goToFullscreen(context);
             }
           },
         );

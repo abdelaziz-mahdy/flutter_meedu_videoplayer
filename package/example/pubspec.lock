@@ -124,7 +124,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.0.9-dev.1"
+    version: "4.0.9"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -151,6 +151,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      sha256: aeac15850ef1b38ee368d4c53ba9a847e900bb2c53a4db3f6881cbb3cb684338
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   fullscreen_window:
     dependency: transitive
     description:
@@ -199,6 +207,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.5"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: c33da08e136c3df0190bd5bbe51ae1df4a7d96e7954d1d7249fea2968a72d317
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.8.0"
   lints:
     dependency: transitive
     description:
@@ -227,18 +243,18 @@ packages:
     dependency: transitive
     description:
       name: media_kit
-      sha256: baaaaa025bffba908e9b4a1c824181a8b3ce44bbf77c82be1728427dbaa848d4
+      sha256: "6b1e851865c2da3d84e93e8132ee0add32f604bf7fc211d019db9101a44c8608"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.3+3"
   media_kit_libs_ios_video:
     dependency: "direct main"
     description:
       name: media_kit_libs_ios_video
-      sha256: "8d253d50ff83afbfb9d64afd1684d437312195d1eedb6d3e4270d5c30757f004"
+      sha256: "495d6e2db9b325aebda16dad3c5ae6593a9dfa37ebe08360b4765a43fa09a3b0"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.2"
   media_kit_libs_linux:
     dependency: transitive
     description:
@@ -248,13 +264,13 @@ packages:
     source: hosted
     version: "1.0.1"
   media_kit_libs_macos_video:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: media_kit_libs_macos_video
-      sha256: "3942001bdb1f555d17d28be56d10082c23921535f3fd5509c945a0bf94189fdc"
+      sha256: ff06adff5f544b11aa1d3ad596f9add477264c6026a60aebeed69eda1c7d9d63
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.2"
   media_kit_libs_windows_video:
     dependency: transitive
     description:
@@ -267,18 +283,18 @@ packages:
     dependency: transitive
     description:
       name: media_kit_native_event_loop
-      sha256: "2b38c83a4c98100d65c92a1bf382247f101dc7534685186e27bedb7b20fcc272"
+      sha256: "677ea41d13a2013ca7fe050674eac3b5d891185d4300779727a5860a85cdda60"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   media_kit_video:
     dependency: transitive
     description:
       name: media_kit_video
-      sha256: f9987d92182f42852fa77e5ca98d11a91482b9f45f7a559ca3453f258026041b
+      sha256: "1a870a3d731a9ce34e12ec5baed05b3081164f0c85b71baf05900ca47ee5639c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.4"
   meedu:
     dependency: transitive
     description:
@@ -351,6 +367,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.5"
+  petitparser:
+    dependency: transitive
+    description:
+      name: petitparser
+      sha256: "49392a45ced973e8d94a85fdb21293fbb40ba805fc49f2965101ae748a3683b4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.1.0"
   platform:
     dependency: transitive
     description:
@@ -624,10 +648,10 @@ packages:
     dependency: transitive
     description:
       name: video_player_media_kit
-      sha256: "7f0e78c96e9d9e333ec2bac2f4e3546e66ed768ba6e1f684897e5a1c76cb9cf2"
+      sha256: "54a481fc317e1af8fbe35aa8872ede97118156bc8da0a2a29a179f310d82ae7d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.4"
+    version: "0.0.5"
   video_player_platform_interface:
     dependency: transitive
     description:
@@ -724,6 +748,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  xml:
+    dependency: transitive
+    description:
+      name: xml
+      sha256: "979ee37d622dec6365e2efa4d906c37470995871fe9ae080d967e192d88286b5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.2.2"
+  youtube_explode_dart:
+    dependency: "direct main"
+    description:
+      name: youtube_explode_dart
+      sha256: "07889a6229a63e78f8d45a3b852897c2e0fa42e96c4daa38d411be211575bc38"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.12.4"
 sdks:
   dart: ">=2.18.0 <3.0.0"
   flutter: ">=3.7.0"

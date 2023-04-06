@@ -1,3 +1,9 @@
+## 4.0.10
+
+* fixed keyboard controls not working 
+* adding playing from youtube example (doesnt work on web)
+* fixed full screen button on desktop (now makes video full screen too)
+
 ## 4.0.9
 
 * screenManager
