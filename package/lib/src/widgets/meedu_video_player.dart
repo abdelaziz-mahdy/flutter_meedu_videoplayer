@@ -84,7 +84,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return CallbackShortcuts(
-      bindings: activatorsToCallBacks(widget.controller),
+      bindings: activatorsToCallBacks(widget.controller,context),
       child: Focus(
         autofocus: true,
         child: MeeduPlayerProvider(

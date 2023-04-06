@@ -64,6 +64,11 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
       _qualities.add(
           Quality(url: element.url.toString(), label: element.qualityLabel));
     });
+    _qualities.sort(
+      (a, b) {
+        return b.label.compareTo(a.label);
+      },
+    );
     print('streamInfo ${streamInfo.url}');
     // Close the YoutubeExplode's http client.
     yt.close();
@@ -194,8 +199,12 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
                   flex: 1,
                   child: ElevatedButton(
                       onPressed: () {
+                        _controller.pause();
+
                         _qualities.clear();
                         _quality.value = null;
+                        _currentPosition = Duration.zero;
+
                         _playYoutubeVideo(url.text);
                       },
                       child: Text("Play")),
@@ -205,34 +214,36 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
             SizedBox(
               height: 10,
             ),
-            AspectRatio(
-              aspectRatio: 16 / 9,
-              child: MeeduVideoPlayer(
-                controller: _controller,
-                bottomRight: (ctx, controller, responsive) {
-                  // creates a responsive fontSize using the size of video container
-                  final double fontSize = responsive.ip(3);
+            Expanded(
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: MeeduVideoPlayer(
+                  controller: _controller,
+                  bottomRight: (ctx, controller, responsive) {
+                    // creates a responsive fontSize using the size of video container
+                    final double fontSize = responsive.ip(3);
 
-                  return CupertinoButton(
-                    padding: const EdgeInsets.all(5),
-                    minSize: 25,
-                    onPressed: _onChangeVideoQuality,
-                    child: ValueListenableBuilder<Quality?>(
-                      valueListenable: _quality,
-                      builder: (context, Quality? quality, child) {
-                        return Text(
-                          quality != null
-                              ? quality.label
-                              : "No qualities loaded ",
-                          style: TextStyle(
-                            fontSize: fontSize > 18 ? 18 : fontSize,
-                            color: Colors.white,
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
+                    return CupertinoButton(
+                      padding: const EdgeInsets.all(5),
+                      minSize: 25,
+                      onPressed: _onChangeVideoQuality,
+                      child: ValueListenableBuilder<Quality?>(
+                        valueListenable: _quality,
+                        builder: (context, Quality? quality, child) {
+                          return Text(
+                            quality != null
+                                ? quality.label
+                                : "No qualities loaded ",
+                            style: TextStyle(
+                              fontSize: fontSize > 18 ? 18 : fontSize,
+                              color: Colors.white,
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ],

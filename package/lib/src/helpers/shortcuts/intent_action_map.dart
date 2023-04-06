@@ -18,7 +18,7 @@ Map<Type, Action<Intent>> shortCutActions(MeeduPlayerController controller) {
 }
 
 Map<ShortcutActivator, void Function()> activatorsToCallBacks(
-    MeeduPlayerController controller) {
+    MeeduPlayerController controller, BuildContext context) {
   return {
     const SingleActivator(LogicalKeyboardKey.arrowUp): () {
       if (!controller.enabledControls.volumeArrows) {
@@ -48,14 +48,13 @@ Map<ShortcutActivator, void Function()> activatorsToCallBacks(
       if (!controller.enabledControls.escapeKeyCloseFullScreen) {
         return;
       }
-      controller.screenManager.setWindowsFullScreen(false, controller);
+      controller.setFullScreen(false, context);
     },
     const SingleActivator(LogicalKeyboardKey.enter): () {
       if (!controller.enabledControls.enterKeyOpensFullScreen) {
         return;
       }
-      controller.screenManager
-          .setWindowsFullScreen(!controller.fullscreen.value, controller);
+      controller.toggleFullScreen(context);
     },
     const SingleActivator(LogicalKeyboardKey.space): () {
       if (!controller.enabledControls.spaceKeyTogglePlay) {
