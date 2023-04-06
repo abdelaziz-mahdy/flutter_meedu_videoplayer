@@ -5,9 +5,10 @@ defaults:
     working-directory: package/example
 on:
   push:
-    branches:
-      - main
-      - master
+    branches: [ master ]
+    paths:
+      - 'package/**'
+      - '!package/README.md'
 
 jobs:
   deploy:

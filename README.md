@@ -8,11 +8,12 @@
 <img src="https://img.shields.io/github/license/zezo357/flutter_meedu_videoplayer?style=flat-square"/>
 
 
-### Cross-platform video player
-- For Android, Ios and Web we are using video player
-- For Windows and Linux and macos we are using media_kit.
+### Cross-Platform Video Player
+We have implemented a cross-platform video player for Android, iOS, and web applications, which provides a seamless video playback experience. Additionally, for desktop applications running on Windows, Linux, and macOS operating systems, we are using the media_kit library to provide a robust video playback solution.
+
 <table>
-  <caption><h4>Demo https://zezo357.github.io/flutter_meedu_videoplayer_example/</h4></caption>
+<caption><h4><a href="https://zezo357.github.io/flutter_meedu_videoplayer_example/">Flutter Web Demo</a></h4></caption>
+
   <tbody>
     <tr>
       <td rowspan="2"><img src="https://zezo357.github.io/flutter_meedu_videoplayer/assets/q2.gif" alt="meedu_player" width="160" /></td>     
@@ -26,41 +27,24 @@
 
 
 
-| Features  | iOS | Android | windows | linux | macos | web|
-| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| Videos from Network  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅|
-| Videos from Assets  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅|
-| Videos from local files  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅
-| Looping  | ✅  | ✅ | x | x | x | x
-| AutoPlay  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅
-| Swipe to increase and decrease Sound  | ✅  | ✅ | keyboard arrows | keyboard arrows | keyboard arrows | keyboard arrows |
-| Swipe to seek in video | ✅  | ✅ | keyboard arrows | keyboard arrows | keyboard arrows | keyboard arrows |
-| FullScreen  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Launch Player as FullScreen  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Playback Speed  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
-| fastForward / Rewind  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
-| srt subtitles  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅
-| Customize  | partially  | partially | partially | partially | partially | partially
-
----
+<table><thead><tr><th>Feature</th><th>iOS</th><th>Android</th><th>Windows</th><th>Linux</th><th>macOS</th><th>Web</th></tr></thead><tbody><tr><td>Videos from Network</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Videos from Assets</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Videos from Local Files</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Looping</td><td>✔️</td><td>✔️</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr><tr><td>AutoPlay</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Swipe to Control Volume</td><td>✔️</td><td>✔️</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td></tr><tr><td>Swipe to Seek</td><td>✔️</td><td>✔️</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td></tr><tr><td>FullScreen</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Launch Player in FullScreen</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Playback Speed</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Fast Forward/Rewind</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>SRT Subtitles</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Customization</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td></tr></tbody></table>
 
 
 # Video Player Controls
-This is a list of controls that allow the user to interact with a video player on both mobile and desktop devices.
 ## Mobile Controls
-- <strong>seekSwipes:</strong> Swipe horizontally to seek forward or backward in the video.
-- <strong>volumeSwipes:</strong> Swipe vertically on the right side of the screen to control the video volume.
-- <strong>brightnessSwipes:</strong> Swipe vertically on the left side of the screen to control the video brightness.
-- <strong>doubleTapToSeek:</strong> Double-tap on the sides of the screen to seek forward or backward in the video.
+- Swipe horizontally to seek forward or backward in the video. (<em>seekSwipes</em>)
+- Swipe vertically on the right side of the screen to control the video volume. (<em>volumeSwipes</em>)
+- Swipe vertically on the left side of the screen to control the video brightness. (<em>brightnessSwipes</em>)
+- Double-tap on the sides of the screen to seek forward or backward in the video. (<em>doubleTapToSeek</em>)
 
 ## Desktop Controls
-- <strong>desktopDoubleTapToFullScreen:</strong> Double-click with the mouse to toggle full-screen mode.
-- <strong>volumeArrows:</strong> Use the keyboard up and down arrows to increase or decrease the video volume.
-- <strong>seekArrows:</strong> Use the keyboard right and left arrows to seek forward or backward in the video.
-- <strong>escapeKeyCloseFullScreen:</strong> Press the Escape key to close full-screen mode.
-- <strong>numPadDecimalKeyToggleFit:</strong> Press the NumPad Decimal key (.) to toggle the video fit.
-- <strong>enterKeyOpensFullScreen:</strong> Press the Enter key to open full-screen mode.
-- <strong>spaceKeyTogglePlay:</strong> Press the Space key to toggle between playing and pausing the video.
+- Double-click with the mouse to toggle full-screen mode. (<em>desktopDoubleTapToFullScreen</em>)
+- Use the keyboard up and down arrows to increase or decrease the video volume. (<em>volumeArrows</em>)
+- Use the keyboard right and left arrows to seek forward or backward in the video. (<em>seekArrows</em>)
+- Press the Escape key to close full-screen mode. (<em>escapeKeyCloseFullScreen</em>)
+- Press the NumPad Decimal key (.) to toggle the video fit. (<em>numPadDecimalKeyToggleFit</em>)
+- Press the Enter key to open full-screen mode. (<em>enterKeyOpensFullScreen</em>)
+- Press the Space key to toggle between playing and pausing the video. (<em>spaceKeyTogglePlay</em>)
 
 
 ## Initialize
