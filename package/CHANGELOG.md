@@ -4,6 +4,7 @@
 * adding playing from youtube example (doesnt work on web)
 * fixed full screen button on desktop (now makes video full screen too)
 * fixed video overflow 
+* added web demo url
 
 ## 4.0.9
 
