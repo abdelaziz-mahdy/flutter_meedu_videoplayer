@@ -45,28 +45,23 @@
 ---
 
 
-# Controls
-seekSwipes: On mobile devices, allows the user to swipe horizontally to seek forward or backward in the video.
+# Video Player Controls
+This is a list of controls that allow the user to interact with a video player on both mobile and desktop devices.
+## Mobile Controls
+- <strong>seekSwipes:</strong> Swipe horizontally to seek forward or backward in the video.
+- <strong>volumeSwipes:</strong> Swipe vertically on the right side of the screen to control the video volume.
+- <strong>brightnessSwipes:</strong> Swipe vertically on the left side of the screen to control the video brightness.
+- <strong>doubleTapToSeek:</strong> Double-tap on the sides of the screen to seek forward or backward in the video.
 
-volumeSwipes: On mobile devices, allows the user to swipe vertically on the right side of the screen to control the video volume.
+## Desktop Controls
+- <strong>desktopDoubleTapToFullScreen:</strong> Double-click with the mouse to toggle full-screen mode.
+- <strong>volumeArrows:</strong> Use the keyboard up and down arrows to increase or decrease the video volume.
+- <strong>seekArrows:</strong> Use the keyboard right and left arrows to seek forward or backward in the video.
+- <strong>escapeKeyCloseFullScreen:</strong> Press the Escape key to close full-screen mode.
+- <strong>numPadDecimalKeyToggleFit:</strong> Press the NumPad Decimal key (.) to toggle the video fit.
+- <strong>enterKeyOpensFullScreen:</strong> Press the Enter key to open full-screen mode.
+- <strong>spaceKeyTogglePlay:</strong> Press the Space key to toggle between playing and pausing the video.
 
-brightnessSwipes: On mobile devices, allows the user to swipe vertically on the left side of the screen to control the video brightness.
-
-doubleTapToSeek: On mobile devices, allows the user to double-tap on the sides of the screen to seek forward or backward in the video.
-
-desktopDoubleTapToFullScreen: On desktop devices, allows the user to double-click with the mouse to toggle full-screen mode.
-
-volumeArrows: On desktop devices, allows the user to use the keyboard up and down arrows to increase or decrease the video volume.
-
-seekArrows: On desktop devices, allows the user to use the keyboard right and left arrows to seek forward or backward in the video.
-
-escapeKeyCloseFullScreen: On desktop devices, allows the user to press the Escape key to close full-screen mode.
-
-numPadDecimalKeyToggleFit: On desktop devices, allows the user to press the NumPad Decimal key (.) to toggle the video fit.
-
-enterKeyOpensFullScreen: On desktop devices, allows the user to press the Enter key to open full-screen mode.
-
-spaceKeyTogglePlay: On desktop devices, allows the user to press the Space key to toggle between playing and pausing the video.
 
 ## Initialize
 ```dart
