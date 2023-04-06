@@ -8,6 +8,7 @@ import 'package:flutter_meedu_videoplayer_example/pages/disabled_buttons_example
 import 'package:flutter_meedu_videoplayer_example/pages/fullscreen_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/gridview_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/listview_example.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/m3u8_page_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/network_with_subtitle_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/one_page_to_other_page_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/pick_file_page_example.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         "gridview": (_) => const GridViewExample(),
         "portrait": (_) => const PortraitExamplePage(),
         "youtube": (_) => const YoutubeExamplePage(),
+        "m3u8": (_) => const M3u8ExamplePage(),
       },
     );
   }
@@ -65,98 +67,64 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'basic');
-            },
-            child: const Text("Basic Network example"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'fullscreen');
-            },
-            child: const Text("Fullscreen example"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'with-header');
-            },
-            child: const Text("With header example"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'subtitles');
-            },
-            child: const Text("With subtitles example"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'playback-speed');
-            },
-            child: const Text("Playback speed example"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'quality-change');
-            },
-            child: const Text("Quality Change example"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'one-page-to-other');
-            },
-            child: const Text("One Page to other"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'pick-file');
-            },
-            child: const Text("Pick file"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'custom-icons');
-            },
-            child: const Text("Custom Icons"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'disabled-buttons');
-            },
-            child: const Text("Disabled Buttons"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'listview');
-            },
-            child: const Text("ListView"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'gridview');
-            },
-            child: const Text("GridView"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'portrait');
-            },
-            child: const Text("Portrait"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'youtube');
-            },
-            child: kIsWeb
-                ? Text(
-                    "Youtube Example doesnt work on web",
-                    style: TextStyle(color: Colors.red),
-                  )
-                : Text("Youtube"),
-          )
-        ],
+      body: Center(
+        child: Wrap(
+          children: [
+            buildButton(context,
+                text: 'Basic Network example', routeName: 'basic'),
+            buildButton(context,
+                text: 'Fullscreen example', routeName: 'fullscreen'),
+            buildButton(context,
+                text: 'With header example', routeName: 'with-header'),
+            buildButton(context,
+                text: 'With subtitles example', routeName: 'subtitles'),
+            buildButton(context,
+                text: 'Playback speed example', routeName: 'playback-speed'),
+            buildButton(context,
+                text: 'Quality Change example', routeName: 'quality-change'),
+            buildButton(context,
+                text: 'One Page to other', routeName: 'one-page-to-other'),
+            buildButton(context, text: 'Pick file', routeName: 'pick-file'),
+            buildButton(context,
+                text: 'Custom Icons', routeName: 'custom-icons'),
+            buildButton(context,
+                text: 'Disabled Buttons', routeName: 'disabled-buttons'),
+            buildButton(context, text: 'ListView', routeName: 'listview'),
+            buildButton(context, text: 'GridView', routeName: 'gridview'),
+            buildButton(context, text: 'Portrait', routeName: 'portrait'),
+            kIsWeb
+                ? buildDisabledButton(context,
+                    text: "Youtube Example doesn't work on web")
+                : buildButton(context, text: 'Youtube', routeName: 'youtube'),
+            buildButton(context, text: 'M3u8', routeName: 'm3u8'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildButton(BuildContext context,
+      {required String text, required String routeName}) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.pushNamed(context, routeName);
+        },
+        child: Text(text),
+      ),
+    );
+  }
+
+  Widget buildDisabledButton(BuildContext context, {required String text}) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: ElevatedButton(
+        onPressed: null,
+        child: Text(
+          text,
+          style: const TextStyle(color: Colors.red),
+        ),
       ),
     );
   }
