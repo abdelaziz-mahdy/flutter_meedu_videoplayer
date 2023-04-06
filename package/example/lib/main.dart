@@ -96,7 +96,10 @@ class _HomePageState extends State<HomePage> {
                 ? buildDisabledButton(context,
                     text: "Youtube Example doesn't work on web")
                 : buildButton(context, text: 'Youtube', routeName: 'youtube'),
-            buildButton(context, text: 'M3u8', routeName: 'm3u8'),
+            kIsWeb
+                ? buildDisabledButton(context,
+                    text: "M3u8 Example doesn't work on web")
+                : buildButton(context, text: 'M3u8', routeName: 'm3u8'),
           ],
         ),
       ),
