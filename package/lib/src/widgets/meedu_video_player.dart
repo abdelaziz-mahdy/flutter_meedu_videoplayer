@@ -55,10 +55,36 @@ class MeeduVideoPlayer extends StatefulWidget {
 }
 
 class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
+  double videoWidth(VideoPlayerController? controller, double max) {
+    double width = controller != null
+        ? controller.value.size.width != 0
+            ? controller.value.size.width
+            : 640
+        : 640;
+    if (width > max) {
+      return max;
+    } else {
+      return width;
+    }
+  }
+
+  double videoHeight(VideoPlayerController? controller, double max) {
+    double height = controller != null
+        ? controller.value.size.height != 0
+            ? controller.value.size.height
+            : 480
+        : 480;
+    if (height > max) {
+      return max;
+    } else {
+      return height;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return CallbackShortcuts(
-      bindings: activatorsToCallBacks(widget.controller),
+      bindings: activatorsToCallBacks(widget.controller,context),
       child: Focus(
         autofocus: true,
         child: MeeduPlayerProvider(
@@ -91,7 +117,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                     excluding: _.excludeFocus,
                     child: Stack(
                       // clipBehavior: Clip.hardEdge,
-                      // fit: StackFit.loose,
+                      // fit: StackFit.,
                       alignment: Alignment.center,
                       children: [
                         RxBuilder(
@@ -108,25 +134,13 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                           //     "videoPlayerController ${_.videoPlayerController}");
                           return Positioned.fill(
                             child: FittedBox(
-                              // clipBehavior: Clip.hardEdge,
+                              clipBehavior: Clip.hardEdge,
                               fit: widget.controller.videoFit.value,
                               child: SizedBox(
-                                width: _.videoPlayerController != null
-                                    ? _.videoPlayerController!.value.size
-                                                .width !=
-                                            0
-                                        ? _.videoPlayerController!.value.size
-                                            .width
-                                        : 640
-                                    : 640,
-                                height: _.videoPlayerController != null
-                                    ? _.videoPlayerController!.value.size
-                                                .height !=
-                                            0
-                                        ? _.videoPlayerController!.value.size
-                                            .height
-                                        : 480
-                                    : 480,
+                                width: videoWidth(_.videoPlayerController,
+                                    constraints.maxWidth),
+                                height: videoHeight(_.videoPlayerController,
+                                    constraints.maxHeight),
                                 // width: 640,
                                 // height: 480,
                                 child: _.videoPlayerController != null

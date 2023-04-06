@@ -75,6 +75,9 @@ class _PickFileExamplePageState extends State<PickFileExamplePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            appBar: AppBar(
+        title: const Text("pick file"),
+      ),
       body: Center(
         child: TextButton(
           onPressed: _onPickFile,

@@ -1,5 +1,4 @@
 # flutter_meedu_videoplayer
-
 <a href="https://www.buymeacoffee.com/zezo357" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 <a href='https://ko-fi.com/zezo357' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
 
@@ -13,7 +12,7 @@
 - For Android, Ios and Web we are using video player
 - For Windows and Linux and macos we are using media_kit.
 <table>
-  <caption><h4>Demo</h4></caption>
+  <caption><h4>Demo https://zezo357.github.io/flutter_meedu_videoplayer_example/</h4></caption>
   <tbody>
     <tr>
       <td rowspan="2"><img src="https://zezo357.github.io/flutter_meedu_videoplayer/assets/q2.gif" alt="meedu_player" width="160" /></td>     
@@ -26,6 +25,7 @@
 </table>
 
 
+
 | Features  | iOS | Android | windows | linux | macos | web|
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Videos from Network  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅|
@@ -33,18 +33,40 @@
 | Videos from local files  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅
 | Looping  | ✅  | ✅ | x | x | x | x
 | AutoPlay  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅
-| Swipe to increase and decrease Sound  | ✅  | ✅ | keyboard arrows | keyboard arrows | ✅ | keyboard arrows |
-| Swipe to seek in video | ✅  | ✅ | keyboard arrows | keyboard arrows | ✅ | keyboard arrows |
+| Swipe to increase and decrease Sound  | ✅  | ✅ | keyboard arrows | keyboard arrows | keyboard arrows | keyboard arrows |
+| Swipe to seek in video | ✅  | ✅ | keyboard arrows | keyboard arrows | keyboard arrows | keyboard arrows |
 | FullScreen  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Launch Player as FullScreen  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Playback Speed  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
 | fastForward / Rewind  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅ |
-| srt subtitles  | ✅  | ✅ | x | x | x | x
-| Customize  | partially  | partially | partially | partially | x | partially
+| srt subtitles  | ✅  | ✅ | ✅ | ✅ | ✅ | ✅
+| Customize  | partially  | partially | partially | partially | partially | partially
 
 ---
 
 
+# Controls
+seekSwipes: On mobile devices, allows the user to swipe horizontally to seek forward or backward in the video.
+
+volumeSwipes: On mobile devices, allows the user to swipe vertically on the right side of the screen to control the video volume.
+
+brightnessSwipes: On mobile devices, allows the user to swipe vertically on the left side of the screen to control the video brightness.
+
+doubleTapToSeek: On mobile devices, allows the user to double-tap on the sides of the screen to seek forward or backward in the video.
+
+desktopDoubleTapToFullScreen: On desktop devices, allows the user to double-click with the mouse to toggle full-screen mode.
+
+volumeArrows: On desktop devices, allows the user to use the keyboard up and down arrows to increase or decrease the video volume.
+
+seekArrows: On desktop devices, allows the user to use the keyboard right and left arrows to seek forward or backward in the video.
+
+escapeKeyCloseFullScreen: On desktop devices, allows the user to press the Escape key to close full-screen mode.
+
+numPadDecimalKeyToggleFit: On desktop devices, allows the user to press the NumPad Decimal key (.) to toggle the video fit.
+
+enterKeyOpensFullScreen: On desktop devices, allows the user to press the Enter key to open full-screen mode.
+
+spaceKeyTogglePlay: On desktop devices, allows the user to press the Space key to toggle between playing and pausing the video.
 
 ## Initialize
 ```dart
@@ -83,7 +105,6 @@ There are other ways to bundle these within your app package e.g. within Snap or
 ### macOS
 
 Everything ready.
-
 
 The minimum supported macOS version is 11.0,set MACOSX_DEPLOYMENT_TARGET = 11.0 `macos\Runner.xcodeproj\project.pbxproj`
 

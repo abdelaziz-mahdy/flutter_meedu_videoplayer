@@ -18,47 +18,46 @@ Map<Type, Action<Intent>> shortCutActions(MeeduPlayerController controller) {
 }
 
 Map<ShortcutActivator, void Function()> activatorsToCallBacks(
-    MeeduPlayerController controller) {
+    MeeduPlayerController controller, BuildContext context) {
   return {
     const SingleActivator(LogicalKeyboardKey.arrowUp): () {
-      if (controller.enabledControls.volumeArrows) {
+      if (!controller.enabledControls.volumeArrows) {
         return;
       }
       controller.setVolume(controller.volume.value + 0.05);
     },
     const SingleActivator(LogicalKeyboardKey.arrowDown): () {
-      if (controller.enabledControls.volumeArrows) {
+      if (!controller.enabledControls.volumeArrows) {
         return;
       }
       controller.setVolume(controller.volume.value - 0.05);
     },
     const SingleActivator(LogicalKeyboardKey.arrowRight): () {
-      if (controller.enabledControls.seekArrows) {
+      if (!controller.enabledControls.seekArrows) {
         return;
       }
       controller.seekTo(controller.position.value + const Duration(seconds: 5));
     },
     const SingleActivator(LogicalKeyboardKey.arrowLeft): () {
-      if (controller.enabledControls.seekArrows) {
+      if (!controller.enabledControls.seekArrows) {
         return;
       }
       controller.seekTo(controller.position.value - const Duration(seconds: 5));
     },
     const SingleActivator(LogicalKeyboardKey.escape): () {
-      if (controller.enabledControls.escapeKeyCloseFullScreen) {
+      if (!controller.enabledControls.escapeKeyCloseFullScreen) {
         return;
       }
-      controller.screenManager.setWindowsFullScreen(false, controller);
+      controller.setFullScreen(false, context);
     },
     const SingleActivator(LogicalKeyboardKey.enter): () {
-      if (controller.enabledControls.enterKeyOpensFullScreen) {
+      if (!controller.enabledControls.enterKeyOpensFullScreen) {
         return;
       }
-      controller.screenManager
-          .setWindowsFullScreen(!controller.fullscreen.value, controller);
+      controller.toggleFullScreen(context);
     },
     const SingleActivator(LogicalKeyboardKey.space): () {
-            if (controller.enabledControls.spaceKeyTogglePlay) {
+      if (!controller.enabledControls.spaceKeyTogglePlay) {
         return;
       }
       if (controller.playerStatus.playing) {
@@ -68,7 +67,7 @@ Map<ShortcutActivator, void Function()> activatorsToCallBacks(
       }
     },
     const SingleActivator(LogicalKeyboardKey.numpadDecimal): () {
-                  if (controller.enabledControls.numPadDecimalKeyToggleFit) {
+      if (!controller.enabledControls.numPadDecimalKeyToggleFit) {
         return;
       }
       controller.toggleVideoFit();

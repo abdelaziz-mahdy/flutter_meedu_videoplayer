@@ -45,6 +45,28 @@
 ---
 
 
+# Controls
+seekSwipes: On mobile devices, allows the user to swipe horizontally to seek forward or backward in the video.
+
+volumeSwipes: On mobile devices, allows the user to swipe vertically on the right side of the screen to control the video volume.
+
+brightnessSwipes: On mobile devices, allows the user to swipe vertically on the left side of the screen to control the video brightness.
+
+doubleTapToSeek: On mobile devices, allows the user to double-tap on the sides of the screen to seek forward or backward in the video.
+
+desktopDoubleTapToFullScreen: On desktop devices, allows the user to double-click with the mouse to toggle full-screen mode.
+
+volumeArrows: On desktop devices, allows the user to use the keyboard up and down arrows to increase or decrease the video volume.
+
+seekArrows: On desktop devices, allows the user to use the keyboard right and left arrows to seek forward or backward in the video.
+
+escapeKeyCloseFullScreen: On desktop devices, allows the user to press the Escape key to close full-screen mode.
+
+numPadDecimalKeyToggleFit: On desktop devices, allows the user to press the NumPad Decimal key (.) to toggle the video fit.
+
+enterKeyOpensFullScreen: On desktop devices, allows the user to press the Enter key to open full-screen mode.
+
+spaceKeyTogglePlay: On desktop devices, allows the user to press the Space key to toggle between playing and pausing the video.
 
 ## Initialize
 ```dart

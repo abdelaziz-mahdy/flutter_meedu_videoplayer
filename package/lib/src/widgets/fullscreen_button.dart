@@ -30,28 +30,7 @@ class FullscreenButton extends StatelessWidget {
           iconPath: iconPath,
           customIcon: customIcon,
           onPressed: () {
-            if (_.fullscreen.value) {
-// exit to fullscreen
-              if (UniversalPlatform.isWeb) {
-                _.screenManager.setWebFullScreen(false, _);
-              } else {
-                if (_.desktopOrWeb) {
-                  _.screenManager.setWindowsFullScreen(false, _);
-                } else {
-                  Navigator.pop(context);
-                }
-              }
-            } else {
-              if (UniversalPlatform.isWeb) {
-                _.screenManager.setWebFullScreen(true, _);
-              } else {
-                if (_.desktopOrWeb) {
-                  _.screenManager.setWindowsFullScreen(true, _);
-                } else {
-                  _.goToFullscreen(context);
-                }
-              }
-            }
+            _.toggleFullScreen(context);
           },
         );
       },
