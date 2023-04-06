@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
@@ -25,10 +24,12 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
     screenManager: const ScreenManager(forceLandScapeInFullscreen: false),
   );
   String fileName = "";
-  List<Quality> _qualities = [];
+  final List<Quality> _qualities = [];
 
   /// listener for the video quality
   final ValueNotifier<Quality?> _quality = ValueNotifier(null);
+
+  final ValueNotifier<bool> _loading = ValueNotifier(false);
 
   Duration _currentPosition = Duration.zero; // to save the video position
 
@@ -60,10 +61,10 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
 
     var manifest = await yt.videos.streamsClient.getManifest(video.id);
     var streamInfo = manifest.muxed.withHighestBitrate();
-    manifest.muxed.forEach((element) {
+    for (var element in manifest.muxed) {
       _qualities.add(
           Quality(url: element.url.toString(), label: element.qualityLabel));
-    });
+    }
     _qualities.sort(
       (a, b) {
         return b.label.compareTo(a.label);
@@ -192,26 +193,41 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
                   flex: 3,
                   child: TextField(
                     controller: url,
-                    decoration: InputDecoration(hintText: "Youtube Url"),
+                    decoration: const InputDecoration(hintText: "Youtube Url"),
                   ),
                 ),
                 Expanded(
                   flex: 1,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        _controller.pause();
+                  child: ValueListenableBuilder<bool>(
+                      valueListenable: _loading,
+                      builder: (context, bool loading, child) {
+                        return loading
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : ElevatedButton(
+                                onPressed: () async {
+                                  _loading.value = true;
+                                  _controller.pause();
 
-                        _qualities.clear();
-                        _quality.value = null;
-                        _currentPosition = Duration.zero;
+                                  _qualities.clear();
+                                  _quality.value = null;
+                                  _currentPosition = Duration.zero;
 
-                        _playYoutubeVideo(url.text);
-                      },
-                      child: Text("Play")),
-                ),
+                                  try {
+                                    await _playYoutubeVideo(url.text);
+                                  } catch (e) {
+                                    print(e);
+                                  }
+
+                                  _loading.value = false;
+                                },
+                                child: const Text("Play"));
+                      }),
+                )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Expanded(

@@ -27,6 +27,9 @@ dependencies:
     path: ../
   file_picker: ^5.2.4
   visibility_detector: ^0.3.3
+  dio: ^5.1.1
+  path: ^1.8.0
+  path_provider: ^2.0.6
 
   media_kit_libs_ios_video: ^1.0.2              # iOS package for video (& audio) native libraries.
   youtube_explode_dart: ^1.12.4
