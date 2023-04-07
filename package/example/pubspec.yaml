@@ -30,6 +30,7 @@ dependencies:
   dio: ^5.1.1
   path: ^1.8.0
   path_provider: ^2.0.6
+  native_device_orientation: ^1.1.4
 
   media_kit_libs_ios_video: ^1.0.2              # iOS package for video (& audio) native libraries.
   youtube_explode_dart: ^1.12.4

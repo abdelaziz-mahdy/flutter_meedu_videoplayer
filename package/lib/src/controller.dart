@@ -845,13 +845,13 @@ setFullScreen(!fullscreen.value, context);
 ///   - context: A `BuildContext` object used to access the current widget tree context.
 void setFullScreen(bool fullscreen, BuildContext context) {
   if (fullscreen) {
-    if (UniversalPlatform.isWeb) {
-      screenManager.setWebFullScreen(true, this);
-    } else {
-      if (desktopOrWeb) {
-        screenManager.setWindowsFullScreen(true, this);
-      }
-    }
+    // if (UniversalPlatform.isWeb) {
+    //   screenManager.setWebFullScreen(true, this);
+    // } else {
+    //   if (desktopOrWeb) {
+    //     screenManager.setWindowsFullScreen(true, this);
+    //   }
+    // }
     goToFullscreen(context);
   } else {
     // exit fullscreen

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/auto_fullscreen_on_rotation.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/change_quality_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_icons_example.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         "portrait": (_) => const PortraitExamplePage(),
         "youtube": (_) => const YoutubeExamplePage(),
         "m3u8": (_) => const M3u8ExamplePage(),
+        "auto_fullscreen": (_) => const AutoFullScreenExamplePage(),
       },
     );
   }
@@ -92,6 +94,9 @@ class _HomePageState extends State<HomePage> {
             buildButton(context, text: 'ListView', routeName: 'listview'),
             buildButton(context, text: 'GridView', routeName: 'gridview'),
             buildButton(context, text: 'Portrait', routeName: 'portrait'),
+            buildButton(context,
+                text: 'Auto FullScreen on rotation',
+                routeName: 'auto_fullscreen'),
             kIsWeb
                 ? buildDisabledButton(context,
                     text: "Youtube Example doesn't work on web")
