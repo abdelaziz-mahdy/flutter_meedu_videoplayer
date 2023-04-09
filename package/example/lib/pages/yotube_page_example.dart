@@ -57,20 +57,31 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
 
   Future<void> getYoutubeStreamUrl(String youtubeUrl) async {
     var yt = YoutubeExplode();
-    var video = await yt.videos.get(youtubeUrl);
+    Video video = await yt.videos.get(youtubeUrl);
 
-    var manifest = await yt.videos.streamsClient.getManifest(video.id);
-    var streamInfo = manifest.muxed.withHighestBitrate();
-    for (var element in manifest.muxed) {
-      _qualities.add(
-          Quality(url: element.url.toString(), label: element.qualityLabel));
+    StreamManifest manifest =
+        await yt.videos.streamsClient.getManifest(video.id);
+    if (video.isLive) {
+      // MuxedStreamInfo  streamInfo = manifest.muxed.withHighestBitrate();
+
+      _qualities.add(Quality(
+          url: await yt.videos.streamsClient.getHttpLiveStreamUrl(video.id),
+          label: "Live"));
+    } else {
+      for (var element in manifest.muxed) {
+        _qualities.add(
+            Quality(url: element.url.toString(), label: element.qualityLabel));
+      }
+    }
+    if (_qualities.isEmpty) {
+      throw Exception("No videos available");
     }
     _qualities.sort(
       (a, b) {
         return b.label.compareTo(a.label);
       },
     );
-    print('streamInfo ${streamInfo.url}');
+    // print('streamInfo ${streamInfo.url}');
     // Close the YoutubeExplode's http client.
     yt.close();
     // return streamInfo.url.toString();
@@ -117,10 +128,9 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
 
   _playYoutubeVideo(String youtubeUrl) async {
     await getYoutubeStreamUrl(youtubeUrl);
-    if (_qualities.isEmpty) {
-      throw Exception("No videos available");
-    }
+
     _quality.value = _qualities[0];
+    print(_quality.value!.url);
     _setDataSource();
     // // ignore: use_build_context_synchronously
     // _controller.launchAsFullscreen(context,

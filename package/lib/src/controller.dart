@@ -360,6 +360,8 @@ class MeeduPlayerController {
 
   void _listener() {
     final value = _videoPlayerController!.value;
+    //update duration
+    duration.value = value.duration;
     // set the current video position
     final position = value.position;
     _position.value = position;
@@ -427,6 +429,7 @@ class MeeduPlayerController {
 
       // set the video duration
       customDebugPrint("Duration is ${_videoPlayerController!.value.duration}");
+
       _duration.value = _videoPlayerController!.value.duration;
 
       /// notify that video was loaded
@@ -821,50 +824,50 @@ class MeeduPlayerController {
     customDebugPrint("Last Brightness used was $BrightnessValue");
   }
 
-/// Toggles the full-screen mode of the application window.
-///
-/// If the current full-screen mode is `true`, sets the full-screen mode to `false`
-/// and exits the full-screen mode if necessary. Otherwise, sets the full-screen mode
-/// to `true` and enters the full-screen mode.
-///
-/// Parameters:
-///   - context: A `BuildContext` object used to access the current widget tree context.
-void toggleFullScreen(BuildContext context) {
-setFullScreen(!fullscreen.value, context);
+  /// Toggles the full-screen mode of the application window.
+  ///
+  /// If the current full-screen mode is `true`, sets the full-screen mode to `false`
+  /// and exits the full-screen mode if necessary. Otherwise, sets the full-screen mode
+  /// to `true` and enters the full-screen mode.
+  ///
+  /// Parameters:
+  ///   - context: A `BuildContext` object used to access the current widget tree context.
+  void toggleFullScreen(BuildContext context) {
+    setFullScreen(!fullscreen.value, context);
+  }
 
-}
-
-/// Sets the full-screen mode of the application window.
-///
-/// If the `fullscreen` parameter is `true`, sets the full-screen mode of the application
-/// window to `true`. Otherwise, sets the full-screen mode to `false` and exits the
-/// full-screen mode if necessary.
-///
-/// Parameters:
-///   - fullscreen: A boolean indicating whether the application window should be in full-screen mode.
-///   - context: A `BuildContext` object used to access the current widget tree context.
-void setFullScreen(bool fullscreen, BuildContext context) {
-  if (fullscreen) {
-    // if (UniversalPlatform.isWeb) {
-    //   screenManager.setWebFullScreen(true, this);
-    // } else {
-    //   if (desktopOrWeb) {
-    //     screenManager.setWindowsFullScreen(true, this);
-    //   }
-    // }
-    goToFullscreen(context);
-  } else {
-    // exit fullscreen
-    if (UniversalPlatform.isWeb) {
-      screenManager.setWebFullScreen(false, this);
+  /// Sets the full-screen mode of the application window.
+  ///
+  /// If the `fullscreen` parameter is `true`, sets the full-screen mode of the application
+  /// window to `true`. Otherwise, sets the full-screen mode to `false` and exits the
+  /// full-screen mode if necessary.
+  ///
+  /// Parameters:
+  ///   - fullscreen: A boolean indicating whether the application window should be in full-screen mode.
+  ///   - context: A `BuildContext` object used to access the current widget tree context.
+  Future<void> setFullScreen(bool fullscreen, BuildContext context) async {
+    if (fullscreen) {
+      // if (UniversalPlatform.isWeb) {
+      //   screenManager.setWebFullScreen(true, this);
+      // } else {
+      //   if (desktopOrWeb) {
+      //     screenManager.setWindowsFullScreen(true, this);
+      //   }
+      // }
+      goToFullscreen(context);
     } else {
-      if (desktopOrWeb) {
-        screenManager.setWindowsFullScreen(false, this);
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
+      // exit fullscreen
+      if (UniversalPlatform.isWeb) {
+        await screenManager.setWebFullScreen(false, this);
+      } else {
+        if (desktopOrWeb) {
+          await screenManager.setWindowsFullScreen(false, this);
+        }
       }
     }
-    Navigator.pop(context);
   }
-}
 
   /// Toggle Change the videofit accordingly
   void toggleVideoFit() {
