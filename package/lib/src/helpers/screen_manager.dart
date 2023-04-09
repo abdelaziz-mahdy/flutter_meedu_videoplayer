@@ -32,7 +32,7 @@ class ScreenManager {
     await SystemChrome.setPreferredOrientations(orientations);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: overlays);
-        
+
     // AutoOrientation.portraitAutoMode();
   }
 
@@ -54,7 +54,15 @@ class ScreenManager {
 
   Future<void> setWebFullScreen(bool state, MeeduPlayerController _) async {
     _.fullscreen.value = state;
-    FullScreenWindow.setFullScreen(state);
+    try {
+      FullScreenWindow.setFullScreen(state);
+    } catch (e) {
+      if (e.toString().contains("Document not active")) {
+        _.customDebugPrint("Document not active ignored");
+      } else {
+        rethrow;
+      }
+    }
   }
 
   Future<void> setOverlays(bool visible) async {

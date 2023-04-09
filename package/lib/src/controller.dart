@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_meedu/meedu.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:screen_brightness/screen_brightness.dart';
@@ -856,16 +857,8 @@ class MeeduPlayerController {
       // }
       goToFullscreen(context);
     } else {
-      // ignore: use_build_context_synchronously
+      // // ignore: use_build_context_synchronously
       Navigator.pop(context);
-      // exit fullscreen
-      if (UniversalPlatform.isWeb) {
-        await screenManager.setWebFullScreen(false, this);
-      } else {
-        if (desktopOrWeb) {
-          await screenManager.setWindowsFullScreen(false, this);
-        }
-      }
     }
   }
 
