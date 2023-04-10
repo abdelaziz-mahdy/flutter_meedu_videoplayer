@@ -1,7 +1,7 @@
 ## 4.0.11
 
 * Fixed live stream duration.
-* Removed extra calls.
+* Removed extra full screen close and open calls.
 
 ## 4.0.10
 
