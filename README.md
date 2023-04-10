@@ -9,7 +9,10 @@
 
 
 ### Cross-Platform Video Player
-We have implemented a cross-platform video player for Android, iOS, and web applications, which provides a seamless video playback experience. Additionally, for desktop applications running on Windows, Linux, and macOS operating systems, we are using the media_kit library to provide a robust video playback solution.
+We have implemented a cross-platform video player, which provides a seamless video playback experience.
+
+* [video_player](https://pub.dev/packages/video_player) for Android, iOS, and web.
+* [media_kit](https://pub.dev/packages/media_kit) for desktop platforms.
 
 <table>
 <caption><h4><a href="https://zezo357.github.io/flutter_meedu_videoplayer_example/">Flutter Web Demo</a></h4></caption>

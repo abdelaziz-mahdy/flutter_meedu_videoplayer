@@ -1,3 +1,8 @@
+## 4.0.11
+
+* Fixed live stream duration.
+* Removed extra calls.
+
 ## 4.0.10
 
 * fixed keyboard controls not working 
