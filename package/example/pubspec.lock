@@ -132,7 +132,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.0.11"
+    version: "4.1.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -664,10 +664,10 @@ packages:
     dependency: transitive
     description:
       name: video_player_media_kit
-      sha256: "54a481fc317e1af8fbe35aa8872ede97118156bc8da0a2a29a179f310d82ae7d"
+      sha256: c12426ac8f1e51580812dd5ce39bdb58eacb65d7982ef3ba271d3a5d0ea36ffd
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.5"
+    version: "0.0.6"
   video_player_platform_interface:
     dependency: transitive
     description:
