@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 
 class ClosedCaptionView extends StatelessWidget {
   final Responsive responsive;

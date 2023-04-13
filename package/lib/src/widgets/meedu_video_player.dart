@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/controls_container.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/primary/primary_player_controls.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/secondary/secondary_player_controls.dart';
 import '../helpers/shortcuts/intent_action_map.dart';
-
-import 'closed_caption_view.dart';
 
 /// An ActionDispatcher that logs all the actions that it invokes.
 class LoggingActionDispatcher extends ActionDispatcher {

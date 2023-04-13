@@ -1,18 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
-import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:native_device_orientation/native_device_orientation.dart';
 
 class Quality {
@@ -212,6 +204,6 @@ void main() {
   runApp(MaterialApp(
     theme: ThemeData.light(useMaterial3: true),
     darkTheme: ThemeData.dark(useMaterial3: true),
-    home: AutoFullScreenExamplePage(),
+    home: const AutoFullScreenExamplePage(),
   ));
 }

@@ -9,5 +9,5 @@ Future<void> initMeeduPlayer({bool iosUseMediaKit = false}) async {
 
   // }
 
-  initVideoPlayerMediaKitIfNeeded(iosUseMediaKit:iosUseMediaKit);
+  initVideoPlayerMediaKitIfNeeded(iosUseMediaKit: iosUseMediaKit);
 }

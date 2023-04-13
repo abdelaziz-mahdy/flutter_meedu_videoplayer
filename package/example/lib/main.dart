@@ -247,9 +247,9 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(text, style: TextStyle(fontSize: 18.0)),
-              SizedBox(height: 8.0),
-              Text(description, style: TextStyle(fontSize: 14.0)),
+              Text(text, style: const TextStyle(fontSize: 18.0)),
+              const SizedBox(height: 8.0),
+              Text(description, style: const TextStyle(fontSize: 14.0)),
             ],
           ),
         ),
@@ -271,7 +271,7 @@ class _HomePageState extends State<HomePage> {
               text,
               style: const TextStyle(color: Colors.red, fontSize: 18.0),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(
               description,
               style: const TextStyle(fontSize: 14.0),

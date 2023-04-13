@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 import 'package:flutter_meedu_videoplayer/src/helpers/utils.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/fullscreen_button.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/mute_sound_button.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/play_pause_button.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/player_slider.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/video_fit_button.dart';
 
 class SecondaryBottomControls extends StatelessWidget {
   final Responsive responsive;

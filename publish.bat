@@ -1,7 +1,9 @@
 cd "${0%/*}" 
 cd package
-flutter clean
-cd example
-flutter clean
-cd ..
+@REM flutter clean
+@REM cd example
+@REM flutter clean
+@REM cd ..
+dart fix --apply 
+dart format .
 dart pub publish

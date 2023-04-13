@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_meedu/meedu.dart';
-import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/fullscreen_page.dart';
 import 'package:volume_controller/volume_controller.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:universal_platform/universal_platform.dart';
@@ -236,7 +233,7 @@ class MeeduPlayerController {
   ///  this.maxButtonsSize = 40,
   ///});
 
-  Responsive responsive= Responsive();
+  Responsive responsive = Responsive();
 
   /// creates an instance of [MeeduPlayerControlle]
   ///
@@ -275,10 +272,9 @@ class MeeduPlayerController {
     Responsive? responsive,
     this.onVideoPlayerClosed,
   }) {
-    if(responsive!=null){
-       this.responsive = responsive;
+    if (responsive != null) {
+      this.responsive = responsive;
     }
-   
 
     if (!manageBrightness) {
       enabledControls = enabledControls.copyWith(brightnessSwipes: false);

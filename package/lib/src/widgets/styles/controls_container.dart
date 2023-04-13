@@ -4,10 +4,7 @@ import 'package:flutter_meedu/ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 import 'package:flutter_meedu_videoplayer/src/helpers/utils.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/forward_and_rewind.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/rewindAndForwardLayout.dart';
 
 class ControlsContainer extends StatelessWidget {
   final Widget child;

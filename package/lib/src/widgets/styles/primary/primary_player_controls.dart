@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/play_pause_button.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/player_button.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/controls_container.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/primary/bottom_controls.dart';
 

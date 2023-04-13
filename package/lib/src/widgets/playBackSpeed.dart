@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
-import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
-
 class PlayBackSpeedButton extends StatelessWidget {
   final Responsive responsive;
   final TextStyle textStyle;
@@ -19,8 +17,7 @@ class PlayBackSpeedButton extends StatelessWidget {
         (__) {
       return TextButton(
         style: TextButton.styleFrom(
-          padding:
-              EdgeInsets.all(responsive.buttonSize() * 0.25),
+          padding: EdgeInsets.all(responsive.buttonSize() * 0.25),
         ),
         onPressed: () {
           _.customDebugPrint("s");

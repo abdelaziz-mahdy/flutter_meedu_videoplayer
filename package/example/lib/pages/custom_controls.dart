@@ -58,12 +58,12 @@ class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   Transform.translate(
                     offset: const Offset(0, 4),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: const PlayerSlider(),
+                    child: const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: PlayerSlider(),
                     ),
                   ),
                   Row(

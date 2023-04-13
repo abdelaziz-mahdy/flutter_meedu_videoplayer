@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
-import 'player_button.dart';
-
 class PlayPauseButton extends StatelessWidget {
   final double size;
   const PlayPauseButton({Key? key, this.size = 40}) : super(key: key);
