@@ -16,10 +16,10 @@ class _CustomSizesExamplePageState extends State<CustomSizesExamplePage> {
       responsive: Responsive(
         fontSizeRelativeToScreen: 2.5,
         maxFontSize: 16,
-        iconsSizeRelativeToScreen: 5,
-        maxIconsSize: 60,
-        buttonsSizeRelativeToScreen: 5,
-        maxButtonsSize: 60,
+        iconsSizeRelativeToScreen: 10,
+        maxIconsSize: 100,
+        buttonsSizeRelativeToScreen: 10,
+        maxButtonsSize: 100,
       ));
 
   StreamSubscription? _playerEventSubs;
