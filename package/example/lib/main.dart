@@ -5,6 +5,7 @@ import 'package:flutter_meedu_videoplayer_example/pages/auto_fullscreen_on_rotat
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/change_quality_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_controls.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/custom_icon_size.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_icons_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/disabled_buttons_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/fullscreen_example_page.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         "basic": (_) => const BasicExamplePage(),
         "secondary_controls": (_) => const SecondaryExamplePage(),
         "custom_controls": (_) => const CustomControlsExamplePage(),
+        "custom_sizes": (_) => const CustomSizesExamplePage(),
         "fullscreen": (_) => const FullscreenExamplePage(),
         "with-header": (_) => const PlayerWithHeaderPage(),
         "subtitles": (_) => const NetworkWithSubtitlesPage(),
@@ -98,6 +100,13 @@ class _HomePageState extends State<HomePage> {
                 routeName: 'custom_controls',
                 description:
                     'An example of how to create custom controls for the player.',
+              ),
+              buildButton(
+                context,
+                text: 'Custom Sizes',
+                routeName: 'custom_sizes',
+                description:
+                    'An example of how to Customize icon and buttons and font sizes for the player.',
               ),
               buildButton(
                 context,
