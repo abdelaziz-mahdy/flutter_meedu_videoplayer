@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
+import 'package:flutter_meedu_videoplayer/src/widgets/styles/controls_container.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/primary/primary_player_controls.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/secondary/secondary_player_controls.dart';
 import '../helpers/shortcuts/intent_action_map.dart';
@@ -42,13 +43,21 @@ class MeeduVideoPlayer extends StatefulWidget {
     Responsive responsive,
   )? customIcons;
 
-  const MeeduVideoPlayer({
-    Key? key,
-    required this.controller,
-    this.header,
-    this.bottomRight,
-    this.customIcons,
-  }) : super(key: key);
+  ///[customControls] this only needed when controlsStyle is [ControlsStyle.custom]
+  final Widget Function(
+    BuildContext context,
+    MeeduPlayerController controller,
+    Responsive responsive,
+  )? customControls;
+
+  const MeeduVideoPlayer(
+      {Key? key,
+      required this.controller,
+      this.header,
+      this.bottomRight,
+      this.customIcons,
+      this.customControls})
+      : super(key: key);
 
   @override
   _MeeduVideoPlayerState createState() => _MeeduVideoPlayerState();
@@ -84,7 +93,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return CallbackShortcuts(
-      bindings: activatorsToCallBacks(widget.controller,context),
+      bindings: activatorsToCallBacks(widget.controller, context),
       child: Focus(
         autofocus: true,
         child: MeeduPlayerProvider(
@@ -96,21 +105,22 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
               child: LayoutBuilder(
                 builder: (ctx, constraints) {
                   MeeduPlayerController _ = widget.controller;
-                  final responsive = Responsive(
+                  _.responsive.setDimensions(
                     constraints.maxWidth,
                     constraints.maxHeight,
                   );
 
                   if (widget.customIcons != null) {
-                    _.customIcons = widget.customIcons!(responsive);
+                    _.customIcons = widget.customIcons!(_.responsive);
                   }
 
                   if (widget.header != null) {
-                    _.header = widget.header!(context, _, responsive);
+                    _.header = widget.header!(context, _, _.responsive);
                   }
 
                   if (widget.bottomRight != null) {
-                    _.bottomRight = widget.bottomRight!(context, _, responsive);
+                    _.bottomRight =
+                        widget.bottomRight!(context, _, _.responsive);
                   }
 
                   return ExcludeFocus(
@@ -150,17 +160,25 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                             ),
                           );
                         }),
-                        ClosedCaptionView(responsive: responsive),
+                        ClosedCaptionView(responsive: _.responsive),
                         if (_.controlsEnabled &&
                             _.controlsStyle == ControlsStyle.primary)
                           PrimaryVideoPlayerControls(
-                            responsive: responsive,
+                            responsive: _.responsive,
                           ),
                         if (_.controlsEnabled &&
                             _.controlsStyle == ControlsStyle.secondary)
                           SecondaryVideoPlayerControls(
-                            responsive: responsive,
+                            responsive: _.responsive,
                           ),
+                        if (_.controlsEnabled &&
+                            _.controlsStyle == ControlsStyle.custom &&
+                            widget.customControls != null)
+                          ControlsContainer(
+                            responsive: _.responsive,
+                            child: widget.customControls!(
+                                context, _, _.responsive),
+                          )
                       ],
                     ),
                   );

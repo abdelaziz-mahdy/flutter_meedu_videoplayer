@@ -17,10 +17,9 @@ class PrimaryBottomControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _ = MeeduPlayerController.of(context);
-    final fontSize = responsive.ip(2.5);
     final textStyle = TextStyle(
       color: Colors.white,
-      fontSize: fontSize > 16 ? 16 : fontSize,
+      fontSize: responsive.fontSize(),
     );
     Widget durationControls = Padding(
       padding: const EdgeInsets.all(8.0),
@@ -71,7 +70,7 @@ class PrimaryBottomControls extends StatelessWidget {
 
       if (_.enabledButtons.fullscreen)
         FullscreenButton(
-          size: responsive.ip(_.fullscreen.value ? 5 : 7),
+          size: responsive.buttonSize(),
         )
     ]);
     return Positioned(

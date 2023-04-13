@@ -1,3 +1,11 @@
+## 4.1.0
+
+* Fixed assets playing without asset:// (will add it if not already added)
+* Made a custom controls widget in video player (check examples for how to use it)
+* Buttons size can be defined from meeduPlayerController Defining the responsive variable. 
+* Updated example to explain each page
+
+
 ## 4.0.11
 
 * Fixed live stream duration.
