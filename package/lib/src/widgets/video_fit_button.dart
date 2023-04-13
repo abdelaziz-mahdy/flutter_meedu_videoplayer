@@ -19,7 +19,7 @@ class VideoFitButton extends StatelessWidget {
       Widget? customIcon = _.customIcons.videoFit;
 
       return PlayerButton(
-        size: responsive.ip(_.fullscreen.value ? 5 : 7),
+        size:responsive.buttonSize(),
         circle: false,
         backgroundColor: Colors.transparent,
         iconColor: Colors.white,

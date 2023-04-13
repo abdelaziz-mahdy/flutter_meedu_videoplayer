@@ -251,10 +251,10 @@ packages:
     dependency: transitive
     description:
       name: media_kit
-      sha256: "6b1e851865c2da3d84e93e8132ee0add32f604bf7fc211d019db9101a44c8608"
+      sha256: defc249a792bf39346e6ee3ec40bbe48685c54aab86a25c4c27cc54a99afb6b1
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.3+3"
+    version: "0.0.4+1"
   media_kit_libs_ios_video:
     dependency: "direct main"
     description:

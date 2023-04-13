@@ -17,14 +17,10 @@ class SecondaryBottomControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _ = MeeduPlayerController.of(context);
-    final fontSize = responsive.ip(2);
     final textStyle = TextStyle(
       color: Colors.white,
-      fontSize: fontSize > 15 ? 15 : fontSize,
+      fontSize: responsive.fontSize(),
     );
-
-    final tmp = responsive.ip(8);
-    final buttonsSize = tmp < 40.0 ? tmp : 40.0;
 
     return Positioned(
       left: 0,
@@ -45,7 +41,7 @@ class SecondaryBottomControls extends StatelessWidget {
                 children: [
                   const SizedBox(width: 5),
                   PlayPauseButton(
-                    size: buttonsSize,
+                    size: responsive.buttonSize(),
                   ),
                   const SizedBox(width: 5),
                   RxBuilder(
@@ -99,7 +95,7 @@ class SecondaryBottomControls extends StatelessWidget {
                     MuteSoundButton(responsive: responsive),
                   if (_.enabledButtons.fullscreen) ...[
                     FullscreenButton(
-                      size: buttonsSize,
+                      size: responsive.buttonSize(),
                     ),
                     const SizedBox(width: 5),
                   ],

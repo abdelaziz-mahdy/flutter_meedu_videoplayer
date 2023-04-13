@@ -16,6 +16,7 @@ import 'package:flutter_meedu_videoplayer_example/pages/pick_file_page_example.d
 import 'package:flutter_meedu_videoplayer_example/pages/playback_speed_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/player_with_header_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/portrait_example_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/secondary_controls.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/yotube_page_example.dart';
 
 void main() {
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
       home: const HomePage(),
       routes: {
         "basic": (_) => const BasicExamplePage(),
+        "secondary_controls": (_) => const SecondaryExamplePage(),
         "fullscreen": (_) => const FullscreenExamplePage(),
         "with-header": (_) => const PlayerWithHeaderPage(),
         "subtitles": (_) => const NetworkWithSubtitlesPage(),
@@ -74,6 +76,8 @@ class _HomePageState extends State<HomePage> {
           children: [
             buildButton(context,
                 text: 'Basic Network example', routeName: 'basic'),
+            buildButton(context,
+                text: 'Basic Network example Secondary Controls', routeName: 'secondary_controls'),
             buildButton(context,
                 text: 'Fullscreen example', routeName: 'fullscreen'),
             buildButton(context,

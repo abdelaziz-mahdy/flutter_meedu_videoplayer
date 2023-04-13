@@ -34,7 +34,7 @@ class ClosedCaptionView extends StatelessWidget {
               text: strSubtitle,
               textStyle: TextStyle(
                 color: Colors.white,
-                fontSize: responsive.ip(2),
+                fontSize: responsive.fontSize(),
               ),
             ),
           );
