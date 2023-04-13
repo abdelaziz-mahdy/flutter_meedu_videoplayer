@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,7 +12,15 @@ import 'package:volume_controller/volume_controller.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:universal_platform/universal_platform.dart';
 
-enum ControlsStyle { primary, secondary }
+/// An enumeration of the different styles that can be applied to controls, such
+/// as buttons and icons and layouts.
+enum ControlsStyle {
+  primary,
+  secondary,
+
+  /// The custom style is used to apply a custom style which you can provide in MeeduPlayerController.
+  custom,
+}
 
 class MeeduPlayerController {
   /// the video_player controller
@@ -215,6 +224,20 @@ class MeeduPlayerController {
   /// return fit of the Video,By default it is set to [BoxFit.contain]
   Rx<BoxFit> get videoFit => _videoFit;
 
+  /// A utility class that helps make the UI responsive by defining the size of
+  /// icons, buttons, and text relative to the screen size.
+  /// if null default values are
+  ///   Responsive({
+  ///  this.fontSizeRelativeToScreen = 2.5,
+  ///  this.maxFontSize = 16,
+  ///  this.iconsSizeRelativeToScreen = 7,
+  ///  this.maxIconsSize = 40,
+  ///  this.buttonsSizeRelativeToScreen = 8,
+  ///  this.maxButtonsSize = 40,
+  ///});
+
+  Responsive responsive= Responsive();
+
   /// creates an instance of [MeeduPlayerControlle]
   ///
   /// [screenManager] the device orientations and overlays
@@ -249,8 +272,14 @@ class MeeduPlayerController {
     this.customIcons = const CustomIcons(),
     this.enabledButtons = const EnabledButtons(),
     this.enabledControls = const EnabledControls(),
+    Responsive? responsive,
     this.onVideoPlayerClosed,
   }) {
+    if(responsive!=null){
+       this.responsive = responsive;
+    }
+   
+
     if (!manageBrightness) {
       enabledControls = enabledControls.copyWith(brightnessSwipes: false);
     }

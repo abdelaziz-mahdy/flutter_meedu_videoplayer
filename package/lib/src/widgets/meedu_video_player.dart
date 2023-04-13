@@ -84,7 +84,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return CallbackShortcuts(
-      bindings: activatorsToCallBacks(widget.controller,context),
+      bindings: activatorsToCallBacks(widget.controller, context),
       child: Focus(
         autofocus: true,
         child: MeeduPlayerProvider(
@@ -96,21 +96,22 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
               child: LayoutBuilder(
                 builder: (ctx, constraints) {
                   MeeduPlayerController _ = widget.controller;
-                  final responsive = Responsive(
+                  _.responsive.setDimensions(
                     constraints.maxWidth,
                     constraints.maxHeight,
                   );
 
                   if (widget.customIcons != null) {
-                    _.customIcons = widget.customIcons!(responsive);
+                    _.customIcons = widget.customIcons!(_.responsive);
                   }
 
                   if (widget.header != null) {
-                    _.header = widget.header!(context, _, responsive);
+                    _.header = widget.header!(context, _, _.responsive);
                   }
 
                   if (widget.bottomRight != null) {
-                    _.bottomRight = widget.bottomRight!(context, _, responsive);
+                    _.bottomRight =
+                        widget.bottomRight!(context, _, _.responsive);
                   }
 
                   return ExcludeFocus(
@@ -150,16 +151,16 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                             ),
                           );
                         }),
-                        ClosedCaptionView(responsive: responsive),
+                        ClosedCaptionView(responsive: _.responsive),
                         if (_.controlsEnabled &&
                             _.controlsStyle == ControlsStyle.primary)
                           PrimaryVideoPlayerControls(
-                            responsive: responsive,
+                            responsive: _.responsive,
                           ),
                         if (_.controlsEnabled &&
                             _.controlsStyle == ControlsStyle.secondary)
                           SecondaryVideoPlayerControls(
-                            responsive: responsive,
+                            responsive: _.responsive,
                           ),
                       ],
                     ),

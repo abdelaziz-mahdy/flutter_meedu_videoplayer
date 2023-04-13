@@ -1,14 +1,13 @@
-import 'dart:math' as math;
 import 'dart:math';
 
 /// A utility class that helps make the UI responsive by defining the size of
 /// icons, buttons, and text relative to the screen size.
 class Responsive {
   /// The width of the screen.
-  final double width;
+  late double width;
 
   /// The height of the screen.
-  final double height;
+  late double height;
 
   /// The diagonal size of the screen in inches.
   late double inch;
@@ -33,24 +32,28 @@ class Responsive {
 
   /// Creates a new [Responsive] instance.
   ///
-  /// The [width] and [height] parameters represent the screen dimensions in
-  /// logical pixels. The optional parameters [fontSizeRelativeToScreen],
-  /// [iconsSizeRelativeToScreen], and [buttonsSizeRelativeToScreen] specify
-  /// the relative size of fonts, icons, and buttons, respectively, as a
-  /// percentage of the screen size. The optional parameters [maxFontSize],
-  /// [maxIconsSize], and [maxButtonsSize] specify the maximum size of fonts,
-  /// icons, and buttons, respectively.
-  Responsive(
-    this.width,
-    this.height, {
+  /// The optional parameters [fontSizeRelativeToScreen], [iconsSizeRelativeToScreen],
+  /// and [buttonsSizeRelativeToScreen] specify the relative size of fonts,
+  /// icons, and buttons, respectively, as a percentage of the screen size. The
+  /// optional parameters [maxFontSize], [maxIconsSize], and [maxButtonsSize]
+  /// specify the maximum size of fonts, icons, and buttons, respectively.
+  Responsive({
     this.fontSizeRelativeToScreen = 2.5,
     this.maxFontSize = 16,
     this.iconsSizeRelativeToScreen = 7,
-    this.maxIconsSize = 40,
+    this.maxIconsSize = 60,
     this.buttonsSizeRelativeToScreen = 8,
-    this.maxButtonsSize = 40,
-  }) {
-    inch = math.sqrt((width * width) + (height * height));
+    this.maxButtonsSize = 60,
+  });
+
+  /// Sets the screen dimensions.
+  void setDimensions(
+    double widthProvided,
+    double heightProvided,
+  ) {
+    width = widthProvided;
+    height = heightProvided;
+    inch = sqrt((width * width) + (height * height));
   }
 
   /// Calculates the actual size of an icon, taking into account the relative
