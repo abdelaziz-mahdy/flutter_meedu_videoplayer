@@ -1,3 +1,10 @@
+
+## 4.1.1
+
+* Fixed double click to fullScreen (desktop and web)
+* Added tap to play and pause (desktop and web)
+* Fix m3u8 example and m3u8 files not playing correctly
+
 ## 4.1.0
 
 * Fixed assets playing without asset:// (will add it if not already added)

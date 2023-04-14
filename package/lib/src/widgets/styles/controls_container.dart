@@ -47,11 +47,14 @@ class ControlsContainer extends StatelessWidget {
     controller.showSwipeDuration.value = true;
   }
 
-  void tappedOnce(MeeduPlayerController _, bool secoundTap) {
-    if (secoundTap) {
+  void tappedOnce(MeeduPlayerController _, bool secondTap) {
+    if (secondTap) {
       _tappedOnce?.cancel();
       _.controls = false;
     } else {
+      if (_.desktopOrWeb&&_.enabledControls.desktopTapToPlayAndPause) {
+        _.togglePlay();
+      }
       tappedTwice = true;
       _.controls = !_.showControls.value;
       _tappedOnce?.cancel();
@@ -64,16 +67,15 @@ class ControlsContainer extends StatelessWidget {
     }
   }
 
-  void _rewind(MeeduPlayerController controller) =>
-      _showRewindAndForward(0, controller);
-  void _forward(MeeduPlayerController controller) =>
-      _showRewindAndForward(1, controller);
+  void _rewind(BuildContext context, MeeduPlayerController controller) =>
+      _showRewindAndForward(context, 0, controller);
+  void _forward(BuildContext context, MeeduPlayerController controller) =>
+      _showRewindAndForward(context, 1, controller);
 
   void _showRewindAndForward(
-      int index, MeeduPlayerController controller) async {
+      BuildContext context, int index, MeeduPlayerController controller) async {
     if (controller.desktopOrWeb) {
-      controller.screenManager
-          .setWindowsFullScreen(!controller.fullscreen.value, controller);
+      controller.toggleFullScreen(context);
     } else {
       //controller.videoSeekToNextSeconds(amount);
       if (index == 0) {
@@ -224,7 +226,7 @@ class ControlsContainer extends StatelessWidget {
         rewind: GestureDetector(
           onTap: () {
             if (_.doubleTapCount.value != 0 || tappedTwice) {
-              _rewind(_);
+              _rewind(context, _);
               tappedOnce(_, true);
             } else {
               tappedOnce(_, false);
@@ -237,7 +239,7 @@ class ControlsContainer extends StatelessWidget {
             //customDebugPrint("0 " + tappedTwice.toString());
 
             if (_.doubleTapCount.value != 0 || tappedTwice) {
-              _forward(_);
+              _forward(context, _);
               //customDebugPrint("if");
               tappedOnce(_, true);
             } else {
@@ -441,7 +443,7 @@ class ControlsContainer extends StatelessWidget {
                 return;
               }
               if (_.doubleTapCount.value != 0 || tappedTwice) {
-                _rewind(_);
+                _rewind(context, _);
                 tappedOnce(_, true);
               } else {
                 tappedOnce(_, false);
@@ -454,7 +456,7 @@ class ControlsContainer extends StatelessWidget {
                 return;
               }
               if (_.doubleTapCount.value != 0 || tappedTwice) {
-                _forward(_);
+                _forward(context, _);
                 tappedOnce(_, true);
               } else {
                 tappedOnce(_, false);
@@ -472,7 +474,7 @@ class ControlsContainer extends StatelessWidget {
       onTap: () {
         if (_.desktopOrWeb && _.enabledControls.desktopDoubleTapToFullScreen) {
           if (_.doubleTapCount.value != 0 || tappedTwice) {
-            _rewind(_);
+            _rewind(context, _);
             tappedOnce(_, true);
           } else {
             tappedOnce(_, false);

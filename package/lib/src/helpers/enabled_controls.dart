@@ -16,6 +16,9 @@ class EnabledControls {
   /// on desktop, double clicks with mouse go fullScreen or close it
   final bool desktopDoubleTapToFullScreen;
 
+  /// on desktop, one click with mouse go toggle play and pause
+  final bool desktopTapToPlayAndPause;
+
   ///on desktop, keyboard arrows (up and down) increase and decrease volume
   final bool volumeArrows;
 
@@ -35,7 +38,9 @@ class EnabledControls {
   final bool spaceKeyTogglePlay;
 
   const EnabledControls(
-      {this.escapeKeyCloseFullScreen = true,
+    
+      {this.desktopTapToPlayAndPause=true,
+       this.escapeKeyCloseFullScreen = true,
       this.numPadDecimalKeyToggleFit = true,
       this.enterKeyOpensFullScreen = true,
       this.spaceKeyTogglePlay = true,
@@ -48,6 +53,7 @@ class EnabledControls {
       this.desktopDoubleTapToFullScreen = true});
 
   EnabledControls copyWith({
+    bool? desktopTapToPlayAndPause,
     bool? seekSwipes,
     bool? volumeSwipes,
     bool? brightnessSwipes,
@@ -61,6 +67,7 @@ class EnabledControls {
     bool? spaceKeyTogglePlay,
   }) {
     return EnabledControls(
+      desktopTapToPlayAndPause:desktopTapToPlayAndPause??this.desktopTapToPlayAndPause,
       seekSwipes: seekSwipes ?? this.seekSwipes,
       volumeSwipes: volumeSwipes ?? this.volumeSwipes,
       brightnessSwipes: brightnessSwipes ?? this.brightnessSwipes,

@@ -41,6 +41,7 @@ We have implemented a cross-platform video player, which provides a seamless vid
 - Double-tap on the sides of the screen to seek forward or backward in the video. (<em>doubleTapToSeek</em>)
 
 ## Desktop Controls
+- One-click with the mouse to toggle play and pause. (<em>desktopTapToPlayAndPause</em>)
 - Double-click with the mouse to toggle full-screen mode. (<em>desktopDoubleTapToFullScreen</em>)
 - Use the keyboard up and down arrows to increase or decrease the video volume. (<em>volumeArrows</em>)
 - Use the keyboard right and left arrows to seek forward or backward in the video. (<em>seekArrows</em>)

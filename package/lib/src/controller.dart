@@ -497,6 +497,17 @@ class MeeduPlayerController {
     playerStatus.status.value = PlayerStatus.paused;
   }
 
+  /// toggle play the current video
+  Future<void> togglePlay() async {
+    if (playerStatus.playing) {
+      pause();
+    } else {
+      play();
+    }
+
+  
+  }
+
   /// seek the current video position
   Future<void> seekTo(Duration position) async {
     if (position >= duration.value) {
