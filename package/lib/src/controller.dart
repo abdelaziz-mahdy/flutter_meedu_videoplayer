@@ -504,8 +504,6 @@ class MeeduPlayerController {
     } else {
       play();
     }
-
-  
   }
 
   /// seek the current video position

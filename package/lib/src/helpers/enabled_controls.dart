@@ -38,9 +38,8 @@ class EnabledControls {
   final bool spaceKeyTogglePlay;
 
   const EnabledControls(
-    
-      {this.desktopTapToPlayAndPause=true,
-       this.escapeKeyCloseFullScreen = true,
+      {this.desktopTapToPlayAndPause = true,
+      this.escapeKeyCloseFullScreen = true,
       this.numPadDecimalKeyToggleFit = true,
       this.enterKeyOpensFullScreen = true,
       this.spaceKeyTogglePlay = true,
@@ -67,7 +66,8 @@ class EnabledControls {
     bool? spaceKeyTogglePlay,
   }) {
     return EnabledControls(
-      desktopTapToPlayAndPause:desktopTapToPlayAndPause??this.desktopTapToPlayAndPause,
+      desktopTapToPlayAndPause:
+          desktopTapToPlayAndPause ?? this.desktopTapToPlayAndPause,
       seekSwipes: seekSwipes ?? this.seekSwipes,
       volumeSwipes: volumeSwipes ?? this.volumeSwipes,
       brightnessSwipes: brightnessSwipes ?? this.brightnessSwipes,

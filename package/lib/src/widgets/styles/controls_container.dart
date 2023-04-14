@@ -52,7 +52,7 @@ class ControlsContainer extends StatelessWidget {
       _tappedOnce?.cancel();
       _.controls = false;
     } else {
-      if (_.desktopOrWeb&&_.enabledControls.desktopTapToPlayAndPause) {
+      if (_.desktopOrWeb && _.enabledControls.desktopTapToPlayAndPause) {
         _.togglePlay();
       }
       tappedTwice = true;
