@@ -49,7 +49,7 @@ Future<List<Quality>> fromM3u8PlaylistUrl(
     multiLine: true,
   );
   final RegExp regExpAudio = RegExp(
-    r"""^#EXT-X-MEDIA:TYPE=AUDIO(?:.*,URI="(.*m3u8.*)")""",
+    r"""^#EXT-X-MEDIA:TYPE=AUDIO(?:.*,URI="(.*m3u8[^"]*)")""",
     caseSensitive: false,
     multiLine: true,
   );
@@ -113,11 +113,11 @@ Future<List<Quality>> fromM3u8PlaylistUrl(
       if (i < audioUrls.length) {
         //talker.info("using $i audio");
         audioMetadata =
-            """#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio-medium",NAME="audio",AUTOSELECT=YES,DEFAULT=YES,CHANNELS="2",URI="${audioUrls[i]}"\n""";
+            """#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio-medium",NAME="audio-medium",AUTOSELECT=YES,DEFAULT=YES,CHANNELS="2",URI="${audioUrls[i]}"\n""";
       } else {
         //talker.info("using last audio");
         audioMetadata =
-            """#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio-medium",NAME="audio",AUTOSELECT=YES,DEFAULT=YES,CHANNELS="2",URI="${audioUrls.last}"\n""";
+            """#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio-medium",NAME="audio-medium",AUTOSELECT=YES,DEFAULT=YES,CHANNELS="2",URI="${audioUrls.last}"\n""";
       }
     } else {
       audioMetadata = "";
@@ -126,7 +126,7 @@ Future<List<Quality>> fromM3u8PlaylistUrl(
     if (directoryPath != null) {
       final File file = File(path.join(directoryPath, 'hls$quality.m3u8'));
       file.writeAsStringSync(
-        """#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-INDEPENDENT-SEGMENTS\n$audioMetadata#EXT-X-STREAM-INF:CLOSED-CAPTIONS=NONE,BANDWIDTH=1469712,RESOLUTION=$quality,AUDIO="audio",FRAME-RATE=30.000\n$playlistUrl""",
+        """#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-INDEPENDENT-SEGMENTS\n$audioMetadata#EXT-X-STREAM-INF:CLOSED-CAPTIONS=NONE,BANDWIDTH=1469712,RESOLUTION=$quality,AUDIO="audio-medium",GROUP-ID="audio-medium",FRAME-RATE=30.000\n$playlistUrl""",
       );
 
       sources[quality] = file;
@@ -258,6 +258,7 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
     if (_quality.value == null) {
       throw Exception("no Quality selected");
     }
+    // print(_quality.value!.file?.readAsStringSync());
     if (_quality.value!.isFile) {
       await _controller.setDataSource(
         DataSource(
