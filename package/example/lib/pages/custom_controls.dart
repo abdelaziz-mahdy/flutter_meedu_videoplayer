@@ -13,8 +13,8 @@ class CustomControlsExamplePage extends StatefulWidget {
 
 class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
-    controlsStyle: ControlsStyle.custom,
-  );
+      controlsStyle: ControlsStyle.custom,
+      enabledOverlays: EnabledOverlays(volume: false));
 
   StreamSubscription? _playerEventSubs;
 
@@ -54,6 +54,10 @@ class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
           child: MeeduVideoPlayer(
             controller: _meeduPlayerController,
             customControls: (context, controller, responsive) {
+              final textStyle = TextStyle(
+                color: Colors.white,
+                fontSize: responsive.fontSize(),
+              );
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -76,6 +80,34 @@ class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
                             size: responsive.buttonSize(),
                           ),
                           const SizedBox(width: 5),
+
+                          // START VIDEO DURATION
+                          RxBuilder(
+                            (__) => Text(
+                              "${controller.duration.value.inMinutes >= 60 ? printDurationWithHours(controller.position.value) : printDuration(controller.position.value)}/${controller.duration.value.inMinutes >= 60 ? printDurationWithHours(controller.duration.value) : printDuration(controller.duration.value)}",
+                              style: textStyle,
+                            ),
+                          ),
+
+                          // START VIDEO DURATION
+
+                          if (controller.enabledButtons.muteAndSound)
+                            SizedBox(
+                              width: responsive.wp(40),
+                              child: RxBuilder(
+                                (__) => Row(
+                                  children: [
+                                    MuteSoundButton(responsive: responsive),
+                                    if (!controller.mute.value)
+                                      Slider(
+                                        value: controller.volume.value,
+                                        onChanged: (value) =>
+                                            controller.setVolume(value),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                       Row(
@@ -86,8 +118,6 @@ class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
                           ],
                           if (controller.enabledButtons.videoFit)
                             VideoFitButton(responsive: responsive),
-                          if (controller.enabledButtons.muteAndSound)
-                            MuteSoundButton(responsive: responsive),
                           if (controller.enabledButtons.fullscreen) ...[
                             FullscreenButton(
                               size: responsive.buttonSize(),

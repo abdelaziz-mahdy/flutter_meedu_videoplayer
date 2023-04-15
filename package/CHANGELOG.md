@@ -3,7 +3,7 @@
 
 * Added durations class to give ability to change animations durations
 * Added enabledOverlays to give ability to disable overlays (volume/brightness)
-
+* Fixed fullScreen when using custom controls
 
 
 ## 4.1.2

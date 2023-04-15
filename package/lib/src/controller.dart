@@ -50,7 +50,7 @@ class MeeduPlayerController {
   final bool controlsEnabled;
   String? _errorText;
   String? get errorText => _errorText;
-  Widget? loadingWidget, header, bottomRight;
+  Widget? loadingWidget, header, bottomRight,customControls;
   final ControlsStyle controlsStyle;
   //final bool pipEnabled, showPipButton;
 
@@ -277,7 +277,7 @@ class MeeduPlayerController {
     this.customIcons = const CustomIcons(),
     this.enabledButtons = const EnabledButtons(),
     this.enabledControls = const EnabledControls(),
-    this.enabledOverlays=const EnabledOverlays(),
+    this.enabledOverlays = const EnabledOverlays(),
     Responsive? responsive,
     this.durations = const Durations(),
     this.onVideoPlayerClosed,
@@ -692,6 +692,7 @@ class MeeduPlayerController {
       }
     }
 
+
     //
   }
 
@@ -735,23 +736,14 @@ class MeeduPlayerController {
   /// create a tasks to hide controls after certain time
   void _hideTaskControls() {
     //customDebugPrint("_hideTaskControls called");
-    if (desktopOrWeb) {
-      _timer = Timer(const Duration(seconds: 2), () {
-        controls = false;
-        //_timer = null;
-        swipeDuration.value = 0;
-        showSwipeDuration.value = false;
-        mouseMoveInitial = 0;
-      });
-    } else {
-      _timer = Timer(const Duration(seconds: 5), () {
-        customDebugPrint("hidden");
-        controls = false;
-        //_timer = null;
-        swipeDuration.value = 0;
-        showSwipeDuration.value = false;
-      });
-    }
+
+    _timer = Timer(durations.controlsAutoHideDuration, () {
+      controls = false;
+      //_timer = null;
+      swipeDuration.value = 0;
+      showSwipeDuration.value = false;
+      mouseMoveInitial = 0;
+    });
   }
 
   /// show the player in fullscreen mode
