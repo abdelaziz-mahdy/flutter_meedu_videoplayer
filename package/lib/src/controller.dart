@@ -202,6 +202,9 @@ class MeeduPlayerController {
   /// if the player should show Logs
   final bool showLogs;
 
+  /// stores the launch state
+  bool launchedAsFullScreen = false;
+
   /// [isInPipMode] is true if pip mode is enabled
   //Rx<bool> get isInPipMode => _pipManager.isInPipMode;
   //Stream<bool?> get onPipModeChanged => _pipManager.isInPipMode.stream;
@@ -790,6 +793,7 @@ class MeeduPlayerController {
   }) async {
     this.header = header;
     this.bottomRight = bottomRight;
+    launchedAsFullScreen = true;
     setDataSource(
       dataSource,
       autoplay: autoplay,
@@ -880,19 +884,23 @@ class MeeduPlayerController {
   /// Parameters:
   ///   - fullscreen: A boolean indicating whether the application window should be in full-screen mode.
   ///   - context: A `BuildContext` object used to access the current widget tree context.
-  Future<void> setFullScreen(bool fullscreen, BuildContext context) async {
+  void setFullScreen(bool fullscreen, BuildContext context) {
     if (fullscreen) {
-      // if (UniversalPlatform.isWeb) {
-      //   screenManager.setWebFullScreen(true, this);
-      // } else {
-      //   if (desktopOrWeb) {
-      //     screenManager.setWindowsFullScreen(true, this);
-      //   }
-      // }
       goToFullscreen(context);
     } else {
-      // // ignore: use_build_context_synchronously
-      Navigator.pop(context);
+      if (launchedAsFullScreen) {
+        if (UniversalPlatform.isWeb) {
+          screenManager.setWebFullScreen(false, this);
+        } else {
+          if (desktopOrWeb) {
+            screenManager.setWindowsFullScreen(false, this);
+          } else {
+            screenManager.setDefaultOverlaysAndOrientations();
+          }
+        }
+      } else {
+        Navigator.pop(context);
+      }
     }
   }
 

@@ -1,21 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'intents.dart';
-import 'actions.dart';
 import 'package:flutter/services.dart';
 
-Map<Type, Action<Intent>> shortCutActions(MeeduPlayerController controller) {
-  return {
-    IncreaseVolumeIntent: IncreaseVolumeAction(controller),
-    DecreaseVolumeIntent: DecreaseVolumeAction(controller),
-    SeekForwardIntent: SeekForwardAction(controller),
-    SeekBackwardIntent: SeekBackwardAction(controller),
-    CloseFullScreenIntent: CloseFullScreenAction(controller),
-    OpenFullScreenIntent: OpenFullScreenAction(controller),
-    TogglePlayingStateIntent: TogglePlayingStateAction(controller),
-    ToggleVideoFitIntent: ToggleVideoFitAction(controller),
-  };
-}
+
 
 Map<ShortcutActivator, void Function()> activatorsToCallBacks(
     MeeduPlayerController controller, BuildContext context) {
@@ -60,11 +47,7 @@ Map<ShortcutActivator, void Function()> activatorsToCallBacks(
       if (!controller.enabledControls.spaceKeyTogglePlay) {
         return;
       }
-      if (controller.playerStatus.playing) {
-        controller.pause();
-      } else {
-        controller.play();
-      }
+      controller.togglePlay();
     },
     const SingleActivator(LogicalKeyboardKey.numpadDecimal): () {
       if (!controller.enabledControls.numPadDecimalKeyToggleFit) {

@@ -1,3 +1,7 @@
+## 4.1.2
+
+* Fixed launch as full screen closing videoPlayer when fullScreen changes
+
 
 ## 4.1.1
 

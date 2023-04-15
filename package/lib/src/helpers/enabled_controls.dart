@@ -37,8 +37,10 @@ class EnabledControls {
   ///on desktop, space Key toggle from playing to pause and pause to playing
   final bool spaceKeyTogglePlay;
 
+
   const EnabledControls(
-      {this.desktopTapToPlayAndPause = true,
+      {
+        this.desktopTapToPlayAndPause = true,
       this.escapeKeyCloseFullScreen = true,
       this.numPadDecimalKeyToggleFit = true,
       this.enterKeyOpensFullScreen = true,
@@ -49,7 +51,9 @@ class EnabledControls {
       this.volumeSwipes = true,
       this.brightnessSwipes = true,
       this.doubleTapToSeek = true,
-      this.desktopDoubleTapToFullScreen = true});
+      this.desktopDoubleTapToFullScreen = true
+      
+      });
 
   EnabledControls copyWith({
     bool? desktopTapToPlayAndPause,
