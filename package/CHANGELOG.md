@@ -1,9 +1,10 @@
 
-## 4.1.3
+## 4.2.0
 
 * Added durations class to give ability to change animations durations
 * Added enabledOverlays to give ability to disable overlays (volume/brightness)
 * Fixed fullScreen when using custom controls
+* player status stopped is now completed
 
 
 ## 4.1.2

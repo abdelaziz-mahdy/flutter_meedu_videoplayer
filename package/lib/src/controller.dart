@@ -102,16 +102,10 @@ class MeeduPlayerController {
     BoxFit.scaleDown
   ];
 
-  // GETS
-  StreamSubscription? positionStream;
-  StreamSubscription? volumeStream;
-  StreamSubscription? playBackStream;
-  StreamSubscription? bufferStream;
-
   /// use this stream to listen the player data events like none, loading, loaded, error
   Stream<DataStatus> get onDataStatusChanged => dataStatus.status.stream;
 
-  /// use this stream to listen the player data events like stopped, playing, paused
+  /// use this stream to listen the player data events like completed, playing, paused
   Stream<PlayerStatus> get onPlayerStatusChanged => playerStatus.status.stream;
 
   /// current position of the player
@@ -422,8 +416,8 @@ class MeeduPlayerController {
 
     // check if the player has been finished
     if (_position.value.inSeconds >= duration.value.inSeconds &&
-        !playerStatus.stopped) {
-      playerStatus.status.value = PlayerStatus.stopped;
+        !playerStatus.completed) {
+      playerStatus.status.value = PlayerStatus.completed;
     }
   }
 

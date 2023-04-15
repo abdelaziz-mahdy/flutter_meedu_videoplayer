@@ -42,6 +42,12 @@ class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
       ),
       autoplay: true,
     );
+
+    ///use this stream to listen the player data events like completed, playing, paused
+    _playerEventSubs =
+        _meeduPlayerController.onPlayerStatusChanged.listen((event) {
+      print(event);
+    });
   }
 
   @override
@@ -58,6 +64,7 @@ class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
                 color: Colors.white,
                 fontSize: responsive.fontSize(),
               );
+
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.end,

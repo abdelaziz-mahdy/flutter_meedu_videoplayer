@@ -1,6 +1,6 @@
 import 'package:flutter_meedu/meedu.dart';
 
-enum PlayerStatus { stopped, playing, paused }
+enum PlayerStatus { completed, playing, paused }
 
 class MeeduPlayerStatus {
   Rx<PlayerStatus> status = Rx(PlayerStatus.paused);
@@ -13,7 +13,7 @@ class MeeduPlayerStatus {
     return status.value == PlayerStatus.paused;
   }
 
-  bool get stopped {
-    return status.value == PlayerStatus.stopped;
+  bool get completed {
+    return status.value == PlayerStatus.completed;
   }
 }
