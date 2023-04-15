@@ -14,7 +14,7 @@ class CustomControlsExamplePage extends StatefulWidget {
 class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
       controlsStyle: ControlsStyle.custom,
-      enabledOverlays: EnabledOverlays(volume: false));
+      enabledOverlays: const EnabledOverlays(volume: false));
 
   StreamSubscription? _playerEventSubs;
 

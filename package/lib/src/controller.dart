@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
-import 'package:flutter_meedu_videoplayer/src/helpers/durations.dart';
-import 'package:flutter_meedu_videoplayer/src/helpers/enabled_overlays.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,7 +48,7 @@ class MeeduPlayerController {
   final bool controlsEnabled;
   String? _errorText;
   String? get errorText => _errorText;
-  Widget? loadingWidget, header, bottomRight,customControls;
+  Widget? loadingWidget, header, bottomRight, customControls;
   final ControlsStyle controlsStyle;
   //final bool pipEnabled, showPipButton;
 
@@ -691,7 +689,6 @@ class MeeduPlayerController {
         }
       }
     }
-
 
     //
   }

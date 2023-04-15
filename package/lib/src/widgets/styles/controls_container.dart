@@ -1,10 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter_meedu/ui.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:flutter_meedu_videoplayer/src/helpers/utils.dart';
 
 class ControlsContainer extends StatelessWidget {
   final Widget child;
@@ -252,82 +249,82 @@ class ControlsContainer extends StatelessWidget {
           //behavior: HitTestBehavior.,
         ),
       ),
-      if(_.enabledOverlays.volume)
-      RxBuilder(
-        //observables: [_.volume],
-        (__) => AnimatedOpacity(
-          duration:_.durations.volumeOverlayDuration,
-          opacity: _.showVolumeStatus.value ? 1 : 0,
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.all(10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: SizedBox(
-                  height: responsive.height / 2,
-                  width: 35,
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomCenter,
-                    children: [
-                      Container(color: Colors.black38),
-                      Container(
-                        height: _.volume.value * responsive.height / 2,
-                        color: Colors.blue,
-                      ),
-                      Container(
-                          padding: const EdgeInsets.all(5),
-                          child: const Icon(
-                            Icons.music_note,
-                            color: Colors.white,
-                          )),
-                    ],
+      if (_.enabledOverlays.volume)
+        RxBuilder(
+          //observables: [_.volume],
+          (__) => AnimatedOpacity(
+            duration: _.durations.volumeOverlayDuration,
+            opacity: _.showVolumeStatus.value ? 1 : 0,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.all(10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: SizedBox(
+                    height: responsive.height / 2,
+                    width: 35,
+                    child: Stack(
+                      alignment: AlignmentDirectional.bottomCenter,
+                      children: [
+                        Container(color: Colors.black38),
+                        Container(
+                          height: _.volume.value * responsive.height / 2,
+                          color: Colors.blue,
+                        ),
+                        Container(
+                            padding: const EdgeInsets.all(5),
+                            child: const Icon(
+                              Icons.music_note,
+                              color: Colors.white,
+                            )),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-      if(_.enabledOverlays.brightness)
-      RxBuilder(
-        //observables: [_.volume],
-        (__) => AnimatedOpacity(
-          duration:_.durations.brightnessOverlayDuration,
-          opacity: _.showBrightnessStatus.value ? 1 : 0,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.all(10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: SizedBox(
-                  height: responsive.height / 2,
-                  width: 35,
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomCenter,
-                    children: [
-                      Container(color: Colors.black38),
-                      Container(
-                        height: _.brightness.value * responsive.height / 2,
-                        color: Colors.blue,
-                      ),
-                      Container(
-                          padding: const EdgeInsets.all(5),
-                          child: const Icon(
-                            Icons.wb_sunny,
-                            color: Colors.white,
-                          )),
-                    ],
+      if (_.enabledOverlays.brightness)
+        RxBuilder(
+          //observables: [_.volume],
+          (__) => AnimatedOpacity(
+            duration: _.durations.brightnessOverlayDuration,
+            opacity: _.showBrightnessStatus.value ? 1 : 0,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.all(10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: SizedBox(
+                    height: responsive.height / 2,
+                    width: 35,
+                    child: Stack(
+                      alignment: AlignmentDirectional.bottomCenter,
+                      children: [
+                        Container(color: Colors.black38),
+                        Container(
+                          height: _.brightness.value * responsive.height / 2,
+                          color: Colors.blue,
+                        ),
+                        Container(
+                            padding: const EdgeInsets.all(5),
+                            child: const Icon(
+                              Icons.wb_sunny,
+                              color: Colors.white,
+                            )),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
         ),
-      ),
       RxBuilder((__) {
         if (_.desktopOrWeb) {
           return MouseRegion(
@@ -353,7 +350,7 @@ class ControlsContainer extends StatelessWidget {
         (__) => Align(
           alignment: Alignment.center,
           child: AnimatedOpacity(
-            duration:_.durations.seekDuration,
+            duration: _.durations.seekDuration,
             opacity: _.showSwipeDuration.value ? 1 : 0,
             child: Visibility(
               visible: _.showSwipeDuration.value,

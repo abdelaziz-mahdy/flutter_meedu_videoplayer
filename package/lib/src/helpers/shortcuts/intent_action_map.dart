@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter/services.dart';
 
-
-
 Map<ShortcutActivator, void Function()> activatorsToCallBacks(
     MeeduPlayerController controller, BuildContext context) {
   return {
