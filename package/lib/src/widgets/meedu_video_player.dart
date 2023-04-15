@@ -56,7 +56,7 @@ class MeeduVideoPlayer extends StatefulWidget {
       : super(key: key);
 
   @override
-  _MeeduVideoPlayerState createState() => _MeeduVideoPlayerState();
+  State<MeeduVideoPlayer> createState() => _MeeduVideoPlayerState();
 }
 
 class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {

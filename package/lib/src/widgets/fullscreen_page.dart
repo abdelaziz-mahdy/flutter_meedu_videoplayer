@@ -8,7 +8,7 @@ class MeeduPlayerFullscreenPage extends StatefulWidget {
       {Key? key, required this.controller, required this.disposePlayer})
       : super(key: key);
   @override
-  _MeeduPlayerFullscreenPageState createState() =>
+  State<MeeduPlayerFullscreenPage> createState() =>
       _MeeduPlayerFullscreenPageState();
 }
 

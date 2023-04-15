@@ -10,21 +10,19 @@ class PlayerSlider extends StatelessWidget {
     return Stack(
       alignment: Alignment.centerLeft,
       children: [
-        Container(
-          child: LayoutBuilder(builder: (ctx, constraints) {
-            return RxBuilder(
-              //observables: [_.buffered, _.duration],
-              (__) {
-                return AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  color: Colors.white30,
-                  width: constraints.maxWidth * _.bufferedPercent.value,
-                  height: 3,
-                );
-              },
-            );
-          }),
-        ),
+        LayoutBuilder(builder: (ctx, constraints) {
+          return RxBuilder(
+            //observables: [_.buffered, _.duration],
+            (__) {
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                color: Colors.white30,
+                width: constraints.maxWidth * _.bufferedPercent.value,
+                height: 3,
+              );
+            },
+          );
+        }),
         RxBuilder(
           //observables: [_.sliderPosition, _.duration],
           (__) {

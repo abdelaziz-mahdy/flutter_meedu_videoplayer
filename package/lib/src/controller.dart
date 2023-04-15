@@ -848,9 +848,9 @@ class MeeduPlayerController {
 
   Future<void> getUserPreferenceForBrightness() async {
     prefs = await SharedPreferences.getInstance();
-    double BrightnessValue = (prefs?.getDouble('brightness')) ?? 0.5;
-    setBrightness(BrightnessValue);
-    customDebugPrint("Last Brightness used was $BrightnessValue");
+    double brightnessValue = (prefs?.getDouble('brightness')) ?? 0.5;
+    setBrightness(brightnessValue);
+    customDebugPrint("Last Brightness used was $brightnessValue");
   }
 
   /// Toggles the full-screen mode of the application window.

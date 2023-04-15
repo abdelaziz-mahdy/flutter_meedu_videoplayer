@@ -3,37 +3,51 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
-class ControlsContainer extends StatelessWidget {
+class ControlsContainer extends StatefulWidget {
   final Widget child;
-  bool playing = false;
-  bool gettingNotification = false;
-  late Offset horizontalDragStartOffset;
-  Offset _dragInitialDelta = Offset.zero;
-  Offset _verticalDragStartOffset = Offset.zero;
-  //Offset _mouseMoveInitial = Offset.zero;
-  //Duration _initialForwardPosition = Duration.zero;
-  //Axis _dragDirection = Axis.vertical;
+  final Responsive responsive;
+  //Duration swipeDuration=Duration(seconds: 0);
+  const ControlsContainer(
+      {Key? key, required this.child, required this.responsive})
+      : super(key: key);
 
+  @override
+  State<ControlsContainer> createState() => _ControlsContainerState();
+}
+
+class _ControlsContainerState extends State<ControlsContainer> {
+  bool playing = false;
+
+  bool gettingNotification = false;
+
+  late Offset horizontalDragStartOffset;
+
+  Offset _dragInitialDelta = Offset.zero;
+
+  Offset _verticalDragStartOffset = Offset.zero;
+
+  //Offset _mouseMoveInitial = Offset.zero;
   Offset _horizontalDragStartOffset = Offset.zero;
+
   final ValueNotifier<double> _currentVolume = ValueNotifier<double>(1.0);
+
   double _onDragStartVolume = 1;
+
   double _onDragStartBrightness = 1;
+
   bool isVolume = false;
+
   //bool gettingNotification = false;
   final int _defaultSeekAmount = -10;
+
   Timer? _doubleTapToSeekTimer;
+
   Timer? _tappedOnce;
+
   bool tappedTwice = false;
 
   final ValueNotifier<double> _currentBrightness = ValueNotifier<double>(1.0);
-  //final double _minScale = 1.0;
-  //double _initialScale = 1.0, _maxScale = 1.0;
-  final Responsive responsive;
-  //Duration swipeDuration=Duration(seconds: 0);
-  ControlsContainer({Key? key, required this.child, required this.responsive})
-      : super(key: key);
-  //------------------------------------//
-  //FORWARD AND REWIND (DRAG HORIZONTAL)//
+
   //------------------------------------//
   void _forwardDragStart(
       Offset globalPosition, MeeduPlayerController controller) async {
@@ -66,6 +80,7 @@ class ControlsContainer extends StatelessWidget {
 
   void _rewind(BuildContext context, MeeduPlayerController controller) =>
       _showRewindAndForward(context, 0, controller);
+
   void _forward(BuildContext context, MeeduPlayerController controller) =>
       _showRewindAndForward(context, 1, controller);
 
@@ -130,8 +145,6 @@ class ControlsContainer extends StatelessWidget {
   }
 
   //----------------------------//
-  //VIDEO VOLUME (VERTICAL DRAG)//
-
   void _volumeDragUpdate(
       Offset globalPosition, MeeduPlayerController controller) {
     double diff = _verticalDragStartOffset.dy - globalPosition.dy;
@@ -219,7 +232,7 @@ class ControlsContainer extends StatelessWidget {
   Widget controlsUI(MeeduPlayerController _, BuildContext context) {
     return Stack(children: [
       VideoCoreForwardAndRewindLayout(
-        responsive: responsive,
+        responsive: widget.responsive,
         rewind: GestureDetector(
           onTap: () {
             if (_.doubleTapCount.value != 0 || tappedTwice) {
@@ -263,14 +276,14 @@ class ControlsContainer extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: SizedBox(
-                    height: responsive.height / 2,
+                    height: widget.responsive.height / 2,
                     width: 35,
                     child: Stack(
                       alignment: AlignmentDirectional.bottomCenter,
                       children: [
                         Container(color: Colors.black38),
                         Container(
-                          height: _.volume.value * responsive.height / 2,
+                          height: _.volume.value * widget.responsive.height / 2,
                           color: Colors.blue,
                         ),
                         Container(
@@ -301,14 +314,15 @@ class ControlsContainer extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: SizedBox(
-                    height: responsive.height / 2,
+                    height: widget.responsive.height / 2,
                     width: 35,
                     child: Stack(
                       alignment: AlignmentDirectional.bottomCenter,
                       children: [
                         Container(color: Colors.black38),
                         Container(
-                          height: _.brightness.value * responsive.height / 2,
+                          height:
+                              _.brightness.value * widget.responsive.height / 2,
                           color: Colors.blue,
                         ),
                         Container(
@@ -424,7 +438,7 @@ class ControlsContainer extends StatelessWidget {
       RxBuilder(
         //observables: [_.showControls],
         (__) => VideoCoreForwardAndRewind(
-          responsive: responsive,
+          responsive: widget.responsive,
           showRewind: _.rewindIcons.value,
           showForward: _.forwardIcons.value,
           rewindSeconds: _defaultSeekAmount * _.doubleTapCount.value,
@@ -432,10 +446,10 @@ class ControlsContainer extends StatelessWidget {
         ),
       ),
       Positioned.fill(
-        bottom: responsive.height * 0.20,
-        top: responsive.height * 0.20,
+        bottom: widget.responsive.height * 0.20,
+        top: widget.responsive.height * 0.20,
         child: VideoCoreForwardAndRewindLayout(
-          responsive: responsive,
+          responsive: widget.responsive,
           rewind: GestureDetector(
             onTap: () {
               if (!_.enabledControls.doubleTapToSeek) {
@@ -492,9 +506,9 @@ class ControlsContainer extends StatelessWidget {
           final Offset position = details.localPosition;
           if (_dragInitialDelta == Offset.zero) {
             final Offset delta = details.delta;
-            if (details.globalPosition.dx > responsive.width * 0.1 &&
-                ((responsive.width - details.globalPosition.dx) >
-                        responsive.width * 0.1 &&
+            if (details.globalPosition.dx > widget.responsive.width * 0.1 &&
+                ((widget.responsive.width - details.globalPosition.dx) >
+                        widget.responsive.width * 0.1 &&
                     !gettingNotification)) {
               _forwardDragStart(position, _);
               _dragInitialDelta = delta;
@@ -529,13 +543,13 @@ class ControlsContainer extends StatelessWidget {
           final Offset position = details.localPosition;
           if (_dragInitialDelta == Offset.zero) {
             _.customDebugPrint(details.globalPosition.dy);
-            if (details.globalPosition.dy > responsive.height * 0.1 &&
-                ((responsive.height - details.globalPosition.dy) >
-                    responsive.height * 0.1) &&
+            if (details.globalPosition.dy > widget.responsive.height * 0.1 &&
+                ((widget.responsive.height - details.globalPosition.dy) >
+                    widget.responsive.height * 0.1) &&
                 !gettingNotification) {
               final Offset delta = details.delta;
               //if(details.globalPosition.dy<30){
-              if (details.globalPosition.dx >= responsive.width / 2) {
+              if (details.globalPosition.dx >= widget.responsive.width / 2) {
                 if (_.enabledControls.volumeSwipes) {
                   _volumeDragStart(position, _);
                 }
@@ -590,7 +604,7 @@ class ControlsContainer extends StatelessWidget {
           color: _.showControls.value ? Colors.black12 : Colors.transparent,
           child: AbsorbPointer(
             absorbing: !_.showControls.value,
-            child: child,
+            child: widget.child,
           ),
         ),
       ),
