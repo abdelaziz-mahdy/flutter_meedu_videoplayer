@@ -252,10 +252,11 @@ class ControlsContainer extends StatelessWidget {
           //behavior: HitTestBehavior.,
         ),
       ),
+      if(_.enabledOverlays.volume)
       RxBuilder(
         //observables: [_.volume],
         (__) => AnimatedOpacity(
-          duration: const Duration(milliseconds: 100),
+          duration:_.durations.volumeOverlayDuration,
           opacity: _.showVolumeStatus.value ? 1 : 0,
           child: Align(
             alignment: Alignment.centerLeft,
@@ -289,10 +290,11 @@ class ControlsContainer extends StatelessWidget {
           ),
         ),
       ),
+      if(_.enabledOverlays.brightness)
       RxBuilder(
         //observables: [_.volume],
         (__) => AnimatedOpacity(
-          duration: const Duration(milliseconds: 100),
+          duration:_.durations.brightnessOverlayDuration,
           opacity: _.showBrightnessStatus.value ? 1 : 0,
           child: Align(
             alignment: Alignment.centerRight,
@@ -351,7 +353,7 @@ class ControlsContainer extends StatelessWidget {
         (__) => Align(
           alignment: Alignment.center,
           child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 100),
+            duration:_.durations.seekDuration,
             opacity: _.showSwipeDuration.value ? 1 : 0,
             child: Visibility(
               visible: _.showSwipeDuration.value,
@@ -377,7 +379,7 @@ class ControlsContainer extends StatelessWidget {
         (__) => Align(
           alignment: Alignment.center,
           child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 100),
+            duration: _.durations.videoFitOverlayDuration,
             opacity: _.videoFitChanged.value ? 1 : 0,
             child: Visibility(
               visible: _.videoFitChanged.value,
@@ -585,10 +587,10 @@ class ControlsContainer extends StatelessWidget {
       },
       child: AnimatedOpacity(
         opacity: _.showControls.value ? 1 : 0,
-        duration: Duration(milliseconds: _.showControls.value ? 150 : 0),
+        duration: _.durations.controlsDuration,
         child: AnimatedContainer(
-          duration: Duration(milliseconds: _.showControls.value ? 150 : 0),
-          color: _.showControls.value ? Colors.black38 : Colors.transparent,
+          duration: _.durations.controlsDuration,
+          color: _.showControls.value ? Colors.black12 : Colors.transparent,
           child: AbsorbPointer(
             absorbing: !_.showControls.value,
             child: child,
