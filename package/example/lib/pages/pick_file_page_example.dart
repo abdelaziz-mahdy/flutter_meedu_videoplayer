@@ -9,7 +9,7 @@ class PickFileExamplePage extends StatefulWidget {
   const PickFileExamplePage({Key? key}) : super(key: key);
 
   @override
-  _PickFileExamplePageState createState() => _PickFileExamplePageState();
+  State<PickFileExamplePage> createState() => _PickFileExamplePageState();
 }
 
 class _PickFileExamplePageState extends State<PickFileExamplePage> {

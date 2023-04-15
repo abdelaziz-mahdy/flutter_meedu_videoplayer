@@ -16,7 +16,7 @@ class ChangeQualityExamplePage extends StatefulWidget {
   const ChangeQualityExamplePage({Key? key}) : super(key: key);
 
   @override
-  _ChangeQualityExamplePageState createState() =>
+  State<ChangeQualityExamplePage> createState() =>
       _ChangeQualityExamplePageState();
 }
 

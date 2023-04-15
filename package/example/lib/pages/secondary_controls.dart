@@ -7,7 +7,7 @@ class SecondaryExamplePage extends StatefulWidget {
   const SecondaryExamplePage({Key? key}) : super(key: key);
 
   @override
-  _SecondaryExamplePageState createState() => _SecondaryExamplePageState();
+  State<SecondaryExamplePage> createState() => _SecondaryExamplePageState();
 }
 
 class _SecondaryExamplePageState extends State<SecondaryExamplePage> {

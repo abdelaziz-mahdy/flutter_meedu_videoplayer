@@ -7,7 +7,7 @@ class ListViewExample extends StatefulWidget {
   const ListViewExample({Key? key}) : super(key: key);
 
   @override
-  _ListViewExampleState createState() => _ListViewExampleState();
+  State<ListViewExample> createState() => _ListViewExampleState();
 }
 
 class _ListViewExampleState extends State<ListViewExample>

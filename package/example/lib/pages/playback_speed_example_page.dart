@@ -6,7 +6,7 @@ class PlayBackSpeedExamplePage extends StatefulWidget {
   const PlayBackSpeedExamplePage({Key? key}) : super(key: key);
 
   @override
-  _PlayBackSpeedExamplePageState createState() =>
+  State<PlayBackSpeedExamplePage> createState() =>
       _PlayBackSpeedExamplePageState();
 }
 

@@ -7,7 +7,7 @@ class GridViewExample extends StatefulWidget {
   const GridViewExample({Key? key}) : super(key: key);
 
   @override
-  _GridViewExampleState createState() => _GridViewExampleState();
+  State<GridViewExample> createState() => _GridViewExampleState();
 }
 
 class _GridViewExampleState extends State<GridViewExample>

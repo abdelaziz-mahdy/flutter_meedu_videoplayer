@@ -6,7 +6,7 @@ class NetworkWithSubtitlesPage extends StatefulWidget {
   const NetworkWithSubtitlesPage({Key? key}) : super(key: key);
 
   @override
-  _NetworkWithSubtitlesPageState createState() =>
+  State<NetworkWithSubtitlesPage> createState() =>
       _NetworkWithSubtitlesPageState();
 }
 

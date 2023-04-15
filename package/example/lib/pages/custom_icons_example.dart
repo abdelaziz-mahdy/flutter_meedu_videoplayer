@@ -8,7 +8,7 @@ class CustomIconsExamplePage extends StatefulWidget {
   const CustomIconsExamplePage({Key? key}) : super(key: key);
 
   @override
-  _CustomIconsExamplePageState createState() => _CustomIconsExamplePageState();
+  State<CustomIconsExamplePage> createState() => _CustomIconsExamplePageState();
 }
 
 class _CustomIconsExamplePageState extends State<CustomIconsExamplePage> {

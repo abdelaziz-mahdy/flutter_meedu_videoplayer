@@ -8,7 +8,7 @@ class DisabledButtonsExample extends StatefulWidget {
   const DisabledButtonsExample({Key? key}) : super(key: key);
 
   @override
-  _DisabledButtonsExampleState createState() => _DisabledButtonsExampleState();
+  State<DisabledButtonsExample> createState() => _DisabledButtonsExampleState();
 }
 
 class _DisabledButtonsExampleState extends State<DisabledButtonsExample> {

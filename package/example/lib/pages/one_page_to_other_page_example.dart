@@ -8,7 +8,7 @@ class OnePageExample extends StatefulWidget {
   const OnePageExample({Key? key}) : super(key: key);
 
   @override
-  _OnePageExampleState createState() => _OnePageExampleState();
+  State<OnePageExample> createState() => _OnePageExampleState();
 }
 
 class _OnePageExampleState extends State<OnePageExample> {

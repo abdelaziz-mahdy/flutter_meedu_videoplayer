@@ -7,7 +7,7 @@ class PortraitExamplePage extends StatefulWidget {
   const PortraitExamplePage({Key? key}) : super(key: key);
 
   @override
-  _PortraitExamplePageState createState() => _PortraitExamplePageState();
+  State<PortraitExamplePage> createState() => _PortraitExamplePageState();
 }
 
 class _PortraitExamplePageState extends State<PortraitExamplePage> {

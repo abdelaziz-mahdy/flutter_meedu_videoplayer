@@ -7,7 +7,7 @@ class PlayerWithHeaderPage extends StatefulWidget {
   const PlayerWithHeaderPage({Key? key}) : super(key: key);
 
   @override
-  _PlayerWithHeaderPageState createState() => _PlayerWithHeaderPageState();
+  State<PlayerWithHeaderPage> createState() => _PlayerWithHeaderPageState();
 }
 
 class _PlayerWithHeaderPageState extends State<PlayerWithHeaderPage> {

@@ -209,7 +209,7 @@ class M3u8ExamplePage extends StatefulWidget {
   const M3u8ExamplePage({Key? key}) : super(key: key);
 
   @override
-  _M3u8ExamplePageState createState() => _M3u8ExamplePageState();
+  State<M3u8ExamplePage> createState() => _M3u8ExamplePageState();
 }
 
 class _M3u8ExamplePageState extends State<M3u8ExamplePage> {

@@ -7,7 +7,7 @@ class CustomSizesExamplePage extends StatefulWidget {
   const CustomSizesExamplePage({Key? key}) : super(key: key);
 
   @override
-  _CustomSizesExamplePageState createState() => _CustomSizesExamplePageState();
+  State<CustomSizesExamplePage> createState() => _CustomSizesExamplePageState();
 }
 
 class _CustomSizesExamplePageState extends State<CustomSizesExamplePage> {

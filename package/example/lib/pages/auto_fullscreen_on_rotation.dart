@@ -19,7 +19,7 @@ class AutoFullScreenExamplePage extends StatefulWidget {
   const AutoFullScreenExamplePage({Key? key}) : super(key: key);
 
   @override
-  _AutoFullScreenExamplePageState createState() =>
+  State<AutoFullScreenExamplePage> createState() =>
       _AutoFullScreenExamplePageState();
 }
 

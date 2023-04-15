@@ -7,7 +7,7 @@ class CustomControlsExamplePage extends StatefulWidget {
   const CustomControlsExamplePage({Key? key}) : super(key: key);
 
   @override
-  _CustomControlsExamplePageState createState() =>
+  State<CustomControlsExamplePage> createState() =>
       _CustomControlsExamplePageState();
 }
 

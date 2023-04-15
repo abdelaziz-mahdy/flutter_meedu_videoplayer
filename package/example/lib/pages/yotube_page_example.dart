@@ -16,7 +16,7 @@ class YoutubeExamplePage extends StatefulWidget {
   const YoutubeExamplePage({Key? key}) : super(key: key);
 
   @override
-  _YoutubeExamplePageState createState() => _YoutubeExamplePageState();
+  State<YoutubeExamplePage> createState() => _YoutubeExamplePageState();
 }
 
 class _YoutubeExamplePageState extends State<YoutubeExamplePage> {

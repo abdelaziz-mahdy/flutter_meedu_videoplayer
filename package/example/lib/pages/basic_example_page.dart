@@ -7,7 +7,7 @@ class BasicExamplePage extends StatefulWidget {
   const BasicExamplePage({Key? key}) : super(key: key);
 
   @override
-  _BasicExamplePageState createState() => _BasicExamplePageState();
+  State<BasicExamplePage> createState() => _BasicExamplePageState();
 }
 
 class _BasicExamplePageState extends State<BasicExamplePage> {

@@ -16,7 +16,7 @@ class FullscreenExamplePage extends StatefulWidget {
   const FullscreenExamplePage({Key? key}) : super(key: key);
 
   @override
-  _FullscreenExamplePageState createState() => _FullscreenExamplePageState();
+  State<FullscreenExamplePage> createState() => _FullscreenExamplePageState();
 }
 
 class _FullscreenExamplePageState extends State<FullscreenExamplePage> {
