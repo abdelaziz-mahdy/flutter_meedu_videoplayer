@@ -1,3 +1,11 @@
+
+## 4.1.3
+
+* Added durations class to give ability to change animations durations
+* Added enabledOverlays to give ability to disable overlays (volume/brightness)
+* Fixed fullScreen when using custom controls
+
+
 ## 4.1.2
 
 * Fixed launch as full screen closing videoPlayer when fullScreen changes

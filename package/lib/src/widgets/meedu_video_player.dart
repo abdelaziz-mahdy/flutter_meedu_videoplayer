@@ -120,6 +120,10 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                         widget.bottomRight!(context, _, _.responsive);
                   }
 
+                  if (widget.customControls != null) {
+                    _.customControls =
+                        widget.customControls!(context, _, _.responsive);
+                  }
                   return ExcludeFocus(
                     excluding: _.excludeFocus,
                     child: Stack(
@@ -170,11 +174,10 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                           ),
                         if (_.controlsEnabled &&
                             _.controlsStyle == ControlsStyle.custom &&
-                            widget.customControls != null)
+                            _.customControls != null)
                           ControlsContainer(
                             responsive: _.responsive,
-                            child: widget.customControls!(
-                                context, _, _.responsive),
+                            child: _.customControls!,
                           )
                       ],
                     ),
