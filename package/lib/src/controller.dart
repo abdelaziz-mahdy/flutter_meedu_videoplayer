@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu_videoplayer/src/helpers/durations.dart';
+import 'package:flutter_meedu_videoplayer/src/helpers/enabled_overlays.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -159,7 +161,7 @@ class MeeduPlayerController {
   Rx<double> get volume => _currentVolume;
   Stream<double> get onVolumeChanged => _currentVolume.stream;
 
-  /// [volume] is true if the player controls are visible
+  /// [brightness] is true if the player controls are visible
   Rx<double> get brightness => _currentBrightness;
   Stream<double> get onBrightnessChanged => _currentBrightness.stream;
 
@@ -238,10 +240,13 @@ class MeeduPlayerController {
 
   Responsive responsive = Responsive();
 
-  /// creates an instance of [MeeduPlayerControlle]
+  final Durations durations;
+
+  final EnabledOverlays enabledOverlays;
+
+  /// creates an instance of [MeeduPlayerController]
   ///
   /// [screenManager] the device orientations and overlays
-  /// [placeholder] widget to show when the player is loading a video
   /// [controlsEnabled] if the player must show the player controls
   /// [manageWakeLock] if the player should use wakelock
   /// [errorText] message to show when the load process failed
@@ -272,7 +277,9 @@ class MeeduPlayerController {
     this.customIcons = const CustomIcons(),
     this.enabledButtons = const EnabledButtons(),
     this.enabledControls = const EnabledControls(),
+    this.enabledOverlays=const EnabledOverlays(),
     Responsive? responsive,
+    this.durations = const Durations(),
     this.onVideoPlayerClosed,
   }) {
     if (responsive != null) {
