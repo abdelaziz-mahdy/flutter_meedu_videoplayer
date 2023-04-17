@@ -60,10 +60,10 @@ class MeeduVideoPlayer extends StatefulWidget {
 }
 
 class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
-  double videoWidth(VideoPlayerController? controller, double max) {
-    double width = controller != null
-        ? controller.value.size.width != 0
-            ? controller.value.size.width
+  double videoWidth(VideoController? controller, double max) {
+    double width = (controller != null&&controller.rect.value!=null)
+        ? controller.rect.value!.width != 0
+            ? controller.rect.value!.width
             : 640
         : 640;
     if (width > max) {
@@ -73,10 +73,10 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
     }
   }
 
-  double videoHeight(VideoPlayerController? controller, double max) {
-    double height = controller != null
-        ? controller.value.size.height != 0
-            ? controller.value.size.height
+  double videoHeight(VideoController? controller, double max) {
+    double height = (controller != null&&controller.rect.value!=null)
+        ? controller.rect.value!.height != 0
+            ? controller.rect.value!.height 
             : 480
         : 480;
     if (height > max) {
@@ -147,20 +147,20 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                               clipBehavior: Clip.hardEdge,
                               fit: widget.controller.videoFit.value,
                               child: SizedBox(
-                                width: videoWidth(_.videoPlayerController,
+                                width: videoWidth(_.videoController,
                                     constraints.maxWidth),
-                                height: videoHeight(_.videoPlayerController,
+                                height: videoHeight(_.videoController,
                                     constraints.maxHeight),
                                 // width: 640,
                                 // height: 480,
                                 child: _.videoPlayerController != null
-                                    ? VideoPlayer(_.videoPlayerController!)
+                                    ? Video(controller:_.videoController!)
                                     : Container(),
                               ),
                             ),
                           );
                         }),
-                        ClosedCaptionView(responsive: _.responsive),
+                        // ClosedCaptionView(responsive: _.responsive),
                         if (_.controlsEnabled &&
                             _.controlsStyle == ControlsStyle.primary)
                           PrimaryVideoPlayerControls(

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart' as yt_explode_dart;
 
 class Quality {
   final String url, label;
@@ -56,10 +56,10 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
   }
 
   Future<void> getYoutubeStreamUrl(String youtubeUrl) async {
-    var yt = YoutubeExplode();
-    Video video = await yt.videos.get(youtubeUrl);
+    var yt = yt_explode_dart.YoutubeExplode();
+    final video = await yt.videos.get(youtubeUrl);
 
-    StreamManifest manifest =
+    yt_explode_dart.StreamManifest manifest =
         await yt.videos.streamsClient.getManifest(video.id);
     if (video.isLive) {
       // MuxedStreamInfo  streamInfo = manifest.muxed.withHighestBitrate();

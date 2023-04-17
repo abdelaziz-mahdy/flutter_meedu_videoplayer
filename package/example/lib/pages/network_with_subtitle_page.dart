@@ -36,7 +36,7 @@ class _NetworkWithSubtitlesPageState extends State<NetworkWithSubtitlesPage> {
         source:
             'https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4',
         type: DataSourceType.network,
-        closedCaptionFile: _loadCaptions(),
+        subtitlesFile: _loadCaptions(),
       ),
       autoplay: true,
     );

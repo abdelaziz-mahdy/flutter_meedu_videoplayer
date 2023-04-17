@@ -22,7 +22,6 @@ import 'package:flutter_meedu_videoplayer_example/pages/secondary_controls.dart'
 import 'package:flutter_meedu_videoplayer_example/pages/yotube_page_example.dart';
 
 void main() {
-  initMeeduPlayer();
   runApp(const MyApp());
 }
 

@@ -2,20 +2,36 @@ import 'dart:io';
 
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
+/// The way in which the video was originally loaded.
+///
+/// This has nothing to do with the video's file type. It's just the place
+/// from which the video is fetched from.
+enum DataSourceType {
+  /// The video was included in the app's asset files.
+  asset,
+
+  /// The video was downloaded from the internet.
+  network,
+
+  /// The video was loaded off of the local filesystem.
+  file,
+
+  /// The video is available via contentUri. Android only.
+  contentUri,
+}
+
 class DataSource {
   File? file;
   String? source, package;
   DataSourceType type;
-  VideoFormat? formatHint;
-  Future<ClosedCaptionFile>? closedCaptionFile; // for subtiles
+  Future<String>? subtitlesFile; // for subtiles
   Map<String, String>? httpHeaders; // for headers
   DataSource({
     this.file,
     this.source,
     required this.type,
-    this.formatHint,
     this.package,
-    this.closedCaptionFile,
+    this.subtitlesFile,
     this.httpHeaders,
   }) : assert((type == DataSourceType.file && file != null) || source != null);
 
@@ -24,18 +40,16 @@ class DataSource {
     String? source,
     String? package,
     DataSourceType? type,
-    VideoFormat? formatHint,
     Map<String, String>? httpHeaders,
-    Future<ClosedCaptionFile>? closedCaptionFile,
+    Future<String>? subtitlesFile,
   }) {
     return DataSource(
       file: file ?? this.file,
       source: source ?? this.source,
       type: type ?? this.type,
       package: package ?? this.package,
-      formatHint: formatHint ?? this.formatHint,
       httpHeaders: httpHeaders ?? this.httpHeaders,
-      closedCaptionFile: closedCaptionFile ?? this.closedCaptionFile,
+      subtitlesFile: subtitlesFile ?? this.subtitlesFile,
     );
   }
 }

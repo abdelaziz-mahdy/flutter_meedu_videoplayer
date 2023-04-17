@@ -21,7 +21,11 @@ enum ControlsStyle {
 
 class MeeduPlayerController {
   /// the video_player controller
-  VideoPlayerController? _videoPlayerController;
+  Player? _videoPlayerController;
+
+  /// the video_player controller
+  VideoController? _videoController;
+
   //final _pipManager = PipManager();
   StreamSubscription? _playerEventSubs;
 
@@ -58,12 +62,13 @@ class MeeduPlayerController {
   final Rx<Duration> _position = Rx(Duration.zero);
   final Rx<Duration> _sliderPosition = Rx(Duration.zero);
   final Rx<Duration> _duration = Rx(Duration.zero);
+  final Rx<Duration> _buffered = Rx(Duration.zero);
+
   final Rx<int> _swipeDuration = 0.obs;
   Rx<int> doubleTapCount = 0.obs;
   final Rx<double> _currentVolume = 1.0.obs;
   final Rx<double> _playbackSpeed = 1.0.obs;
   final Rx<double> _currentBrightness = 0.0.obs;
-  final Rx<List<DurationRange>> _buffered = Rx([]);
   Rx<double> bufferedPercent = Rx(0.0);
   final Rx<bool> _closedCaptionEnabled = false.obs;
   final Rx<bool> _mute = false.obs;
@@ -82,6 +87,8 @@ class MeeduPlayerController {
   bool _isSliderMoving = false;
   bool _looping = false;
   bool _autoPlay = false;
+  bool _listenersInitialized = false;
+
   double _volumeBeforeMute = 0;
   double mouseMoveInitial = 0;
   Timer? _timer;
@@ -119,6 +126,12 @@ class MeeduPlayerController {
 
   /// use this stream to listen the changes in the video duration
   Stream<Duration> get onDurationChanged => _duration.stream;
+
+  /// duration of the video buffered
+  Rx<Duration> get buffered => _buffered;
+
+  /// use this stream to listen the changes in the video buffered
+  Stream<Duration> get onBufferedChanged => _buffered.stream;
 
   /// [mute] is true if the player is muted
   Rx<bool> get mute => _mute;
@@ -161,12 +174,11 @@ class MeeduPlayerController {
   Rx<Duration> get sliderPosition => _sliderPosition;
   Stream<Duration> get onSliderPositionChanged => _sliderPosition.stream;
 
-  /// [bufferedLoaded] buffered Loaded for network resources
-  Rx<List<DurationRange>> get buffered => _buffered;
-  Stream<List<DurationRange>> get onBufferedChanged => _buffered.stream;
+  /// [videoPlayerController] instace of Player
+  Player? get videoPlayerController => _videoPlayerController;
 
-  /// [videoPlayerController] instace of VideoPlayerController
-  VideoPlayerController? get videoPlayerController => _videoPlayerController;
+  /// [videoController] instace of Player
+  VideoController? get videoController => _videoController;
 
   /// the playback speed default value is 1.0
   double get playbackSpeed => _playbackSpeed.value;
@@ -328,32 +340,69 @@ class MeeduPlayerController {
     //_pipAvailable.value = false;
     //}
   }
+  String? mapToStringList(Map<String, String>? map) {
+    if (map == null) {
+      return null;
+    }
+    String list = "";
+    map.forEach((key, value) {
+      list += "'$key: $value',";
+    });
+    if (list.isEmpty) {
+      return null;
+    }
+    return list.substring(0, list.length - 1);
+  }
 
   /// create a new video_player controller
-  VideoPlayerController _createVideoController(DataSource dataSource) {
-    VideoPlayerController tmp; // create a new video controller
+  Future<Player> _createVideoController(DataSource dataSource) async {
+    Player player = Player(
+        configuration: PlayerConfiguration(
+            //logLevel: logLevel
+            )); // create a new video controller
+
+    // (player.platform as libmpvPlayer).setProperty("demuxer-lavf-o", "protocol_whitelist=[file,tcp,tls,http,https]");
+
+    _videoController = await VideoController.create(player);
+    player.setPlaylistMode(PlaylistMode.loop);
+
+    String? refer, userAgent, headersListString;
+    refer = dataSource.httpHeaders?["Referer"];
+    userAgent = dataSource.httpHeaders?["User-Agent"];
+    headersListString = mapToStringList(dataSource.httpHeaders);
+    //print('--http-referrer=' + refer);
+
+    if (refer != null) {
+      (player.platform as libmpvPlayer).setProperty("referrer", refer);
+    }
+    if (userAgent != null) {
+      (player.platform as libmpvPlayer).setProperty("user-agent", userAgent);
+    }
+
+    if (headersListString != null) {
+      (player.platform as libmpvPlayer)
+          .setProperty("http-header-fields", headersListString);
+    }
     //dataSource = await checkIfm3u8AndNoLinks(dataSource);
     if (dataSource.type == DataSourceType.asset) {
-      tmp = VideoPlayerController.asset(
-        dataSource.source!,
-        closedCaptionFile: dataSource.closedCaptionFile,
-        package: dataSource.package,
-      );
+      final assetUrl = dataSource.source!.startsWith("asset://")
+          ? dataSource.source!
+          : "asset://${dataSource.source!}";
+      player.open(Media(assetUrl), play: false
+          // autoStart: ,
+          );
     } else if (dataSource.type == DataSourceType.network) {
-      tmp = VideoPlayerController.network(
-        dataSource.source!,
-        formatHint: dataSource.formatHint,
-        closedCaptionFile: dataSource.closedCaptionFile,
-        httpHeaders: dataSource.httpHeaders ?? {},
-      );
+      player.open(Media(dataSource.source!), play: false
+          // autoStart: ,
+          );
     } else {
-      tmp = VideoPlayerController.file(
-        dataSource.file!,
-        closedCaptionFile: dataSource.closedCaptionFile,
-        httpHeaders: dataSource.httpHeaders ?? {},
-      );
+      player.open(Media(dataSource.file!.path), play: false
+          // autoStart: ,
+          );
     }
-    return tmp;
+    //TODO: subtitles
+    if(){}
+    return player;
   }
 
   void customDebugPrint(Object? object) {
@@ -376,9 +425,9 @@ class MeeduPlayerController {
       await setPlaybackSpeed(_playbackSpeed.value);
     }
 
-    if (_looping) {
-      await setLooping(_looping);
-    }
+    // if (_looping) {
+    //   await setLooping(_looping);
+    // }
 
     if (_autoPlay) {
       // if the autoPlay is enabled
@@ -386,38 +435,52 @@ class MeeduPlayerController {
     }
   }
 
-  void _listener() {
-    final value = _videoPlayerController!.value;
-    //update duration
-    duration.value = value.duration;
-    // set the current video position
-    final position = value.position;
-    _position.value = position;
-    if (!_isSliderMoving) {
-      _sliderPosition.value = position;
-    }
+  List<StreamSubscription> subscriptions = [];
 
-    // set the video buffered loaded
-    final buffered = value.buffered;
+  void startListeners() {
+    subscriptions.addAll(
+      [
+        videoPlayerController!.streams.playing.listen((event) {
+          if (event) {
+            playerStatus.status.value = PlayerStatus.playing;
+          } else {
+            //playerStatus.status.value = PlayerStatus.paused;
+          }
+        }),
+        videoPlayerController!.streams.completed.listen((event) {
+          if (event) {
+            playerStatus.status.value = PlayerStatus.completed;
+          } else {
+            //            playerStatus.status.value = PlayerStatus.playing;
+          }
+        }),
+        videoPlayerController!.streams.position.listen((event) {
+          _position.value = event;
+          if (!_isSliderMoving) {
+            _sliderPosition.value = event;
+          }
+        }),
+        videoPlayerController!.streams.duration.listen((event) {
+          duration.value = event;
+        }),
+        videoPlayerController!.streams.buffer.listen((event) {
+          _buffered.value = event;
+        }),
+        videoPlayerController!.streams.buffering.listen((event) {
+          isBuffering.value = event;
+        }),
+        videoPlayerController!.streams.volume.listen((event) {
+          if (!mute.value && _volumeBeforeMute != event) {
+            _volumeBeforeMute = event;
+          }
+        }),
+      ],
+    );
+  }
 
-    if (buffered.isNotEmpty) {
-      _buffered.value = buffered;
-      isBuffering.value =
-          value.isPlaying && position.inSeconds >= buffered.last.end.inSeconds;
-      bufferedPercent.value =
-          buffered.last.end.inSeconds / duration.value.inSeconds;
-    }
-
-    // save the volume value
-    final volume = value.volume;
-    if (!mute.value && _volumeBeforeMute != volume) {
-      _volumeBeforeMute = volume;
-    }
-
-    // check if the player has been finished
-    if (_position.value.inSeconds >= duration.value.inSeconds &&
-        !playerStatus.completed) {
-      playerStatus.status.value = PlayerStatus.completed;
+  void removeListeners() {
+    for (final s in subscriptions) {
+      s.cancel();
     }
   }
 
@@ -437,39 +500,29 @@ class MeeduPlayerController {
 
       // if we are playing a video
       if (_videoPlayerController != null &&
-          _videoPlayerController!.value.isPlaying) {
+          _videoPlayerController!.state.playing) {
         await pause(notify: false);
       }
 
-      // save the current video controller to be disposed in the next frame
-      VideoPlayerController? oldController = _videoPlayerController;
-
-      _videoPlayerController = _createVideoController(dataSource);
-      await _videoPlayerController!.initialize();
-
-      if (oldController != null) {
-        WidgetsBinding.instance.addPostFrameCallback((_) async {
-          oldController.removeListener(_listener);
-          await oldController
-              .dispose(); // dispose the previous video controller
-        });
-      }
+      _videoPlayerController = await _createVideoController(dataSource);
 
       // set the video duration
-      customDebugPrint("Duration is ${_videoPlayerController!.value.duration}");
+      customDebugPrint("Duration is ${_videoPlayerController!.state.duration}");
 
-      _duration.value = _videoPlayerController!.value.duration;
+      _duration.value = _videoPlayerController!.state.duration;
 
       /// notify that video was loaded
       dataStatus.status.value = DataStatus.loaded;
 
       await _initializePlayer(seekTo: seekTo);
       // listen the video player events
-      _videoPlayerController!.addListener(_listener);
+      if (!_listenersInitialized) {
+        startListeners();
+      }
     } catch (e, s) {
       customDebugPrint(e);
       customDebugPrint(s);
-      _errorText ??= _videoPlayerController!.value.errorDescription ?? "$e";
+      // _errorText ??= _videoPlayerController!.value.errorDescription ?? "$e";
       dataStatus.status.value = DataStatus.error;
     }
   }
@@ -520,7 +573,7 @@ class MeeduPlayerController {
     customDebugPrint(
         "duration in seek function is ${duration.value.toString()}");
     if (duration.value.inSeconds != 0) {
-      await _videoPlayerController?.seekTo(position);
+      await _videoPlayerController?.seek(position);
 
       // if (playerStatus.stopped) {
       //   play();
@@ -532,7 +585,7 @@ class MeeduPlayerController {
         //_timerForSeek = null;
         customDebugPrint("SEEK CALLED");
         if (duration.value.inSeconds != 0) {
-          await _videoPlayerController?.seekTo(position);
+          await _videoPlayerController?.seek(position);
 
           // if (playerStatus.stopped) {
           //   play();
@@ -562,7 +615,7 @@ class MeeduPlayerController {
   ///   possible that your specific video cannot be slowed down, in which case
   ///   the plugin also reports errors.
   Future<void> setPlaybackSpeed(double speed) async {
-    await _videoPlayerController?.setPlaybackSpeed(speed);
+    await _videoPlayerController?.setRate(speed);
     _playbackSpeed.value = speed;
   }
 
@@ -577,11 +630,11 @@ class MeeduPlayerController {
     }
   }
 
-  /// Sets whether or not the video should loop after playing once
-  Future<void> setLooping(bool looping) async {
-    await _videoPlayerController?.setLooping(looping);
-    _looping = looping;
-  }
+  // /// Sets whether or not the video should loop after playing once
+  // Future<void> setLooping(bool looping) async {
+  //   await _videoPlayerController?.setLooping(looping);
+  //   _looping = looping;
+  // }
 
   void onChangedSliderStart() {
     _isSliderMoving = true;
@@ -600,7 +653,7 @@ class MeeduPlayerController {
   /// [enabled] if is true the video player is muted
   Future<void> setMute(bool enabled) async {
     if (enabled) {
-      _volumeBeforeMute = _videoPlayerController!.value.volume;
+      _volumeBeforeMute = _videoPlayerController!.state.volume;
     }
     _mute.value = enabled;
     await setVolume(enabled ? 0 : _volumeBeforeMute, videoPlayerVolume: true);
@@ -635,7 +688,7 @@ class MeeduPlayerController {
 
   Future<void> getCurrentVolume() async {
     if (desktopOrWeb) {
-      _currentVolume.value = _videoPlayerController?.value.volume ?? 0;
+      _currentVolume.value = _videoPlayerController?.state.volume ?? 0;
     } else {
       try {
         _currentVolume.value = await VolumeController().getVolume();
@@ -819,7 +872,7 @@ class MeeduPlayerController {
     playerStatus.status.close();
     dataStatus.status.close();
 
-    _videoPlayerController?.removeListener(_listener);
+    removeListeners();
     await _videoPlayerController?.dispose();
     _videoPlayerController = null;
   }
@@ -934,7 +987,7 @@ class MeeduPlayerController {
   Future<void> videoSeekToNextSeconds(int seconds, bool playing) async {
     int position = 0;
 
-    position = _videoPlayerController!.value.position.inSeconds;
+    position = _videoPlayerController!.state.position.inSeconds;
 
     await seekTo(Duration(seconds: position + seconds));
     if (playing) {
@@ -987,11 +1040,11 @@ class MeeduPlayerController {
         Wakelock.disable();
       }
 
-      _videoPlayerController?.removeListener(_listener);
+      removeListeners();
       await _videoPlayerController?.dispose();
       _videoPlayerController = null;
 
-      //disposeVideoPlayerController();
+      //disposePlayer();
       if (onVideoPlayerClosed != null) {
         customDebugPrint("Called");
         onVideoPlayerClosed!();

@@ -84,7 +84,7 @@ class _VideoItemState extends State<VideoItem>
         final visible = info.visibleFraction > 0;
         if (_visible.value != visible) {
           _visible.value = visible;
-          if (!visible && _controller.videoPlayerController!.value.isPlaying) {
+          if (!visible && _controller.videoPlayerController!.state.playing) {
             _controller.pause();
           }
         }

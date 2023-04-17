@@ -275,10 +275,10 @@ packages:
     dependency: transitive
     description:
       name: media_kit_libs_macos_video
-      sha256: ff06adff5f544b11aa1d3ad596f9add477264c6026a60aebeed69eda1c7d9d63
+      sha256: b3259875e201ec66d98ed33b32687ff14fcce7d91e74d420733c039556dff8cd
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.3"
   media_kit_libs_windows_video:
     dependency: transitive
     description:
@@ -564,14 +564,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  stream_transform:
-    dependency: transitive
-    description:
-      name: stream_transform
-      sha256: "14a00e794c7c11aa145a170587321aedce29769c08d7f58b1d141da75e3b1c6f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   string_scanner:
     dependency: transitive
     description:
@@ -636,54 +628,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  video_player:
-    dependency: transitive
-    description:
-      name: video_player
-      sha256: "868a139229acb5018d22aded3eb9cb4767ff43a8216573c086b6c535a4957481"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.6.0"
-  video_player_android:
-    dependency: transitive
-    description:
-      name: video_player_android
-      sha256: e7de6fabe5d96048cd8f4d710f25c3df84bb3cab8b22da6c082bd8f39e316984
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.3"
-  video_player_avfoundation:
-    dependency: transitive
-    description:
-      name: video_player_avfoundation
-      sha256: "90468226c8687adf7b567d9bb42c25588783c4d30509af1fbd663b2dd049f700"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.2"
-  video_player_media_kit:
-    dependency: transitive
-    description:
-      name: video_player_media_kit
-      sha256: e09ae81c3d27085502abc49988d6c442ee64cacb8224b05ec88d390cc8ab8c47
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.7"
-  video_player_platform_interface:
-    dependency: transitive
-    description:
-      name: video_player_platform_interface
-      sha256: a8c4dcae2a7a6e7cc1d7f9808294d968eca1993af34a98e95b9bdfa959bec684
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.1.0"
-  video_player_web:
-    dependency: transitive
-    description:
-      name: video_player_web
-      sha256: fb3bbeaf0302cb0c31340ebd6075487939aa1fe3b379d1a8784ef852b679940e
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.15"
   visibility_detector:
     dependency: "direct main"
     description:
