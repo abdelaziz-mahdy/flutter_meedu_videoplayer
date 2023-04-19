@@ -487,7 +487,7 @@ class MeeduPlayerController {
     await getCurrentBrightness();
 
     playerStatus.status.value = PlayerStatus.playing;
-    screenManager.setOverlays(false);
+    // screenManager.setOverlays(false);
     _hideTaskControls();
   }
 

@@ -1,6 +1,7 @@
 ## 4.2.1
 
 * Updating example and awaiting full screen
+* Fixed hiding overlays when not full screen
 
 ## 4.2.0
 
