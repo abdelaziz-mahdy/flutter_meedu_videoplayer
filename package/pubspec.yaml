@@ -20,8 +20,11 @@ dependencies:
   meta: ^1.7.0
   universal_platform: ^1.0.0+1
   fullscreen_window: ^1.0.4
-  video_player_media_kit: ^0.0.7
+  video_player_media_kit: ^0.0.8
     # path: ../../video_player_media_kit
+
+  # video_player_media_kit:
+  #   path: ../../video_player_media_kit
   # flutter_volume_controller: ^1.2.2
 
   window_manager: ^0.3.0

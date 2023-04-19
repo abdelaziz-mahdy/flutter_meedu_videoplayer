@@ -751,8 +751,8 @@ class MeeduPlayerController {
           screenManager.setFullScreenOverlaysAndOrientations();
         }
       }
-    }
-    _fullscreen.value = true;
+    }    _fullscreen.value = true;
+
     final route = PageRouteBuilder(
       opaque: false,
       fullscreenDialog: true,
@@ -764,7 +764,8 @@ class MeeduPlayerController {
       },
     );
 
-    await Navigator.push(context, route);
+    await Navigator.push(context, route);    
+
   }
 
   /// launch a video using the fullscreen apge
@@ -889,7 +890,7 @@ class MeeduPlayerController {
           }
         }
       } else {
-        Navigator.pop(context);
+         Navigator.pop(context);
       }
     }
   }
@@ -955,18 +956,19 @@ class MeeduPlayerController {
   }*/
   Future<void> onFullscreenClose() async {
     customDebugPrint("Fullscreen Closed");
-    fullscreen.value = false;
-    resetBrightness();
+    await resetBrightness();
 
     if (UniversalPlatform.isWeb) {
-      screenManager.setWebFullScreen(false, this);
+      await screenManager.setWebFullScreen(false, this);
     } else {
       if (desktopOrWeb) {
-        screenManager.setWindowsFullScreen(false, this);
+        await screenManager.setWindowsFullScreen(false, this);
       } else {
-        screenManager.setDefaultOverlaysAndOrientations();
+        await screenManager.setDefaultOverlaysAndOrientations();
       }
     }
+        fullscreen.value = false;
+
   }
 
   Future<void> videoPlayerClosed() async {

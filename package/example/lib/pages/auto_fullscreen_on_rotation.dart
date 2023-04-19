@@ -71,26 +71,35 @@ class _AutoFullScreenExamplePageState extends State<AutoFullScreenExamplePage> {
       _setDataSource();
     });
 
+    Timer? _debounceTimer;
+
     _orientation = NativeDeviceOrientationCommunicator()
         .onOrientationChanged(useSensor: true)
         .listen((event) {
-      print("onOrientationChanged $event");
-      //check orientation variable to identiy the current mode
-      if (event == NativeDeviceOrientation.portraitUp ||
-          event == NativeDeviceOrientation.portraitDown) {
-        if (_controller.fullscreen.value) {
-          _controller.setFullScreen(false, context);
-        }
+      if (_debounceTimer?.isActive ?? false) {
+        _debounceTimer?.cancel();
       }
+      _debounceTimer = Timer(Duration(milliseconds: 100), () {
+        print("onOrientationChanged $event");
+        //check orientation variable to identiy the current mode
+        if (event == NativeDeviceOrientation.portraitUp ||
+            event == NativeDeviceOrientation.portraitDown) {
+          // WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (_controller.fullscreen.value) {
+            _controller.setFullScreen(false, context);
+          }
+          // });
+        }
 
-      if (event == NativeDeviceOrientation.landscapeLeft ||
-          event == NativeDeviceOrientation.landscapeRight) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (event == NativeDeviceOrientation.landscapeLeft ||
+            event == NativeDeviceOrientation.landscapeRight) {
+          // WidgetsBinding.instance.addPostFrameCallback((_) {
           if (!_controller.fullscreen.value) {
             _controller.setFullScreen(true, context);
           }
-        });
-      }
+          // });
+        }
+      });
     });
   }
 

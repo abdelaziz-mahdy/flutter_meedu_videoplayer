@@ -1,3 +1,6 @@
+## 4.2.1
+
+* Updating example and awaiting full screen
 
 ## 4.2.0
 

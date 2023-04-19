@@ -43,12 +43,14 @@ class _MeeduPlayerFullscreenPageState extends State<MeeduPlayerFullscreenPage> {
   @override
   Future<void> dispose() async {
     widget.controller.customDebugPrint("disposed");
-    widget.controller.launchedAsFullScreen = false;
     if (widget.disposePlayer) {
       widget.controller.videoPlayerClosed();
     } else {
       widget.controller.onFullscreenClose();
     }
+
+    widget.controller.launchedAsFullScreen = false;
+
     super.dispose();
   }
 }

@@ -251,10 +251,10 @@ packages:
     dependency: transitive
     description:
       name: media_kit
-      sha256: defc249a792bf39346e6ee3ec40bbe48685c54aab86a25c4c27cc54a99afb6b1
+      sha256: "4c2b3bb600c063ad194934ea7439bce3135cc6b4f9555222c3dc12ca1aa1d85c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.4+1"
+    version: "0.0.5+1"
   media_kit_libs_ios_video:
     dependency: "direct main"
     description:
@@ -267,42 +267,42 @@ packages:
     dependency: transitive
     description:
       name: media_kit_libs_linux
-      sha256: "7310b17dd2abc2e7363f78a273086445c2216c7b6dfb60933ca3814031d03814"
+      sha256: "21acc71cbae3518b3aeef9023a6a3a3decb579a40153764333814987ccd61040"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   media_kit_libs_macos_video:
     dependency: transitive
     description:
       name: media_kit_libs_macos_video
-      sha256: ff06adff5f544b11aa1d3ad596f9add477264c6026a60aebeed69eda1c7d9d63
+      sha256: ab1cbdf51400e30a9087bd7d6e10c6130d17296e76313fedd0ef0c57dae8c0f4
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.4"
   media_kit_libs_windows_video:
     dependency: transitive
     description:
       name: media_kit_libs_windows_video
-      sha256: c2bcbe31e6e6f1e6ae5813c5fe9b7bfde1110c2e95643869919972a7845948e1
+      sha256: "99a3a85b185ae012a8e3bd596cf0ca425834477d0bec86207548d6ff7c926254"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   media_kit_native_event_loop:
     dependency: transitive
     description:
       name: media_kit_native_event_loop
-      sha256: "677ea41d13a2013ca7fe050674eac3b5d891185d4300779727a5860a85cdda60"
+      sha256: ed87140ad4b64156b2b470c8105f48d8cad7923c952ca05d23e02d28978d2cb3
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.3"
   media_kit_video:
     dependency: transitive
     description:
       name: media_kit_video
-      sha256: "1a870a3d731a9ce34e12ec5baed05b3081164f0c85b71baf05900ca47ee5639c"
+      sha256: "3860b1e8b2779a5702ecea7e6e3d8b16a79407ad478234008550cca660ac52ad"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.4"
+    version: "0.0.6"
   meedu:
     dependency: transitive
     description:
@@ -663,10 +663,9 @@ packages:
   video_player_media_kit:
     dependency: transitive
     description:
-      name: video_player_media_kit
-      sha256: e09ae81c3d27085502abc49988d6c442ee64cacb8224b05ec88d390cc8ab8c47
-      url: "https://pub.dev"
-    source: hosted
+      path: "../../../video_player_media_kit"
+      relative: true
+    source: path
     version: "0.0.7"
   video_player_platform_interface:
     dependency: transitive

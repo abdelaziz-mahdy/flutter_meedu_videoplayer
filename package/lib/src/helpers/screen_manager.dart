@@ -30,7 +30,7 @@ class ScreenManager {
   /// set the default orientations and overlays after exit of fullscreen
   Future<void> setDefaultOverlaysAndOrientations() async {
     await SystemChrome.setPreferredOrientations(orientations);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: overlays);
 
     // AutoOrientation.portraitAutoMode();
