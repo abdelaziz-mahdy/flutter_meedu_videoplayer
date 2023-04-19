@@ -56,48 +56,62 @@ class _AutoFullScreenExamplePageState extends State<AutoFullScreenExamplePage> {
   StreamSubscription? _currentPositionSubs;
 
   StreamSubscription<NativeDeviceOrientation>? _orientation;
+
+  /// A timer used to debounce the orientation change event listener.
+  Timer? _debounceTimer;
+
+  /// A flag indicating if the device was put in fullscreen mode from an orientation change.
+  bool fullScreenFromOrientation = false;
+
   @override
   void initState() {
     super.initState();
-    _quality.value = _qualities[0]; // set the default video quality (480p)
 
-    // listen the video position
+    // Set the default video quality to 480p.
+    _quality.value = _qualities[0];
+
+    // Listen to the video position changes and save the current position.
     _currentPositionSubs = _controller.onPositionChanged.listen(
       (Duration position) {
-        _currentPosition = position; // save the video position
+        _currentPosition = position;
       },
     );
+
+    // Set the video source after the frame has been rendered.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _setDataSource();
     });
 
-    Timer? _debounceTimer;
-
+    // Listen for device orientation changes.
     _orientation = NativeDeviceOrientationCommunicator()
         .onOrientationChanged(useSensor: true)
         .listen((event) {
+      // Cancel any active debounce timers.
       if (_debounceTimer?.isActive ?? false) {
         _debounceTimer?.cancel();
       }
+
+      // Set a new debounce timer to wait 100 milliseconds before processing the orientation change.
       _debounceTimer = Timer(Duration(milliseconds: 100), () {
         print("onOrientationChanged $event");
-        //check orientation variable to identiy the current mode
+
+        // Check the device orientation to identify the current mode.
         if (event == NativeDeviceOrientation.portraitUp ||
             event == NativeDeviceOrientation.portraitDown) {
-          // WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (_controller.fullscreen.value) {
+          // Exit fullscreen mode if the device was put in fullscreen mode from an orientation change.
+          if (_controller.fullscreen.value && fullScreenFromOrientation) {
             _controller.setFullScreen(false, context);
+            fullScreenFromOrientation = false;
           }
-          // });
         }
 
         if (event == NativeDeviceOrientation.landscapeLeft ||
             event == NativeDeviceOrientation.landscapeRight) {
-          // WidgetsBinding.instance.addPostFrameCallback((_) {
+          // Enter fullscreen mode if the device is in landscape mode and not in fullscreen mode.
           if (!_controller.fullscreen.value) {
             _controller.setFullScreen(true, context);
+            fullScreenFromOrientation = true;
           }
-          // });
         }
       });
     });
