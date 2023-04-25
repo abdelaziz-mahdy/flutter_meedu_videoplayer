@@ -118,10 +118,19 @@ Also, during the build phase, the following warnings are not critical and cannot
 ```yaml
 dependencies:
   ...
-  media_kit_libs_ios_video: ^1.0.2         # iOS package for video (& audio) native libraries.
+  media_kit_libs_ios_video: ^1.0.4         # iOS package for video (& audio) native libraries.
+```
+Also, software rendering is forced in the iOS simulator, due to an incompatibility with OpenGL ES.
+
+### Android (replace original video_player with media_kit one)
+
+1. Just add this package in case you set androidUseMediaKit to true in initMeeduPlayer
+```yaml
+dependencies:
+  ...
+  media_kit_libs_android_video: ^1.0.1           # Android package for video native libraries.
 ```
 
-Also, software rendering is forced in the iOS simulator, due to an incompatibility with OpenGL ES.
 
 
 👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_videoplayer/)</b>
