@@ -2,6 +2,7 @@
 
 * Fixed widget being black when not surrounded by `SizedBox` or `AspectRatio`
 * Added new example for bottom controls
+* Added media_kit android support
 
 
 ## 4.2.1
