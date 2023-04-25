@@ -51,6 +51,7 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
         child: AspectRatio(
           aspectRatio: 16 / 9,
           child: MeeduVideoPlayer(
+            
             controller: _meeduPlayerController,
           ),
         ),

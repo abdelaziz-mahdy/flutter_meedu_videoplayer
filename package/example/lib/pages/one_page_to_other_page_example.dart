@@ -79,16 +79,18 @@ class _OnePageExampleState extends State<OnePageExample> {
       body: SafeArea(
         child: Column(
           children: [
-            AspectRatio(
-              aspectRatio: 16 / 9,
+            Expanded(
+              flex: 5,
               child: MeeduVideoPlayer(
                 controller: _meeduPlayerController!,
               ),
             ),
             const SizedBox(height: 2),
-            TextButton(
-              onPressed: _gotTo,
-              child: const Text("Page 2"),
+            Expanded(
+              child: TextButton(
+                onPressed: _gotTo,
+                child: const Text("Page 2"),
+              ),
             ),
           ],
         ),

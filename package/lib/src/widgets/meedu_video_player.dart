@@ -99,10 +99,12 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
               child: LayoutBuilder(
                 builder: (ctx, constraints) {
                   MeeduPlayerController _ = widget.controller;
-                  _.responsive.setDimensions(
-                    constraints.maxWidth,
-                    constraints.maxHeight,
-                  );
+                  if (_.controlsEnabled) {
+                    _.responsive.setDimensions(
+                      constraints.maxWidth,
+                      constraints.maxHeight,
+                    );
+                  }
 
                   if (widget.customIcons != null) {
                     _.customIcons = widget.customIcons!(_.responsive);

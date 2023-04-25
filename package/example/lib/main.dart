@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/auto_fullscreen_on_rotation.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/bottom_controls.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/change_quality_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_controls.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_icon_size.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         "basic": (_) => const BasicExamplePage(),
         "secondary_controls": (_) => const SecondaryExamplePage(),
         "custom_controls": (_) => const CustomControlsExamplePage(),
+        "bottom_controls": (_) => const BottomControlsExamplePage(),
         "custom_sizes": (_) => const CustomSizesExamplePage(),
         "fullscreen": (_) => const FullscreenExamplePage(),
         "with-header": (_) => const PlayerWithHeaderPage(),
@@ -79,153 +81,205 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            child: Wrap(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildButton(
-                  context,
-                  text: 'Basic Network example',
-                  routeName: 'basic',
-                  description:
-                      'An example of how to load a video from a network source.',
+                // Basic Examples Section
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                  child: Text(
+                    'Basic Examples',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-                buildButton(
-                  context,
-                  text: 'Secondary Controls',
-                  routeName: 'secondary_controls',
-                  description:
-                      'An example of how to customize the secondary controls of the player.',
+                Wrap(
+                  children: [
+                    buildButton(
+                      context,
+                      text: 'Basic Network example',
+                      routeName: 'basic',
+                      description:
+                          'An example of how to load a video from a network source.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Secondary Controls',
+                      routeName: 'secondary_controls',
+                      description:
+                          'An example of how to customize the secondary controls of the player.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Custom Controls',
+                      routeName: 'custom_controls',
+                      description:
+                          'An example of how to create custom controls for the player.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Bottom Controls',
+                      routeName: 'bottom_controls',
+                      description:
+                          'An example of how to create custom controls under the player.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Custom Sizes',
+                      routeName: 'custom_sizes',
+                      description:
+                          'An example of how to Customize icon and buttons and font sizes for the player.',
+                    ),
+                  ],
                 ),
-                buildButton(
-                  context,
-                  text: 'Custom Controls',
-                  routeName: 'custom_controls',
-                  description:
-                      'An example of how to create custom controls for the player.',
+
+                // Advanced Examples Section
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                  child: Text(
+                    'Advanced Examples',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-                buildButton(
-                  context,
-                  text: 'Custom Sizes',
-                  routeName: 'custom_sizes',
-                  description:
-                      'An example of how to Customize icon and buttons and font sizes for the player.',
+                Wrap(
+                  children: [
+                    buildButton(
+                      context,
+                      text: 'Fullscreen example',
+                      routeName: 'fullscreen',
+                      description:
+                          'An example of how to enable fullscreen mode for the player.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'With header example',
+                      routeName: 'with-header',
+                      description:
+                          'An example of how to add a header to the player.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'With subtitles example',
+                      routeName: 'subtitles',
+                      description:
+                          'An example of how to add subtitles to the player.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Playback speed example',
+                      routeName: 'playback-speed',
+                      description:
+                          'An example of how to change the playback speed of the video.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Quality Change example',
+                      routeName: 'quality-change',
+                      description:
+                          'An example of how to change the quality of the video.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'One Page to other',
+                      routeName: 'one-page-to-other',
+                      description:
+                          'An example of how to navigate between pages in the app.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Pick file',
+                      routeName: 'pick-file',
+                      description:
+                          'An example of how to pick a video file from the device storage.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Custom Icons',
+                      routeName: 'custom-icons',
+                      description:
+                          'An example of how to use custom icons for the player controls.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Disabled Buttons',
+                      routeName: 'disabled-buttons',
+                      description:
+                          'An example of how to disable certain buttons in the player controls.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Portrait',
+                      routeName: 'portrait',
+                      description:
+                          'An example of how to lock the player in portrait mode.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Auto FullScreen on rotation',
+                      routeName: 'auto_fullscreen',
+                      description:
+                          'Automatically switch to fullscreen mode when device is rotated.',
+                    ),
+                    kIsWeb
+                        ? buildDisabledButton(
+                            context,
+                            text: "Youtube Example doesn't work on web",
+                            description:
+                                'This example is not available on web due to restrictions.',
+                          )
+                        : buildButton(
+                            context,
+                            text: 'Youtube',
+                            routeName: 'youtube',
+                            description: 'Play a Youtube video.',
+                          ),
+                    kIsWeb
+                        ? buildDisabledButton(
+                            context,
+                            text: "M3u8 Example doesn't work on web",
+                            description:
+                                'This example is not available on web due to restrictions.',
+                          )
+                        : buildButton(
+                            context,
+                            text: 'M3u8',
+                            routeName: 'm3u8',
+                            description: 'Play a HLS stream.',
+                          ),
+                  ],
                 ),
-                buildButton(
-                  context,
-                  text: 'Fullscreen example',
-                  routeName: 'fullscreen',
-                  description:
-                      'An example of how to enable fullscreen mode for the player.',
+                // List/Grid View Examples Section
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                  child: Text(
+                    'List/Grid View Examples',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-                buildButton(
-                  context,
-                  text: 'With header example',
-                  routeName: 'with-header',
-                  description:
-                      'An example of how to add a header to the player.',
-                ),
-                buildButton(
-                  context,
-                  text: 'With subtitles example',
-                  routeName: 'subtitles',
-                  description:
-                      'An example of how to add subtitles to the player.',
-                ),
-                buildButton(
-                  context,
-                  text: 'Playback speed example',
-                  routeName: 'playback-speed',
-                  description:
-                      'An example of how to change the playback speed of the video.',
-                ),
-                buildButton(
-                  context,
-                  text: 'Quality Change example',
-                  routeName: 'quality-change',
-                  description:
-                      'An example of how to change the quality of the video.',
-                ),
-                buildButton(
-                  context,
-                  text: 'One Page to other',
-                  routeName: 'one-page-to-other',
-                  description:
-                      'An example of how to navigate between pages in the app.',
-                ),
-                buildButton(
-                  context,
-                  text: 'Pick file',
-                  routeName: 'pick-file',
-                  description:
-                      'An example of how to pick a video file from the device storage.',
-                ),
-                buildButton(
-                  context,
-                  text: 'Custom Icons',
-                  routeName: 'custom-icons',
-                  description:
-                      'An example of how to use custom icons for the player controls.',
-                ),
-                buildButton(
-                  context,
-                  text: 'Disabled Buttons',
-                  routeName: 'disabled-buttons',
-                  description:
-                      'An example of how to disable certain buttons in the player controls.',
-                ),
-                buildButton(
-                  context,
-                  text: 'ListView',
-                  routeName: 'listview',
-                  description:
-                      'An example of how to display a list of videos using a ListView widget.',
-                ),
-                buildButton(
-                  context,
-                  text: 'GridView',
-                  routeName: 'gridview',
-                  description:
-                      'An example of how to display a grid of videos using a GridView widget.',
-                ),
-                buildButton(
-                  context,
-                  text: 'Portrait',
-                  routeName: 'portrait',
-                  description:
-                      'An example of how to lock the player in portrait mode.',
-                ),
-                buildButton(
-                  context,
-                  text: 'Auto FullScreen on rotation',
-                  routeName: 'auto_fullscreen',
-                  description:
-                      'Automatically switch to fullscreen mode when device is rotated.',
-                ),
-                kIsWeb
-                    ? buildDisabledButton(
-                        context,
-                        text: "Youtube Example doesn't work on web",
-                        description:
-                            'This example is not available on web due to restrictions.',
-                      )
-                    : buildButton(
-                        context,
-                        text: 'Youtube',
-                        routeName: 'youtube',
-                        description: 'Play a Youtube video.',
-                      ),
-                kIsWeb
-                    ? buildDisabledButton(
-                        context,
-                        text: "M3u8 Example doesn't work on web",
-                        description:
-                            'This example is not available on web due to restrictions.',
-                      )
-                    : buildButton(
-                        context,
-                        text: 'M3u8',
-                        routeName: 'm3u8',
-                        description: 'Play a HLS stream.',
-                      ),
+                Wrap(children: [
+                  buildButton(
+                    context,
+                    text: 'ListView',
+                    routeName: 'listview',
+                    description:
+                        'An example of how to display a list of videos using a ListView widget.',
+                  ),
+                  buildButton(
+                    context,
+                    text: 'GridView',
+                    routeName: 'gridview',
+                    description:
+                        'An example of how to display a grid of videos using a GridView widget.',
+                  ),
+                ]),
               ],
             ),
           ),

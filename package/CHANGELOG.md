@@ -1,7 +1,7 @@
 ## 4.2.2
 
 * Fixed widget being black when not surrounded by `SizedBox` or `AspectRatio`
-
+* Added new example for bottom controls
 
 
 ## 4.2.1
