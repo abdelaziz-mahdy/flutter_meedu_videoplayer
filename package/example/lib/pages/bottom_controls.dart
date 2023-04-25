@@ -95,83 +95,85 @@ class Controls extends StatelessWidget {
       color: Colors.white,
       fontSize: responsive.fontSize(),
     );
-    return Container(
-      color: Colors.blueGrey.shade900,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          const Spacer(),
-          Transform.translate(
-            offset: const Offset(0, 4),
-            child: const Padding(
-              padding: EdgeInsets.all(5.0),
-              child: PlayerSlider(),
+    return ExcludeFocus(
+      child: Container(
+        color: Colors.blueGrey.shade900,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            const Spacer(),
+            Transform.translate(
+              offset: const Offset(0, 4),
+              child: const Padding(
+                padding: EdgeInsets.all(5.0),
+                child: PlayerSlider(),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const SizedBox(width: 5),
-                    PlayPauseButton(
-                      size: responsive.buttonSize(),
-                    ),
-                    const SizedBox(width: 5),
-
-                    // START VIDEO DURATION
-                    RxBuilder(
-                      (__) => Text(
-                        "${controller.duration.value.inMinutes >= 60 ? printDurationWithHours(controller.position.value) : printDuration(controller.position.value)}/${controller.duration.value.inMinutes >= 60 ? printDurationWithHours(controller.duration.value) : printDuration(controller.duration.value)}",
-                        style: textStyle,
-                      ),
-                    ),
-
-                    // START VIDEO DURATION
-
-                    if (controller.enabledButtons.muteAndSound)
-                      SizedBox(
-                        width: responsive.wp(40),
-                        height: 40,
-                        child: RxBuilder(
-                          (__) => Row(
-                            children: [
-                              MuteSoundButton(responsive: responsive),
-                              if (!controller.mute.value)
-                                Slider(
-                                  value: controller.volume.value,
-                                  onChanged: (value) =>
-                                      controller.setVolume(value),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    if (controller.bottomRight != null) ...[
-                      controller.bottomRight!,
-                      const SizedBox(width: 10)
-                    ],
-                    if (controller.enabledButtons.videoFit)
-                      VideoFitButton(responsive: responsive),
-                    if (controller.enabledButtons.fullscreen) ...[
-                      FullscreenButton(
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const SizedBox(width: 5),
+                      PlayPauseButton(
                         size: responsive.buttonSize(),
                       ),
                       const SizedBox(width: 5),
+    
+                      // START VIDEO DURATION
+                      RxBuilder(
+                        (__) => Text(
+                          "${controller.duration.value.inMinutes >= 60 ? printDurationWithHours(controller.position.value) : printDuration(controller.position.value)}/${controller.duration.value.inMinutes >= 60 ? printDurationWithHours(controller.duration.value) : printDuration(controller.duration.value)}",
+                          style: textStyle,
+                        ),
+                      ),
+    
+                      // START VIDEO DURATION
+    
+                      if (controller.enabledButtons.muteAndSound)
+                        SizedBox(
+                          width: responsive.wp(40),
+                          height: 40,
+                          child: RxBuilder(
+                            (__) => Row(
+                              children: [
+                                MuteSoundButton(responsive: responsive),
+                                if (!controller.mute.value)
+                                  Slider(
+                                    value: controller.volume.value,
+                                    onChanged: (value) =>
+                                        controller.setVolume(value),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ),
                     ],
-                  ],
-                )
-              ],
+                  ),
+                  Row(
+                    children: [
+                      if (controller.bottomRight != null) ...[
+                        controller.bottomRight!,
+                        const SizedBox(width: 10)
+                      ],
+                      if (controller.enabledButtons.videoFit)
+                        VideoFitButton(responsive: responsive),
+                      if (controller.enabledButtons.fullscreen) ...[
+                        FullscreenButton(
+                          size: responsive.buttonSize(),
+                        ),
+                        const SizedBox(width: 5),
+                      ],
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
