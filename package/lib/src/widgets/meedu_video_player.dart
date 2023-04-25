@@ -96,8 +96,6 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
           controller: widget.controller,
           child: Container(
               color: Colors.black,
-              width: 0.0,
-              height: 0.0,
               child: LayoutBuilder(
                 builder: (ctx, constraints) {
                   MeeduPlayerController _ = widget.controller;

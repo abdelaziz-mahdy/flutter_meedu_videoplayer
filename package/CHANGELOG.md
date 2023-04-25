@@ -1,3 +1,9 @@
+## 4.2.2
+
+* Fixed widget being black when not surrounded by `SizedBox` or `AspectRatio`
+
+
+
 ## 4.2.1
 
 * Updating example and awaiting full screen
