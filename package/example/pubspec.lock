@@ -684,6 +684,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.15"
+  video_player_web_hls:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "1ad2ad1a091cde65a5c5e736c740adaae521d4f0"
+      url: "https://github.com/zezo357/video_player_web_hls"
+    source: git
+    version: "1.0.0+2"
   visibility_detector:
     dependency: "direct main"
     description:
