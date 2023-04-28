@@ -347,7 +347,7 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
   }
 
   TextEditingController url = TextEditingController(
-      text: "http://content.jwplatform.com/manifests/vM7nH0Kl.m3u8");
+      text: "https://content.jwplatform.com/manifests/vM7nH0Kl.m3u8");
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
