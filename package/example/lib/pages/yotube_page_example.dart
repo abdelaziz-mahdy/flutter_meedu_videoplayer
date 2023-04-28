@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+import 'package:http/http.dart' as http;
 
 class Quality {
   final String url, label;
@@ -10,6 +12,29 @@ class Quality {
     required this.url,
     required this.label,
   });
+}
+
+class CorsBypassClient extends http.BaseClient {
+  final _client = http.Client();
+
+  @override
+  Future<http.StreamedResponse> send(covariant http.Request request) {
+    final uri = request.url;
+    final http.BaseRequest newRequest = http.Request(
+        request.method,
+        request.url.replace(
+            //TODO: change this cors-anywhere to your instance
+            host: '',
+            pathSegments: [uri.host, ...uri.pathSegments]))
+      ..headers.addAll({
+        ...request.headers,
+        'origin': 'https://www.youtube.com',
+        'x-requested-with': 'https://www.youtube.com',
+      })
+      ..bodyBytes = request.bodyBytes;
+
+    return _client.send(newRequest);
+  }
 }
 
 class YoutubeExamplePage extends StatefulWidget {
@@ -56,7 +81,11 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
   }
 
   Future<void> getYoutubeStreamUrl(String youtubeUrl) async {
-    var yt = YoutubeExplode();
+    YoutubeExplode yt = YoutubeExplode();
+    if (kIsWeb) {
+      yt = YoutubeExplode(YoutubeHttpClient(CorsBypassClient()));
+    }
+
     Video video = await yt.videos.get(youtubeUrl);
 
     StreamManifest manifest =
