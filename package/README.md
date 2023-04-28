@@ -131,7 +131,28 @@ dependencies:
   media_kit_libs_android_video: ^1.0.1           # Android package for video native libraries.
 ```
 
+### hls on web
 
+Add to `pubspec.yaml`
+```     
+  video_player_web_hls:
+    git: https://github.com/zezo357/video_player_web_hls
+```
+
+
+Add
+```javascript
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"  type="application/javascript"></script>
+```
+    
+in index.html above   
+```javascript
+    <script src="main.dart.js" type="application/javascript"></script>
+```
+or above
+```javascript
+    <script src="flutter.js" defer></script>
+```
 
 👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_videoplayer/)</b>
 
