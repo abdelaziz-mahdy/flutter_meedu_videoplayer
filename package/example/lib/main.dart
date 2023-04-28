@@ -238,14 +238,7 @@ class _HomePageState extends State<HomePage> {
                             routeName: 'youtube',
                             description: 'Play a Youtube video.',
                           ),
-                    kIsWeb
-                        ? buildDisabledButton(
-                            context,
-                            text: "M3u8 Example doesn't work on web",
-                            description:
-                                'This example is not available on web due to restrictions.',
-                          )
-                        : buildButton(
+                    buildButton(
                             context,
                             text: 'M3u8',
                             routeName: 'm3u8',
