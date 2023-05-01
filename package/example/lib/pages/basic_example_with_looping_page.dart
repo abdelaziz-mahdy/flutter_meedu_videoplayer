@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
-class BasicExamplePage extends StatefulWidget {
-  const BasicExamplePage({Key? key}) : super(key: key);
+class BasicExampleWithLoopingPage extends StatefulWidget {
+  const BasicExampleWithLoopingPage({Key? key}) : super(key: key);
 
   @override
-  State<BasicExamplePage> createState() => _BasicExamplePageState();
+  State<BasicExampleWithLoopingPage> createState() => _BasicExampleWithLoopingPageState();
 }
 
-class _BasicExamplePageState extends State<BasicExamplePage> {
+class _BasicExampleWithLoopingPageState extends State<BasicExampleWithLoopingPage> {
   final _meeduPlayerController = MeeduPlayerController(
       controlsStyle: ControlsStyle.primary,
       enabledControls: EnabledControls(doubleTapToSeek: false));
@@ -40,7 +40,7 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
               "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
         ),
         autoplay: true,
-        looping: false);
+        looping: true);
   }
 
   @override

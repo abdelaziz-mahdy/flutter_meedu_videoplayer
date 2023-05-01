@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/auto_fullscreen_on_rotation.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/basic_example_with_looping_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/bottom_controls.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/change_quality_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_controls.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
       home: const HomePage(),
       routes: {
         "basic": (_) => const BasicExamplePage(),
+        "basic_with_looping": (_) => const BasicExampleWithLoopingPage(),
         "secondary_controls": (_) => const SecondaryExamplePage(),
         "custom_controls": (_) => const CustomControlsExamplePage(),
         "bottom_controls": (_) => const BottomControlsExamplePage(),
@@ -103,6 +105,13 @@ class _HomePageState extends State<HomePage> {
                       routeName: 'basic',
                       description:
                           'An example of how to load a video from a network source.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Basic Network example with looping',
+                      routeName: 'basic_with_looping',
+                      description:
+                          'An example of how to load a video from a network source with looping enabled.',
                     ),
                     buildButton(
                       context,
@@ -239,11 +248,11 @@ class _HomePageState extends State<HomePage> {
                             description: 'Play a Youtube video.',
                           ),
                     buildButton(
-                            context,
-                            text: 'M3u8',
-                            routeName: 'm3u8',
-                            description: 'Play a HLS stream.',
-                          ),
+                      context,
+                      text: 'M3u8',
+                      routeName: 'm3u8',
+                      description: 'Play a HLS stream.',
+                    ),
                   ],
                 ),
                 // List/Grid View Examples Section
