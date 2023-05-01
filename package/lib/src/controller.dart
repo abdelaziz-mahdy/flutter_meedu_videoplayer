@@ -274,6 +274,7 @@ class MeeduPlayerController {
     this.durations = const Durations(),
     this.onVideoPlayerClosed,
   }) {
+        
     if (responsive != null) {
       this.responsive = responsive;
     }
