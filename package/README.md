@@ -30,7 +30,7 @@ We have implemented a cross-platform video player, which provides a seamless vid
 
 
 
-<table><thead><tr><th>Feature</th><th>iOS</th><th>Android</th><th>Windows</th><th>Linux</th><th>macOS</th><th>Web</th></tr></thead><tbody><tr><td>Videos from Network</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Videos from Assets</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Videos from Local Files</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Looping</td><td>✔️</td><td>✔️</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr><tr><td>AutoPlay</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Swipe to Control Volume</td><td>✔️</td><td>✔️</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td></tr><tr><td>Swipe to Seek</td><td>✔️</td><td>✔️</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td></tr><tr><td>FullScreen</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Launch Player in FullScreen</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Playback Speed</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Fast Forward/Rewind</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>SRT Subtitles</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Customization</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td></tr></tbody></table>
+<table><thead><tr><th>Feature</th><th>iOS</th><th>Android</th><th>Windows</th><th>Linux</th><th>macOS</th><th>Web</th></tr></thead><tbody><tr><td>Videos from Network</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Videos from Assets</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Videos from Local Files</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Looping</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>AutoPlay</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Swipe to Control Volume</td><td>✔️</td><td>✔️</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td></tr><tr><td>Swipe to Seek</td><td>✔️</td><td>✔️</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td></tr><tr><td>FullScreen</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Launch Player in FullScreen</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Playback Speed</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Fast Forward/Rewind</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>SRT Subtitles</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Customization</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td></tr></tbody></table>
 
 
 # Video Player Controls
@@ -135,8 +135,7 @@ dependencies:
 
 Add to `pubspec.yaml`
 ```     
-  video_player_web_hls:
-    git: https://github.com/zezo357/video_player_web_hls
+  video_player_web_hls: ^1.0.0+3
 ```
 
 

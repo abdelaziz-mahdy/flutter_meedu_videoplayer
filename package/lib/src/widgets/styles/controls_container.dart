@@ -59,19 +59,15 @@ class _ControlsContainerState extends State<ControlsContainer> {
   }
 
   void tappedOnce(MeeduPlayerController _, bool secondTap) {
-    if (secondTap) {
-      _tappedOnce?.cancel();
-      _.controls = false;
-    } else {
-      if (_.desktopOrWeb && _.enabledControls.desktopTapToPlayAndPause) {
-        _.togglePlay();
-      }
+    if (!secondTap) {
+      //   // _tappedOnce?.cancel();
+      //   _.controls = false;
+      // } else {
       tappedTwice = true;
       _.controls = !_.showControls.value;
       _tappedOnce?.cancel();
       _tappedOnce = Timer(const Duration(milliseconds: 300), () {
-        _.customDebugPrint(
-            "_____________________hidden here 0____________________________");
+        _.customDebugPrint("set tapped twice to false");
         tappedTwice = false;
         //_dragInitialDelta = Offset.zero;
       });
@@ -86,41 +82,39 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   void _showRewindAndForward(
       BuildContext context, int index, MeeduPlayerController controller) async {
-    if (controller.desktopOrWeb) {
-      controller.toggleFullScreen(context);
+    //controller.videoSeekToNextSeconds(amount);
+    if (index == 0) {
+      controller.doubleTapCount.value += 1;
     } else {
-      //controller.videoSeekToNextSeconds(amount);
-      if (index == 0) {
-        controller.doubleTapCount.value += 1;
+      controller.doubleTapCount.value -= 1;
+    }
+    if (!controller.enabledControls.doubleTapToSeek) {
+      return;
+    }
+    if (controller.doubleTapCount.value < 0) {
+      controller.rewindIcons.value = false;
+      controller.forwardIcons.value = true;
+    } else {
+      if (controller.doubleTapCount.value > 0) {
+        controller.rewindIcons.value = true;
+        controller.forwardIcons.value = false;
       } else {
-        controller.doubleTapCount.value -= 1;
-      }
-
-      if (controller.doubleTapCount.value < 0) {
-        controller.rewindIcons.value = false;
-        controller.forwardIcons.value = true;
-      } else {
-        if (controller.doubleTapCount.value > 0) {
-          controller.rewindIcons.value = true;
-          controller.forwardIcons.value = false;
-        } else {
-          controller.rewindIcons.value = false;
-          controller.forwardIcons.value = false;
-        }
-      }
-
-      _doubleTapToSeekTimer?.cancel();
-      _doubleTapToSeekTimer = Timer(const Duration(milliseconds: 500), () {
-        playing = controller.playerStatus.playing;
-        controller.videoSeekToNextSeconds(
-            _defaultSeekAmount * controller.doubleTapCount.value, playing);
-        controller.customDebugPrint("tapped is false here");
-        tappedTwice = false;
         controller.rewindIcons.value = false;
         controller.forwardIcons.value = false;
-        controller.doubleTapCount.value = 0;
-      });
+      }
     }
+
+    _doubleTapToSeekTimer?.cancel();
+    _doubleTapToSeekTimer = Timer(const Duration(milliseconds: 500), () {
+      playing = controller.playerStatus.playing;
+      controller.videoSeekToNextSeconds(
+          _defaultSeekAmount * controller.doubleTapCount.value, playing);
+      controller.customDebugPrint("set tapped Twice to false");
+      tappedTwice = false;
+      controller.rewindIcons.value = false;
+      controller.forwardIcons.value = false;
+      controller.doubleTapCount.value = 0;
+    });
   }
 
   void _forwardDragUpdate(
@@ -153,7 +147,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
         volume <= 1 &&
         differenceOfExists((controller.volume.value * 100).round(),
             (volume * 100).round(), 2)) {
-      controller.customDebugPrint("Volume$volume");
+      controller.customDebugPrint("Volume $volume");
       //customDebugPrint("current ${(controller.volume.value*100).round()}");
       //customDebugPrint("new ${(volume*100).round()}");
       controller.setVolume(volume);
@@ -435,61 +429,69 @@ class _ControlsContainerState extends State<ControlsContainer> {
           return Container();
         }
       }),
-      RxBuilder(
-        //observables: [_.showControls],
-        (__) => VideoCoreForwardAndRewind(
-          responsive: widget.responsive,
-          showRewind: _.rewindIcons.value,
-          showForward: _.forwardIcons.value,
-          rewindSeconds: _defaultSeekAmount * _.doubleTapCount.value,
-          forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
-        ),
-      ),
-      Positioned.fill(
-        bottom: widget.responsive.height * 0.20,
-        top: widget.responsive.height * 0.20,
-        child: VideoCoreForwardAndRewindLayout(
-          responsive: widget.responsive,
-          rewind: GestureDetector(
-            onTap: () {
-              if (!_.enabledControls.doubleTapToSeek) {
-                return;
-              }
-              if (_.doubleTapCount.value != 0 || tappedTwice) {
-                _rewind(context, _);
-                tappedOnce(_, true);
-              } else {
-                tappedOnce(_, false);
-              }
-            },
-          ),
-          forward: GestureDetector(
-            onTap: () {
-              if (!_.enabledControls.doubleTapToSeek) {
-                return;
-              }
-              if (_.doubleTapCount.value != 0 || tappedTwice) {
-                _forward(context, _);
-                tappedOnce(_, true);
-              } else {
-                tappedOnce(_, false);
-              }
-            },
-            //behavior: HitTestBehavior.,
+      if (_.enabledControls.doubleTapToSeek)
+        RxBuilder(
+          //observables: [_.showControls],
+          (__) => VideoCoreForwardAndRewind(
+            responsive: widget.responsive,
+            showRewind: _.rewindIcons.value,
+            showForward: _.forwardIcons.value,
+            rewindSeconds: _defaultSeekAmount * _.doubleTapCount.value,
+            forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
           ),
         ),
-      ),
+      if (_.enabledControls.doubleTapToSeek)
+        Positioned.fill(
+          bottom: widget.responsive.height * 0.20,
+          top: widget.responsive.height * 0.20,
+          child: VideoCoreForwardAndRewindLayout(
+            responsive: widget.responsive,
+            rewind: GestureDetector(
+              onTap: () {
+                if (!_.enabledControls.doubleTapToSeek) {
+                  return;
+                }
+                if (_.doubleTapCount.value != 0 || tappedTwice) {
+                  _rewind(context, _);
+                  tappedOnce(_, true);
+                } else {
+                  tappedOnce(_, false);
+                }
+              },
+            ),
+            forward: GestureDetector(
+              onTap: () {
+                if (!_.enabledControls.doubleTapToSeek) {
+                  return;
+                }
+                if (_.doubleTapCount.value != 0 || tappedTwice) {
+                  _forward(context, _);
+                  tappedOnce(_, true);
+                } else {
+                  tappedOnce(_, false);
+                }
+              },
+              //behavior: HitTestBehavior.,
+            ),
+          ),
+        ),
     ]);
   }
 
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (_.desktopOrWeb && _.enabledControls.desktopDoubleTapToFullScreen) {
-          if (_.doubleTapCount.value != 0 || tappedTwice) {
-            _rewind(context, _);
+        if (_.desktopOrWeb) {
+          if (tappedTwice) {
+            if (_.enabledControls.desktopDoubleTapToFullScreen) {
+              _.toggleFullScreen(context);
+            }
+
             tappedOnce(_, true);
           } else {
+            if (_.enabledControls.desktopTapToPlayAndPause) {
+              _.togglePlay();
+            }
             tappedOnce(_, false);
           }
         }

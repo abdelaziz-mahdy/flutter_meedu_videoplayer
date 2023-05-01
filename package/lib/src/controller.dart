@@ -415,7 +415,7 @@ class MeeduPlayerController {
     }
 
     // check if the player has been finished
-    if (_position.value.inSeconds >= duration.value.inSeconds &&
+    if ((_position.value.inSeconds >= duration.value.inSeconds) &&
         !playerStatus.completed) {
       playerStatus.status.value = PlayerStatus.completed;
     }
@@ -751,7 +751,8 @@ class MeeduPlayerController {
           screenManager.setFullScreenOverlaysAndOrientations();
         }
       }
-    }    _fullscreen.value = true;
+    }
+    _fullscreen.value = true;
 
     final route = PageRouteBuilder(
       opaque: false,
@@ -764,8 +765,7 @@ class MeeduPlayerController {
       },
     );
 
-    await Navigator.push(context, route);    
-
+    await Navigator.push(context, route);
   }
 
   /// launch a video using the fullscreen apge
@@ -890,7 +890,7 @@ class MeeduPlayerController {
           }
         }
       } else {
-         Navigator.pop(context);
+        Navigator.pop(context);
       }
     }
   }
@@ -967,8 +967,7 @@ class MeeduPlayerController {
         await screenManager.setDefaultOverlaysAndOrientations();
       }
     }
-        fullscreen.value = false;
-
+    fullscreen.value = false;
   }
 
   Future<void> videoPlayerClosed() async {

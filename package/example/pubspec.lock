@@ -664,10 +664,10 @@ packages:
     dependency: transitive
     description:
       name: video_player_media_kit
-      sha256: "86152794960ce553a4b6bde4153f0c7c2ecc85c473e1b87127c01e366311b69a"
+      sha256: "4b066f5a6b2c5611b37a9a6c71e5723c596a25542824b72c0db69b15f1a8c8e3"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.8"
+    version: "0.0.9"
   video_player_platform_interface:
     dependency: transitive
     description:
@@ -687,12 +687,11 @@ packages:
   video_player_web_hls:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "1ad2ad1a091cde65a5c5e736c740adaae521d4f0"
-      url: "https://github.com/zezo357/video_player_web_hls"
-    source: git
-    version: "1.0.0+2"
+      name: video_player_web_hls
+      sha256: "3157e36de50a74f8c06d4ec9b08e5b7453b5529dd62daef9750b0c52b7c3be36"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+3"
   visibility_detector:
     dependency: "direct main"
     description:

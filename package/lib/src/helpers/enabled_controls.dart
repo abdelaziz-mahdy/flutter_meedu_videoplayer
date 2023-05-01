@@ -10,7 +10,7 @@ class EnabledControls {
   /// on mobile, swipe vertically to control brightness (on left side)
   final bool brightnessSwipes;
 
-  /// on mobile, double tap on sides to seek forward or backwards
+  /// double tap on sides to seek forward or backwards
   final bool doubleTapToSeek;
 
   /// on desktop, double clicks with mouse go fullScreen or close it

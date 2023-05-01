@@ -13,7 +13,7 @@ class BasicExamplePage extends StatefulWidget {
 class _BasicExamplePageState extends State<BasicExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
       controlsStyle: ControlsStyle.primary,
-      enabledControls: const EnabledControls());
+      enabledControls: EnabledControls(doubleTapToSeek: false));
 
   StreamSubscription? _playerEventSubs;
 
@@ -34,13 +34,13 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
 
   _init() {
     _meeduPlayerController.setDataSource(
-      DataSource(
-        type: DataSourceType.network,
-        source:
-            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
-      ),
-      autoplay: true,
-    );
+        DataSource(
+          type: DataSourceType.network,
+          source:
+              "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
+        ),
+        autoplay: true,
+        looping: true);
   }
 
   @override
@@ -51,7 +51,6 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
         child: AspectRatio(
           aspectRatio: 16 / 9,
           child: MeeduVideoPlayer(
-            
             controller: _meeduPlayerController,
           ),
         ),

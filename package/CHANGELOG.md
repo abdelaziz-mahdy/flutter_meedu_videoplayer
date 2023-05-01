@@ -1,3 +1,9 @@
+## 4.2.3
+
+* Added hls web steps.
+* Fixed taps on desktop and web.
+* Made double tap to seek work on desktop and web,can be disabled `enabledControls: EnabledControls(doubleTapToSeek: false)`.
+  
 ## 4.2.2
 
 * Fixed widget being black when not surrounded by `SizedBox` or `AspectRatio`

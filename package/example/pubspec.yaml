@@ -35,8 +35,7 @@ dependencies:
 
   media_kit_libs_ios_video: ^1.0.2              # iOS package for video (& audio) native libraries.
   youtube_explode_dart: ^1.12.4
-  video_player_web_hls:
-    git: https://github.com/zezo357/video_player_web_hls
+  video_player_web_hls: ^1.0.0+3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
