@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: auto_orientation
-      sha256: "838f55e20ec2c717d5f7a8228cd8d21b89a24ca151f7bcdbe4fcbda828b27614"
+      sha256: cd56bb59b36fa54cc28ee254bc600524f022a4862f31d5ab20abd7bb1c54e678
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.1"
+    version: "2.3.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -132,7 +132,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.2.4-test.1"
+    version: "4.2.4"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

@@ -2,6 +2,7 @@
 ## 4.2.4
 * Updated media_kit packages 
 * Fixes playing on android 
+* Updating to auto_orientation: ^2.3.1 
 
 ## 4.2.3
 
