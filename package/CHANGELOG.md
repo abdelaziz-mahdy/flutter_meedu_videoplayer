@@ -1,4 +1,6 @@
 
+## 4.2.5
+* Fix fit.
 ## 4.2.4
 * Updated media_kit packages 
 * Fixes playing on android 

@@ -60,30 +60,32 @@ class MeeduVideoPlayer extends StatefulWidget {
 }
 
 class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
-  double videoWidth(VideoPlayerController? controller, double max) {
+  double videoWidth(VideoPlayerController? controller) {
     double width = controller != null
         ? controller.value.size.width != 0
             ? controller.value.size.width
             : 640
         : 640;
-    if (width > max) {
-      return max;
-    } else {
-      return width;
-    }
+    return width;
+    // if (width < max) {
+    //   return max;
+    // } else {
+    //   return width;
+    // }
   }
 
-  double videoHeight(VideoPlayerController? controller, double max) {
+  double videoHeight(VideoPlayerController? controller) {
     double height = controller != null
         ? controller.value.size.height != 0
             ? controller.value.size.height
             : 480
         : 480;
-    if (height > max) {
-      return max;
-    } else {
-      return height;
-    }
+    return height;
+    // if (height < max) {
+    //   return max;
+    // } else {
+    //   return height;
+    // }
   }
 
   @override
@@ -138,8 +140,8 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                               "Fit is ${widget.controller.videoFit.value}");
                           // customDebugPrint(
                           //     "constraints.maxWidth ${constraints.maxWidth}");
-                          // customDebugPrint(
-                          //     "width ${_.videoPlayerController?.value.size.width}");
+                          // _.customDebugPrint(
+                          //     "width ${videoWidth(_.videoPlayerController, constraints.maxWidth)}");
                           // customDebugPrint(
                           //     "videoPlayerController ${_.videoPlayerController}");
                           return Positioned.fill(
@@ -147,10 +149,12 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                               clipBehavior: Clip.hardEdge,
                               fit: widget.controller.videoFit.value,
                               child: SizedBox(
-                                width: videoWidth(_.videoPlayerController,
-                                    constraints.maxWidth),
-                                height: videoHeight(_.videoPlayerController,
-                                    constraints.maxHeight),
+                                width: videoWidth(
+                                  _.videoPlayerController,
+                                ),
+                                height: videoHeight(
+                                  _.videoPlayerController,
+                                ),
                                 // width: 640,
                                 // height: 480,
                                 child: _.videoPlayerController != null
