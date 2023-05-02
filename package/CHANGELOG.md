@@ -1,3 +1,8 @@
+
+## 4.2.4
+* Updated media_kit packages 
+* Fixes playing on android 
+
 ## 4.2.3
 
 * Added hls web steps.

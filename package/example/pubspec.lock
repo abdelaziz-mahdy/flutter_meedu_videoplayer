@@ -132,7 +132,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.2.3"
+    version: "4.2.4"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -251,18 +251,18 @@ packages:
     dependency: transitive
     description:
       name: media_kit
-      sha256: "4c2b3bb600c063ad194934ea7439bce3135cc6b4f9555222c3dc12ca1aa1d85c"
+      sha256: d9a32b3f6eafdfbba6aff2e37045a3a80009b6dfbdeec638d51d85e8b254a6a2
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.5+1"
+    version: "0.0.7+1"
   media_kit_libs_ios_video:
     dependency: "direct main"
     description:
       name: media_kit_libs_ios_video
-      sha256: "495d6e2db9b325aebda16dad3c5ae6593a9dfa37ebe08360b4765a43fa09a3b0"
+      sha256: "28c6ddd5ed43263641293832c8d1fb3f24af81b4eba0b61d6da9bedadbf2e1b1"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.4"
   media_kit_libs_linux:
     dependency: transitive
     description:
@@ -275,10 +275,10 @@ packages:
     dependency: transitive
     description:
       name: media_kit_libs_macos_video
-      sha256: ab1cbdf51400e30a9087bd7d6e10c6130d17296e76313fedd0ef0c57dae8c0f4
+      sha256: c4d3706af5a67bf194d8208eef5cf29ea79e64931ea9bcd50f665b9a438f8416
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.4"
+    version: "1.0.5"
   media_kit_libs_windows_video:
     dependency: transitive
     description:
@@ -299,10 +299,10 @@ packages:
     dependency: transitive
     description:
       name: media_kit_video
-      sha256: "3860b1e8b2779a5702ecea7e6e3d8b16a79407ad478234008550cca660ac52ad"
+      sha256: "634872ca85575e5756c466af04d1adbdb5178315d7f801901b8c731fae314c66"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.6"
+    version: "0.0.9"
   meedu:
     dependency: transitive
     description:
@@ -584,10 +584,10 @@ packages:
     dependency: transitive
     description:
       name: synchronized
-      sha256: "33b31b6beb98100bf9add464a36a8dd03eb10c7a8cf15aeec535e9b054aaf04b"
+      sha256: "5fcbd27688af6082f5abd611af56ee575342c30e87541d0245f7ff99faa02c60"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.1"
+    version: "3.1.0"
   term_glyph:
     dependency: transitive
     description:
@@ -664,10 +664,10 @@ packages:
     dependency: transitive
     description:
       name: video_player_media_kit
-      sha256: "4b066f5a6b2c5611b37a9a6c71e5723c596a25542824b72c0db69b15f1a8c8e3"
+      sha256: "119b6ff14b91f5dbedd6bbb392bd061a07863fac71f1b3f5381b9700fd3d2e19"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.9"
+    version: "0.0.10"
   video_player_platform_interface:
     dependency: transitive
     description:
