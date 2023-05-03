@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
@@ -88,9 +89,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
     } else {
       controller.doubleTapCount.value -= 1;
     }
-    if (!controller.enabledControls.doubleTapToSeek) {
-      return;
-    }
+
     if (controller.doubleTapCount.value < 0) {
       controller.rewindIcons.value = false;
       controller.forwardIcons.value = true;
@@ -429,7 +428,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
           return Container();
         }
       }),
-      if (_.enabledControls.doubleTapToSeek)
+      if (_.enabledControls.doubleTapToSeek || !_.desktopOrWeb)
         RxBuilder(
           //observables: [_.showControls],
           (__) => VideoCoreForwardAndRewind(
@@ -440,17 +439,15 @@ class _ControlsContainerState extends State<ControlsContainer> {
             forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
           ),
         ),
-      if (_.enabledControls.doubleTapToSeek)
+      if (_.enabledControls.doubleTapToSeek || !_.desktopOrWeb)
         Positioned.fill(
           bottom: widget.responsive.height * 0.20,
           top: widget.responsive.height * 0.20,
           child: VideoCoreForwardAndRewindLayout(
             responsive: widget.responsive,
             rewind: GestureDetector(
+              behavior: HitTestBehavior.deferToChild,
               onTap: () {
-                if (!_.enabledControls.doubleTapToSeek) {
-                  return;
-                }
                 if (_.doubleTapCount.value != 0 || tappedTwice) {
                   _rewind(context, _);
                   tappedOnce(_, true);
@@ -460,10 +457,8 @@ class _ControlsContainerState extends State<ControlsContainer> {
               },
             ),
             forward: GestureDetector(
+              behavior: HitTestBehavior.deferToChild,
               onTap: () {
-                if (!_.enabledControls.doubleTapToSeek) {
-                  return;
-                }
                 if (_.doubleTapCount.value != 0 || tappedTwice) {
                   _forward(context, _);
                   tappedOnce(_, true);
@@ -480,6 +475,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.deferToChild,
       onTap: () {
         if (_.desktopOrWeb) {
           if (tappedTwice) {

@@ -1,3 +1,5 @@
+## 4.2.6
+* Made double tap to seek work only on mobile to fix taps issues on desktop and web.
 
 ## 4.2.5
 * Fix fit.
