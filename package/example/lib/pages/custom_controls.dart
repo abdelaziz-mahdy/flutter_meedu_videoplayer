@@ -104,13 +104,22 @@ class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
                               child: RxBuilder(
                                 (__) => Row(
                                   children: [
-                                    MuteSoundButton(responsive: responsive),
-                                    if (!controller.mute.value)
-                                      Slider(
-                                        value: controller.volume.value,
-                                        onChanged: (value) =>
-                                            controller.setVolume(value),
-                                      ),
+                                    Expanded(
+                                        child: MuteSoundButton(
+                                            responsive: responsive)),
+                                    !controller.mute.value
+                                        ? Expanded(
+                                            flex: 2,
+                                            child: Slider(
+                                              value: controller.volume.value,
+                                              onChanged: (value) =>
+                                                  controller.setVolume(value),
+                                            ),
+                                          )
+                                        : Expanded(
+                                            flex: 2,
+                                            child: SizedBox(),
+                                          ),
                                   ],
                                 ),
                               ),

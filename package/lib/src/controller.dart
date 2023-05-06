@@ -273,8 +273,25 @@ class MeeduPlayerController {
     Responsive? responsive,
     this.durations = const Durations(),
     this.onVideoPlayerClosed,
-  }) {
-        
+  }) : assert(
+            !(enabledButtons.rewindAndfastForward == true &&
+                enabledControls.doubleTapToSeek == true &&
+                controlsStyle != ControlsStyle.custom &&
+                controlsStyle != ControlsStyle.secondary &&
+                controlsEnabled),
+            '''
+using Both rewindAndfastForward buttons and double tap to seek is not recommended, due to touch events conflicts
+
+please set one of which to false enabledButtons.rewindAndfastForward or enabledControls.doubleTapToSeek
+
+examples to be used in controller:
+enabledButtons: EnabledButtons(rewindAndfastForward: false)
+or 
+enabledControls: EnabledControls(doubleTapToSeek: false)
+
+Note: if you can help fix this issue,a pr is always welcomed.
+.
+''') {
     if (responsive != null) {
       this.responsive = responsive;
     }

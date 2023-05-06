@@ -25,9 +25,9 @@ class AutoFullScreenExamplePage extends StatefulWidget {
 
 class _AutoFullScreenExamplePageState extends State<AutoFullScreenExamplePage> {
   final _controller = MeeduPlayerController(
-    colorTheme: Colors.red,
-    screenManager: const ScreenManager(hideSystemOverlay: false),
-  );
+      colorTheme: Colors.red,
+      screenManager: const ScreenManager(hideSystemOverlay: false),
+      enabledButtons: EnabledButtons(rewindAndfastForward: false));
 
   final _qualities = [
     Quality(

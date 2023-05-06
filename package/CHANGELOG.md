@@ -1,5 +1,9 @@
 ## 4.2.6
 * Made double tap to seek work only on mobile to fix taps issues on desktop and web.
+* Added assert statement to avoid debugging issues (with hit tests).
+* Fixed buffering widget being smaller than button (which was causing rewind and forward buttons to change position).
+* Fixing all examples scaling and following new assert.
+* Fixing brightness and volume swipes wrong calculations.
 
 ## 4.2.5
 * Fix fit.

@@ -13,7 +13,9 @@ class CustomIconsExamplePage extends StatefulWidget {
 
 class _CustomIconsExamplePageState extends State<CustomIconsExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
-      controlsStyle: ControlsStyle.primary, manageWakeLock: false);
+      controlsStyle: ControlsStyle.primary,
+      manageWakeLock: false,
+      enabledControls: EnabledControls(doubleTapToSeek: false));
 
   StreamSubscription? _playerEventSubs;
 

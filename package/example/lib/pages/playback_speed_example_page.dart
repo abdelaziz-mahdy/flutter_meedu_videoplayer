@@ -12,10 +12,10 @@ class PlayBackSpeedExamplePage extends StatefulWidget {
 
 class _PlayBackSpeedExamplePageState extends State<PlayBackSpeedExamplePage> {
   final _controller = MeeduPlayerController(
-    screenManager: const ScreenManager(
-      forceLandScapeInFullscreen: false,
-    ),
-  );
+      screenManager: const ScreenManager(
+        forceLandScapeInFullscreen: false,
+      ),
+      enabledControls: EnabledControls(doubleTapToSeek: false));
 
   final ValueNotifier<double> _playbackSpeed = ValueNotifier(1);
 

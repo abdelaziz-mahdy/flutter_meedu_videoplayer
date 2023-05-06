@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PlayerButton extends StatelessWidget {
   final double size;
-  final String iconPath;
+  final String? iconPath;
   final VoidCallback onPressed;
   final Color backgroundColor, iconColor;
   final bool circle;
@@ -11,7 +11,7 @@ class PlayerButton extends StatelessWidget {
   const PlayerButton({
     Key? key,
     this.size = 40,
-    required this.iconPath,
+    this.iconPath,
     required this.onPressed,
     this.circle = true,
     this.backgroundColor = Colors.white54,
@@ -36,7 +36,7 @@ class PlayerButton extends StatelessWidget {
               shape: circle ? BoxShape.circle : BoxShape.rectangle,
             ),
             child: Image.asset(
-              iconPath,
+              iconPath!,
               color: iconColor,
               package: 'flutter_meedu_videoplayer',
             ),

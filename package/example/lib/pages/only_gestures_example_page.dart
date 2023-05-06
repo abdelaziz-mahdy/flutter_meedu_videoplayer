@@ -3,18 +3,19 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
-class PortraitExamplePage extends StatefulWidget {
-  const PortraitExamplePage({Key? key}) : super(key: key);
+class OnlyGesturesExamplePage extends StatefulWidget {
+  const OnlyGesturesExamplePage({Key? key}) : super(key: key);
 
   @override
-  State<PortraitExamplePage> createState() => _PortraitExamplePageState();
+  State<OnlyGesturesExamplePage> createState() =>
+      _OnlyGesturesExamplePageState();
 }
 
-class _PortraitExamplePageState extends State<PortraitExamplePage> {
+class _OnlyGesturesExamplePageState extends State<OnlyGesturesExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
       controlsStyle: ControlsStyle.primary,
-      enabledControls: EnabledControls(doubleTapToSeek: false),
-      responsive: Responsive(buttonsSizeRelativeToScreen: 6));
+      // enabledControls: EnabledControls(doubleTapToSeek: false),
+      enabledButtons: EnabledButtons(rewindAndfastForward: false));
 
   StreamSubscription? _playerEventSubs;
 
@@ -35,13 +36,13 @@ class _PortraitExamplePageState extends State<PortraitExamplePage> {
 
   _init() {
     _meeduPlayerController.setDataSource(
-      DataSource(
-        type: DataSourceType.network,
-        source:
-            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
-      ),
-      autoplay: true,
-    );
+        DataSource(
+          type: DataSourceType.network,
+          source:
+              "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
+        ),
+        autoplay: true,
+        looping: false);
   }
 
   @override
@@ -50,7 +51,7 @@ class _PortraitExamplePageState extends State<PortraitExamplePage> {
       appBar: AppBar(),
       body: SafeArea(
         child: AspectRatio(
-          aspectRatio: 9 / 16,
+          aspectRatio: 16 / 9,
           child: MeeduVideoPlayer(
             controller: _meeduPlayerController,
           ),

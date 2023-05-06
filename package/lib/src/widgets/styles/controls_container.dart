@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:defer_pointer/defer_pointer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
@@ -51,11 +52,11 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   //------------------------------------//
   void _forwardDragStart(
-      Offset globalPosition, MeeduPlayerController controller) async {
+      Offset localPosition, MeeduPlayerController controller) async {
     playing = controller.playerStatus.playing;
     controller.pause();
     //_initialForwardPosition = controller.position.value;
-    _horizontalDragStartOffset = globalPosition;
+    _horizontalDragStartOffset = localPosition;
     controller.showSwipeDuration.value = true;
   }
 
@@ -117,8 +118,8 @@ class _ControlsContainerState extends State<ControlsContainer> {
   }
 
   void _forwardDragUpdate(
-      Offset globalPosition, MeeduPlayerController controller) {
-    final double diff = _horizontalDragStartOffset.dx - globalPosition.dx;
+      Offset localPosition, MeeduPlayerController controller) {
+    final double diff = _horizontalDragStartOffset.dx - localPosition.dx;
     final int duration = controller.duration.value.inSeconds;
     final int position = controller.position.value.inSeconds;
     final int seconds = -(diff / (5000 / duration)).round();
@@ -139,8 +140,8 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   //----------------------------//
   void _volumeDragUpdate(
-      Offset globalPosition, MeeduPlayerController controller) {
-    double diff = _verticalDragStartOffset.dy - globalPosition.dy;
+      Offset localPosition, MeeduPlayerController controller) {
+    double diff = _verticalDragStartOffset.dy - localPosition.dy;
     double volume = (diff / 500) + _onDragStartVolume;
     if (volume >= 0 &&
         volume <= 1 &&
@@ -154,13 +155,13 @@ class _ControlsContainerState extends State<ControlsContainer> {
   }
 
   void _volumeDragStart(
-      Offset globalPosition, MeeduPlayerController controller) {
+      Offset localPosition, MeeduPlayerController controller) {
     controller.showVolumeStatus.value = true;
     controller.showBrightnessStatus.value = false;
     isVolume = true;
     _currentVolume.value = controller.volume.value;
     _onDragStartVolume = _currentVolume.value;
-    _verticalDragStartOffset = globalPosition;
+    _verticalDragStartOffset = localPosition;
   }
 
   void _volumeDragEnd(MeeduPlayerController controller) {
@@ -190,8 +191,8 @@ class _ControlsContainerState extends State<ControlsContainer> {
   }
 
   void _brightnessDragUpdate(
-      Offset globalPosition, MeeduPlayerController controller) {
-    double diff = _verticalDragStartOffset.dy - globalPosition.dy;
+      Offset localPosition, MeeduPlayerController controller) {
+    double diff = _verticalDragStartOffset.dy - localPosition.dy;
     double brightness = (diff / 500) + _onDragStartBrightness;
     //customDebugPrint("New");
     //customDebugPrint((controller.brightness.value*100).round());
@@ -207,13 +208,13 @@ class _ControlsContainerState extends State<ControlsContainer> {
   }
 
   void _brightnessDragStart(
-      Offset globalPosition, MeeduPlayerController controller) async {
+      Offset localPosition, MeeduPlayerController controller) async {
     controller.showBrightnessStatus.value = true;
     controller.showVolumeStatus.value = false;
 
     _currentBrightness.value = controller.brightness.value;
     _onDragStartBrightness = _currentBrightness.value;
-    _verticalDragStartOffset = globalPosition;
+    _verticalDragStartOffset = localPosition;
   }
 
   void _brightnessDragEnd(MeeduPlayerController controller) {
@@ -224,37 +225,25 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   Widget controlsUI(MeeduPlayerController _, BuildContext context) {
     return Stack(children: [
-      VideoCoreForwardAndRewindLayout(
-        responsive: widget.responsive,
-        rewind: GestureDetector(
-          onTap: () {
-            if (_.doubleTapCount.value != 0 || tappedTwice) {
-              _rewind(context, _);
-              tappedOnce(_, true);
-            } else {
-              tappedOnce(_, false);
-            }
-          },
-          //behavior: HitTestBehavior.opaque,
-        ),
-        forward: GestureDetector(
-          onTap: () {
-            //customDebugPrint("0 " + tappedTwice.toString());
-
-            if (_.doubleTapCount.value != 0 || tappedTwice) {
-              _forward(context, _);
-              //customDebugPrint("if");
-              tappedOnce(_, true);
-            } else {
-              //customDebugPrint("else");
-              //customDebugPrint("1 " + tappedTwice.toString());
-              tappedOnce(_, false);
-              //customDebugPrint("2 " + tappedTwice.toString());
-            }
-          },
-          //behavior: HitTestBehavior.,
-        ),
-      ),
+      RxBuilder((__) {
+        if (_.desktopOrWeb) {
+          return MouseRegion(
+              cursor: _.showControls.value
+                  ? SystemMouseCursors.basic
+                  : SystemMouseCursors.none,
+              onHover: (___) {
+                //customDebugPrint(___.delta);
+                if (_.mouseMoveInitial < const Offset(75, 75).distance) {
+                  _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
+                } else {
+                  _.controls = true;
+                }
+              },
+              child: videoControls(_, context));
+        } else {
+          return videoControls(_, context);
+        }
+      }),
       if (_.enabledOverlays.volume)
         RxBuilder(
           //observables: [_.volume],
@@ -332,25 +321,6 @@ class _ControlsContainerState extends State<ControlsContainer> {
             ),
           ),
         ),
-      RxBuilder((__) {
-        if (_.desktopOrWeb) {
-          return MouseRegion(
-              cursor: _.showControls.value
-                  ? SystemMouseCursors.basic
-                  : SystemMouseCursors.none,
-              onHover: (___) {
-                //customDebugPrint(___.delta);
-                if (_.mouseMoveInitial < const Offset(75, 75).distance) {
-                  _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
-                } else {
-                  _.controls = true;
-                }
-              },
-              child: videoControls(_, context));
-        } else {
-          return videoControls(_, context);
-        }
-      }),
       RxBuilder(
         //observables: [_.showSwipeDuration],
         //observables: [_.swipeDuration],
@@ -428,7 +398,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
           return Container();
         }
       }),
-      if (_.enabledControls.doubleTapToSeek || !_.desktopOrWeb)
+      if (_.enabledControls.doubleTapToSeek && !_.desktopOrWeb)
         RxBuilder(
           //observables: [_.showControls],
           (__) => VideoCoreForwardAndRewind(
@@ -439,14 +409,14 @@ class _ControlsContainerState extends State<ControlsContainer> {
             forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
           ),
         ),
-      if (_.enabledControls.doubleTapToSeek || !_.desktopOrWeb)
+      if (_.enabledControls.doubleTapToSeek && !_.desktopOrWeb)
         Positioned.fill(
           bottom: widget.responsive.height * 0.20,
           top: widget.responsive.height * 0.20,
           child: VideoCoreForwardAndRewindLayout(
             responsive: widget.responsive,
             rewind: GestureDetector(
-              behavior: HitTestBehavior.deferToChild,
+              // behavior: HitTestBehavior.translucent,
               onTap: () {
                 if (_.doubleTapCount.value != 0 || tappedTwice) {
                   _rewind(context, _);
@@ -457,7 +427,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
               },
             ),
             forward: GestureDetector(
-              behavior: HitTestBehavior.deferToChild,
+              // behavior: HitTestBehavior.translucent,
               onTap: () {
                 if (_.doubleTapCount.value != 0 || tappedTwice) {
                   _forward(context, _);
@@ -475,7 +445,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
     return GestureDetector(
-      behavior: HitTestBehavior.deferToChild,
+      // behavior: HitTestBehavior.opaque,
       onTap: () {
         if (_.desktopOrWeb) {
           if (tappedTwice) {
@@ -504,8 +474,8 @@ class _ControlsContainerState extends State<ControlsContainer> {
           final Offset position = details.localPosition;
           if (_dragInitialDelta == Offset.zero) {
             final Offset delta = details.delta;
-            if (details.globalPosition.dx > widget.responsive.width * 0.1 &&
-                ((widget.responsive.width - details.globalPosition.dx) >
+            if (details.localPosition.dx > widget.responsive.width * 0.1 &&
+                ((widget.responsive.width - details.localPosition.dx) >
                         widget.responsive.width * 0.1 &&
                     !gettingNotification)) {
               _forwardDragStart(position, _);
@@ -540,14 +510,14 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
           final Offset position = details.localPosition;
           if (_dragInitialDelta == Offset.zero) {
-            _.customDebugPrint(details.globalPosition.dy);
-            if (details.globalPosition.dy > widget.responsive.height * 0.1 &&
-                ((widget.responsive.height - details.globalPosition.dy) >
+            _.customDebugPrint(details.localPosition.dy);
+            if (details.localPosition.dy > widget.responsive.height * 0.1 &&
+                ((widget.responsive.height - details.localPosition.dy) >
                     widget.responsive.height * 0.1) &&
                 !gettingNotification) {
               final Offset delta = details.delta;
-              //if(details.globalPosition.dy<30){
-              if (details.globalPosition.dx >= widget.responsive.width / 2) {
+              //if(details.localPosition.dy<30){
+              if (details.localPosition.dx >= widget.responsive.width / 2) {
                 if (_.enabledControls.volumeSwipes) {
                   _volumeDragStart(position, _);
                 }
@@ -561,7 +531,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
                 //customDebugPrint("left");
               }
             } else {
-              _.customDebugPrint("out");
+              _.customDebugPrint("getting Notification");
               gettingNotification = true;
             }
             //}

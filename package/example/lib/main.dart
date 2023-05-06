@@ -4,7 +4,6 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/auto_fullscreen_on_rotation.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_with_looping_page.dart';
-import 'package:flutter_meedu_videoplayer_example/pages/bottom_controls.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/change_quality_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_controls.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_icon_size.dart';
@@ -16,6 +15,7 @@ import 'package:flutter_meedu_videoplayer_example/pages/listview_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/m3u8_page_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/network_with_subtitle_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/one_page_to_other_page_example.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/only_gestures_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/pick_file_page_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/playback_speed_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/player_with_header_page.dart';
@@ -38,9 +38,9 @@ class MyApp extends StatelessWidget {
       routes: {
         "basic": (_) => const BasicExamplePage(),
         "basic_with_looping": (_) => const BasicExampleWithLoopingPage(),
+        "only_gestures": (_) => const OnlyGesturesExamplePage(),
         "secondary_controls": (_) => const SecondaryExamplePage(),
         "custom_controls": (_) => const CustomControlsExamplePage(),
-        "bottom_controls": (_) => const BottomControlsExamplePage(),
         "custom_sizes": (_) => const CustomSizesExamplePage(),
         "fullscreen": (_) => const FullscreenExamplePage(),
         "with-header": (_) => const PlayerWithHeaderPage(),
@@ -115,6 +115,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                     buildButton(
                       context,
+                      text:
+                          'Network example without rewind and forward buttons',
+                      routeName: 'only_gestures',
+                      description:
+                          'An example of how to load a video from a network source without rewind and forward buttons.',
+                    ),
+                    buildButton(
+                      context,
                       text: 'Secondary Controls',
                       routeName: 'secondary_controls',
                       description:
@@ -126,13 +134,6 @@ class _HomePageState extends State<HomePage> {
                       routeName: 'custom_controls',
                       description:
                           'An example of how to create custom controls for the player.',
-                    ),
-                    buildButton(
-                      context,
-                      text: 'Bottom Controls',
-                      routeName: 'bottom_controls',
-                      description:
-                          'An example of how to create custom controls under the player.',
                     ),
                     buildButton(
                       context,
@@ -249,9 +250,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                     buildButton(
                       context,
-                      text: 'M3u8',
+                      text: 'M3u8 with qualities',
                       routeName: 'm3u8',
-                      description: 'Play a HLS stream.',
+                      description:
+                          'Play a HLS stream with the ability to change qualities.',
                     ),
                   ],
                 ),

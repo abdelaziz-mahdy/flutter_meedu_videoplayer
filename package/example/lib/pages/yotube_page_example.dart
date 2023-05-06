@@ -46,8 +46,9 @@ class YoutubeExamplePage extends StatefulWidget {
 
 class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
   final _controller = MeeduPlayerController(
-    screenManager: const ScreenManager(forceLandScapeInFullscreen: false),
-  );
+      screenManager: const ScreenManager(forceLandScapeInFullscreen: false),
+      enabledButtons: EnabledButtons(rewindAndfastForward: false),
+      responsive: Responsive(buttonsSizeRelativeToScreen: 3));
   String fileName = "";
   final List<Quality> _qualities = [];
 
@@ -276,7 +277,7 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
                   controller: _controller,
                   bottomRight: (ctx, controller, responsive) {
                     // creates a responsive fontSize using the size of video container
-                    final double fontSize = responsive.ip(3);
+                    final double fontSize = responsive.fontSize();
 
                     return CupertinoButton(
                       padding: const EdgeInsets.all(5),
@@ -290,7 +291,7 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
                                 ? quality.label
                                 : "No qualities loaded ",
                             style: TextStyle(
-                              fontSize: fontSize > 18 ? 18 : fontSize,
+                              fontSize: fontSize,
                               color: Colors.white,
                             ),
                           );
