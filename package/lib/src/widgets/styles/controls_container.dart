@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:defer_pointer/defer_pointer.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 

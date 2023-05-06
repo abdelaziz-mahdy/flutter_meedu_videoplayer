@@ -7,13 +7,15 @@ class BasicExampleWithLoopingPage extends StatefulWidget {
   const BasicExampleWithLoopingPage({Key? key}) : super(key: key);
 
   @override
-  State<BasicExampleWithLoopingPage> createState() => _BasicExampleWithLoopingPageState();
+  State<BasicExampleWithLoopingPage> createState() =>
+      _BasicExampleWithLoopingPageState();
 }
 
-class _BasicExampleWithLoopingPageState extends State<BasicExampleWithLoopingPage> {
+class _BasicExampleWithLoopingPageState
+    extends State<BasicExampleWithLoopingPage> {
   final _meeduPlayerController = MeeduPlayerController(
       controlsStyle: ControlsStyle.primary,
-      enabledControls: EnabledControls(doubleTapToSeek: false));
+      enabledControls: const EnabledControls(doubleTapToSeek: false));
 
   StreamSubscription? _playerEventSubs;
 

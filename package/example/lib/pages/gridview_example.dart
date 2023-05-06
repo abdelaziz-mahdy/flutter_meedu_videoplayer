@@ -49,7 +49,7 @@ class _VideoItemState extends State<VideoItem>
       screenManager: const ScreenManager(orientations: [
         DeviceOrientation.portraitUp,
       ]),
-      enabledControls: EnabledControls(doubleTapToSeek: false));
+      enabledControls: const EnabledControls(doubleTapToSeek: false));
 
   final ValueNotifier<bool> _visible = ValueNotifier(true);
 

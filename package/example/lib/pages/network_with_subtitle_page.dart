@@ -20,7 +20,7 @@ class _NetworkWithSubtitlesPageState extends State<NetworkWithSubtitlesPage> {
     super.initState();
     _controller = MeeduPlayerController(
         controlsStyle: ControlsStyle.primary,
-        enabledControls: EnabledControls(doubleTapToSeek: false));
+        enabledControls: const EnabledControls(doubleTapToSeek: false));
     _setDataSource();
   }
 

@@ -15,7 +15,7 @@ class _PlayBackSpeedExamplePageState extends State<PlayBackSpeedExamplePage> {
       screenManager: const ScreenManager(
         forceLandScapeInFullscreen: false,
       ),
-      enabledControls: EnabledControls(doubleTapToSeek: false));
+      enabledControls: const EnabledControls(doubleTapToSeek: false));
 
   final ValueNotifier<double> _playbackSpeed = ValueNotifier(1);
 

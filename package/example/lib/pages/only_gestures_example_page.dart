@@ -15,7 +15,7 @@ class _OnlyGesturesExamplePageState extends State<OnlyGesturesExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
       controlsStyle: ControlsStyle.primary,
       // enabledControls: EnabledControls(doubleTapToSeek: false),
-      enabledButtons: EnabledButtons(rewindAndfastForward: false));
+      enabledButtons: const EnabledButtons(rewindAndfastForward: false));
 
   StreamSubscription? _playerEventSubs;
 

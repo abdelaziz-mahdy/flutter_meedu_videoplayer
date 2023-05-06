@@ -116,7 +116,7 @@ class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
                                                   controller.setVolume(value),
                                             ),
                                           )
-                                        : Expanded(
+                                        : const Expanded(
                                             flex: 2,
                                             child: SizedBox(),
                                           ),

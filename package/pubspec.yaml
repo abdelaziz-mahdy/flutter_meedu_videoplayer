@@ -22,7 +22,6 @@ dependencies:
   fullscreen_window: ^1.0.4
   video_player_media_kit: ^0.0.10
     # path: ../../video_player_media_kit
-  defer_pointer: ^0.0.2
 
   # video_player_media_kit:
   #   path: ../../video_player_media_kit

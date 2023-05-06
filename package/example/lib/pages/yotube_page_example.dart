@@ -47,7 +47,7 @@ class YoutubeExamplePage extends StatefulWidget {
 class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
   final _controller = MeeduPlayerController(
       screenManager: const ScreenManager(forceLandScapeInFullscreen: false),
-      enabledButtons: EnabledButtons(rewindAndfastForward: false),
+      enabledButtons: const EnabledButtons(rewindAndfastForward: false),
       responsive: Responsive(buttonsSizeRelativeToScreen: 3));
   String fileName = "";
   final List<Quality> _qualities = [];

@@ -15,7 +15,7 @@ class _CustomIconsExamplePageState extends State<CustomIconsExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
       controlsStyle: ControlsStyle.primary,
       manageWakeLock: false,
-      enabledControls: EnabledControls(doubleTapToSeek: false));
+      enabledControls: const EnabledControls(doubleTapToSeek: false));
 
   StreamSubscription? _playerEventSubs;
 

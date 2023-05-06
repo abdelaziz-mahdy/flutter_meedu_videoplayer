@@ -34,7 +34,7 @@ class _FullscreenExamplePageState extends State<FullscreenExamplePage> {
 
   final MeeduPlayerController _meeduPlayerController = MeeduPlayerController(
       colorTheme: Colors.blue,
-      enabledButtons: EnabledButtons(rewindAndfastForward: false));
+      enabledButtons: const EnabledButtons(rewindAndfastForward: false));
   ValueNotifier<int> currentIndex = ValueNotifier(0);
   DataSource? _dataSource;
 

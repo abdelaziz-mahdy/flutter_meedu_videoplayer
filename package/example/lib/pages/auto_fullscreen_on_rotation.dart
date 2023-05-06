@@ -27,7 +27,7 @@ class _AutoFullScreenExamplePageState extends State<AutoFullScreenExamplePage> {
   final _controller = MeeduPlayerController(
       colorTheme: Colors.red,
       screenManager: const ScreenManager(hideSystemOverlay: false),
-      enabledButtons: EnabledButtons(rewindAndfastForward: false));
+      enabledButtons: const EnabledButtons(rewindAndfastForward: false));
 
   final _qualities = [
     Quality(
@@ -92,7 +92,7 @@ class _AutoFullScreenExamplePageState extends State<AutoFullScreenExamplePage> {
       }
 
       // Set a new debounce timer to wait 100 milliseconds before processing the orientation change.
-      _debounceTimer = Timer(Duration(milliseconds: 100), () {
+      _debounceTimer = Timer(const Duration(milliseconds: 100), () {
         print("onOrientationChanged $event");
 
         // Check the device orientation to identify the current mode.
