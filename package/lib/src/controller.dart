@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu_videoplayer/src/native/pip_manager.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,7 +23,7 @@ enum ControlsStyle {
 class MeeduPlayerController {
   /// the video_player controller
   VideoPlayerController? _videoPlayerController;
-  //final _pipManager = PipManager();
+  final _pipManager = PipManager();
   StreamSubscription? _playerEventSubs;
 
   /// Screen Manager to define the overlays and device orientation when the player enters in fullscreen mode
@@ -50,7 +51,7 @@ class MeeduPlayerController {
   String? get errorText => _errorText;
   Widget? loadingWidget, header, bottomRight, customControls;
   final ControlsStyle controlsStyle;
-  //final bool pipEnabled, showPipButton;
+  final bool pipEnabled, showPipButton;
 
   String? tag;
 
@@ -68,10 +69,13 @@ class MeeduPlayerController {
   final Rx<bool> _closedCaptionEnabled = false.obs;
   final Rx<bool> _mute = false.obs;
   final Rx<bool> _fullscreen = false.obs;
+  final Rx<bool> _pipAvailable = false.obs;
+
   final Rx<bool> _showControls = true.obs;
   final Rx<bool> _showSwipeDuration = false.obs;
   final Rx<bool> _showVolumeStatus = false.obs;
   final Rx<bool> _showBrightnessStatus = false.obs;
+  Rx<bool> bufferingVideoDuration = false.obs;
 
   Rx<bool> videoFitChanged = false.obs;
   final Rx<BoxFit> _videoFit = Rx(BoxFit.fill);
@@ -91,7 +95,9 @@ class MeeduPlayerController {
   Timer? _timerForGettingVolume;
   Timer? timerForTrackingMouse;
   Timer? videoFitChangedTimer;
-  Rx<bool> bufferingVideoDuration = false.obs;
+  RxReaction? _pipModeWorker;
+  BuildContext? _pipContextToFullscreen;
+
   void Function()? onVideoPlayerClosed;
   List<BoxFit> fits = [
     BoxFit.contain,
@@ -200,20 +206,20 @@ class MeeduPlayerController {
   bool launchedAsFullScreen = false;
 
   /// [isInPipMode] is true if pip mode is enabled
-  //Rx<bool> get isInPipMode => _pipManager.isInPipMode;
-  //Stream<bool?> get onPipModeChanged => _pipManager.isInPipMode.stream;
+  Rx<bool> get isInPipMode => _pipManager.isInPipMode;
+  Stream<bool?> get onPipModeChanged => _pipManager.isInPipMode.stream;
 
   Rx<bool> isBuffering = false.obs;
 
   SharedPreferences? prefs;
 
-  /// returns the os version
-  //Future<double> get osVersion async {
-  //return _pipManager.osVersion;
-  //}
+  // returns the os version
+  Future<double> get osVersion async {
+  return _pipManager.osVersion;
+  }
 
   /// returns true if the pip mode can used on the current device, the initial value will be false after check if pip is available
-  //Rx<bool> get pipAvailable => _pipAvailable;
+  Rx<bool> get pipAvailable => _pipAvailable;
 
   /// return fit of the Video,By default it is set to [BoxFit.contain]
   Rx<BoxFit> get videoFit => _videoFit;
@@ -264,8 +270,8 @@ class MeeduPlayerController {
       BoxFit.fitWidth,
       BoxFit.scaleDown
     ],
-    //this.pipEnabled = false,
-    //this.showPipButton = false,
+    this.pipEnabled = false,
+    this.showPipButton = false,
     this.customIcons = const CustomIcons(),
     this.enabledButtons = const EnabledButtons(),
     this.enabledControls = const EnabledControls(),
@@ -335,16 +341,16 @@ Note: if you can help fix this issue,a pr is always welcomed.
       },
     );
 
-    //if (pipEnabled) {
+    if (pipEnabled) {
     // get the OS version and check if pip is available
-    //this._pipManager.checkPipAvailable().then(
-    //(value) => _pipAvailable.value = value,
-    //);
+    this._pipManager.checkPipAvailable().then(
+    (value) => _pipAvailable.value = value,
+    );
     // listen the pip mode changes
-    //_pipModeWorker = _pipManager.isInPipMode.ever(this._onPipModeChanged);
-    //} else {
-    //_pipAvailable.value = false;
-    //}
+    _pipModeWorker = _pipManager.isInPipMode.ever(this._onPipModeChanged);
+    } else {
+    _pipAvailable.value = false;
+    }
   }
 
   /// create a new video_player controller
@@ -1020,6 +1026,30 @@ Note: if you can help fix this issue,a pr is always welcomed.
     });
   }
 
+
+  /// enter to picture in picture mode only Android
+  ///
+  /// only available since Android 7
+  Future<void> enterPip(BuildContext context) async {
+    if (this.pipAvailable.value && this.pipEnabled) {
+      controls = false; // hide the controls
+      if (!fullscreen.value) {
+        // if the player is not in the fullscreen mode
+        _pipContextToFullscreen = context;
+        goToFullscreen(context, applyOverlaysAndOrientations: false);
+      }
+      await _pipManager.enterPip();
+    }
+  }
+
+  /// listener for pip changes
+  void _onPipModeChanged(bool isInPipMode) {
+    // if the pip mode was closed and before enter to pip mode the player was not in fullscreen
+    if (!isInPipMode && _pipContextToFullscreen != null) {
+      Navigator.pop(_pipContextToFullscreen!); // close the fullscreen
+      _pipContextToFullscreen = null;
+    }
+  }
   static MeeduPlayerController of(BuildContext context) {
     return context
         .dependOnInheritedWidgetOfExactType<MeeduPlayerProvider>()!

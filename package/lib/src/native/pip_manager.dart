@@ -1,4 +1,4 @@
-/*
+
 import 'dart:async';
 import 'dart:io' show Platform;
 
@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:meedu/rx.dart';
 
 class PipManager {
-  final _channel = MethodChannel("app.meedu.player");
+  final _channel = const MethodChannel("com.zezo357.flutter_meedu_videoplayer");
 
   Completer<double> _osVersion = Completer();
   Completer<bool> _pipAvailable = Completer();
@@ -32,7 +32,7 @@ class PipManager {
   Future<void> _getOSVersion() async {
     final _os = await _channel.invokeMethod<String>('osVersion');
     final os = double.parse(_os!);
-    this._osVersion.complete(os);
+    _osVersion.complete(os);
   }
 
   Future<void> enterPip() async {
@@ -42,7 +42,7 @@ class PipManager {
   Future<bool> checkPipAvailable() async {
     bool available = false;
     if (Platform.isAndroid) {
-      await this._channel.invokeMethod('initPipConfiguration');
+      await _channel.invokeMethod('initPipConfiguration');
       await _getOSVersion();
       final osVersion = await _osVersion.future;
       // check the OS version
@@ -50,11 +50,11 @@ class PipManager {
         return true;
       }
     }
-    this._pipAvailable.complete(available);
+    _pipAvailable.complete(available);
     return available;
   }
 
   Future<void> dispose() async {
     isInPipMode.close();
   }
-}*/
+}
