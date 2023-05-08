@@ -32,12 +32,12 @@ In your `AndroidManifest.xml`  in your MainActivity tag you must enable `android
 
 
 
-> When you create your instance of `MeeduPlayerController` you need pass the `pipEnabled` param as **true** and if you want to show the **pip button** in the controls you can pass the `showPipButton` param and then you don't need call to `enterPip` method.
+> When you create your instance of `MeeduPlayerController` you need pass the `pipEnabled` param as **true** and if you want to show the **pip button** in the controls and then you don't need call to `enterPip` method.
 ```dart
 final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.primary,
     pipEnabled: true, // use false to hide pip button in the player
-    showPipButton: true,
+    enabledButtons: EnabledButtons(pip: true), // pip is true by default, but only visible if pipEnabled is `true`
   );
 ```
 
