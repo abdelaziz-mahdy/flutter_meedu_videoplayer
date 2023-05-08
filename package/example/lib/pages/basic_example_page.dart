@@ -16,7 +16,7 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
       enabledButtons: EnabledButtons(pip: true),
       enabledControls: const EnabledControls(doubleTapToSeek: false),
       pipEnabled: true,
-      showPipButton: true);
+      );
 
   StreamSubscription? _playerEventSubs;
 
@@ -44,7 +44,6 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
         ),
         autoplay: true,
         looping: false);
-    print("pip ${_meeduPlayerController.pipAvailable.value}");
   }
 
   @override

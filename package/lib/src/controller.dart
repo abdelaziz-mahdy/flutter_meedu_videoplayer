@@ -51,7 +51,7 @@ class MeeduPlayerController {
   String? get errorText => _errorText;
   Widget? loadingWidget, header, bottomRight, customControls;
   final ControlsStyle controlsStyle;
-  final bool pipEnabled, showPipButton;
+  final bool pipEnabled;
 
   String? tag;
 
@@ -271,7 +271,6 @@ class MeeduPlayerController {
       BoxFit.scaleDown
     ],
     this.pipEnabled = false,
-    this.showPipButton = false,
     this.customIcons = const CustomIcons(),
     this.enabledButtons = const EnabledButtons(),
     this.enabledControls = const EnabledControls(),

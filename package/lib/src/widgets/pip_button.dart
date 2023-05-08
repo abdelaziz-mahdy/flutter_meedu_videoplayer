@@ -17,7 +17,7 @@ class PipButton extends StatelessWidget {
         //   _.fullscreen,
         // ],
         (__) {
-          if (!_.pipAvailable.value || !_.showPipButton) return Container();
+          if (!_.pipAvailable.value ) return Container();
           return PlayerButton(
             size: responsive.buttonSize(),
             circle: false,

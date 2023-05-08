@@ -13,6 +13,11 @@ We have implemented a cross-platform video player, which provides a seamless vid
 
 * [video_player](https://pub.dev/packages/video_player) for Android, iOS, and web.
 * [media_kit](https://pub.dev/packages/media_kit) for desktop platforms.
+  
+👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_videoplayer/)</b>
+
+
+
 
 <table>
 <caption><h4><a href="https://zezo357.github.io/flutter_meedu_videoplayer_example/">Flutter Web Demo</a></h4></caption>
@@ -154,8 +159,4 @@ or above
 ```javascript
     <script src="flutter.js" defer></script>
 ```
-
-👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_videoplayer/)</b>
-
-
 
