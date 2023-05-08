@@ -13,7 +13,10 @@ class BasicExamplePage extends StatefulWidget {
 class _BasicExamplePageState extends State<BasicExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
       controlsStyle: ControlsStyle.primary,
-      enabledControls: const EnabledControls(doubleTapToSeek: false));
+      enabledButtons: EnabledButtons(pip: true),
+      enabledControls: const EnabledControls(doubleTapToSeek: false),
+      pipEnabled: true,
+      );
 
   StreamSubscription? _playerEventSubs;
 
@@ -32,8 +35,8 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
     super.dispose();
   }
 
-  _init() {
-    _meeduPlayerController.setDataSource(
+  _init() async {
+    await _meeduPlayerController.setDataSource(
         DataSource(
           type: DataSourceType.network,
           source:
