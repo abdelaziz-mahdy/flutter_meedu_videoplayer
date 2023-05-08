@@ -40,12 +40,12 @@ We have implemented a cross-platform video player, which provides a seamless vid
 
 # Video Player Controls
 
-- Double-tap on the sides of the screen to seek forward or backward in the video. (<em>doubleTapToSeek</em>)
 
 ## Mobile Controls
 - Swipe horizontally to seek forward or backward in the video. (<em>seekSwipes</em>)
 - Swipe vertically on the right side of the screen to control the video volume. (<em>volumeSwipes</em>)
 - Swipe vertically on the left side of the screen to control the video brightness. (<em>brightnessSwipes</em>)
+- Double-tap on the sides of the screen to seek forward or backward in the video. (<em>doubleTapToSeek</em>)
 
 ## Desktop Controls
 - One-click with the mouse to toggle play and pause. (<em>desktopTapToPlayAndPause</em>)

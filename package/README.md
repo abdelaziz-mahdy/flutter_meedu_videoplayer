@@ -13,6 +13,11 @@ We have implemented a cross-platform video player, which provides a seamless vid
 
 * [video_player](https://pub.dev/packages/video_player) for Android, iOS, and web.
 * [media_kit](https://pub.dev/packages/media_kit) for desktop platforms.
+  
+👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_videoplayer/)</b>
+
+
+
 
 <table>
 <caption><h4><a href="https://zezo357.github.io/flutter_meedu_videoplayer_example/">Flutter Web Demo</a></h4></caption>
@@ -35,12 +40,12 @@ We have implemented a cross-platform video player, which provides a seamless vid
 
 # Video Player Controls
 
-- Double-tap on the sides of the screen to seek forward or backward in the video. (<em>doubleTapToSeek</em>)
 
 ## Mobile Controls
 - Swipe horizontally to seek forward or backward in the video. (<em>seekSwipes</em>)
 - Swipe vertically on the right side of the screen to control the video volume. (<em>volumeSwipes</em>)
 - Swipe vertically on the left side of the screen to control the video brightness. (<em>brightnessSwipes</em>)
+- Double-tap on the sides of the screen to seek forward or backward in the video. (<em>doubleTapToSeek</em>)
 
 ## Desktop Controls
 - One-click with the mouse to toggle play and pause. (<em>desktopTapToPlayAndPause</em>)
@@ -154,8 +159,4 @@ or above
 ```javascript
     <script src="flutter.js" defer></script>
 ```
-
-👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_videoplayer/)</b>
-
-
 
