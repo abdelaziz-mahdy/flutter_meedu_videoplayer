@@ -343,13 +343,13 @@ Note: if you can help fix this issue,a pr is always welcomed.
       },
     );
 
-    if (pipEnabled) {
+    if (pipEnabled&&UniversalPlatform.isAndroid) {
       // get the OS version and check if pip is available
-      this._pipManager.checkPipAvailable().then(
+      _pipManager.checkPipAvailable().then(
             (value) => _pipAvailable.value = value,
           );
       // listen the pip mode changes
-      _pipModeWorker = _pipManager.isInPipMode.ever(this._onPipModeChanged);
+      _pipModeWorker = _pipManager.isInPipMode.ever(_onPipModeChanged);
     } else {
       _pipAvailable.value = false;
     }
@@ -1032,7 +1032,7 @@ Note: if you can help fix this issue,a pr is always welcomed.
   ///
   /// only available since Android 7
   Future<void> enterPip(BuildContext context) async {
-    if (this.pipAvailable.value && this.pipEnabled) {
+    if (pipAvailable.value && pipEnabled) {
       controls = false; // hide the controls
       if (!fullscreen.value) {
         // if the player is not in the fullscreen mode
