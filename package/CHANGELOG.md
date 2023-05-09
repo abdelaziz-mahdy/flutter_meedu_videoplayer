@@ -1,3 +1,7 @@
+## 4.2.7
+* Fixes web controls when opened on mobile device.
+* Adds pip for android. 
+
 ## 4.2.6
 * Made double tap to seek work only on mobile to fix taps issues on desktop and web.
 * Added assert statement to avoid debugging issues (with hit tests).

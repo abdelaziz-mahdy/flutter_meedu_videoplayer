@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
 import 'package:flutter_meedu_videoplayer/src/native/pip_manager.dart';
@@ -215,7 +216,7 @@ class MeeduPlayerController {
 
   // returns the os version
   Future<double> get osVersion async {
-  return _pipManager.osVersion;
+    return _pipManager.osVersion;
   }
 
   /// returns true if the pip mode can used on the current device, the initial value will be false after check if pip is available
@@ -313,10 +314,12 @@ Note: if you can help fix this issue,a pr is always welcomed.
           size: 30,
           color: colorTheme,
         );
-    if (UniversalPlatform.isWindows ||
-        UniversalPlatform.isLinux ||
-        UniversalPlatform.isMacOS ||
-        UniversalPlatform.isWeb) {
+    if ((UniversalPlatform.isWindows ||
+            UniversalPlatform.isLinux ||
+            UniversalPlatform.isMacOS ||
+            UniversalPlatform.isWeb) &&
+        !(defaultTargetPlatform == TargetPlatform.iOS ||
+            defaultTargetPlatform == TargetPlatform.android)) {
       desktopOrWeb = true;
     }
     //check each
@@ -341,14 +344,14 @@ Note: if you can help fix this issue,a pr is always welcomed.
     );
 
     if (pipEnabled) {
-    // get the OS version and check if pip is available
-    this._pipManager.checkPipAvailable().then(
-    (value) => _pipAvailable.value = value,
-    );
-    // listen the pip mode changes
-    _pipModeWorker = _pipManager.isInPipMode.ever(this._onPipModeChanged);
+      // get the OS version and check if pip is available
+      this._pipManager.checkPipAvailable().then(
+            (value) => _pipAvailable.value = value,
+          );
+      // listen the pip mode changes
+      _pipModeWorker = _pipManager.isInPipMode.ever(this._onPipModeChanged);
     } else {
-    _pipAvailable.value = false;
+      _pipAvailable.value = false;
     }
   }
 
@@ -1025,7 +1028,6 @@ Note: if you can help fix this issue,a pr is always welcomed.
     });
   }
 
-
   /// enter to picture in picture mode only Android
   ///
   /// only available since Android 7
@@ -1049,6 +1051,7 @@ Note: if you can help fix this issue,a pr is always welcomed.
       _pipContextToFullscreen = null;
     }
   }
+
   static MeeduPlayerController of(BuildContext context) {
     return context
         .dependOnInheritedWidgetOfExactType<MeeduPlayerProvider>()!
