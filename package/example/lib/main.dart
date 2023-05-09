@@ -200,13 +200,20 @@ class _HomePageState extends State<HomePage> {
                       description:
                           'An example of how to navigate between pages in the app.',
                     ),
-                    buildButton(
-                      context,
-                      text: 'Pick file',
-                      routeName: 'pick-file',
-                      description:
-                          'An example of how to pick a video file from the device storage.',
-                    ),
+                    kIsWeb
+                        ? buildDisabledButton(
+                            context,
+                            text: "Pick file Example doesn't work on web",
+                            description:
+                                'This example is not available on web due to restrictions.',
+                          )
+                        : buildButton(
+                            context,
+                            text: 'Pick file',
+                            routeName: 'pick-file',
+                            description:
+                                'An example of how to pick a video file from the device storage.',
+                          ),
                     buildButton(
                       context,
                       text: 'Custom Icons',
