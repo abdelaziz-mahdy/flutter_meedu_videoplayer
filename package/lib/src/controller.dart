@@ -191,6 +191,9 @@ class MeeduPlayerController {
   /// for defining that video player is working on desktop or web
   bool desktopOrWeb = false;
 
+  /// for defining that video player needs mobile controls (even if its running on a web on a mobile device)
+  bool mobileControls = false;
+
   /// controls if widgets inside videoplayer should get focus or not
   final bool excludeFocus;
 
@@ -315,12 +318,14 @@ Note: if you can help fix this issue,a pr is always welcomed.
           color: colorTheme,
         );
     if ((UniversalPlatform.isWindows ||
-            UniversalPlatform.isLinux ||
-            UniversalPlatform.isMacOS ||
-            UniversalPlatform.isWeb) &&
-        !(defaultTargetPlatform == TargetPlatform.iOS ||
-            defaultTargetPlatform == TargetPlatform.android)) {
+        UniversalPlatform.isLinux ||
+        UniversalPlatform.isMacOS ||
+        UniversalPlatform.isWeb)) {
       desktopOrWeb = true;
+    }
+    if ((defaultTargetPlatform == TargetPlatform.iOS ||
+        defaultTargetPlatform == TargetPlatform.android)) {
+      mobileControls = true;
     }
     //check each
     if (!desktopOrWeb && enabledControls.volumeSwipes) {
@@ -343,7 +348,7 @@ Note: if you can help fix this issue,a pr is always welcomed.
       },
     );
 
-    if (pipEnabled&&UniversalPlatform.isAndroid) {
+    if (pipEnabled && UniversalPlatform.isAndroid) {
       // get the OS version and check if pip is available
       _pipManager.checkPipAvailable().then(
             (value) => _pipAvailable.value = value,

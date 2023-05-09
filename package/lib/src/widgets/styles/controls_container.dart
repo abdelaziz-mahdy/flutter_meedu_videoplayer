@@ -224,7 +224,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
   Widget controlsUI(MeeduPlayerController _, BuildContext context) {
     return Stack(children: [
       RxBuilder((__) {
-        if (_.desktopOrWeb) {
+        if (!_.mobileControls) {
           return MouseRegion(
               cursor: _.showControls.value
                   ? SystemMouseCursors.basic
@@ -396,7 +396,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
           return Container();
         }
       }),
-      if (_.enabledControls.doubleTapToSeek && !_.desktopOrWeb)
+      if (_.enabledControls.doubleTapToSeek && (_.mobileControls))
         RxBuilder(
           //observables: [_.showControls],
           (__) => VideoCoreForwardAndRewind(
@@ -407,7 +407,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
             forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
           ),
         ),
-      if (_.enabledControls.doubleTapToSeek && !_.desktopOrWeb)
+      if (_.enabledControls.doubleTapToSeek && (_.mobileControls))
         Positioned.fill(
           bottom: widget.responsive.height * 0.20,
           top: widget.responsive.height * 0.20,
@@ -445,7 +445,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
     return GestureDetector(
       // behavior: HitTestBehavior.opaque,
       onTap: () {
-        if (_.desktopOrWeb) {
+        if (!_.mobileControls) {
           if (tappedTwice) {
             if (_.enabledControls.desktopDoubleTapToFullScreen) {
               _.toggleFullScreen(context);
@@ -463,7 +463,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
         _dragInitialDelta = Offset.zero;
       },
       onHorizontalDragUpdate: (DragUpdateDetails details) {
-        if (!_.desktopOrWeb && _.enabledControls.seekSwipes) {
+        if (_.mobileControls && _.enabledControls.seekSwipes) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           //return;
           //}
@@ -491,7 +491,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
         //_.videoPlayerController!.seekTo(position);
       },
       onHorizontalDragEnd: (DragEndDetails details) {
-        if (!_.desktopOrWeb && _.enabledControls.seekSwipes) {
+        if (_.mobileControls && _.enabledControls.seekSwipes) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           //return;
           //}
@@ -500,7 +500,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
         }
       },
       onVerticalDragUpdate: (DragUpdateDetails details) {
-        if (!_.desktopOrWeb) {
+        if (_.mobileControls) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           //return;
           //}
@@ -522,7 +522,9 @@ class _ControlsContainerState extends State<ControlsContainer> {
                 _dragInitialDelta = delta;
                 //customDebugPrint("right");
               } else {
-                if (!_.desktopOrWeb && _.enabledControls.brightnessSwipes) {
+                if (
+                  
+                  _.mobileControls && _.enabledControls.brightnessSwipes) {
                   _brightnessDragStart(position, _);
                 }
                 _dragInitialDelta = delta;
@@ -538,7 +540,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
               if (isVolume && _.enabledControls.volumeSwipes) {
                 _volumeDragUpdate(position, _);
               } else {
-                if (!_.desktopOrWeb && _.enabledControls.brightnessSwipes) {
+                if (_.mobileControls && _.enabledControls.brightnessSwipes) {
                   _brightnessDragUpdate(position, _);
                 }
               }
@@ -548,7 +550,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
         //_.videoPlayerController!.seekTo(position);
       },
       onVerticalDragEnd: (DragEndDetails details) {
-        if (!_.desktopOrWeb) {
+        if (_.mobileControls) {
           //if (!_.videoPlayerController!.value.isInitialized) {
           // return;
           //}
@@ -556,7 +558,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
           if (isVolume && _.enabledControls.volumeSwipes) {
             _volumeDragEnd(_);
           } else {
-            if (!_.desktopOrWeb && _.enabledControls.brightnessSwipes) {
+            if (_.mobileControls && _.enabledControls.brightnessSwipes) {
               _brightnessDragEnd(_);
             }
           }
