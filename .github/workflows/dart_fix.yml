@@ -1,0 +1,23 @@
+name: apply_dart_fix
+on:
+  workflow_run:
+    workflows: ["Manual Workflow"]
+    types:
+      - requested
+
+jobs:
+  dart_fix_commit:
+    name: Dart Fix and Commit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 'stable'
+      - run: dart pub get
+      - run: dart fix --apply
+      - run: |
+          git diff-index --quiet HEAD || git commit -am "Apply Dart fix"
+
+
