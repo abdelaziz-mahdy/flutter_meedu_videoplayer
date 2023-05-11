@@ -1,21 +1,33 @@
 name: apply_dart_fix
-on: 
+on:
   workflow_dispatch:
+  
+defaults:
+  run:
+    working-directory: package
 
 jobs:
   dart_fix_commit:
     name: Dart Fix and Commit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Dart
-      - uses: subosito/flutter-action@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           cache: true
-      - run: flutter pub get
-      - run: dart fix --apply
-      - run: |
+          
+      - name: Get Flutter dependencies
+        run: flutter pub get
+      
+      - name: Apply Dart fix
+        run: dart fix --apply
+      
+      - name: Commit changes
+        run: |
           git diff-index --quiet HEAD || git commit -am "Apply Dart fix"
-
 
