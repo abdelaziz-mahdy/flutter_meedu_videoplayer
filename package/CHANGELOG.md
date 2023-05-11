@@ -1,6 +1,7 @@
 ## 4.2.7
 * Fixes web controls when opened on mobile device.
 * Adds pip for android. 
+* Fixes flutter 3.10 errors
 
 ## 4.2.6
 * Made double tap to seek work only on mobile to fix taps issues on desktop and web.
