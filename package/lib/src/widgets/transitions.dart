@@ -15,7 +15,7 @@ class CustomOpacityTransition extends StatelessWidget {
     return AnimatedOpacity(
       curve: Curves.ease,
       duration: const Duration(milliseconds: 100),
-      opacity: visible!?1:0,
+      opacity: visible! ? 1 : 0,
       child: child!,
     );
   }

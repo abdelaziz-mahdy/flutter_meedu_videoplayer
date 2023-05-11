@@ -3,7 +3,7 @@ description: A cross Platform video player that uses video_player for android an
 version: 4.2.7
 homepage: "https://github.com/zezo357/flutter_meedu_videoplayer"
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=2.16.2 <4.0.0"
   flutter: ">=2.5.0"
 
 dependencies:

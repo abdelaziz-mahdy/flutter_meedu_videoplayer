@@ -1,15 +1,14 @@
-
 import 'dart:async';
 import 'dart:io' show Platform;
 
 import 'package:flutter/services.dart';
-import 'package:meedu/rx.dart';
+import 'package:flutter_meedu/meedu.dart';
 
 class PipManager {
   final _channel = const MethodChannel("com.zezo357.flutter_meedu_videoplayer");
 
-  Completer<double> _osVersion = Completer();
-  Completer<bool> _pipAvailable = Completer();
+  final Completer<double> _osVersion = Completer();
+  final Completer<bool> _pipAvailable = Completer();
 
   Rx<bool> isInPipMode = false.obs;
 
@@ -30,8 +29,8 @@ class PipManager {
   }
 
   Future<void> _getOSVersion() async {
-    final _os = await _channel.invokeMethod<String>('osVersion');
-    final os = double.parse(_os!);
+    final os0 = await _channel.invokeMethod<String>('osVersion');
+    final os = double.parse(os0!);
     _osVersion.complete(os);
   }
 

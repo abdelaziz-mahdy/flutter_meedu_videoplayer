@@ -837,7 +837,7 @@ Note: if you can help fix this issue,a pr is always welcomed.
     timerForTrackingMouse?.cancel();
     _timerForSeek?.cancel();
     videoFitChangedTimer?.cancel();
-
+    _pipModeWorker?.dispose();
     _position.close();
     _playerEventSubs?.cancel();
     _sliderPosition.close();

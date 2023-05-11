@@ -522,9 +522,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
                 _dragInitialDelta = delta;
                 //customDebugPrint("right");
               } else {
-                if (
-                  
-                  _.mobileControls && _.enabledControls.brightnessSwipes) {
+                if (_.mobileControls && _.enabledControls.brightnessSwipes) {
                   _brightnessDragStart(position, _);
                 }
                 _dragInitialDelta = delta;
