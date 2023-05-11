@@ -1,18 +1,9 @@
-name: Build_cross_platform
+name: apply_dart_fix
 on:
-  push:
-    branches: [ master ]
-    paths:
-      - 'package/**'
-      - '!package/README.md'
-  pull_request:
-    branches: [ master ]
-    paths:
-      - 'package/**'
-      - '!package/README.md'
-defaults:
-  run:
-    working-directory: package
+  workflow_run:
+    workflows: ["Manual Workflow"]
+    types:
+      - requested
 
 jobs:
   dart_fix_commit:
@@ -28,4 +19,5 @@ jobs:
       - run: dart fix --apply
       - run: |
           git diff-index --quiet HEAD || git commit -am "Apply Dart fix"
+
 
