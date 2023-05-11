@@ -1,9 +1,6 @@
 name: apply_dart_fix
-on:
-  workflow_run:
-    workflows: ["Manual Workflow"]
-    types:
-      - requested
+on: 
+  workflow_dispatch:
 
 jobs:
   dart_fix_commit:
