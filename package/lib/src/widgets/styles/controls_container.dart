@@ -223,25 +223,6 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   Widget controlsUI(MeeduPlayerController _, BuildContext context) {
     return Stack(children: [
-      RxBuilder((__) {
-        if (!_.mobileControls) {
-          return MouseRegion(
-              cursor: _.showControls.value
-                  ? SystemMouseCursors.basic
-                  : SystemMouseCursors.none,
-              onHover: (___) {
-                //customDebugPrint(___.delta);
-                if (_.mouseMoveInitial < const Offset(75, 75).distance) {
-                  _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
-                } else {
-                  _.controls = true;
-                }
-              },
-              child: videoControls(_, context));
-        } else {
-          return videoControls(_, context);
-        }
-      }),
       if (_.enabledOverlays.volume)
         RxBuilder(
           //observables: [_.volume],
@@ -407,43 +388,33 @@ class _ControlsContainerState extends State<ControlsContainer> {
             forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
           ),
         ),
-      if (_.enabledControls.doubleTapToSeek && (_.mobileControls))
-        Positioned.fill(
-          bottom: widget.responsive.height * 0.20,
-          top: widget.responsive.height * 0.20,
-          child: VideoCoreForwardAndRewindLayout(
-            responsive: widget.responsive,
-            rewind: GestureDetector(
-              // behavior: HitTestBehavior.translucent,
-              onTap: () {
-                if (_.doubleTapCount.value != 0 || tappedTwice) {
-                  _rewind(context, _);
-                  tappedOnce(_, true);
+      RxBuilder((__) {
+        if (!_.mobileControls) {
+          return MouseRegion(
+              cursor: _.showControls.value
+                  ? SystemMouseCursors.basic
+                  : SystemMouseCursors.none,
+              onHover: (___) {
+                //customDebugPrint(___.delta);
+                if (_.mouseMoveInitial < const Offset(75, 75).distance) {
+                  _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
                 } else {
-                  tappedOnce(_, false);
+                  _.controls = true;
                 }
               },
-            ),
-            forward: GestureDetector(
-              // behavior: HitTestBehavior.translucent,
-              onTap: () {
-                if (_.doubleTapCount.value != 0 || tappedTwice) {
-                  _forward(context, _);
-                  tappedOnce(_, true);
-                } else {
-                  tappedOnce(_, false);
-                }
-              },
-              //behavior: HitTestBehavior.,
-            ),
-          ),
-        ),
+              child: videoControls(_, context));
+        } else {
+          return videoControls(_, context);
+        }
+      }),
     ]);
   }
 
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
     return GestureDetector(
       // behavior: HitTestBehavior.opaque,
+      behavior: HitTestBehavior.translucent,
+
       onTap: () {
         if (!_.mobileControls) {
           if (tappedTwice) {
@@ -566,13 +537,44 @@ class _ControlsContainerState extends State<ControlsContainer> {
         opacity: _.showControls.value ? 1 : 0,
         duration: _.durations.controlsDuration,
         child: AnimatedContainer(
-          duration: _.durations.controlsDuration,
-          color: _.showControls.value ? Colors.black12 : Colors.transparent,
-          child: AbsorbPointer(
-            absorbing: !_.showControls.value,
-            child: widget.child,
-          ),
-        ),
+            duration: _.durations.controlsDuration,
+            color: _.showControls.value ? Colors.black45 : Colors.transparent,
+            child: Stack(
+              children: [
+                if (_.enabledControls.doubleTapToSeek && (_.mobileControls))
+                  Positioned.fill(
+                    bottom: widget.responsive.height * 0.20,
+                    top: widget.responsive.height * 0.20,
+                    child: VideoCoreForwardAndRewindLayout(
+                      responsive: widget.responsive,
+                      rewind: GestureDetector(
+                        // behavior: HitTestBehavior.translucent,
+                        onTap: () {
+                          if (_.doubleTapCount.value != 0 || tappedTwice) {
+                            _rewind(context, _);
+                            tappedOnce(_, true);
+                          } else {
+                            tappedOnce(_, false);
+                          }
+                        },
+                      ),
+                      forward: GestureDetector(
+                        // behavior: HitTestBehavior.translucent,
+                        onTap: () {
+                          if (_.doubleTapCount.value != 0 || tappedTwice) {
+                            _forward(context, _);
+                            tappedOnce(_, true);
+                          } else {
+                            tappedOnce(_, false);
+                          }
+                        },
+                        //behavior: HitTestBehavior.,
+                      ),
+                    ),
+                  ),
+                widget.child,
+              ],
+            )),
       ),
     );
   }
