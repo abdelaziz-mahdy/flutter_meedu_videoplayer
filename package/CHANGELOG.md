@@ -1,3 +1,7 @@
+## 4.2.8
+* Fixes controls not taking hits.
+
+
 ## 4.2.7
 * Fixes web controls when opened on mobile device.
 * Adds pip for android. 
