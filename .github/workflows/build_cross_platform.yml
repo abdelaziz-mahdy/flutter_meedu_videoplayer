@@ -31,24 +31,7 @@ jobs:
           cache: true
       - run: flutter pub get
       - run: flutter build apk --verbose
-  android_3_7:
-    name: Android_3_7
-    runs-on: windows-latest
-    steps:
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '11'
-      - uses: actions/checkout@v2
-        with:
-          submodules: "true"
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.7.1'
-          channel: "stable"
-          cache: true
-      - run: flutter pub get
-      - run: flutter build apk --verbose 
-      - run: flutter build apk --release 
+  
     
   web:
     name: Web

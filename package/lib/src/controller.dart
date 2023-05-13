@@ -282,8 +282,7 @@ class MeeduPlayerController {
     Responsive? responsive,
     this.durations = const Durations(),
     this.onVideoPlayerClosed,
-  }) 
-{
+  }) {
     if (responsive != null) {
       this.responsive = responsive;
     }
@@ -947,6 +946,9 @@ class MeeduPlayerController {
     }
   }*/
   Future<void> videoSeekToNextSeconds(int seconds, bool playing) async {
+    if (seconds == 0) {
+      return;
+    }
     int position = 0;
 
     position = _videoPlayerController!.value.position.inSeconds;

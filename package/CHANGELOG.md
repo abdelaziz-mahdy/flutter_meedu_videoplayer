@@ -1,6 +1,7 @@
 ## 4.2.9
 * Fixes double taps not working properly (by https://github.com/mohamed-Etman https://github.com/zezo357/flutter_meedu_videoplayer/pull/74).
 * Remove assert introduced in 4.2.6 since the above fix made it work properly.
+* Fixes seeking 0 seconds resulting in video pausing.
 
 ## 4.2.8
 * Fixes controls not taking hits.

@@ -120,7 +120,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
     final double diff = _horizontalDragStartOffset.dx - localPosition.dx;
     final int duration = controller.duration.value.inSeconds;
     final int position = controller.position.value.inSeconds;
-    final int seconds = -(diff / (5000 / duration)).round();
+    final int seconds = -(diff * duration / 5000).round();
     final int relativePosition = position + seconds;
     if (relativePosition <= duration && relativePosition >= 0) {
       controller.swipeDuration.value = seconds;
