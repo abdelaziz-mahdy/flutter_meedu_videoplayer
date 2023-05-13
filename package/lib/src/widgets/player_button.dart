@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 class PlayerButton extends StatelessWidget {
   final double size;
@@ -25,7 +26,9 @@ class PlayerButton extends StatelessWidget {
       style: TextButton.styleFrom(minimumSize: const Size(20, 20)),
       //padding: EdgeInsets.zero,
       //minSize: 20,
-      onPressed: onPressed,
+      onPressed: () {
+        onPressed();
+      },
       child: customIcon ??
           Container(
             width: size,

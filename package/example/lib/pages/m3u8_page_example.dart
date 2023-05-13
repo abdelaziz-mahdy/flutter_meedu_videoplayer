@@ -6,6 +6,7 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as path;
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart' as dio;
 
@@ -250,8 +251,23 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
   }
 
   Future<void> getStreamUrls(String url) async {
-    _qualities = await fromM3u8PlaylistUrl(url);
-    _qualities.sort((b, a) => a.compareTo(b));
+    String type;
+    Uri parsedLink = Uri.parse(url);
+    String path = parsedLink.path;
+    String filename = basename(path);
+    if (filename.substring(filename.lastIndexOf(".")).contains("?")) {
+      type = filename.substring(filename.lastIndexOf("."),
+          filename.substring(filename.lastIndexOf(".")).indexOf("?"));
+    } else {
+      type = filename.substring(filename.lastIndexOf("."));
+    }
+    if (type == ".m3u8") {
+      _qualities = await fromM3u8PlaylistUrl(url);
+      _qualities.sort((b, a) => a.compareTo(b));
+    } else {
+      _qualities.clear();
+      _qualities.add(Quality(url: url));
+    }
   }
 
   Future<void> _setDataSource() async {
@@ -283,7 +299,7 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
     }
   }
 
-  void _onChangeVideoQuality() {
+  void _onChangeVideoQuality(BuildContext context) {
     showCupertinoModalPopup(
       context: context,
       builder: (_) => CupertinoActionSheet(
@@ -319,7 +335,7 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
     _setDataSource();
   }
 
-  Widget get header {
+  Widget header(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
       child: Row(
@@ -415,7 +431,9 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
                     return CupertinoButton(
                       padding: const EdgeInsets.all(5),
                       minSize: 25,
-                      onPressed: _onChangeVideoQuality,
+                      onPressed: () {
+                        _onChangeVideoQuality(context);
+                      },
                       child: ValueListenableBuilder<Quality?>(
                         valueListenable: _quality,
                         builder: (context, Quality? quality, child) {

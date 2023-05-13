@@ -223,6 +223,25 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   Widget controlsUI(MeeduPlayerController _, BuildContext context) {
     return Stack(children: [
+      RxBuilder((__) {
+        if (!_.mobileControls) {
+          return MouseRegion(
+              cursor: _.showControls.value
+                  ? SystemMouseCursors.basic
+                  : SystemMouseCursors.none,
+              onHover: (___) {
+                //customDebugPrint(___.delta);
+                if (_.mouseMoveInitial < const Offset(75, 75).distance) {
+                  _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
+                } else {
+                  _.controls = true;
+                }
+              },
+              child: videoControls(_, context));
+        } else {
+          return videoControls(_, context);
+        }
+      }),
       if (_.enabledOverlays.volume)
         RxBuilder(
           //observables: [_.volume],
@@ -388,25 +407,6 @@ class _ControlsContainerState extends State<ControlsContainer> {
             forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
           ),
         ),
-      RxBuilder((__) {
-        if (!_.mobileControls) {
-          return MouseRegion(
-              cursor: _.showControls.value
-                  ? SystemMouseCursors.basic
-                  : SystemMouseCursors.none,
-              onHover: (___) {
-                //customDebugPrint(___.delta);
-                if (_.mouseMoveInitial < const Offset(75, 75).distance) {
-                  _.mouseMoveInitial = _.mouseMoveInitial + ___.delta.distance;
-                } else {
-                  _.controls = true;
-                }
-              },
-              child: videoControls(_, context));
-        } else {
-          return videoControls(_, context);
-        }
-      }),
     ]);
   }
 
