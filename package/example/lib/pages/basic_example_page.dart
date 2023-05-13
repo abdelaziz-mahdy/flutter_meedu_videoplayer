@@ -14,7 +14,7 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.primary,
     enabledButtons: const EnabledButtons(pip: true),
-    enabledControls: const EnabledControls(doubleTapToSeek: false),
+    // enabledControls: const EnabledControls(doubleTapToSeek: false),
     pipEnabled: true,
   );
 

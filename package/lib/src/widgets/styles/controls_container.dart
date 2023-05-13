@@ -536,7 +536,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
         duration: _.durations.controlsDuration,
         child: AnimatedContainer(
             duration: _.durations.controlsDuration,
-            color: _.showControls.value ? Colors.black45 : Colors.transparent,
+            color: _.showControls.value ? Colors.black26 : Colors.transparent,
             child: Stack(
               children: [
                 if (_.enabledControls.doubleTapToSeek && (_.mobileControls))

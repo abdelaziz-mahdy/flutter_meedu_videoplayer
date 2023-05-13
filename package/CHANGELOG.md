@@ -1,3 +1,7 @@
+## 4.2.9
+* Fixes double taps not working properly (by ).
+* Remove assert introduced in 4.2.6 since the above fix made it work properly.
+
 ## 4.2.8
 * Fixes controls not taking hits.
 
