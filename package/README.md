@@ -13,6 +13,11 @@ We have implemented a cross-platform video player, which provides a seamless vid
 
 * [video_player](https://pub.dev/packages/video_player) for Android, iOS, and web.
 * [media_kit](https://pub.dev/packages/media_kit) for desktop platforms.
+  
+👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_videoplayer/)</b>
+
+
+
 
 <table>
 <caption><h4><a href="https://zezo357.github.io/flutter_meedu_videoplayer_example/">Flutter Web Demo</a></h4></caption>
@@ -30,10 +35,12 @@ We have implemented a cross-platform video player, which provides a seamless vid
 
 
 
-<table><thead><tr><th>Feature</th><th>iOS</th><th>Android</th><th>Windows</th><th>Linux</th><th>macOS</th><th>Web</th></tr></thead><tbody><tr><td>Videos from Network</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Videos from Assets</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Videos from Local Files</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Looping</td><td>✔️</td><td>✔️</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr><tr><td>AutoPlay</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Swipe to Control Volume</td><td>✔️</td><td>✔️</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td></tr><tr><td>Swipe to Seek</td><td>✔️</td><td>✔️</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td></tr><tr><td>FullScreen</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Launch Player in FullScreen</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Playback Speed</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Fast Forward/Rewind</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>SRT Subtitles</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Customization</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td></tr></tbody></table>
+<table><thead><tr><th>Feature</th><th>iOS</th><th>Android</th><th>Windows</th><th>Linux</th><th>macOS</th><th>Web</th></tr></thead><tbody><tr><td>Videos from Network</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Videos from Assets</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Videos from Local Files</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Looping</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>AutoPlay</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Swipe to Control Volume</td><td>✔️</td><td>✔️</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td></tr><tr><td>Swipe to Seek</td><td>✔️</td><td>✔️</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td></tr><tr><td>FullScreen</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Launch Player in FullScreen</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Playback Speed</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Fast Forward/Rewind</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>SRT Subtitles</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Customization</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td></tr></tbody></table>
 
 
 # Video Player Controls
+
+
 ## Mobile Controls
 - Swipe horizontally to seek forward or backward in the video. (<em>seekSwipes</em>)
 - Swipe vertically on the right side of the screen to control the video volume. (<em>volumeSwipes</em>)
@@ -118,13 +125,38 @@ Also, during the build phase, the following warnings are not critical and cannot
 ```yaml
 dependencies:
   ...
-  media_kit_libs_ios_video: ^1.0.2         # iOS package for video (& audio) native libraries.
+  media_kit_libs_ios_video: ^1.0.4         # iOS package for video (& audio) native libraries.
 ```
-
 Also, software rendering is forced in the iOS simulator, due to an incompatibility with OpenGL ES.
 
+### Android (replace original video_player with media_kit one)
 
-👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_videoplayer/)</b>
+1. Just add this package in case you set androidUseMediaKit to true in initMeeduPlayer
+```yaml
+dependencies:
+  ...
+  media_kit_libs_android_video: ^1.0.3           # Android package for video native libraries.
+```
+
+### hls on web
+
+Add to `pubspec.yaml`
+```     
+  video_player_web_hls: ^1.0.0+3
+```
 
 
+Add
+```javascript
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"  type="application/javascript"></script>
+```
+    
+in index.html above   
+```javascript
+    <script src="main.dart.js" type="application/javascript"></script>
+```
+or above
+```javascript
+    <script src="flutter.js" defer></script>
+```
 

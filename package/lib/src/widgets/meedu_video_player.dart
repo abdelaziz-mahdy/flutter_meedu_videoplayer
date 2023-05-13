@@ -60,30 +60,32 @@ class MeeduVideoPlayer extends StatefulWidget {
 }
 
 class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
-  double videoWidth(VideoController? controller, double max) {
+  double videoWidth(VideoController? controller) {
     double width = (controller != null&&controller.rect.value!=null)
         ? controller.rect.value!.width != 0
             ? controller.rect.value!.width
             : 640
         : 640;
-    if (width > max) {
-      return max;
-    } else {
-      return width;
-    }
+    return width;
+    // if (width < max) {
+    //   return max;
+    // } else {
+    //   return width;
+    // }
   }
 
-  double videoHeight(VideoController? controller, double max) {
+  double videoHeight(VideoController? controller) {
     double height = (controller != null&&controller.rect.value!=null)
         ? controller.rect.value!.height != 0
             ? controller.rect.value!.height 
             : 480
         : 480;
-    if (height > max) {
-      return max;
-    } else {
-      return height;
-    }
+    return height;
+    // if (height < max) {
+    //   return max;
+    // } else {
+    //   return height;
+    // }
   }
 
   @override
@@ -96,15 +98,15 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
           controller: widget.controller,
           child: Container(
               color: Colors.black,
-              width: 0.0,
-              height: 0.0,
               child: LayoutBuilder(
                 builder: (ctx, constraints) {
                   MeeduPlayerController _ = widget.controller;
-                  _.responsive.setDimensions(
-                    constraints.maxWidth,
-                    constraints.maxHeight,
-                  );
+                  if (_.controlsEnabled) {
+                    _.responsive.setDimensions(
+                      constraints.maxWidth,
+                      constraints.maxHeight,
+                    );
+                  }
 
                   if (widget.customIcons != null) {
                     _.customIcons = widget.customIcons!(_.responsive);
@@ -138,8 +140,8 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                               "Fit is ${widget.controller.videoFit.value}");
                           // customDebugPrint(
                           //     "constraints.maxWidth ${constraints.maxWidth}");
-                          // customDebugPrint(
-                          //     "width ${_.videoPlayerController?.value.size.width}");
+                          // _.customDebugPrint(
+                          //     "width ${videoWidth(_.videoPlayerController, constraints.maxWidth)}");
                           // customDebugPrint(
                           //     "videoPlayerController ${_.videoPlayerController}");
                           return Positioned.fill(
@@ -147,10 +149,12 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                               clipBehavior: Clip.hardEdge,
                               fit: widget.controller.videoFit.value,
                               child: SizedBox(
-                                width: videoWidth(_.videoController,
-                                    constraints.maxWidth),
-                                height: videoHeight(_.videoController,
-                                    constraints.maxHeight),
+                                width: videoWidth(
+                                  _.videoPlayerController,
+                                ),
+                                height: videoHeight(
+                                  _.videoPlayerController,
+                                ),
                                 // width: 640,
                                 // height: 480,
                                 child: _.videoPlayerController != null

@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart' as yt_explode_dart;
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+import 'package:http/http.dart' as http;
 
 class Quality {
   final String url, label;
@@ -10,6 +12,29 @@ class Quality {
     required this.url,
     required this.label,
   });
+}
+
+class CorsBypassClient extends http.BaseClient {
+  final _client = http.Client();
+
+  @override
+  Future<http.StreamedResponse> send(covariant http.Request request) {
+    final uri = request.url;
+    final http.BaseRequest newRequest = http.Request(
+        request.method,
+        request.url.replace(
+            //TODO: change this cors-anywhere to your instance
+            host: '',
+            pathSegments: [uri.host, ...uri.pathSegments]))
+      ..headers.addAll({
+        ...request.headers,
+        'origin': 'https://www.youtube.com',
+        'x-requested-with': 'https://www.youtube.com',
+      })
+      ..bodyBytes = request.bodyBytes;
+
+    return _client.send(newRequest);
+  }
 }
 
 class YoutubeExamplePage extends StatefulWidget {
@@ -21,8 +46,9 @@ class YoutubeExamplePage extends StatefulWidget {
 
 class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
   final _controller = MeeduPlayerController(
-    screenManager: const ScreenManager(forceLandScapeInFullscreen: false),
-  );
+      screenManager: const ScreenManager(forceLandScapeInFullscreen: false),
+      enabledButtons: const EnabledButtons(rewindAndfastForward: false),
+      responsive: Responsive(buttonsSizeRelativeToScreen: 3));
   String fileName = "";
   final List<Quality> _qualities = [];
 
@@ -52,14 +78,19 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
   @override
   void dispose() {
     _controller.dispose();
+    _currentPositionSubs?.cancel();
     super.dispose();
   }
 
   Future<void> getYoutubeStreamUrl(String youtubeUrl) async {
-    var yt = yt_explode_dart.YoutubeExplode();
-    final video = await yt.videos.get(youtubeUrl);
+    YoutubeExplode yt = YoutubeExplode();
+    if (kIsWeb) {
+      yt = YoutubeExplode(YoutubeHttpClient(CorsBypassClient()));
+    }
 
-    yt_explode_dart.StreamManifest manifest =
+    Video video = await yt.videos.get(youtubeUrl);
+
+    StreamManifest manifest =
         await yt.videos.streamsClient.getManifest(video.id);
     if (video.isLive) {
       // MuxedStreamInfo  streamInfo = manifest.muxed.withHighestBitrate();
@@ -188,7 +219,6 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
   TextEditingController url = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text("play youtube video"),
@@ -247,7 +277,7 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
                   controller: _controller,
                   bottomRight: (ctx, controller, responsive) {
                     // creates a responsive fontSize using the size of video container
-                    final double fontSize = responsive.ip(3);
+                    final double fontSize = responsive.fontSize();
 
                     return CupertinoButton(
                       padding: const EdgeInsets.all(5),
@@ -261,7 +291,7 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
                                 ? quality.label
                                 : "No qualities loaded ",
                             style: TextStyle(
-                              fontSize: fontSize > 18 ? 18 : fontSize,
+                              fontSize: fontSize,
                               color: Colors.white,
                             ),
                           );

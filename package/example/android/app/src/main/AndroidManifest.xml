@@ -12,6 +12,8 @@
         
         <activity
             android:name=".MainActivity"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

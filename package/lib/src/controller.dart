@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu_videoplayer/src/native/pip_manager.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +28,8 @@ class MeeduPlayerController {
   /// the video_player controller
   VideoController? _videoController;
 
-  //final _pipManager = PipManager();
+  final _pipManager = PipManager();
+
   StreamSubscription? _playerEventSubs;
 
   /// Screen Manager to define the overlays and device orientation when the player enters in fullscreen mode
@@ -54,7 +57,7 @@ class MeeduPlayerController {
   String? get errorText => _errorText;
   Widget? loadingWidget, header, bottomRight, customControls;
   final ControlsStyle controlsStyle;
-  //final bool pipEnabled, showPipButton;
+  final bool pipEnabled;
 
   String? tag;
 
@@ -73,10 +76,13 @@ class MeeduPlayerController {
   final Rx<bool> _closedCaptionEnabled = false.obs;
   final Rx<bool> _mute = false.obs;
   final Rx<bool> _fullscreen = false.obs;
+  final Rx<bool> _pipAvailable = false.obs;
+
   final Rx<bool> _showControls = true.obs;
   final Rx<bool> _showSwipeDuration = false.obs;
   final Rx<bool> _showVolumeStatus = false.obs;
   final Rx<bool> _showBrightnessStatus = false.obs;
+  Rx<bool> bufferingVideoDuration = false.obs;
 
   Rx<bool> videoFitChanged = false.obs;
   final Rx<BoxFit> _videoFit = Rx(BoxFit.fill);
@@ -98,7 +104,9 @@ class MeeduPlayerController {
   Timer? _timerForGettingVolume;
   Timer? timerForTrackingMouse;
   Timer? videoFitChangedTimer;
-  Rx<bool> bufferingVideoDuration = false.obs;
+  RxReaction? _pipModeWorker;
+  BuildContext? _pipContextToFullscreen;
+
   void Function()? onVideoPlayerClosed;
   List<BoxFit> fits = [
     BoxFit.contain,
@@ -196,6 +204,9 @@ class MeeduPlayerController {
   /// for defining that video player is working on desktop or web
   bool desktopOrWeb = false;
 
+  /// for defining that video player needs mobile controls (even if its running on a web on a mobile device)
+  bool mobileControls = false;
+
   /// controls if widgets inside videoplayer should get focus or not
   final bool excludeFocus;
 
@@ -212,20 +223,20 @@ class MeeduPlayerController {
   bool launchedAsFullScreen = false;
 
   /// [isInPipMode] is true if pip mode is enabled
-  //Rx<bool> get isInPipMode => _pipManager.isInPipMode;
-  //Stream<bool?> get onPipModeChanged => _pipManager.isInPipMode.stream;
+  Rx<bool> get isInPipMode => _pipManager.isInPipMode;
+  Stream<bool?> get onPipModeChanged => _pipManager.isInPipMode.stream;
 
   Rx<bool> isBuffering = false.obs;
 
   SharedPreferences? prefs;
 
-  /// returns the os version
-  //Future<double> get osVersion async {
-  //return _pipManager.osVersion;
-  //}
+  // returns the os version
+  Future<double> get osVersion async {
+    return _pipManager.osVersion;
+  }
 
   /// returns true if the pip mode can used on the current device, the initial value will be false after check if pip is available
-  //Rx<bool> get pipAvailable => _pipAvailable;
+  Rx<bool> get pipAvailable => _pipAvailable;
 
   /// return fit of the Video,By default it is set to [BoxFit.contain]
   Rx<BoxFit> get videoFit => _videoFit;
@@ -276,8 +287,7 @@ class MeeduPlayerController {
       BoxFit.fitWidth,
       BoxFit.scaleDown
     ],
-    //this.pipEnabled = false,
-    //this.showPipButton = false,
+    this.pipEnabled = false,
     this.customIcons = const CustomIcons(),
     this.enabledButtons = const EnabledButtons(),
     this.enabledControls = const EnabledControls(),
@@ -302,12 +312,17 @@ class MeeduPlayerController {
           size: 30,
           color: colorTheme,
         );
-    if (UniversalPlatform.isWindows ||
+    if ((UniversalPlatform.isWindows ||
         UniversalPlatform.isLinux ||
         UniversalPlatform.isMacOS ||
-        UniversalPlatform.isWeb) {
+        UniversalPlatform.isWeb)) {
       desktopOrWeb = true;
     }
+    if ((defaultTargetPlatform == TargetPlatform.iOS ||
+        defaultTargetPlatform == TargetPlatform.android)) {
+      mobileControls = true;
+    }
+
     //check each
     if (!desktopOrWeb && enabledControls.volumeSwipes) {
       VolumeController().listener((newVolume) {
@@ -329,16 +344,16 @@ class MeeduPlayerController {
       },
     );
 
-    //if (pipEnabled) {
-    // get the OS version and check if pip is available
-    //this._pipManager.checkPipAvailable().then(
-    //(value) => _pipAvailable.value = value,
-    //);
-    // listen the pip mode changes
-    //_pipModeWorker = _pipManager.isInPipMode.ever(this._onPipModeChanged);
-    //} else {
-    //_pipAvailable.value = false;
-    //}
+    if (pipEnabled && UniversalPlatform.isAndroid) {
+      // get the OS version and check if pip is available
+      _pipManager.checkPipAvailable().then(
+            (value) => _pipAvailable.value = value,
+          );
+      // listen the pip mode changes
+      _pipModeWorker = _pipManager.isInPipMode.ever(_onPipModeChanged);
+    } else {
+      _pipAvailable.value = false;
+    }
   }
   String? mapToStringList(Map<String, String>? map) {
     if (map == null) {
@@ -530,7 +545,7 @@ class MeeduPlayerController {
   /// play the current video
   ///
   /// [repeat] if is true the player go to Duration.zero before play
-  Future<void> play({bool repeat = false}) async {
+  Future<void> play({bool repeat = false, bool hideControls = true}) async {
     if (repeat) {
       await seekTo(Duration.zero);
     }
@@ -540,8 +555,11 @@ class MeeduPlayerController {
     await getCurrentBrightness();
 
     playerStatus.status.value = PlayerStatus.playing;
-    screenManager.setOverlays(false);
-    _hideTaskControls();
+    // screenManager.setOverlays(false);
+    if (hideControls) {
+      _hideTaskControls();
+    }
+    //
   }
 
   /// pause the current video
@@ -661,16 +679,12 @@ class MeeduPlayerController {
 
   /// fast Forward (10 seconds)
   Future<void> fastForward() async {
-    final to = position.value.inSeconds + 10;
-    if (duration.value.inSeconds > to) {
-      await seekTo(Duration(seconds: to));
-    }
+    await videoSeekToNextSeconds(10, playerStatus.playing);
   }
 
   /// rewind (10 seconds)
   Future<void> rewind() async {
-    final to = position.value.inSeconds - 10;
-    await seekTo(Duration(seconds: to < 0 ? 0 : to));
+    await videoSeekToNextSeconds(-10, playerStatus.playing);
   }
 
   Future<void> getCurrentBrightness() async {
@@ -764,7 +778,7 @@ class MeeduPlayerController {
 
   /// show or hide the player controls
   set controls(bool visible) {
-    //customDebugPrint("controls called");
+    // customDebugPrint("controls called with value $visible");
     if (fullscreen.value) {
       //customDebugPrint("Closed");
       screenManager.setOverlays(visible);
@@ -779,7 +793,8 @@ class MeeduPlayerController {
 
   /// create a tasks to hide controls after certain time
   void _hideTaskControls() {
-    //customDebugPrint("_hideTaskControls called");
+    // customDebugPrint(
+    //     "controls will be hidden after ${durations.controlsAutoHideDuration}");
 
     _timer = Timer(durations.controlsAutoHideDuration, () {
       controls = false;
@@ -806,6 +821,7 @@ class MeeduPlayerController {
       }
     }
     _fullscreen.value = true;
+
     final route = PageRouteBuilder(
       opaque: false,
       fullscreenDialog: true,
@@ -858,7 +874,7 @@ class MeeduPlayerController {
     timerForTrackingMouse?.cancel();
     _timerForSeek?.cancel();
     videoFitChangedTimer?.cancel();
-
+    _pipModeWorker?.dispose();
     _position.close();
     _playerEventSubs?.cancel();
     _sliderPosition.close();
@@ -985,6 +1001,9 @@ class MeeduPlayerController {
     }
   }*/
   Future<void> videoSeekToNextSeconds(int seconds, bool playing) async {
+    if (seconds == 0) {
+      return;
+    }
     int position = 0;
 
     position = _videoPlayerController!.state.position.inSeconds;
@@ -1008,18 +1027,18 @@ class MeeduPlayerController {
   }*/
   Future<void> onFullscreenClose() async {
     customDebugPrint("Fullscreen Closed");
-    fullscreen.value = false;
-    resetBrightness();
+    await resetBrightness();
 
     if (UniversalPlatform.isWeb) {
-      screenManager.setWebFullScreen(false, this);
+      await screenManager.setWebFullScreen(false, this);
     } else {
       if (desktopOrWeb) {
-        screenManager.setWindowsFullScreen(false, this);
+        await screenManager.setWindowsFullScreen(false, this);
       } else {
-        screenManager.setDefaultOverlaysAndOrientations();
+        await screenManager.setDefaultOverlaysAndOrientations();
       }
     }
+    fullscreen.value = false;
   }
 
   Future<void> videoPlayerClosed() async {
@@ -1052,6 +1071,30 @@ class MeeduPlayerController {
         customDebugPrint("Didnt get Called");
       }
     });
+  }
+
+  /// enter to picture in picture mode only Android
+  ///
+  /// only available since Android 7
+  Future<void> enterPip(BuildContext context) async {
+    if (pipAvailable.value && pipEnabled) {
+      controls = false; // hide the controls
+      if (!fullscreen.value) {
+        // if the player is not in the fullscreen mode
+        _pipContextToFullscreen = context;
+        goToFullscreen(context, applyOverlaysAndOrientations: false);
+      }
+      await _pipManager.enterPip();
+    }
+  }
+
+  /// listener for pip changes
+  void _onPipModeChanged(bool isInPipMode) {
+    // if the pip mode was closed and before enter to pip mode the player was not in fullscreen
+    if (!isInPipMode && _pipContextToFullscreen != null) {
+      Navigator.pop(_pipContextToFullscreen!); // close the fullscreen
+      _pipContextToFullscreen = null;
+    }
   }
 
   static MeeduPlayerController of(BuildContext context) {

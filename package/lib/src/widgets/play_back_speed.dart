@@ -21,6 +21,8 @@ class PlayBackSpeedButton extends StatelessWidget {
         onPressed: () {
           _.customDebugPrint("s");
           _.togglePlaybackSpeed();
+
+          _.controls = true;
         },
         child: Text(
           _.playbackSpeed.toString(),

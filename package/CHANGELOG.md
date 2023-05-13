@@ -1,3 +1,54 @@
+## 4.2.10
+* Improving the controls by showing overlays on top of the controls.
+* Fixes controls disappearing while clicking.
+  
+
+
+## 4.2.9
+* Fixes double taps not working properly (by https://github.com/mohamed-Etman https://github.com/zezo357/flutter_meedu_videoplayer/pull/74).
+* Remove assert introduced in 4.2.6 since the above fix made it work properly.
+* Fixes seeking 0 seconds resulting in video pausing.
+
+## 4.2.8
+* Fixes controls not taking hits.
+
+
+## 4.2.7
+* Fixes web controls when opened on mobile device.
+* Adds pip for android. 
+* Fixes flutter 3.10 errors
+
+## 4.2.6
+* Made double tap to seek work only on mobile to fix taps issues on desktop and web.
+* Added assert statement to avoid debugging issues (with hit tests).
+* Fixed buffering widget being smaller than button (which was causing rewind and forward buttons to change position).
+* Fixing all examples scaling and following new assert.
+* Fixing brightness and volume swipes wrong calculations.
+
+## 4.2.5
+* Fix fit.
+## 4.2.4
+* Updated media_kit packages 
+* Fixes playing on android 
+* Updating to auto_orientation: ^2.3.1 
+
+## 4.2.3
+
+* Added hls web steps.
+* Fixed taps on desktop and web.
+* Made double tap to seek work on desktop and web,can be disabled `enabledControls: EnabledControls(doubleTapToSeek: false)`.
+  
+## 4.2.2
+
+* Fixed widget being black when not surrounded by `SizedBox` or `AspectRatio`
+* Added new example for bottom controls
+* Added media_kit android support
+
+
+## 4.2.1
+
+* Updating example and awaiting full screen
+* Fixed hiding overlays when not full screen
 
 ## 4.2.0
 

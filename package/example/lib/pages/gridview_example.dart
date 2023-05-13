@@ -46,10 +46,10 @@ class VideoItem extends StatefulWidget {
 class _VideoItemState extends State<VideoItem>
     with AutomaticKeepAliveClientMixin {
   final MeeduPlayerController _controller = MeeduPlayerController(
-    screenManager: const ScreenManager(orientations: [
-      DeviceOrientation.portraitUp,
-    ]),
-  );
+      screenManager: const ScreenManager(orientations: [
+        DeviceOrientation.portraitUp,
+      ]),
+      enabledControls: const EnabledControls(doubleTapToSeek: false));
 
   final ValueNotifier<bool> _visible = ValueNotifier(true);
 

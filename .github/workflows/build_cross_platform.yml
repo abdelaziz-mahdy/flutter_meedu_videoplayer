@@ -31,6 +31,8 @@ jobs:
           cache: true
       - run: flutter pub get
       - run: flutter build apk --verbose
+  
+    
   web:
     name: Web
     runs-on: windows-latest

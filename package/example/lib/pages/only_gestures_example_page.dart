@@ -3,20 +3,19 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
-class BasicExamplePage extends StatefulWidget {
-  const BasicExamplePage({Key? key}) : super(key: key);
+class OnlyGesturesExamplePage extends StatefulWidget {
+  const OnlyGesturesExamplePage({Key? key}) : super(key: key);
 
   @override
-  State<BasicExamplePage> createState() => _BasicExamplePageState();
+  State<OnlyGesturesExamplePage> createState() =>
+      _OnlyGesturesExamplePageState();
 }
 
-class _BasicExamplePageState extends State<BasicExamplePage> {
+class _OnlyGesturesExamplePageState extends State<OnlyGesturesExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
-    controlsStyle: ControlsStyle.primary,
-    enabledButtons: const EnabledButtons(pip: true),
-    // enabledControls: const EnabledControls(doubleTapToSeek: false),
-    pipEnabled: true,
-  );
+      controlsStyle: ControlsStyle.primary,
+      // enabledControls: EnabledControls(doubleTapToSeek: false),
+      enabledButtons: const EnabledButtons(rewindAndfastForward: false));
 
   StreamSubscription? _playerEventSubs;
 
@@ -35,8 +34,8 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
     super.dispose();
   }
 
-  _init() async {
-    await _meeduPlayerController.setDataSource(
+  _init() {
+    _meeduPlayerController.setDataSource(
         DataSource(
           type: DataSourceType.network,
           source:

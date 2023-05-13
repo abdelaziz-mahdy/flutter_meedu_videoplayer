@@ -12,8 +12,8 @@ class SecondaryExamplePage extends StatefulWidget {
 
 class _SecondaryExamplePageState extends State<SecondaryExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
-    controlsStyle: ControlsStyle.secondary,
-  );
+      controlsStyle: ControlsStyle.secondary,
+      enabledButtons: const EnabledButtons(rewindAndfastForward: false));
 
   StreamSubscription? _playerEventSubs;
 

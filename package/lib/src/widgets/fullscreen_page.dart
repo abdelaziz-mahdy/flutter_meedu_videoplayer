@@ -15,27 +15,10 @@ class MeeduPlayerFullscreenPage extends StatefulWidget {
 class _MeeduPlayerFullscreenPageState extends State<MeeduPlayerFullscreenPage> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
-      body: RxBuilder(
-        //observables: [controller.videoFit],
-        (__) {
-          return SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: FittedBox(
-              fit: widget.controller.videoFit.value,
-              child: SizedBox(
-                width: size.width,
-                height: size.height,
-                child: MeeduVideoPlayer(
-                  controller: widget.controller,
-                ),
-              ),
-            ),
-          );
-        },
+      body: MeeduVideoPlayer(
+        controller: widget.controller,
       ),
     );
   }
@@ -43,12 +26,14 @@ class _MeeduPlayerFullscreenPageState extends State<MeeduPlayerFullscreenPage> {
   @override
   Future<void> dispose() async {
     widget.controller.customDebugPrint("disposed");
-    widget.controller.launchedAsFullScreen = false;
     if (widget.disposePlayer) {
       widget.controller.videoPlayerClosed();
     } else {
       widget.controller.onFullscreenClose();
     }
+
+    widget.controller.launchedAsFullScreen = false;
+
     super.dispose();
   }
 }

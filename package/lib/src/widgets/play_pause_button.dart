@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
@@ -17,9 +16,17 @@ class PlayPauseButton extends StatelessWidget {
       //  _.position
       //],
       (__) {
-        if (_.isBuffering.value) {
-          return CupertinoButton(onPressed: _.pause, child: _.loadingWidget!);
-        }
+        // if (_.isBuffering.value) {
+
+        //   return PlayerButton(
+        //     onPressed: _.pause,
+        //     customIcon: Container(
+        //         width: size,
+        //         height: size,
+        //         padding: EdgeInsets.all(size * 0.25),
+        //         child: _.loadingWidget!),
+        //   );
+        // }
 
         String iconPath = 'assets/icons/repeat.png';
         Widget? customIcon = _.customIcons.repeat;
@@ -37,9 +44,9 @@ class PlayPauseButton extends StatelessWidget {
             if (_.playerStatus.playing) {
               _.pause();
             } else if (_.playerStatus.paused) {
-              _.play();
+              _.play(hideControls: false);
             } else {
-              _.play(repeat: true);
+              _.play(repeat: true, hideControls: false);
             }
           },
           size: size,

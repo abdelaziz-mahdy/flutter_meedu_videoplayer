@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:helpers/helpers/transition.dart';
 
 class CustomOpacityTransition extends StatelessWidget {
   const CustomOpacityTransition({
@@ -13,10 +12,10 @@ class CustomOpacityTransition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OpacityTransition(
+    return AnimatedOpacity(
       curve: Curves.ease,
       duration: const Duration(milliseconds: 100),
-      visible: visible!,
+      opacity: visible! ? 1 : 0,
       child: child!,
     );
   }

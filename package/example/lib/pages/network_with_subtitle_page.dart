@@ -19,8 +19,8 @@ class _NetworkWithSubtitlesPageState extends State<NetworkWithSubtitlesPage> {
   void initState() {
     super.initState();
     _controller = MeeduPlayerController(
-      controlsStyle: ControlsStyle.primary,
-    );
+        controlsStyle: ControlsStyle.primary,
+        enabledControls: const EnabledControls(doubleTapToSeek: false));
     _setDataSource();
   }
 
@@ -110,38 +110,35 @@ Great
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: AspectRatio(
-          aspectRatio: 16 / 9,
-          child: MeeduVideoPlayer(
-            controller: _controller,
-            bottomRight: (ctx, controller, responsive) {
-              // creates a responsive fontSize using the size of video container
-              final double fontSize = responsive.ip(3);
+        child: MeeduVideoPlayer(
+          controller: _controller,
+          bottomRight: (ctx, controller, responsive) {
+            // creates a responsive fontSize using the size of video container
+            final double fontSize = responsive.ip(3);
 
-              return CupertinoButton(
-                padding: const EdgeInsets.all(5),
-                minSize: 25,
-                child: ValueListenableBuilder(
-                  valueListenable: _subtitlesEnabled,
-                  builder: (BuildContext context, bool enabled, _) {
-                    return Text(
-                      "CC",
-                      style: TextStyle(
-                        fontSize: fontSize > 18 ? 18 : fontSize,
-                        color: Colors.white.withOpacity(
-                          enabled ? 1 : 0.4,
-                        ),
+            return CupertinoButton(
+              padding: const EdgeInsets.all(5),
+              minSize: 25,
+              child: ValueListenableBuilder(
+                valueListenable: _subtitlesEnabled,
+                builder: (BuildContext context, bool enabled, _) {
+                  return Text(
+                    "CC",
+                    style: TextStyle(
+                      fontSize: fontSize > 18 ? 18 : fontSize,
+                      color: Colors.white.withOpacity(
+                        enabled ? 1 : 0.4,
                       ),
-                    );
-                  },
-                ),
-                onPressed: () {
-                  _subtitlesEnabled.value = !_subtitlesEnabled.value;
-                  _controller.onClosedCaptionEnabled(_subtitlesEnabled.value);
+                    ),
+                  );
                 },
-              );
-            },
-          ),
+              ),
+              onPressed: () {
+                _subtitlesEnabled.value = !_subtitlesEnabled.value;
+                _controller.onClosedCaptionEnabled(_subtitlesEnabled.value);
+              },
+            );
+          },
         ),
       ),
     );

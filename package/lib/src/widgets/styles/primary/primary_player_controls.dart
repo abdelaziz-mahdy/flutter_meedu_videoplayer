@@ -61,7 +61,13 @@ class PrimaryVideoPlayerControls extends StatelessWidget {
                       size: responsive.iconSize(),
                     );
                   } else {
-                    return Container();
+                    return Padding(
+                      padding: EdgeInsets.all(responsive.iconSize() * 0.25),
+                      child: SizedBox(
+                        width: responsive.iconSize(),
+                        height: responsive.iconSize(),
+                      ),
+                    );
                   }
                 }),
               if (_.enabledButtons.rewindAndfastForward) ...[

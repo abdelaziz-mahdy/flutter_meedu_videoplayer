@@ -16,9 +16,7 @@ class _DisabledButtonsExampleState extends State<DisabledButtonsExample> {
     controlsStyle: ControlsStyle.primary,
     manageWakeLock: false,
     enabledButtons: const EnabledButtons(
-      fullscreen: false,
-      pip: false,
-    ),
+        fullscreen: false, pip: false, rewindAndfastForward: false),
   );
 
   StreamSubscription? _playerEventSubs;

@@ -80,7 +80,7 @@ class SecondaryBottomControls extends StatelessWidget {
                     _.bottomRight!,
                     const SizedBox(width: 10)
                   ],
-                  //if (_.enabledButtons.pip) PipButton(responsive: responsive),
+                  if (_.enabledButtons.pip) PipButton(responsive: responsive),
                   if (_.enabledButtons.videoFit)
                     VideoFitButton(responsive: responsive),
                   if (_.enabledButtons.muteAndSound)

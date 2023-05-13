@@ -14,8 +14,8 @@ class PickFileExamplePage extends StatefulWidget {
 
 class _PickFileExamplePageState extends State<PickFileExamplePage> {
   final _controller = MeeduPlayerController(
-    screenManager: const ScreenManager(forceLandScapeInFullscreen: false),
-  );
+      screenManager: const ScreenManager(forceLandScapeInFullscreen: false),
+      enabledControls: const EnabledControls(doubleTapToSeek: false));
   String fileName = "";
   @override
   void dispose() {
