@@ -412,9 +412,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
     return GestureDetector(
-      // behavior: HitTestBehavior.opaque,
       behavior: HitTestBehavior.translucent,
-
       onTap: () {
         if (!_.mobileControls) {
           if (tappedTwice) {
@@ -572,7 +570,8 @@ class _ControlsContainerState extends State<ControlsContainer> {
                       ),
                     ),
                   ),
-                widget.child,
+                IgnorePointer(
+                    ignoring: !_.showControls.value, child: widget.child),
               ],
             )),
       ),
