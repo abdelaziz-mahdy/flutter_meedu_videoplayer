@@ -242,6 +242,20 @@ class _ControlsContainerState extends State<ControlsContainer> {
           return videoControls(_, context);
         }
       }),
+      if (_.enabledControls.doubleTapToSeek && (_.mobileControls))
+        RxBuilder(
+          //observables: [_.showControls],
+          (__) => IgnorePointer(
+            ignoring: true,
+            child: VideoCoreForwardAndRewind(
+              responsive: widget.responsive,
+              showRewind: _.rewindIcons.value,
+              showForward: _.forwardIcons.value,
+              rewindSeconds: _defaultSeekAmount * _.doubleTapCount.value,
+              forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
+            ),
+          ),
+        ),
       if (_.enabledOverlays.volume)
         RxBuilder(
           //observables: [_.volume],
@@ -396,23 +410,11 @@ class _ControlsContainerState extends State<ControlsContainer> {
           return Container();
         }
       }),
-      if (_.enabledControls.doubleTapToSeek && (_.mobileControls))
-        RxBuilder(
-          //observables: [_.showControls],
-          (__) => VideoCoreForwardAndRewind(
-            responsive: widget.responsive,
-            showRewind: _.rewindIcons.value,
-            showForward: _.forwardIcons.value,
-            rewindSeconds: _defaultSeekAmount * _.doubleTapCount.value,
-            forwardSeconds: _defaultSeekAmount * _.doubleTapCount.value,
-          ),
-        ),
     ]);
   }
 
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
     return GestureDetector(
-      behavior: HitTestBehavior.translucent,
       onTap: () {
         if (!_.mobileControls) {
           if (tappedTwice) {

@@ -490,7 +490,7 @@ class MeeduPlayerController {
   /// play the current video
   ///
   /// [repeat] if is true the player go to Duration.zero before play
-  Future<void> play({bool repeat = false}) async {
+  Future<void> play({bool repeat = false, bool hideControls = true}) async {
     if (repeat) {
       await seekTo(Duration.zero);
     }
@@ -501,7 +501,10 @@ class MeeduPlayerController {
 
     playerStatus.status.value = PlayerStatus.playing;
     // screenManager.setOverlays(false);
-    _hideTaskControls();
+    if (hideControls) {
+      _hideTaskControls();
+    }
+    //
   }
 
   /// pause the current video
@@ -621,16 +624,12 @@ class MeeduPlayerController {
 
   /// fast Forward (10 seconds)
   Future<void> fastForward() async {
-    final to = position.value.inSeconds + 10;
-    if (duration.value.inSeconds > to) {
-      await seekTo(Duration(seconds: to));
-    }
+    await videoSeekToNextSeconds(10, playerStatus.playing);
   }
 
   /// rewind (10 seconds)
   Future<void> rewind() async {
-    final to = position.value.inSeconds - 10;
-    await seekTo(Duration(seconds: to < 0 ? 0 : to));
+    await videoSeekToNextSeconds(-10, playerStatus.playing);
   }
 
   Future<void> getCurrentBrightness() async {
@@ -724,7 +723,7 @@ class MeeduPlayerController {
 
   /// show or hide the player controls
   set controls(bool visible) {
-    //customDebugPrint("controls called");
+    customDebugPrint("controls called with value $visible");
     if (fullscreen.value) {
       //customDebugPrint("Closed");
       screenManager.setOverlays(visible);
@@ -739,7 +738,8 @@ class MeeduPlayerController {
 
   /// create a tasks to hide controls after certain time
   void _hideTaskControls() {
-    //customDebugPrint("_hideTaskControls called");
+    customDebugPrint(
+        "controls will be hidden after ${durations.controlsAutoHideDuration}");
 
     _timer = Timer(durations.controlsAutoHideDuration, () {
       controls = false;

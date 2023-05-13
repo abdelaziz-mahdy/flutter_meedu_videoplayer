@@ -44,9 +44,9 @@ class PlayPauseButton extends StatelessWidget {
             if (_.playerStatus.playing) {
               _.pause();
             } else if (_.playerStatus.paused) {
-              _.play();
+              _.play(hideControls: false);
             } else {
-              _.play(repeat: true);
+              _.play(repeat: true, hideControls: false);
             }
           },
           size: size,

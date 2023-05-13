@@ -27,7 +27,10 @@ class PlayerButton extends StatelessWidget {
       //padding: EdgeInsets.zero,
       //minSize: 20,
       onPressed: () {
-        onPressed();
+
+        onPressed();        
+        MeeduPlayerController.of(context).controls = true;
+
       },
       child: customIcon ??
           Container(
