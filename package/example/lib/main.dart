@@ -23,7 +23,7 @@ import 'package:flutter_meedu_videoplayer_example/pages/portrait_example_page.da
 import 'package:flutter_meedu_videoplayer_example/pages/secondary_controls.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/yotube_page_example.dart';
 
-void main() {
+void main() {MediaKit.ensureInitialized();
   runApp(const MyApp());
 }
 

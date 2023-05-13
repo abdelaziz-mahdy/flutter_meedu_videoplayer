@@ -88,7 +88,7 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
       yt = YoutubeExplode(YoutubeHttpClient(CorsBypassClient()));
     }
 
-    Video video = await yt.videos.get(youtubeUrl);
+    var video = await yt.videos.get(youtubeUrl);
 
     StreamManifest manifest =
         await yt.videos.streamsClient.getManifest(video.id);

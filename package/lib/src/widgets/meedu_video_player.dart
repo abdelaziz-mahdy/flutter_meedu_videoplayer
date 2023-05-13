@@ -60,13 +60,13 @@ class MeeduVideoPlayer extends StatefulWidget {
 }
 
 class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
-  double videoWidth(VideoController? controller) {
-    double width = (controller != null&&controller.rect.value!=null)
-        ? controller.rect.value!.width != 0
-            ? controller.rect.value!.width
+  double videoWidth(Player? controller) {
+    int width = (controller != null && controller.state.width != null)
+        ? controller.state.width! != 0
+            ? controller.state.width!
             : 640
         : 640;
-    return width;
+    return width.toDouble();
     // if (width < max) {
     //   return max;
     // } else {
@@ -74,13 +74,13 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
     // }
   }
 
-  double videoHeight(VideoController? controller) {
-    double height = (controller != null&&controller.rect.value!=null)
-        ? controller.rect.value!.height != 0
-            ? controller.rect.value!.height 
+  double videoHeight(Player? controller) {
+    int height = (controller != null && controller.state.height != null)
+        ? controller.state.height! != 0
+            ? controller.state.height!
             : 480
         : 480;
-    return height;
+    return height.toDouble();
     // if (height < max) {
     //   return max;
     // } else {
@@ -158,7 +158,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                                 // width: 640,
                                 // height: 480,
                                 child: _.videoPlayerController != null
-                                    ? Video(controller:_.videoController!)
+                                    ? Video(controller: _.videoController!)
                                     : Container(),
                               ),
                             ),
