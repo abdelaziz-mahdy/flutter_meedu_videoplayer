@@ -78,6 +78,7 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
   @override
   void dispose() {
     _controller.dispose();
+    _currentPositionSubs?.cancel();
     super.dispose();
   }
 
@@ -218,7 +219,6 @@ class _YoutubeExamplePageState extends State<YoutubeExamplePage> {
   TextEditingController url = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text("play youtube video"),

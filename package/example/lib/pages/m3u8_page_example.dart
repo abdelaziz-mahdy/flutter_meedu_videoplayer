@@ -247,6 +247,7 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
   @override
   void dispose() {
     _controller.dispose();
+    _currentPositionSubs?.cancel();
     super.dispose();
   }
 
@@ -365,9 +366,9 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
 
   TextEditingController url = TextEditingController(
       text: "https://content.jwplatform.com/manifests/vM7nH0Kl.m3u8");
+
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text("play m3u8 video"),
