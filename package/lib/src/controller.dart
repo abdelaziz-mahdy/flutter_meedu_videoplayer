@@ -309,6 +309,7 @@ class MeeduPlayerController {
         defaultTargetPlatform == TargetPlatform.android)) {
       mobileControls = true;
     }
+
     //check each
     if (!desktopOrWeb && enabledControls.volumeSwipes) {
       VolumeController().listener((newVolume) {
@@ -723,7 +724,7 @@ class MeeduPlayerController {
 
   /// show or hide the player controls
   set controls(bool visible) {
-    customDebugPrint("controls called with value $visible");
+    // customDebugPrint("controls called with value $visible");
     if (fullscreen.value) {
       //customDebugPrint("Closed");
       screenManager.setOverlays(visible);
@@ -738,8 +739,8 @@ class MeeduPlayerController {
 
   /// create a tasks to hide controls after certain time
   void _hideTaskControls() {
-    customDebugPrint(
-        "controls will be hidden after ${durations.controlsAutoHideDuration}");
+    // customDebugPrint(
+    //     "controls will be hidden after ${durations.controlsAutoHideDuration}");
 
     _timer = Timer(durations.controlsAutoHideDuration, () {
       controls = false;
