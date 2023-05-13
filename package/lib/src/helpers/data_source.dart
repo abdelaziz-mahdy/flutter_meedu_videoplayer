@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-
 /// The way in which the video was originally loaded.
 ///
 /// This has nothing to do with the video's file type. It's just the place
@@ -19,7 +17,6 @@ enum DataSourceType {
   /// The video is available via contentUri. Android only.
   contentUri,
 }
-
 
 class DataSource {
   File? file;
