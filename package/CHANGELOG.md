@@ -1,7 +1,7 @@
 ## 4.2.10
 * Improving the controls by showing overlays on top of the controls.
 * Fixes controls disappearing while clicking.
-* 
+  
 
 
 ## 4.2.9
