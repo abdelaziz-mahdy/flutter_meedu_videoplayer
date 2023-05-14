@@ -216,7 +216,11 @@ class M3u8ExamplePage extends StatefulWidget {
 class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
   final _controller = MeeduPlayerController(
       screenManager: const ScreenManager(forceLandScapeInFullscreen: false),
-      enabledButtons: const EnabledButtons(rewindAndfastForward: false),
+      enabledButtons: const EnabledButtons(
+        rewindAndfastForward: false,
+        pip: true,
+      ),
+      pipEnabled: true,
       responsive: Responsive(buttonsSizeRelativeToScreen: 3));
   String fileName = "";
   List<Quality> _qualities = [];

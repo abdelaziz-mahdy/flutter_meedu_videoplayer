@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class BasicExamplePage extends StatefulWidget {
   const BasicExamplePage({Key? key}) : super(key: key);
@@ -49,8 +50,16 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        // shadowColor: Colors.transparent,
+        // foregroundColor: Colors.transparent,
+        // surfaceTintColor: Colors.transparent,
+      ),
+      extendBodyBehindAppBar: true,
       body: SafeArea(
+        top: UniversalPlatform.isDesktop ? false : true,
         child: AspectRatio(
           aspectRatio: 16 / 9,
           child: MeeduVideoPlayer(

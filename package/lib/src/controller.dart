@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu_videoplayer/src/helpers/desktop_pip_bk.dart';
 import 'package:flutter_meedu_videoplayer/src/native/pip_manager.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:screen_brightness/screen_brightness.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:volume_controller/volume_controller.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:universal_platform/universal_platform.dart';
+import 'package:window_manager/window_manager.dart';
 
 /// An enumeration of the different styles that can be applied to controls, such
 /// as buttons and icons and layouts.
@@ -217,6 +219,8 @@ class MeeduPlayerController {
 
   SharedPreferences? prefs;
 
+  DektopPipBk? dektopPipBk;
+
   // returns the os version
   Future<double> get osVersion async {
     return _pipManager.osVersion;
@@ -331,15 +335,18 @@ class MeeduPlayerController {
       },
     );
 
-    if (pipEnabled && UniversalPlatform.isAndroid) {
-      // get the OS version and check if pip is available
-      _pipManager.checkPipAvailable().then(
-            (value) => _pipAvailable.value = value,
-          );
-      // listen the pip mode changes
-      _pipModeWorker = _pipManager.isInPipMode.ever(_onPipModeChanged);
-    } else {
-      _pipAvailable.value = false;
+    _pipAvailable.value = false;
+    if (pipEnabled) {
+      if (UniversalPlatform.isAndroid) {
+        // get the OS version and check if pip is available
+        _pipManager.checkPipAvailable().then(
+              (value) => _pipAvailable.value = value,
+            );
+        // listen the pip mode changes
+        _pipModeWorker = _pipManager.isInPipMode.ever(_onPipModeChanged);
+      } else if (UniversalPlatform.isDesktop) {
+        _pipAvailable.value = true;
+      }
     }
   }
 
@@ -1024,14 +1031,46 @@ class MeeduPlayerController {
   /// only available since Android 7
   Future<void> enterPip(BuildContext context) async {
     if (pipAvailable.value && pipEnabled) {
-      controls = false; // hide the controls
-      if (!fullscreen.value) {
-        // if the player is not in the fullscreen mode
-        _pipContextToFullscreen = context;
-        goToFullscreen(context, applyOverlaysAndOrientations: false);
+      if (UniversalPlatform.isAndroid) {
+        await enterPipAndroid(context);
+      } else if (UniversalPlatform.isDesktop) {
+        await enterPipDesktop(context);
       }
-      await _pipManager.enterPip();
     }
+  }
+
+  Future<void> enterPipAndroid(BuildContext context) async {
+    controls = false; // hide the controls
+    if (!fullscreen.value) {
+      // if the player is not in the fullscreen mode
+      _pipContextToFullscreen = context;
+      goToFullscreen(context, applyOverlaysAndOrientations: false);
+    }
+    await _pipManager.enterPip();
+  }
+
+  Future<void> enterPipDesktop(BuildContext context) async {
+    if (_videoPlayerController == null) return;
+
+    double minH = MediaQuery.of(context).size.height * 0.15;
+    double defaultH = MediaQuery.of(context).size.height * 0.30;
+
+    double aspectRatio = _videoPlayerController!.value.size.width /
+        _videoPlayerController!.value.size.height;
+
+    dektopPipBk = DektopPipBk(
+        isFullScreen: await windowManager.isFullScreen(),
+        size: await windowManager.getSize());
+    await onFullscreenClose();
+    await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
+    await windowManager.center(animate: true);
+    windowManager.setAlwaysOnTop(true);
+    await windowManager.setMinimumSize(Size(minH * (aspectRatio), minH));
+    await windowManager.setSize(Size(defaultH * (aspectRatio), defaultH));
+    // await windowManager.setAsFrameless();
+    await windowManager.setAspectRatio(aspectRatio);
+    windowManager.setSkipTaskbar(true);
+    _pipManager.isInPipMode.value = true;
   }
 
   /// listener for pip changes
@@ -1041,6 +1080,22 @@ class MeeduPlayerController {
       Navigator.pop(_pipContextToFullscreen!); // close the fullscreen
       _pipContextToFullscreen = null;
     }
+  }
+
+  Future<void> closePipDesktop(BuildContext context) async {
+    double defaultSize = MediaQuery.of(context).size.height * 0.30;
+
+    windowManager.setAlwaysOnTop(false);
+    await windowManager.setAspectRatio(0);
+    windowManager.setSkipTaskbar(false);
+    await windowManager.setSize(dektopPipBk!.size);
+    await windowManager.setMinimumSize(Size(defaultSize, defaultSize));
+
+    if (dektopPipBk!.isFullScreen) {
+      await goToFullscreen(context);
+    }
+    
+    _pipManager.isInPipMode.value = false;
   }
 
   static MeeduPlayerController of(BuildContext context) {
