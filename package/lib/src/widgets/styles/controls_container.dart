@@ -415,16 +415,16 @@ class _ControlsContainerState extends State<ControlsContainer> {
     ]);
   }
 
-  void windowsDrag() {
-    if (UniversalPlatform.isDesktop) {
+  void windowDrag(MeeduPlayerController _) {
+    if (_.isInPipMode.value && UniversalPlatform.isDesktop) {
       windowManager.startDragging();
     }
   }
 
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
     return GestureDetector(
-      onPanStart: (_) {
-        windowsDrag();
+      onPanStart: (__) {
+        windowDrag(_);
       },
       onTap: () {
         if (!_.mobileControls) {
