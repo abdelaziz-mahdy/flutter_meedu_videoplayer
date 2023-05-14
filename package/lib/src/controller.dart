@@ -1090,6 +1090,14 @@ class MeeduPlayerController {
     }
   }
 
+  Future<void> closePip(BuildContext context) async {
+    if (_pipManager.isInPipMode.value == true) {
+      if (UniversalPlatform.isDesktop) {
+        _closePipDesktop(context);
+      }
+    }
+  }
+
   Future<void> _closePipDesktop(BuildContext context) async {
     double defaultSize = MediaQuery.of(context).size.height * 0.30;
 
