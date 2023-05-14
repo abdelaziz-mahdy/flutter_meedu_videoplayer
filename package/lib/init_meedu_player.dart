@@ -14,5 +14,15 @@ Future<void> initMeeduPlayer(
 Future<void> initWindowManagerIfNeeded() async {
   if (UniversalPlatform.isDesktop) {
     await windowManager.ensureInitialized();
+
+    WindowOptions windowOptions = const WindowOptions(
+      size: Size(1200, 700),
+      center: true,
+    );
+
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
   }
 }

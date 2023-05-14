@@ -1026,20 +1026,29 @@ class MeeduPlayerController {
     });
   }
 
+  double getAspectRatio() {
+    if (_videoPlayerController == null) {
+      return 16 / 9;
+    }
+
+    return _videoPlayerController!.value.size.width /
+        _videoPlayerController!.value.size.height;
+  }
+
   /// enter to picture in picture mode only Android
   ///
   /// only available since Android 7
   Future<void> enterPip(BuildContext context) async {
     if (pipAvailable.value && pipEnabled) {
       if (UniversalPlatform.isAndroid) {
-        await enterPipAndroid(context);
+        await _enterPipAndroid(context);
       } else if (UniversalPlatform.isDesktop) {
-        await enterPipDesktop(context);
+        await _enterPipDesktop(context);
       }
     }
   }
 
-  Future<void> enterPipAndroid(BuildContext context) async {
+  Future<void> _enterPipAndroid(BuildContext context) async {
     controls = false; // hide the controls
     if (!fullscreen.value) {
       // if the player is not in the fullscreen mode
@@ -1049,14 +1058,13 @@ class MeeduPlayerController {
     await _pipManager.enterPip();
   }
 
-  Future<void> enterPipDesktop(BuildContext context) async {
+  Future<void> _enterPipDesktop(BuildContext context) async {
     if (_videoPlayerController == null) return;
 
     double minH = MediaQuery.of(context).size.height * 0.15;
     double defaultH = MediaQuery.of(context).size.height * 0.30;
 
-    double aspectRatio = _videoPlayerController!.value.size.width /
-        _videoPlayerController!.value.size.height;
+    double aspectRatio = getAspectRatio();
 
     dektopPipBk = DektopPipBk(
         isFullScreen: await windowManager.isFullScreen(),
@@ -1082,7 +1090,7 @@ class MeeduPlayerController {
     }
   }
 
-  Future<void> closePipDesktop(BuildContext context) async {
+  Future<void> _closePipDesktop(BuildContext context) async {
     double defaultSize = MediaQuery.of(context).size.height * 0.30;
 
     windowManager.setAlwaysOnTop(false);
@@ -1094,7 +1102,7 @@ class MeeduPlayerController {
     if (dektopPipBk!.isFullScreen) {
       await goToFullscreen(context);
     }
-    
+
     _pipManager.isInPipMode.value = false;
   }
 
