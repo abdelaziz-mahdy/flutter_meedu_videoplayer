@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
@@ -219,7 +220,7 @@ class MeeduPlayerController {
 
   SharedPreferences? prefs;
 
-  DektopPipBk? dektopPipBk;
+  DektopPipBk? desktopPipBk;
 
   // returns the os version
   Future<double> get osVersion async {
@@ -773,6 +774,14 @@ class MeeduPlayerController {
         }
       }
     }
+    setVideoAsAppFullScreen(context,
+        applyOverlaysAndOrientations: applyOverlaysAndOrientations,
+        disposePlayer: disposePlayer);
+  }
+
+  Future<void> setVideoAsAppFullScreen(BuildContext context,
+      {bool applyOverlaysAndOrientations = true,
+      bool disposePlayer = false}) async {
     _fullscreen.value = true;
 
     final route = PageRouteBuilder(
@@ -786,7 +795,7 @@ class MeeduPlayerController {
       },
     );
 
-    await Navigator.push(context, route);
+    await Navigator.of(context).push(route);
   }
 
   /// launch a video using the fullscreen apge
@@ -1060,24 +1069,28 @@ class MeeduPlayerController {
 
   Future<void> _enterPipDesktop(BuildContext context) async {
     if (_videoPlayerController == null) return;
-
-    double minH = MediaQuery.of(context).size.height * 0.15;
-    double defaultH = MediaQuery.of(context).size.height * 0.30;
+    if (!fullscreen.value) {
+      setVideoAsAppFullScreen(context);
+    }
+    double minH = max(MediaQuery.of(context).size.height * 0.15, 200);
+    double defaultH = max(MediaQuery.of(context).size.height * 0.30, 400);
 
     double aspectRatio = getAspectRatio();
-
-    dektopPipBk = DektopPipBk(
+    desktopPipBk = DektopPipBk(
         isFullScreen: await windowManager.isFullScreen(),
         size: await windowManager.getSize());
+
     await onFullscreenClose();
+    // ignore: use_build_context_synchronously
+
     await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
     await windowManager.center(animate: true);
-    windowManager.setAlwaysOnTop(true);
+    await windowManager.setAlwaysOnTop(true);
     await windowManager.setMinimumSize(Size(minH * (aspectRatio), minH));
     await windowManager.setSize(Size(defaultH * (aspectRatio), defaultH));
     // await windowManager.setAsFrameless();
     await windowManager.setAspectRatio(aspectRatio);
-    windowManager.setSkipTaskbar(true);
+    // windowManager.setSkipTaskbar(true);
     _pipManager.isInPipMode.value = true;
   }
 
@@ -1090,27 +1103,35 @@ class MeeduPlayerController {
     }
   }
 
-  Future<void> closePip(BuildContext context) async {
+  void closePip(BuildContext context) {
     if (_pipManager.isInPipMode.value == true) {
       if (UniversalPlatform.isDesktop) {
+        if (!desktopPipBk!.isFullScreen) {
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).pop();
+        }
+
         _closePipDesktop(context);
       }
     }
   }
 
   Future<void> _closePipDesktop(BuildContext context) async {
-    double defaultSize = MediaQuery.of(context).size.height * 0.30;
+    double defaultSizeHeight =
+        max(MediaQuery.of(context).size.height * 0.30, 300);
+    double defaultSizeWidth =
+        max(MediaQuery.of(context).size.width * 0.30, 500);
 
-    windowManager.setAlwaysOnTop(false);
+    await windowManager.setTitleBarStyle(TitleBarStyle.normal);
+    await windowManager.setAlwaysOnTop(false);
     await windowManager.setAspectRatio(0);
-    windowManager.setSkipTaskbar(false);
-    await windowManager.setSize(dektopPipBk!.size);
-    await windowManager.setMinimumSize(Size(defaultSize, defaultSize));
-
-    if (dektopPipBk!.isFullScreen) {
-      await goToFullscreen(context);
+    // // windowManager.setSkipTaskbar(false);
+    await windowManager.setSize(desktopPipBk!.size);
+    await windowManager
+        .setMinimumSize(Size(defaultSizeWidth, defaultSizeHeight));
+    if (desktopPipBk!.isFullScreen) {
+      screenManager.setWindowsFullScreen(true, this);
     }
-
     _pipManager.isInPipMode.value = false;
   }
 

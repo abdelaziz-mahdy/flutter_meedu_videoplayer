@@ -11,6 +11,7 @@ class CustomIcons {
       mute,
       videoFit,
       pip,
+      exitPip,
       minimize,
       fullscreen;
 
@@ -24,6 +25,7 @@ class CustomIcons {
     this.mute,
     this.videoFit,
     this.pip,
+    this.exitPip,
     this.minimize,
     this.fullscreen,
   });

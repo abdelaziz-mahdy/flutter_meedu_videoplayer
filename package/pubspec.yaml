@@ -83,6 +83,7 @@ flutter:
     - assets/icons/rewind.png
     - assets/icons/sound.png
     - assets/icons/picture-in-picture.png
+    - assets/icons/exit_picture-in-picture.png
     - assets/icons/fit.png
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
