@@ -220,7 +220,8 @@ class MeeduPlayerController {
 
   SharedPreferences? prefs;
 
-  DektopPipBk? desktopPipBk;
+  DektopPipBk? _desktopPipBk;
+  Size? _screenSizeBk;
 
   // returns the os version
   Future<double> get osVersion async {
@@ -768,6 +769,9 @@ class MeeduPlayerController {
         screenManager.setWebFullScreen(true, this);
       } else {
         if (desktopOrWeb) {
+          if (!isInPipMode.value) {
+            _screenSizeBk = await windowManager.getSize();
+          }
           screenManager.setWindowsFullScreen(true, this);
         } else {
           screenManager.setFullScreenOverlaysAndOrientations();
@@ -1076,9 +1080,16 @@ class MeeduPlayerController {
     double defaultH = max(MediaQuery.of(context).size.height * 0.30, 400);
 
     double aspectRatio = getAspectRatio();
-    desktopPipBk = DektopPipBk(
-        isFullScreen: await windowManager.isFullScreen(),
-        size: await windowManager.getSize());
+    _desktopPipBk = DektopPipBk(
+      isFullScreen: fullscreen.value,
+      size: fullscreen.value
+          ? (_screenSizeBk ??
+              Size(
+                MediaQuery.of(context).size.width / 2,
+                MediaQuery.of(context).size.height / 2,
+              ))
+          : await windowManager.getSize(),
+    );
 
     await onFullscreenClose();
     // ignore: use_build_context_synchronously
@@ -1106,7 +1117,7 @@ class MeeduPlayerController {
   void closePip(BuildContext context) {
     if (_pipManager.isInPipMode.value == true) {
       if (UniversalPlatform.isDesktop) {
-        if (!desktopPipBk!.isFullScreen) {
+        if (!_desktopPipBk!.isFullScreen) {
           // ignore: use_build_context_synchronously
           Navigator.of(context).pop();
         }
@@ -1126,10 +1137,10 @@ class MeeduPlayerController {
     await windowManager.setAlwaysOnTop(false);
     await windowManager.setAspectRatio(0);
     // // windowManager.setSkipTaskbar(false);
-    await windowManager.setSize(desktopPipBk!.size);
+    await windowManager.setSize(_desktopPipBk!.size);
     await windowManager
         .setMinimumSize(Size(defaultSizeWidth, defaultSizeHeight));
-    if (desktopPipBk!.isFullScreen) {
+    if (_desktopPipBk!.isFullScreen) {
       screenManager.setWindowsFullScreen(true, this);
     }
     _pipManager.isInPipMode.value = false;
