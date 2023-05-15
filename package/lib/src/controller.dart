@@ -220,7 +220,7 @@ class MeeduPlayerController {
 
   SharedPreferences? prefs;
 
-  DektopPipBk? _desktopPipBk;
+  DesktopPipBk? _desktopPipBk;
   Size? _screenSizeBk;
 
   // returns the os version
@@ -1080,9 +1080,9 @@ class MeeduPlayerController {
     double defaultH = max(MediaQuery.of(context).size.height * 0.30, 400);
 
     double aspectRatio = getAspectRatio();
-    _desktopPipBk = DektopPipBk(
-      isFullScreen: fullscreen.value,
-      size: fullscreen.value
+    _desktopPipBk = DesktopPipBk(
+      isFullScreen: await windowManager.isFullScreen(),
+      size: await windowManager.isFullScreen()
           ? (_screenSizeBk ??
               Size(
                 MediaQuery.of(context).size.width / 2,
