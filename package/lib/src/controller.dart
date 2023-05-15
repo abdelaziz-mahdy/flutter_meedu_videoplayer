@@ -197,6 +197,9 @@ class MeeduPlayerController {
   /// for defining that video player needs mobile controls (even if its running on a web on a mobile device)
   bool mobileControls = false;
 
+  /// for defining that video player locked controls
+  bool lockedControls = false;
+
   /// controls if widgets inside videoplayer should get focus or not
   final bool excludeFocus;
 

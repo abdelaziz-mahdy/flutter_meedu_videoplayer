@@ -415,143 +415,169 @@ class _ControlsContainerState extends State<ControlsContainer> {
     ]);
   }
 
+  //----------------------------//
+  bool checkMobileLock(MeeduPlayerController _) {
+    if (!_.lockedControls) {
+      // reminds the user that the UI is locked
+      // showLockIcon();
+    }
+    return _.lockedControls;
+  }
+
   void windowDrag(MeeduPlayerController _) {
     if (_.isInPipMode.value && UniversalPlatform.isDesktop) {
       windowManager.startDragging();
     }
   }
 
-  Widget videoControls(MeeduPlayerController _, BuildContext context) {
-    return GestureDetector(
-      onPanStart: (__) {
-        windowDrag(_);
-      },
-      onTap: () {
-        if (!_.mobileControls) {
-          if (tappedTwice) {
-            if (_.enabledControls.desktopDoubleTapToFullScreen) {
-              _.toggleFullScreen(context);
-            }
+  void onTap(MeeduPlayerController _) {
+    if (_.mobileControls && !checkMobileLock(_)) return;
 
-            tappedOnce(_, true);
+    if (!_.mobileControls) {
+      if (tappedTwice) {
+        if (_.enabledControls.desktopDoubleTapToFullScreen) {
+          _.toggleFullScreen(context);
+        }
+
+        tappedOnce(_, true);
+      } else {
+        if (_.enabledControls.desktopTapToPlayAndPause) {
+          _.togglePlay();
+        }
+        tappedOnce(_, false);
+      }
+    }
+    _.controls = !_.showControls.value;
+    _dragInitialDelta = Offset.zero;
+  }
+
+  void Function(DragUpdateDetails)? onHorizontalDragUpdate(
+      MeeduPlayerController _) {
+    if (!_.mobileControls || !checkMobileLock(_)) return null;
+
+    return (DragUpdateDetails details) {
+      if (_.enabledControls.seekSwipes) {
+        //if (!_.videoPlayerController!.value.isInitialized) {
+        //return;
+        //}
+
+        //_.controls=true;
+        final Offset position = details.localPosition;
+        if (_dragInitialDelta == Offset.zero) {
+          final Offset delta = details.delta;
+          if (details.localPosition.dx > widget.responsive.width * 0.1 &&
+              ((widget.responsive.width - details.localPosition.dx) >
+                      widget.responsive.width * 0.1 &&
+                  !gettingNotification)) {
+            _forwardDragStart(position, _);
+            _dragInitialDelta = delta;
           } else {
-            if (_.enabledControls.desktopTapToPlayAndPause) {
-              _.togglePlay();
-            }
-            tappedOnce(_, false);
+            _.customDebugPrint("##############out###############");
+            gettingNotification = true;
           }
         }
-        _.controls = !_.showControls.value;
-        _dragInitialDelta = Offset.zero;
-      },
-      onHorizontalDragUpdate: !_.mobileControls
-          ? null
-          : (DragUpdateDetails details) {
-              if (_.enabledControls.seekSwipes) {
-                //if (!_.videoPlayerController!.value.isInitialized) {
-                //return;
-                //}
+        if (!gettingNotification) {
+          _forwardDragUpdate(position, _);
+        }
+      }
 
-                //_.controls=true;
-                final Offset position = details.localPosition;
-                if (_dragInitialDelta == Offset.zero) {
-                  final Offset delta = details.delta;
-                  if (details.localPosition.dx >
-                          widget.responsive.width * 0.1 &&
-                      ((widget.responsive.width - details.localPosition.dx) >
-                              widget.responsive.width * 0.1 &&
-                          !gettingNotification)) {
-                    _forwardDragStart(position, _);
-                    _dragInitialDelta = delta;
-                  } else {
-                    _.customDebugPrint("##############out###############");
-                    gettingNotification = true;
-                  }
-                }
-                if (!gettingNotification) {
-                  _forwardDragUpdate(position, _);
-                }
-              }
+      //_.videoPlayerController!.seekTo(position);
+    };
+  }
 
-              //_.videoPlayerController!.seekTo(position);
-            },
-      onHorizontalDragEnd: !_.mobileControls
-          ? null
-          : (DragEndDetails details) {
-              if (_.enabledControls.seekSwipes) {
-                //if (!_.videoPlayerController!.value.isInitialized) {
-                //return;
-                //}
-                gettingNotification = false;
-                _forwardDragEnd(_);
-              }
-            },
-      onVerticalDragUpdate: !_.mobileControls
-          ? null
-          : (DragUpdateDetails details) {
-              //if (!_.videoPlayerController!.value.isInitialized) {
-              //return;
-              //}
-              //_.controls=true;
+  void Function(DragEndDetails)? onHorizontalDragEnd(MeeduPlayerController _) {
+    if (!_.mobileControls || !checkMobileLock(_)) return null;
 
-              final Offset position = details.localPosition;
-              if (_dragInitialDelta == Offset.zero) {
-                _.customDebugPrint(details.localPosition.dy);
-                if (details.localPosition.dy > widget.responsive.height * 0.1 &&
-                    ((widget.responsive.height - details.localPosition.dy) >
-                        widget.responsive.height * 0.1) &&
-                    !gettingNotification) {
-                  final Offset delta = details.delta;
-                  //if(details.localPosition.dy<30){
-                  if (details.localPosition.dx >= widget.responsive.width / 2) {
-                    if (_.enabledControls.volumeSwipes) {
-                      _volumeDragStart(position, _);
-                    }
-                    _dragInitialDelta = delta;
-                    //customDebugPrint("right");
-                  } else {
-                    if (_.mobileControls &&
-                        _.enabledControls.brightnessSwipes) {
-                      _brightnessDragStart(position, _);
-                    }
-                    _dragInitialDelta = delta;
-                    //customDebugPrint("left");
-                  }
-                } else {
-                  _.customDebugPrint("getting Notification");
-                  gettingNotification = true;
-                }
-                //}
-              } else {
-                if (!gettingNotification) {
-                  if (isVolume && _.enabledControls.volumeSwipes) {
-                    _volumeDragUpdate(position, _);
-                  } else {
-                    if (_.mobileControls &&
-                        _.enabledControls.brightnessSwipes) {
-                      _brightnessDragUpdate(position, _);
-                    }
-                  }
-                }
-              }
+    return (DragEndDetails details) {
+      if (_.enabledControls.seekSwipes) {
+        //if (!_.videoPlayerController!.value.isInitialized) {
+        //return;
+        //}
+        gettingNotification = false;
+        _forwardDragEnd(_);
+      }
+    };
+  }
 
-              //_.videoPlayerController!.seekTo(position);
-            },
-      onVerticalDragEnd: !_.mobileControls
-          ? null
-          : (DragEndDetails details) {
-              //if (!_.videoPlayerController!.value.isInitialized) {
-              // return;
-              //}
-              gettingNotification = false;
-              if (isVolume && _.enabledControls.volumeSwipes) {
-                _volumeDragEnd(_);
-              } else {
-                if (_.mobileControls && _.enabledControls.brightnessSwipes) {
-                  _brightnessDragEnd(_);
-                }
-              }
-            },
+  void Function(DragUpdateDetails)? onVerticalDragUpdate(
+      MeeduPlayerController _) {
+    if (!_.mobileControls || !checkMobileLock(_)) return null;
+
+    return (DragUpdateDetails details) {
+      //if (!_.videoPlayerController!.value.isInitialized) {
+      //return;
+      //}
+      //_.controls=true;
+
+      final Offset position = details.localPosition;
+      if (_dragInitialDelta == Offset.zero) {
+        _.customDebugPrint(details.localPosition.dy);
+        if (details.localPosition.dy > widget.responsive.height * 0.1 &&
+            ((widget.responsive.height - details.localPosition.dy) >
+                widget.responsive.height * 0.1) &&
+            !gettingNotification) {
+          final Offset delta = details.delta;
+          //if(details.localPosition.dy<30){
+          if (details.localPosition.dx >= widget.responsive.width / 2) {
+            if (_.enabledControls.volumeSwipes) {
+              _volumeDragStart(position, _);
+            }
+            _dragInitialDelta = delta;
+            //customDebugPrint("right");
+          } else {
+            if (_.mobileControls && _.enabledControls.brightnessSwipes) {
+              _brightnessDragStart(position, _);
+            }
+            _dragInitialDelta = delta;
+            //customDebugPrint("left");
+          }
+        } else {
+          _.customDebugPrint("getting Notification");
+          gettingNotification = true;
+        }
+        //}
+      } else {
+        if (!gettingNotification) {
+          if (isVolume && _.enabledControls.volumeSwipes) {
+            _volumeDragUpdate(position, _);
+          } else {
+            if (_.mobileControls && _.enabledControls.brightnessSwipes) {
+              _brightnessDragUpdate(position, _);
+            }
+          }
+        }
+      }
+
+      //_.videoPlayerController!.seekTo(position);
+    };
+  }
+
+  void Function(DragEndDetails)? onVerticalDragEnd(MeeduPlayerController _) {
+    if (!_.mobileControls || !checkMobileLock(_)) return null;
+
+    return (DragEndDetails details) {
+      //if (!_.videoPlayerController!.value.isInitialized) {
+      // return;
+      //}
+      gettingNotification = false;
+      if (isVolume && _.enabledControls.volumeSwipes) {
+        _volumeDragEnd(_);
+      } else {
+        if (_.mobileControls && _.enabledControls.brightnessSwipes) {
+          _brightnessDragEnd(_);
+        }
+      }
+    };
+  }
+
+  Widget videoControls(MeeduPlayerController _, BuildContext context) {
+    return GestureDetector(
+      onPanStart: (__) => windowDrag(_),
+      onTap: () => onTap(_),
+      onHorizontalDragUpdate: onHorizontalDragUpdate(_),
+      onHorizontalDragEnd: onHorizontalDragEnd(_),
+      onVerticalDragUpdate: onVerticalDragUpdate(_),
+      onVerticalDragEnd: onVerticalDragEnd(_),
       child: AnimatedOpacity(
         opacity: _.showControls.value ? 1 : 0,
         duration: _.durations.controlsDuration,
