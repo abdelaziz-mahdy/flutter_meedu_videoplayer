@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:universal_platform/universal_platform.dart';
-import 'package:window_manager/window_manager.dart';
 
 class BasicPipExamplePage extends StatefulWidget {
   const BasicPipExamplePage({Key? key}) : super(key: key);
