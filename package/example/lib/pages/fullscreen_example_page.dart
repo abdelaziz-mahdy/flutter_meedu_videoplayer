@@ -98,7 +98,7 @@ class _FullscreenExamplePageState extends State<FullscreenExamplePage> {
                 ),
                 onPressed: () {
                   // close the fullscreen
-                  Navigator.pop(context);
+                  Navigator.maybePop(context);
                 },
               ),
               Expanded(

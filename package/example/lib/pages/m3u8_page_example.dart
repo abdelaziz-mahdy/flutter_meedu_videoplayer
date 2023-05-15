@@ -317,13 +317,13 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
               onPressed: () {
                 _quality.value = quality; // change the video quality
                 _setDataSource(); // update the datasource
-                Navigator.pop(_);
+                Navigator.maybePop(_);
               },
             );
           },
         ),
         cancelButton: CupertinoActionSheetAction(
-          onPressed: () => Navigator.pop(_),
+          onPressed: () => Navigator.maybePop(_),
           isDestructiveAction: true,
           child: const Text("Cancel"),
         ),
@@ -352,7 +352,7 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
             ),
             onPressed: () {
               // close the fullscreen
-              Navigator.pop(context);
+              Navigator.maybePop(context);
             },
           ),
           Expanded(

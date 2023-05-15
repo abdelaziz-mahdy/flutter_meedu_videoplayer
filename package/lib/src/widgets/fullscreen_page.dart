@@ -15,10 +15,21 @@ class MeeduPlayerFullscreenPage extends StatefulWidget {
 class _MeeduPlayerFullscreenPageState extends State<MeeduPlayerFullscreenPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: MeeduVideoPlayer(
-        controller: widget.controller,
+    return WillPopScope(
+      onWillPop: () async {
+        if (widget.controller.isInPipMode.value) {
+          widget.controller.closePip(context);
+
+          return true;
+        }
+        // print("NO");
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: MeeduVideoPlayer(
+          controller: widget.controller,
+        ),
       ),
     );
   }

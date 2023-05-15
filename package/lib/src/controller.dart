@@ -987,7 +987,7 @@ class MeeduPlayerController {
   void _onPipModeChanged(bool isInPipMode) {
     // if the pip mode was closed and before enter to pip mode the player was not in fullscreen
     if (!isInPipMode && _pipContextToFullscreen != null) {
-      Navigator.pop(_pipContextToFullscreen!); // close the fullscreen
+      Navigator.maybePop(_pipContextToFullscreen!); // close the fullscreen
       _pipContextToFullscreen = null;
     }
   }*/

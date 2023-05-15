@@ -61,7 +61,7 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
             ),
             onPressed: () {
               // close the fullscreen
-              Navigator.pop(context);
+              Navigator.maybePop(context);
             },
           ),
         ],

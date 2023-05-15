@@ -35,12 +35,12 @@ class _PlayBackSpeedExamplePageState extends State<PlayBackSpeedExamplePage> {
                 _playbackSpeed.value,
               );
               // hide the modal
-              Navigator.pop(_);
+              Navigator.maybePop(_);
             },
           ),
         ),
         cancelButton: CupertinoActionSheetAction(
-          onPressed: () => Navigator.pop(_),
+          onPressed: () => Navigator.maybePop(_),
           isDestructiveAction: true,
           child: const Text("Cancel"),
         ),

@@ -62,7 +62,7 @@ class _BasicPipExamplePageState extends State<BasicPipExamplePage> {
             ),
             onPressed: () {
               // close the fullscreen
-              Navigator.pop(context);
+              Navigator.maybePop(context);
             },
           ),
         ],
