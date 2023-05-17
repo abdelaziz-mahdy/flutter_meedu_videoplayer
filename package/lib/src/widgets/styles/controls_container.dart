@@ -417,21 +417,21 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   //----------------------------//
   bool checkMobileLock(MeeduPlayerController _) {
-    if (!_.lockedControls) {
+    if (!UniversalPlatform.isDesktopOrWeb && !_.lockedControls) {
       // reminds the user that the UI is locked
       // showLockIcon();
     }
-    return _.lockedControls;
+    return _.lockedControls && !UniversalPlatform.isDesktopOrWeb;
   }
 
   void windowDrag(MeeduPlayerController _) {
-    if (_.isInPipMode.value && UniversalPlatform.isDesktop) {
+    if (_.isInPipMode.value) {
       windowManager.startDragging();
     }
   }
 
   void onTap(MeeduPlayerController _) {
-    if (_.mobileControls && !checkMobileLock(_)) return;
+    if (_.mobileControls || checkMobileLock(_)) return;
 
     if (!_.mobileControls) {
       if (tappedTwice) {
@@ -451,59 +451,55 @@ class _ControlsContainerState extends State<ControlsContainer> {
     _dragInitialDelta = Offset.zero;
   }
 
-  void Function(DragUpdateDetails)? onHorizontalDragUpdate(
-      MeeduPlayerController _) {
-    if (!_.mobileControls || !checkMobileLock(_)) return null;
+  void onHorizontalDragUpdate(
+      DragUpdateDetails details, MeeduPlayerController _) {
+    // if (checkMobileLock(_)) return;
 
-    return (DragUpdateDetails details) {
-      if (_.enabledControls.seekSwipes) {
-        //if (!_.videoPlayerController!.value.isInitialized) {
-        //return;
-        //}
+    if (_.enabledControls.seekSwipes) {
+      //if (!_.videoPlayerController!.value.isInitialized) {
+      //return;
+      //}
 
-        //_.controls=true;
-        final Offset position = details.localPosition;
-        if (_dragInitialDelta == Offset.zero) {
-          final Offset delta = details.delta;
-          if (details.localPosition.dx > widget.responsive.width * 0.1 &&
-              ((widget.responsive.width - details.localPosition.dx) >
-                      widget.responsive.width * 0.1 &&
-                  !gettingNotification)) {
-            _forwardDragStart(position, _);
-            _dragInitialDelta = delta;
-          } else {
-            _.customDebugPrint("##############out###############");
-            gettingNotification = true;
-          }
-        }
-        if (!gettingNotification) {
-          _forwardDragUpdate(position, _);
+      //_.controls=true;
+      final Offset position = details.localPosition;
+      if (_dragInitialDelta == Offset.zero) {
+        final Offset delta = details.delta;
+        if (details.localPosition.dx > widget.responsive.width * 0.1 &&
+            ((widget.responsive.width - details.localPosition.dx) >
+                    widget.responsive.width * 0.1 &&
+                !gettingNotification)) {
+          _forwardDragStart(position, _);
+          _dragInitialDelta = delta;
+        } else {
+          _.customDebugPrint("##############out###############");
+          gettingNotification = true;
         }
       }
-
-      //_.videoPlayerController!.seekTo(position);
-    };
-  }
-
-  void Function(DragEndDetails)? onHorizontalDragEnd(MeeduPlayerController _) {
-    if (!_.mobileControls || !checkMobileLock(_)) return null;
-
-    return (DragEndDetails details) {
-      if (_.enabledControls.seekSwipes) {
-        //if (!_.videoPlayerController!.value.isInitialized) {
-        //return;
-        //}
-        gettingNotification = false;
-        _forwardDragEnd(_);
+      if (!gettingNotification) {
+        _forwardDragUpdate(position, _);
       }
-    };
+    }
+
+    //_.videoPlayerController!.seekTo(position);
   }
 
-  void Function(DragUpdateDetails)? onVerticalDragUpdate(
-      MeeduPlayerController _) {
-    if (!_.mobileControls || !checkMobileLock(_)) return null;
+  void onHorizontalDragEnd(DragEndDetails details, MeeduPlayerController _) {
+    // if (checkMobileLock(_)) return;
 
-    return (DragUpdateDetails details) {
+    if (_.enabledControls.seekSwipes) {
+      //if (!_.videoPlayerController!.value.isInitialized) {
+      //return;
+      //}
+      gettingNotification = false;
+      _forwardDragEnd(_);
+    }
+  }
+
+  void onVerticalDragUpdate(
+      DragUpdateDetails details, MeeduPlayerController _) {
+    // if (checkMobileLock(_)) return;
+
+    if (_.mobileControls) {
       //if (!_.videoPlayerController!.value.isInitialized) {
       //return;
       //}
@@ -549,13 +545,13 @@ class _ControlsContainerState extends State<ControlsContainer> {
       }
 
       //_.videoPlayerController!.seekTo(position);
-    };
+    }
   }
 
-  void Function(DragEndDetails)? onVerticalDragEnd(MeeduPlayerController _) {
-    if (!_.mobileControls || !checkMobileLock(_)) return null;
+  void onVerticalDragEnd(DragEndDetails details, MeeduPlayerController _) {
+    // if (checkMobileLock(_)) return;
 
-    return (DragEndDetails details) {
+    if (_.mobileControls) {
       //if (!_.videoPlayerController!.value.isInitialized) {
       // return;
       //}
@@ -567,17 +563,24 @@ class _ControlsContainerState extends State<ControlsContainer> {
           _brightnessDragEnd(_);
         }
       }
-    };
+    }
   }
 
   Widget videoControls(MeeduPlayerController _, BuildContext context) {
     return GestureDetector(
-      onPanStart: (__) => windowDrag(_),
+      onPanStart: UniversalPlatform.isDesktop ? (__) => windowDrag(_) : null,
       onTap: () => onTap(_),
-      onHorizontalDragUpdate: onHorizontalDragUpdate(_),
-      onHorizontalDragEnd: onHorizontalDragEnd(_),
-      onVerticalDragUpdate: onVerticalDragUpdate(_),
-      onVerticalDragEnd: onVerticalDragEnd(_),
+      onHorizontalDragUpdate: _.mobileControls
+          ? (details) => onHorizontalDragUpdate(details, _)
+          : null,
+      onHorizontalDragEnd: _.mobileControls
+          ? (details) => onHorizontalDragEnd(details, _)
+          : null,
+      onVerticalDragUpdate: _.mobileControls
+          ? (details) => onVerticalDragUpdate(details, _)
+          : null,
+      onVerticalDragEnd:
+          _.mobileControls ? (details) => onVerticalDragEnd(details, _) : null,
       child: AnimatedOpacity(
         opacity: _.showControls.value ? 1 : 0,
         duration: _.durations.controlsDuration,

@@ -198,7 +198,7 @@ class MeeduPlayerController {
   bool mobileControls = false;
 
   /// for defining that video player locked controls
-  bool lockedControls = false;
+  bool lockedControls = true;
 
   /// controls if widgets inside videoplayer should get focus or not
   final bool excludeFocus;
@@ -736,6 +736,8 @@ class MeeduPlayerController {
 
   /// show or hide the player controls
   set controls(bool visible) {
+    if (!UniversalPlatform.isDesktopOrWeb && visible && lockedControls) return;
+
     // customDebugPrint("controls called with value $visible");
     if (fullscreen.value) {
       //customDebugPrint("Closed");
