@@ -417,11 +417,11 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   //----------------------------//
   bool checkMobileLock(MeeduPlayerController _) {
-    if (!UniversalPlatform.isDesktopOrWeb && !_.lockedControls) {
+    if (!UniversalPlatform.isDesktopOrWeb && !_.lockedControls.value) {
       // reminds the user that the UI is locked
       // showLockIcon();
     }
-    return _.lockedControls && !UniversalPlatform.isDesktopOrWeb;
+    return _.lockedControls.value && !UniversalPlatform.isDesktopOrWeb;
   }
 
   void windowDrag(MeeduPlayerController _) {
@@ -453,7 +453,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   void onHorizontalDragUpdate(
       DragUpdateDetails details, MeeduPlayerController _) {
-    // if (checkMobileLock(_)) return;
+    if (checkMobileLock(_)) return;
 
     if (_.enabledControls.seekSwipes) {
       //if (!_.videoPlayerController!.value.isInitialized) {
@@ -484,7 +484,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
   }
 
   void onHorizontalDragEnd(DragEndDetails details, MeeduPlayerController _) {
-    // if (checkMobileLock(_)) return;
+    if (checkMobileLock(_)) return;
 
     if (_.enabledControls.seekSwipes) {
       //if (!_.videoPlayerController!.value.isInitialized) {
@@ -497,7 +497,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
   void onVerticalDragUpdate(
       DragUpdateDetails details, MeeduPlayerController _) {
-    // if (checkMobileLock(_)) return;
+    if (checkMobileLock(_)) return;
 
     if (_.mobileControls) {
       //if (!_.videoPlayerController!.value.isInitialized) {
@@ -549,7 +549,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
   }
 
   void onVerticalDragEnd(DragEndDetails details, MeeduPlayerController _) {
-    // if (checkMobileLock(_)) return;
+    if (checkMobileLock(_)) return;
 
     if (_.mobileControls) {
       //if (!_.videoPlayerController!.value.isInitialized) {
