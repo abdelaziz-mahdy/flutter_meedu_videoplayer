@@ -84,6 +84,8 @@ flutter:
     - assets/icons/sound.png
     - assets/icons/picture-in-picture.png
     - assets/icons/exit_picture-in-picture.png
+    - assets/icons/lock-screen.png
+    - assets/icons/exit_lock-screen.png
     - assets/icons/fit.png
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
