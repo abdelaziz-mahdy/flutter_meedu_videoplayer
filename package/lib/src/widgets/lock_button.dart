@@ -17,7 +17,7 @@ class LockButton extends StatelessWidget {
       if (UniversalPlatform.isDesktopOrWeb) return Container();
       String iconPath = 'assets/icons/lock-screen.png';
       Widget? customIcon = _.customIcons.lock;
-      if (_.lockedControls.value) {
+      if (!_.lockedControls.value) {
         iconPath = 'assets/icons/exit_lock-screen.png';
         customIcon = _.customIcons.unlock;
       }

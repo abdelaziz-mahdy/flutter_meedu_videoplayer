@@ -739,9 +739,9 @@ class MeeduPlayerController {
 
   /// show or hide the player controls
   set controls(bool visible) {
-    if (!UniversalPlatform.isDesktopOrWeb && visible && lockedControls.value) {
-      return;
-    }
+    // if (!UniversalPlatform.isDesktopOrWeb && visible && lockedControls.value) {
+    //   return;
+    // }
 
     // customDebugPrint("controls called with value $visible");
     if (fullscreen.value) {

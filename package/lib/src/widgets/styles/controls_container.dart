@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:flutter_meedu_videoplayer/src/widgets/lock_button.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -431,8 +432,6 @@ class _ControlsContainerState extends State<ControlsContainer> {
   }
 
   void onTap(MeeduPlayerController _) {
-    if (_.mobileControls || checkMobileLock(_)) return;
-
     if (!_.mobileControls) {
       if (tappedTwice) {
         if (_.enabledControls.desktopDoubleTapToFullScreen) {
@@ -581,50 +580,66 @@ class _ControlsContainerState extends State<ControlsContainer> {
           : null,
       onVerticalDragEnd:
           _.mobileControls ? (details) => onVerticalDragEnd(details, _) : null,
-      child: AnimatedOpacity(
-        opacity: _.showControls.value ? 1 : 0,
-        duration: _.durations.controlsDuration,
-        child: AnimatedContainer(
-            duration: _.durations.controlsDuration,
-            color: _.showControls.value ? Colors.black26 : Colors.transparent,
-            child: Stack(
-              children: [
-                if (_.enabledControls.doubleTapToSeek && (_.mobileControls))
-                  Positioned.fill(
-                    bottom: widget.responsive.height * 0.20,
-                    top: widget.responsive.height * 0.20,
-                    child: VideoCoreForwardAndRewindLayout(
-                      responsive: widget.responsive,
-                      rewind: GestureDetector(
-                        // behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          if (_.doubleTapCount.value != 0 || tappedTwice) {
-                            _rewind(context, _);
-                            tappedOnce(_, true);
-                          } else {
-                            tappedOnce(_, false);
-                          }
-                        },
-                      ),
-                      forward: GestureDetector(
-                        // behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          if (_.doubleTapCount.value != 0 || tappedTwice) {
-                            _forward(context, _);
-                            tappedOnce(_, true);
-                          } else {
-                            tappedOnce(_, false);
-                          }
-                        },
-                        //behavior: HitTestBehavior.,
-                      ),
+      child: AnimatedContainer(
+          duration: _.durations.controlsDuration,
+          color: _.showControls.value ? Colors.black26 : Colors.transparent,
+          child: Stack(
+            children: [
+              if (_.enabledControls.doubleTapToSeek && (_.mobileControls))
+                Positioned.fill(
+                  bottom: widget.responsive.height * 0.20,
+                  top: widget.responsive.height * 0.20,
+                  child: VideoCoreForwardAndRewindLayout(
+                    responsive: widget.responsive,
+                    rewind: GestureDetector(
+                      // behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        if (_.doubleTapCount.value != 0 || tappedTwice) {
+                          _rewind(context, _);
+                          tappedOnce(_, true);
+                        } else {
+                          tappedOnce(_, false);
+                        }
+                      },
+                    ),
+                    forward: GestureDetector(
+                      // behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        if (_.doubleTapCount.value != 0 || tappedTwice) {
+                          _forward(context, _);
+                          tappedOnce(_, true);
+                        } else {
+                          tappedOnce(_, false);
+                        }
+                      },
+                      //behavior: HitTestBehavior.,
                     ),
                   ),
-                IgnorePointer(
-                    ignoring: !_.showControls.value, child: widget.child),
-              ],
-            )),
-      ),
+                ),
+              AnimatedOpacity(
+                opacity:
+                    (!_.showControls.value || _.lockedControls.value) ? 0 : 1,
+                duration: _.durations.controlsDuration,
+                child: IgnorePointer(
+                    ignoring: (!_.showControls.value || _.lockedControls.value),
+                    child: widget.child),
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: AnimatedOpacity(
+                  opacity:
+                      !(_.showControls.value && _.lockedControls.value) ? 0 : 1,
+                  duration: _.durations.controlsDuration,
+                  child: IgnorePointer(
+                      ignoring:
+                          !(_.showControls.value && _.lockedControls.value),
+                      child: LockButton(
+                        responsive: _.responsive,
+                      )),
+                ),
+              ),
+            ],
+          )),
     );
   }
 
