@@ -15,6 +15,8 @@ import 'package:universal_platform/universal_platform.dart';
 /// as buttons and icons and layouts.
 enum ControlsStyle {
   primary,
+  // prevent drag evnet for scrollable list
+  primaryList,
   secondary,
 
   /// The custom style is used to apply a custom style which you can provide in MeeduPlayerController.
