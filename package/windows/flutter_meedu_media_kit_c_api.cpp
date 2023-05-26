@@ -4,9 +4,9 @@
 
 #include "flutter_meedu_media_kit_plugin.h"
 
-void FlutterMeeduVideoplayerPluginCApiRegisterWithRegistrar(
+void FlutterMeeduMediaKitPluginCApiRegisterWithRegistrar(
     FlutterDesktopPluginRegistrarRef registrar) {
-  flutter_meedu_media_kit::FlutterMeeduVideoplayerPlugin::RegisterWithRegistrar(
+  flutter_meedu_media_kit::FlutterMeeduMediaKitPlugin::RegisterWithRegistrar(
       flutter::PluginRegistrarManager::GetInstance()
           ->GetRegistrar<flutter::PluginRegistrarWindows>(registrar));
 }

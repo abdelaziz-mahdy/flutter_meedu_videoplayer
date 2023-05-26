@@ -8,7 +8,7 @@
 PRODUCT_NAME = flutter_meedu_media_kit_example
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.zezo357.flutterMeeduVideoplayerExample
+PRODUCT_BUNDLE_IDENTIFIER = com.zezo357.FlutterMeeduMediaKitExample
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2023 com.zezo357. All rights reserved.

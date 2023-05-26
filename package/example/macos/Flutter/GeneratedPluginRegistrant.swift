@@ -16,7 +16,7 @@ import wakelock_macos
 import window_manager
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  FlutterMeeduVideoplayerPlugin.register(with: registry.registrar(forPlugin: "FlutterMeeduVideoplayerPlugin"))
+  FlutterMeeduMediaKitPlugin.register(with: registry.registrar(forPlugin: "FlutterMeeduMediaKitPlugin"))
   MediaKitLibsMacosVideoPlugin.register(with: registry.registrar(forPlugin: "MediaKitLibsMacosVideoPlugin"))
   MediaKitVideoPlugin.register(with: registry.registrar(forPlugin: "MediaKitVideoPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))

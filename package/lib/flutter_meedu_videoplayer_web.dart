@@ -5,10 +5,10 @@
 
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
-/// A web implementation of the FlutterMeeduVideoplayerPlatform of the FlutterMeeduVideoplayer plugin.
-class FlutterMeeduVideoplayerWeb {
-  /// Constructs a FlutterMeeduVideoplayerWeb
-  FlutterMeeduVideoplayerWeb();
+/// A web implementation of the FlutterMeeduMediaKitPlatform of the FlutterMeeduMediaKit plugin.
+class FlutterMeeduMediaKitWeb {
+  /// Constructs a FlutterMeeduMediaKitWeb
+  FlutterMeeduMediaKitWeb();
 
   static void registerWith(Registrar registrar) {}
 }

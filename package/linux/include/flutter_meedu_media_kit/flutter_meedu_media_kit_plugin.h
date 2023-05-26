@@ -11,10 +11,10 @@ G_BEGIN_DECLS
 #define FLUTTER_PLUGIN_EXPORT
 #endif
 
-typedef struct _FlutterMeeduVideoplayerPlugin FlutterMeeduVideoplayerPlugin;
+typedef struct _FlutterMeeduMediaKitPlugin FlutterMeeduMediaKitPlugin;
 typedef struct {
   GObjectClass parent_class;
-} FlutterMeeduVideoplayerPluginClass;
+} FlutterMeeduMediaKitPluginClass;
 
 FLUTTER_PLUGIN_EXPORT GType flutter_meedu_media_kit_plugin_get_type();
 

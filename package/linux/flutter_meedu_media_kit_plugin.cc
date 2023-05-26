@@ -8,17 +8,17 @@
 
 #define flutter_meedu_media_kit_PLUGIN(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST((obj), flutter_meedu_media_kit_plugin_get_type(), \
-                              FlutterMeeduVideoplayerPlugin))
+                              FlutterMeeduMediaKitPlugin))
 
-struct _FlutterMeeduVideoplayerPlugin {
+struct _FlutterMeeduMediaKitPlugin {
   GObject parent_instance;
 };
 
-G_DEFINE_TYPE(FlutterMeeduVideoplayerPlugin, flutter_meedu_media_kit_plugin, g_object_get_type())
+G_DEFINE_TYPE(FlutterMeeduMediaKitPlugin, flutter_meedu_media_kit_plugin, g_object_get_type())
 
 // Called when a method call is received from Flutter.
 static void flutter_meedu_media_kit_plugin_handle_method_call(
-    FlutterMeeduVideoplayerPlugin* self,
+    FlutterMeeduMediaKitPlugin* self,
     FlMethodCall* method_call) {
   g_autoptr(FlMethodResponse) response = nullptr;
 
@@ -41,20 +41,20 @@ static void flutter_meedu_media_kit_plugin_dispose(GObject* object) {
   G_OBJECT_CLASS(flutter_meedu_media_kit_plugin_parent_class)->dispose(object);
 }
 
-static void flutter_meedu_media_kit_plugin_class_init(FlutterMeeduVideoplayerPluginClass* klass) {
+static void flutter_meedu_media_kit_plugin_class_init(FlutterMeeduMediaKitPluginClass* klass) {
   G_OBJECT_CLASS(klass)->dispose = flutter_meedu_media_kit_plugin_dispose;
 }
 
-static void flutter_meedu_media_kit_plugin_init(FlutterMeeduVideoplayerPlugin* self) {}
+static void flutter_meedu_media_kit_plugin_init(FlutterMeeduMediaKitPlugin* self) {}
 
 static void method_call_cb(FlMethodChannel* channel, FlMethodCall* method_call,
                            gpointer user_data) {
-  FlutterMeeduVideoplayerPlugin* plugin = flutter_meedu_media_kit_PLUGIN(user_data);
+  FlutterMeeduMediaKitPlugin* plugin = flutter_meedu_media_kit_PLUGIN(user_data);
   flutter_meedu_media_kit_plugin_handle_method_call(plugin, method_call);
 }
 
 void flutter_meedu_media_kit_plugin_register_with_registrar(FlPluginRegistrar* registrar) {
-  FlutterMeeduVideoplayerPlugin* plugin = flutter_meedu_media_kit_PLUGIN(
+  FlutterMeeduMediaKitPlugin* plugin = flutter_meedu_media_kit_PLUGIN(
       g_object_new(flutter_meedu_media_kit_plugin_get_type(), nullptr));
 
   g_autoptr(FlStandardMethodCodec) codec = fl_standard_method_codec_new();

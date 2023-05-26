@@ -28,7 +28,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 /**
  * PlayerPlugin
  */
-public class FlutterMeeduVideoplayerPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware, OnPictureInPictureListener {
+public class FlutterMeeduMediaKitPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware, OnPictureInPictureListener {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it

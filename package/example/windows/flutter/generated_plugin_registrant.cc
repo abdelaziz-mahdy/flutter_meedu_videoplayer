@@ -15,8 +15,8 @@
 #include <window_manager/window_manager_plugin.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
-  FlutterMeeduVideoplayerPluginCApiRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("FlutterMeeduVideoplayerPluginCApi"));
+  FlutterMeeduMediaKitPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("FlutterMeeduMediaKitPluginCApi"));
   FullscreenWindowPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FullscreenWindowPluginCApi"));
   MediaKitLibsWindowsVideoPluginCApiRegisterWithRegistrar(

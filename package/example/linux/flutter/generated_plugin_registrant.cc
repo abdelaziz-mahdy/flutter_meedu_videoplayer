@@ -14,7 +14,7 @@
 
 void fl_register_plugins(FlPluginRegistry* registry) {
   g_autoptr(FlPluginRegistrar) flutter_meedu_media_kit_registrar =
-      fl_plugin_registry_get_registrar_for_plugin(registry, "FlutterMeeduVideoplayerPlugin");
+      fl_plugin_registry_get_registrar_for_plugin(registry, "FlutterMeeduMediaKitPlugin");
   flutter_meedu_media_kit_plugin_register_with_registrar(flutter_meedu_media_kit_registrar);
   g_autoptr(FlPluginRegistrar) media_kit_libs_linux_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "MediaKitLibsLinuxPlugin");
