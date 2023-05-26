@@ -172,13 +172,13 @@ class _HomePageState extends State<HomePage> {
                       description:
                           'An example of how to add a header to the player.',
                     ),
-                    buildButton(
-                      context,
-                      text: 'With subtitles example',
-                      routeName: 'subtitles',
-                      description:
-                          'An example of how to add subtitles to the player.',
-                    ),
+                    // buildButton(
+                    //   context,
+                    //   text: 'With subtitles example',
+                    //   routeName: 'subtitles',
+                    //   description:
+                    //       'An example of how to add subtitles to the player.',
+                    // ),
                     buildButton(
                       context,
                       text: 'Playback speed example',

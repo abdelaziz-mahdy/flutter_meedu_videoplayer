@@ -355,63 +355,35 @@ class MeeduPlayerController {
       _pipAvailable.value = false;
     }
   }
-  String? mapToStringList(Map<String, String>? map) {
-    if (map == null) {
-      return null;
-    }
-    String list = "";
-    map.forEach((key, value) {
-      list += "'$key: $value',";
-    });
-    if (list.isEmpty) {
-      return null;
-    }
-    return list.substring(0, list.length - 1);
-  }
+
 
   /// create a new video_player controller
   Future<Player> _createVideoController(DataSource dataSource) async {
-    Player player = Player(
+    Player player = _videoPlayerController??Player(
         configuration: PlayerConfiguration(
             //logLevel: logLevel
             )); // create a new video controller
 
     // (player.platform as libmpvPlayer).setProperty("demuxer-lavf-o", "protocol_whitelist=[file,tcp,tls,http,https]");
 
-    _videoController = await VideoController.create(player);
+    _videoController = _videoController??VideoController(player);
     player.setPlaylistMode(PlaylistMode.loop);
 
-    String? refer, userAgent, headersListString;
-    refer = dataSource.httpHeaders?["Referer"];
-    userAgent = dataSource.httpHeaders?["User-Agent"];
-    headersListString = mapToStringList(dataSource.httpHeaders);
-    //print('--http-referrer=' + refer);
-
-    if (refer != null) {
-      (player.platform as libmpvPlayer).setProperty("referrer", refer);
-    }
-    if (userAgent != null) {
-      (player.platform as libmpvPlayer).setProperty("user-agent", userAgent);
-    }
-
-    if (headersListString != null) {
-      (player.platform as libmpvPlayer)
-          .setProperty("http-header-fields", headersListString);
-    }
+  
     //dataSource = await checkIfm3u8AndNoLinks(dataSource);
     if (dataSource.type == DataSourceType.asset) {
       final assetUrl = dataSource.source!.startsWith("asset://")
           ? dataSource.source!
           : "asset://${dataSource.source!}";
-      player.open(Media(assetUrl), play: false
+      player.open(Media(assetUrl,httpHeaders:dataSource.httpHeaders), play: false
           // autoStart: ,
           );
     } else if (dataSource.type == DataSourceType.network) {
-      player.open(Media(dataSource.source!), play: false
+      player.open(Media(dataSource.source!,httpHeaders:dataSource.httpHeaders), play: false
           // autoStart: ,
           );
     } else {
-      player.open(Media(dataSource.file!.path), play: false
+      player.open(Media(dataSource.file!.path,httpHeaders:dataSource.httpHeaders), play: false
           // autoStart: ,
           );
     }

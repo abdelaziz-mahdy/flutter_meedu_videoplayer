@@ -22,14 +22,12 @@ class DataSource {
   File? file;
   String? source, package;
   DataSourceType type;
-  Future<String>? subtitlesFile; // for subtiles
   Map<String, String>? httpHeaders; // for headers
   DataSource({
     this.file,
     this.source,
     required this.type,
     this.package,
-    this.subtitlesFile,
     this.httpHeaders,
   }) : assert((type == DataSourceType.file && file != null) || source != null);
 
@@ -39,7 +37,6 @@ class DataSource {
     String? package,
     DataSourceType? type,
     Map<String, String>? httpHeaders,
-    Future<String>? subtitlesFile,
   }) {
     return DataSource(
       file: file ?? this.file,
@@ -47,7 +44,6 @@ class DataSource {
       type: type ?? this.type,
       package: package ?? this.package,
       httpHeaders: httpHeaders ?? this.httpHeaders,
-      subtitlesFile: subtitlesFile ?? this.subtitlesFile,
     );
   }
 }
