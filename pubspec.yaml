@@ -1,7 +1,7 @@
-name: flutter_meedu_videoplayer
+name: flutter_meedu_media_kit
 description: A cross Platform video player that uses video_player for android and ios and web, media_kit for windows and linux and macos.
 version: 4.2.10
-homepage: "https://github.com/zezo357/flutter_meedu_videoplayer"
+homepage: "https://github.com/zezo357/flutter_meedu_media_kit"
 environment:
   sdk: ">=2.16.2 <4.0.0"
   flutter: ">=2.5.0"
@@ -61,25 +61,25 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.zezo357.flutter_meedu_videoplayer
-        pluginClass: FlutterMeeduVideoplayerPlugin
+        package: com.zezo357.flutter_meedu_media_kit
+        pluginClass: FlutterMeeduMediaKitPlugin
       ios:
-        pluginClass: FlutterMeeduVideoplayerPlugin
+        pluginClass: FlutterMeeduMediaKitPlugin
       linux:
-        pluginClass: FlutterMeeduVideoplayerPlugin
+        pluginClass: FlutterMeeduMediaKitPlugin
       macos:
-        pluginClass: FlutterMeeduVideoplayerPlugin
+        pluginClass: FlutterMeeduMediaKitPlugin
       windows:
-        pluginClass: FlutterMeeduVideoplayerPluginCApi
+        pluginClass: FlutterMeeduMediaKitPluginCApi
       web:
-        pluginClass: FlutterMeeduVideoplayerWeb
-        fileName: flutter_meedu_videoplayer_web.dart
+        pluginClass: FlutterMeeduMediaKitWeb
+        fileName: flutter_meedu_media_kit_web.dart
 
       # web:
-      #   pluginClass: FlutterMeeduVideoplayerPlugin
+      #   pluginClass: FlutterMeeduMediaKitPlugin
       #web:
-      #pluginClass: FlutterMeeduVideoplayerWeb
-      #fileName: flutter_meedu_videoplayer_web.dart
+      #pluginClass: FlutterMeeduMediaKitWeb
+      #fileName: flutter_meedu_media_kit_web.dart
   assets:
     - assets/icons/fast-forward.png
     - assets/icons/fullscreen.png

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:flutter_meedu_media_kit/meedu_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class GridViewExample extends StatefulWidget {

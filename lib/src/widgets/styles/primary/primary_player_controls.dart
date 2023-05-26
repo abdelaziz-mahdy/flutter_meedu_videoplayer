@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/styles/controls_container.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/styles/primary/bottom_controls.dart';
+import 'package:flutter_meedu_media_kit/meedu_player.dart';
+import 'package:flutter_meedu_media_kit/src/widgets/styles/controls_container.dart';
+import 'package:flutter_meedu_media_kit/src/widgets/styles/primary/bottom_controls.dart';
 
 class PrimaryVideoPlayerControls extends StatelessWidget {
   final Responsive responsive;

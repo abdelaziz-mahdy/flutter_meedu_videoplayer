@@ -1,4 +1,4 @@
-#include "flutter_meedu_videoplayer_plugin.h"
+#include "flutter_meedu_media_kit_plugin.h"
 
 // This must be included before many other Windows headers.
 #include <windows.h>
@@ -13,17 +13,17 @@
 #include <memory>
 #include <sstream>
 
-namespace flutter_meedu_videoplayer {
+namespace flutter_meedu_media_kit {
 
 // static
-void FlutterMeeduVideoplayerPlugin::RegisterWithRegistrar(
+void FlutterMeeduMediaKitPlugin::RegisterWithRegistrar(
     flutter::PluginRegistrarWindows *registrar) {
   auto channel =
       std::make_unique<flutter::MethodChannel<flutter::EncodableValue>>(
-          registrar->messenger(), "flutter_meedu_videoplayer",
+          registrar->messenger(), "flutter_meedu_media_kit",
           &flutter::StandardMethodCodec::GetInstance());
 
-  auto plugin = std::make_unique<FlutterMeeduVideoplayerPlugin>();
+  auto plugin = std::make_unique<FlutterMeeduMediaKitPlugin>();
 
   channel->SetMethodCallHandler(
       [plugin_pointer = plugin.get()](const auto &call, auto result) {
@@ -33,11 +33,11 @@ void FlutterMeeduVideoplayerPlugin::RegisterWithRegistrar(
   registrar->AddPlugin(std::move(plugin));
 }
 
-FlutterMeeduVideoplayerPlugin::FlutterMeeduVideoplayerPlugin() {}
+FlutterMeeduMediaKitPlugin::FlutterMeeduMediaKitPlugin() {}
 
-FlutterMeeduVideoplayerPlugin::~FlutterMeeduVideoplayerPlugin() {}
+FlutterMeeduMediaKitPlugin::~FlutterMeeduMediaKitPlugin() {}
 
-void FlutterMeeduVideoplayerPlugin::HandleMethodCall(
+void FlutterMeeduMediaKitPlugin::HandleMethodCall(
     const flutter::MethodCall<flutter::EncodableValue> &method_call,
     std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result) {
   if (method_call.method_name().compare("getPlatformVersion") == 0) {
@@ -56,4 +56,4 @@ void FlutterMeeduVideoplayerPlugin::HandleMethodCall(
   }
 }
 
-}  // namespace flutter_meedu_videoplayer
+}  // namespace flutter_meedu_media_kit

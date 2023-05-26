@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:flutter_meedu_media_kit/meedu_player.dart';
 import 'package:path/path.dart' as path;
 
 class PickFileExamplePage extends StatefulWidget {

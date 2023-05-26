@@ -1,4 +1,4 @@
-group 'com.zezo357.flutter_meedu_videoplayer'
+group 'com.zezo357.flutter_meedu_media_kit'
 version '1.0'
 
 buildscript {

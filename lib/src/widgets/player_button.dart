@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:flutter_meedu_media_kit/meedu_player.dart';
 
 class PlayerButton extends StatelessWidget {
   final double size;
@@ -42,7 +42,7 @@ class PlayerButton extends StatelessWidget {
             child: Image.asset(
               iconPath!,
               color: iconColor,
-              package: 'flutter_meedu_videoplayer',
+              package: 'flutter_meedu_media_kit',
             ),
           ),
     );

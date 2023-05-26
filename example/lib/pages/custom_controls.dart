@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:flutter_meedu_media_kit/meedu_player.dart';
 
 class CustomControlsExamplePage extends StatefulWidget {
   const CustomControlsExamplePage({Key? key}) : super(key: key);

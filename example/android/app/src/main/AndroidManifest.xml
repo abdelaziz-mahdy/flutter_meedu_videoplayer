@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zezo357.flutter_meedu_videoplayer_example">
+    package="com.zezo357.flutter_meedu_media_kit_example">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     
    <application
-        android:label="flutter_meedu_videoplayer_example"
+        android:label="flutter_meedu_media_kit_example"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"

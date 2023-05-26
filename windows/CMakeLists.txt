@@ -5,24 +5,24 @@
 cmake_minimum_required(VERSION 3.14)
 
 # Project-level configuration.
-set(PROJECT_NAME "flutter_meedu_videoplayer")
+set(PROJECT_NAME "flutter_meedu_media_kit")
 project(${PROJECT_NAME} LANGUAGES CXX)
 
 # This value is used when generating builds using this plugin, so it must
 # not be changed
-set(PLUGIN_NAME "flutter_meedu_videoplayer_plugin")
+set(PLUGIN_NAME "flutter_meedu_media_kit_plugin")
 
 # Any new source files that you add to the plugin should be added here.
 list(APPEND PLUGIN_SOURCES
-  "flutter_meedu_videoplayer_plugin.cpp"
-  "flutter_meedu_videoplayer_plugin.h"
+  "flutter_meedu_media_kit_plugin.cpp"
+  "flutter_meedu_media_kit_plugin.h"
 )
 
 # Define the plugin library target. Its name must not be changed (see comment
 # on PLUGIN_NAME above).
 add_library(${PLUGIN_NAME} SHARED
-  "include/flutter_meedu_videoplayer/flutter_meedu_videoplayer_plugin_c_api.h"
-  "flutter_meedu_videoplayer_plugin_c_api.cpp"
+  "include/flutter_meedu_media_kit/flutter_meedu_media_kit_plugin_c_api.h"
+  "flutter_meedu_media_kit_plugin_c_api.cpp"
   ${PLUGIN_SOURCES}
 )
 
@@ -47,7 +47,7 @@ target_link_libraries(${PLUGIN_NAME} PRIVATE flutter flutter_wrapper_plugin)
 # List of absolute paths to libraries that should be bundled with the plugin.
 # This list could contain prebuilt libraries, or libraries created by an
 # external build triggered from this build file.
-set(flutter_meedu_videoplayer_bundled_libraries
+set(flutter_meedu_media_kit_bundled_libraries
   ""
   PARENT_SCOPE
 )

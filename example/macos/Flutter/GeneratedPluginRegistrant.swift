@@ -5,7 +5,7 @@
 import FlutterMacOS
 import Foundation
 
-import flutter_meedu_videoplayer
+import flutter_meedu_media_kit
 import media_kit_libs_macos_video
 import media_kit_video
 import path_provider_foundation
@@ -16,7 +16,7 @@ import wakelock_macos
 import window_manager
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  FlutterMeeduVideoplayerPlugin.register(with: registry.registrar(forPlugin: "FlutterMeeduVideoplayerPlugin"))
+  FlutterMeeduMediaKitPlugin.register(with: registry.registrar(forPlugin: "FlutterMeeduMediaKitPlugin"))
   MediaKitLibsMacosVideoPlugin.register(with: registry.registrar(forPlugin: "MediaKitLibsMacosVideoPlugin"))
   MediaKitVideoPlugin.register(with: registry.registrar(forPlugin: "MediaKitVideoPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))

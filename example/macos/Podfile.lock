@@ -1,5 +1,5 @@
 PODS:
-  - flutter_meedu_videoplayer (0.0.1):
+  - flutter_meedu_media_kit (0.0.1):
     - FlutterMacOS
   - FlutterMacOS (1.0.0)
   - media_kit_libs_macos_video (1.0.4):
@@ -24,7 +24,7 @@ PODS:
     - FlutterMacOS
 
 DEPENDENCIES:
-  - flutter_meedu_videoplayer (from `Flutter/ephemeral/.symlinks/plugins/flutter_meedu_videoplayer/macos`)
+  - flutter_meedu_media_kit (from `Flutter/ephemeral/.symlinks/plugins/flutter_meedu_media_kit/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
   - media_kit_libs_macos_video (from `Flutter/ephemeral/.symlinks/plugins/media_kit_libs_macos_video/macos`)
   - media_kit_native_event_loop (from `Flutter/ephemeral/.symlinks/plugins/media_kit_native_event_loop/macos`)
@@ -37,8 +37,8 @@ DEPENDENCIES:
   - window_manager (from `Flutter/ephemeral/.symlinks/plugins/window_manager/macos`)
 
 EXTERNAL SOURCES:
-  flutter_meedu_videoplayer:
-    :path: Flutter/ephemeral/.symlinks/plugins/flutter_meedu_videoplayer/macos
+  flutter_meedu_media_kit:
+    :path: Flutter/ephemeral/.symlinks/plugins/flutter_meedu_media_kit/macos
   FlutterMacOS:
     :path: Flutter/ephemeral
   media_kit_libs_macos_video:
@@ -61,7 +61,7 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/window_manager/macos
 
 SPEC CHECKSUMS:
-  flutter_meedu_videoplayer: fceb30a833044aaf6410c5da53c3d61ab3d6abbb
+  flutter_meedu_media_kit: fceb30a833044aaf6410c5da53c3d61ab3d6abbb
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   media_kit_libs_macos_video: 0a4a5bf21533cba968c0833f1b59e9af8b5847f1
   media_kit_native_event_loop: 6cf347b98de9735713a86c188467a008af5f860e

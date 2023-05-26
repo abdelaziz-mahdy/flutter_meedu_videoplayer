@@ -1,4 +1,4 @@
-package com.zezo357.flutter_meedu_videoplayer;
+package com.zezo357.flutter_meedu_media_kit;
 
 import android.content.res.Configuration;
 

@@ -1,4 +1,4 @@
-#include "include/flutter_meedu_videoplayer/flutter_meedu_videoplayer_plugin.h"
+#include "include/flutter_meedu_media_kit/flutter_meedu_media_kit_plugin.h"
 
 #include <flutter_linux/flutter_linux.h>
 #include <gtk/gtk.h>
@@ -6,19 +6,19 @@
 
 #include <cstring>
 
-#define FLUTTER_MEEDU_VIDEOPLAYER_PLUGIN(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST((obj), flutter_meedu_videoplayer_plugin_get_type(), \
-                              FlutterMeeduVideoplayerPlugin))
+#define flutter_meedu_media_kit_PLUGIN(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST((obj), flutter_meedu_media_kit_plugin_get_type(), \
+                              FlutterMeeduMediaKitPlugin))
 
-struct _FlutterMeeduVideoplayerPlugin {
+struct _FlutterMeeduMediaKitPlugin {
   GObject parent_instance;
 };
 
-G_DEFINE_TYPE(FlutterMeeduVideoplayerPlugin, flutter_meedu_videoplayer_plugin, g_object_get_type())
+G_DEFINE_TYPE(FlutterMeeduMediaKitPlugin, flutter_meedu_media_kit_plugin, g_object_get_type())
 
 // Called when a method call is received from Flutter.
-static void flutter_meedu_videoplayer_plugin_handle_method_call(
-    FlutterMeeduVideoplayerPlugin* self,
+static void flutter_meedu_media_kit_plugin_handle_method_call(
+    FlutterMeeduMediaKitPlugin* self,
     FlMethodCall* method_call) {
   g_autoptr(FlMethodResponse) response = nullptr;
 
@@ -37,30 +37,30 @@ static void flutter_meedu_videoplayer_plugin_handle_method_call(
   fl_method_call_respond(method_call, response, nullptr);
 }
 
-static void flutter_meedu_videoplayer_plugin_dispose(GObject* object) {
-  G_OBJECT_CLASS(flutter_meedu_videoplayer_plugin_parent_class)->dispose(object);
+static void flutter_meedu_media_kit_plugin_dispose(GObject* object) {
+  G_OBJECT_CLASS(flutter_meedu_media_kit_plugin_parent_class)->dispose(object);
 }
 
-static void flutter_meedu_videoplayer_plugin_class_init(FlutterMeeduVideoplayerPluginClass* klass) {
-  G_OBJECT_CLASS(klass)->dispose = flutter_meedu_videoplayer_plugin_dispose;
+static void flutter_meedu_media_kit_plugin_class_init(FlutterMeeduMediaKitPluginClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = flutter_meedu_media_kit_plugin_dispose;
 }
 
-static void flutter_meedu_videoplayer_plugin_init(FlutterMeeduVideoplayerPlugin* self) {}
+static void flutter_meedu_media_kit_plugin_init(FlutterMeeduMediaKitPlugin* self) {}
 
 static void method_call_cb(FlMethodChannel* channel, FlMethodCall* method_call,
                            gpointer user_data) {
-  FlutterMeeduVideoplayerPlugin* plugin = FLUTTER_MEEDU_VIDEOPLAYER_PLUGIN(user_data);
-  flutter_meedu_videoplayer_plugin_handle_method_call(plugin, method_call);
+  FlutterMeeduMediaKitPlugin* plugin = flutter_meedu_media_kit_PLUGIN(user_data);
+  flutter_meedu_media_kit_plugin_handle_method_call(plugin, method_call);
 }
 
-void flutter_meedu_videoplayer_plugin_register_with_registrar(FlPluginRegistrar* registrar) {
-  FlutterMeeduVideoplayerPlugin* plugin = FLUTTER_MEEDU_VIDEOPLAYER_PLUGIN(
-      g_object_new(flutter_meedu_videoplayer_plugin_get_type(), nullptr));
+void flutter_meedu_media_kit_plugin_register_with_registrar(FlPluginRegistrar* registrar) {
+  FlutterMeeduMediaKitPlugin* plugin = flutter_meedu_media_kit_PLUGIN(
+      g_object_new(flutter_meedu_media_kit_plugin_get_type(), nullptr));
 
   g_autoptr(FlStandardMethodCodec) codec = fl_standard_method_codec_new();
   g_autoptr(FlMethodChannel) channel =
       fl_method_channel_new(fl_plugin_registrar_get_messenger(registrar),
-                            "flutter_meedu_videoplayer",
+                            "flutter_meedu_media_kit",
                             FL_METHOD_CODEC(codec));
   fl_method_channel_set_method_call_handler(channel, method_call_cb,
                                             g_object_ref(plugin),

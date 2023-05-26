@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/styles/controls_container.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/styles/primary/primary_player_controls.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/styles/secondary/secondary_player_controls.dart';
+import 'package:flutter_meedu_media_kit/meedu_player.dart';
+import 'package:flutter_meedu_media_kit/src/widgets/styles/controls_container.dart';
+import 'package:flutter_meedu_media_kit/src/widgets/styles/primary/primary_player_controls.dart';
+import 'package:flutter_meedu_media_kit/src/widgets/styles/secondary/secondary_player_controls.dart';
 import '../helpers/shortcuts/intent_action_map.dart';
 
 /// An ActionDispatcher that logs all the actions that it invokes.

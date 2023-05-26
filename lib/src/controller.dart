@@ -2,11 +2,11 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
-import 'package:flutter_meedu_videoplayer/src/native/pip_manager.dart';
+import 'package:flutter_meedu_media_kit/src/native/pip_manager.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:flutter_meedu_media_kit/meedu_player.dart';
 import 'package:volume_controller/volume_controller.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:universal_platform/universal_platform.dart';
@@ -356,34 +356,38 @@ class MeeduPlayerController {
     }
   }
 
-
   /// create a new video_player controller
   Future<Player> _createVideoController(DataSource dataSource) async {
-    Player player = _videoPlayerController??Player(
-        configuration: PlayerConfiguration(
-            //logLevel: logLevel
-            )); // create a new video controller
+    Player player = _videoPlayerController ??
+        Player(
+            configuration: PlayerConfiguration(
+                //logLevel: logLevel
+                )); // create a new video controller
 
     // (player.platform as libmpvPlayer).setProperty("demuxer-lavf-o", "protocol_whitelist=[file,tcp,tls,http,https]");
 
-    _videoController = _videoController??VideoController(player);
+    _videoController = _videoController ?? VideoController(player);
     player.setPlaylistMode(PlaylistMode.loop);
 
-  
     //dataSource = await checkIfm3u8AndNoLinks(dataSource);
     if (dataSource.type == DataSourceType.asset) {
       final assetUrl = dataSource.source!.startsWith("asset://")
           ? dataSource.source!
           : "asset://${dataSource.source!}";
-      player.open(Media(assetUrl,httpHeaders:dataSource.httpHeaders), play: false
+      player.open(Media(assetUrl, httpHeaders: dataSource.httpHeaders),
+          play: false
           // autoStart: ,
           );
     } else if (dataSource.type == DataSourceType.network) {
-      player.open(Media(dataSource.source!,httpHeaders:dataSource.httpHeaders), play: false
+      player.open(
+          Media(dataSource.source!, httpHeaders: dataSource.httpHeaders),
+          play: false
           // autoStart: ,
           );
     } else {
-      player.open(Media(dataSource.file!.path,httpHeaders:dataSource.httpHeaders), play: false
+      player.open(
+          Media(dataSource.file!.path, httpHeaders: dataSource.httpHeaders),
+          play: false
           // autoStart: ,
           );
     }

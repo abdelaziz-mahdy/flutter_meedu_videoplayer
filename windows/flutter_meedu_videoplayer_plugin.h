@@ -1,24 +1,24 @@
-#ifndef FLUTTER_PLUGIN_FLUTTER_MEEDU_VIDEOPLAYER_PLUGIN_H_
-#define FLUTTER_PLUGIN_FLUTTER_MEEDU_VIDEOPLAYER_PLUGIN_H_
+#ifndef FLUTTER_PLUGIN_flutter_meedu_media_kit_PLUGIN_H_
+#define FLUTTER_PLUGIN_flutter_meedu_media_kit_PLUGIN_H_
 
 #include <flutter/method_channel.h>
 #include <flutter/plugin_registrar_windows.h>
 
 #include <memory>
 
-namespace flutter_meedu_videoplayer {
+namespace flutter_meedu_media_kit {
 
-class FlutterMeeduVideoplayerPlugin : public flutter::Plugin {
+class FlutterMeeduMediaKitPlugin : public flutter::Plugin {
  public:
   static void RegisterWithRegistrar(flutter::PluginRegistrarWindows *registrar);
 
-  FlutterMeeduVideoplayerPlugin();
+  FlutterMeeduMediaKitPlugin();
 
-  virtual ~FlutterMeeduVideoplayerPlugin();
+  virtual ~FlutterMeeduMediaKitPlugin();
 
   // Disallow copy and assign.
-  FlutterMeeduVideoplayerPlugin(const FlutterMeeduVideoplayerPlugin&) = delete;
-  FlutterMeeduVideoplayerPlugin& operator=(const FlutterMeeduVideoplayerPlugin&) = delete;
+  FlutterMeeduMediaKitPlugin(const FlutterMeeduMediaKitPlugin&) = delete;
+  FlutterMeeduMediaKitPlugin& operator=(const FlutterMeeduMediaKitPlugin&) = delete;
 
  private:
   // Called when a method is called on this plugin's channel from Dart.
@@ -27,6 +27,6 @@ class FlutterMeeduVideoplayerPlugin : public flutter::Plugin {
       std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result);
 };
 
-}  // namespace flutter_meedu_videoplayer
+}  // namespace flutter_meedu_media_kit
 
-#endif  // FLUTTER_PLUGIN_FLUTTER_MEEDU_VIDEOPLAYER_PLUGIN_H_
+#endif  // FLUTTER_PLUGIN_flutter_meedu_media_kit_PLUGIN_H_

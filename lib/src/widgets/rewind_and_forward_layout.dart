@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
+import 'package:flutter_meedu_media_kit/src/helpers/responsive.dart';
 
 class VideoCoreForwardAndRewindLayout extends StatelessWidget {
   const VideoCoreForwardAndRewindLayout(

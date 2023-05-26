@@ -1,10 +1,10 @@
 import Flutter
 import UIKit
 
-public class FlutterMeeduVideoplayerPlugin: NSObject, FlutterPlugin {
+public class FlutterMeeduMediaKitPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "flutter_meedu_videoplayer", binaryMessenger: registrar.messenger())
-    let instance = FlutterMeeduVideoplayerPlugin()
+    let channel = FlutterMethodChannel(name: "flutter_meedu_media_kit", binaryMessenger: registrar.messenger())
+    let instance = FlutterMeeduMediaKitPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 

@@ -1,4 +1,4 @@
-package com.zezo357.flutter_meedu_videoplayer;
+package com.zezo357.flutter_meedu_media_kit;
 
 import androidx.annotation.NonNull;
 
@@ -28,7 +28,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 /**
  * PlayerPlugin
  */
-public class FlutterMeeduVideoplayerPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware, OnPictureInPictureListener {
+public class FlutterMeeduMediaKitPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware, OnPictureInPictureListener {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -38,7 +38,7 @@ public class FlutterMeeduVideoplayerPlugin implements FlutterPlugin, MethodCallH
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "com.zezo357.flutter_meedu_videoplayer");
+        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "com.zezo357.flutter_meedu_media_kit");
         channel.setMethodCallHandler(this);
     }
 
