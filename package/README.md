@@ -1,6 +1,5 @@
 # flutter_meedu_media_kit
 
-## a controls wrapper for [media_kit](https://pub.dev/packages/media_kit) same features and logic as [flutter_meedu_videoplayer](https://pub.dev/packages/flutter_meedu_videoplayer).
 
 
 
@@ -13,6 +12,7 @@
 
 
 
+### a controls wrapper for [media_kit](https://pub.dev/packages/media_kit) using same features and logic as [flutter_meedu_videoplayer](https://pub.dev/packages/flutter_meedu_videoplayer).
 
 
 <!-- 👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_media_kit/)</b> -->
