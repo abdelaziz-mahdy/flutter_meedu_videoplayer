@@ -93,7 +93,7 @@ class MeeduPlayerController {
   bool _isSliderMoving = false;
   bool _looping = false;
   bool _autoPlay = false;
-  bool _listenersInitialized = false;
+  final bool _listenersInitialized = false;
 
   double _volumeBeforeMute = 0;
   double mouseMoveInitial = 0;
@@ -266,6 +266,7 @@ class MeeduPlayerController {
   /// [manageWakeLock] if the player should use wakelock
   /// [errorText] message to show when the load process failed
   MeeduPlayerController({
+    
     this.screenManager = const ScreenManager(),
     this.colorTheme = Colors.redAccent,
     Widget? loadingWidget,
@@ -356,34 +357,38 @@ class MeeduPlayerController {
     }
   }
 
-
   /// create a new video_player controller
   Future<Player> _createVideoController(DataSource dataSource) async {
-    Player player = _videoPlayerController??Player(
-        configuration: PlayerConfiguration(
-            //logLevel: logLevel
-            )); // create a new video controller
+    Player player = _videoPlayerController ??
+        Player(
+            configuration: const PlayerConfiguration(
+                //logLevel: logLevel
+                )); // create a new video controller
 
     // (player.platform as libmpvPlayer).setProperty("demuxer-lavf-o", "protocol_whitelist=[file,tcp,tls,http,https]");
 
-    _videoController = _videoController??VideoController(player);
+    _videoController = _videoController ?? VideoController(player);
     player.setPlaylistMode(PlaylistMode.loop);
 
-  
     //dataSource = await checkIfm3u8AndNoLinks(dataSource);
     if (dataSource.type == DataSourceType.asset) {
       final assetUrl = dataSource.source!.startsWith("asset://")
           ? dataSource.source!
           : "asset://${dataSource.source!}";
-      player.open(Media(assetUrl,httpHeaders:dataSource.httpHeaders), play: false
+      player.open(Media(assetUrl, httpHeaders: dataSource.httpHeaders),
+          play: false
           // autoStart: ,
           );
     } else if (dataSource.type == DataSourceType.network) {
-      player.open(Media(dataSource.source!,httpHeaders:dataSource.httpHeaders), play: false
+      player.open(
+          Media(dataSource.source!, httpHeaders: dataSource.httpHeaders),
+          play: false
           // autoStart: ,
           );
     } else {
-      player.open(Media(dataSource.file!.path,httpHeaders:dataSource.httpHeaders), play: false
+      player.open(
+          Media(dataSource.file!.path, httpHeaders: dataSource.httpHeaders),
+          play: false
           // autoStart: ,
           );
     }
