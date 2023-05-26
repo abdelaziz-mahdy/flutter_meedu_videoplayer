@@ -7,7 +7,7 @@
 <a href='https://ko-fi.com/zezo357' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
 
 <a target="blank" href="https://pub.dev/packages/flutter_meedu_media_kit"><img src="https://img.shields.io/pub/v/flutter_meedu_media_kit?include_prereleases&style=flat-square"/></a>
-<img src="https://img.shields.io/github/last-commit/zezo357/flutter_meedu_media_kit/master?style=flat-square"/>
+<img src="https://img.shields.io/github/last-commit/zezo357/flutter_meedu_media_kit/main?style=flat-square"/>
 <img src="https://img.shields.io/github/license/zezo357/flutter_meedu_media_kit?style=flat-square"/>
 
 
