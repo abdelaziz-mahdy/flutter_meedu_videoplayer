@@ -12,7 +12,8 @@
 a controls wrapper for [media_kit](https://pub.dev/packages/media_kit).
 
 
-👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_media_kit/)</b>
+
+<!-- 👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_media_kit/)</b> -->
 
 <!-- <table>
 <caption><h4><a href="https://zezo357.github.io/flutter_meedu_media_kit_example/">Flutter Web Demo</a></h4></caption>
@@ -181,14 +182,6 @@ a controls wrapper for [media_kit](https://pub.dev/packages/media_kit).
 - Press the Enter key to open full-screen mode. (<em>enterKeyOpensFullScreen</em>)
 - Press the Space key to toggle between playing and pausing the video. (<em>spaceKeyTogglePlay</em>)
 
-## Initialize
 
-```dart
-void main() {
-  initMeeduPlayer();
-  runApp(MyApp());
-}
-```
 
-# Setup
-
+# Setup [media_kit](https://pub.dev/packages/media_kit).
