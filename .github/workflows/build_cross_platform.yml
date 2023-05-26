@@ -1,0 +1,106 @@
+name: Build_cross_platform
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'package/**'
+      - '!package/README.md'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - 'package/**'
+      - '!package/README.md'
+defaults:
+  run:
+    working-directory: package/example
+
+jobs:
+  android:
+    name: Android
+    runs-on: windows-latest
+    steps:
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      - uses: actions/checkout@v2
+        with:
+          submodules: "true"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - run: flutter pub get
+      - run: flutter build apk --verbose
+  
+    
+  web:
+    name: Web
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "true"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - run: flutter pub get
+      - run: flutter build web --verbose
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "true"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - run: flutter pub get
+      - run: flutter build windows --verbose
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "true"
+      - run: sudo apt-get update
+      - run: sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev mpv libmpv-dev dpkg-dev p7zip-full p7zip-rar
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - run: flutter pub get
+      - run: flutter build linux --verbose
+
+  macos:
+    name: macOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "true"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - run: flutter pub get
+      - run: cd macos && pod install && cd ..
+      - run: flutter build macos --verbose
+
+  ios:
+    name: iOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "true"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+      - run: flutter pub get
+      - run: flutter build ios --verbose --no-codesign
+
