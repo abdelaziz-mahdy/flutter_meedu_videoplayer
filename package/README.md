@@ -15,7 +15,7 @@
 ### a controls wrapper for [media_kit](https://pub.dev/packages/media_kit) using same features and logic as [flutter_meedu_videoplayer](https://pub.dev/packages/flutter_meedu_videoplayer).
 
 
-<!-- 👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_media_kit/)</b> -->
+👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_media_kit/)</b>
 
 <!-- <table>
 <caption><h4><a href="https://zezo357.github.io/flutter_meedu_media_kit_example/">Flutter Web Demo</a></h4></caption>
