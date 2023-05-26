@@ -19,7 +19,7 @@ jobs:
         
       - name: test clone demo web app
         run: |
-          git clone https://${{secrets.USER_NAME}}:${{secrets.PAT}}@github.com/zezo357/flutter_meedu_videoplayer_example.git
+          git clone https://${{secrets.USER_NAME}}:${{secrets.PAT}}@github.com/zezo357/flutter_meedu_media_kit_example.git
           
       - name: Set up Flutter
         uses: subosito/flutter-action@v1
@@ -39,7 +39,7 @@ jobs:
           git config --global user.email ${{secrets.EMAIL}}
           git config --global user.name Abdelaziz
           git status
-          git remote add origin https://${{secrets.USER_NAME}}:${{secrets.PAT}}@github.com/zezo357/flutter_meedu_videoplayer_example.git
+          git remote add origin https://${{secrets.USER_NAME}}:${{secrets.PAT}}@github.com/zezo357/flutter_meedu_media_kit_example.git
           git add --all
           git commit -m "update"
           git push origin HEAD:main -f
