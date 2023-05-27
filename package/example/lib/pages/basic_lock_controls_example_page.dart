@@ -9,10 +9,12 @@ class BasicLockControlsExamplePage extends StatefulWidget {
   const BasicLockControlsExamplePage({Key? key}) : super(key: key);
 
   @override
-  State<BasicLockControlsExamplePage> createState() => _BasicLockControlsExamplePageState();
+  State<BasicLockControlsExamplePage> createState() =>
+      _BasicLockControlsExamplePageState();
 }
 
-class _BasicLockControlsExamplePageState extends State<BasicLockControlsExamplePage> {
+class _BasicLockControlsExamplePageState
+    extends State<BasicLockControlsExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.primary,
     enabledButtons: const EnabledButtons(lockControls: true),

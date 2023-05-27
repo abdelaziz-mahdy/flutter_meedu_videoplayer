@@ -9,14 +9,13 @@ class EnabledButtons {
       playBackSpeed,
       lockControls;
 
-  const EnabledButtons({
-    this.playPauseAndRepeat = true,
-    this.rewindAndfastForward = true,
-    this.videoFit = true,
-    this.muteAndSound = true,
-    this.pip = true,
-    this.fullscreen = true,
-    this.playBackSpeed = true,
-    this.lockControls=false
-  });
+  const EnabledButtons(
+      {this.playPauseAndRepeat = true,
+      this.rewindAndfastForward = true,
+      this.videoFit = true,
+      this.muteAndSound = true,
+      this.pip = true,
+      this.fullscreen = true,
+      this.playBackSpeed = true,
+      this.lockControls = false});
 }

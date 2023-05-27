@@ -14,7 +14,8 @@ class LockButton extends StatelessWidget {
         //   _.lockAvailable,
         // ],
         (__) {
-      _.lockedControls.value; // this is the value that the rxbuilder will listen to (for updates)
+      _.lockedControls
+          .value; // this is the value that the rxbuilder will listen to (for updates)
       if (UniversalPlatform.isDesktopOrWeb) return Container();
       String iconPath = 'assets/icons/lock-screen.png';
       Widget? customIcon = _.customIcons.lock;

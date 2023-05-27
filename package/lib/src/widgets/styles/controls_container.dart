@@ -479,6 +479,9 @@ class _ControlsContainerState extends State<ControlsContainer> {
           _.customDebugPrint("##############out###############");
           gettingNotification = true;
         }
+        if (!gettingNotification) {
+          _forwardDragUpdate(position, _);
+        }
       }
     }
   }
@@ -622,7 +625,6 @@ class _ControlsContainerState extends State<ControlsContainer> {
                       forward: GestureDetector(
                         // behavior: HitTestBehavior.translucent,
                         onTap: () {
-
                           if (_.doubleTapCount.value != 0 || tappedTwice) {
                             _forward(context, _);
                             tappedOnce(_, true);
