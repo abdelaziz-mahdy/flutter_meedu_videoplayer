@@ -439,13 +439,21 @@ class _ControlsContainerState extends State<ControlsContainer> {
         _.controls = !_.showControls.value;
         _dragInitialDelta = Offset.zero;
       },
-      onHorizontalDragUpdate: widget.preventHorizontalDrag
-          ? null
-          : (DragUpdateDetails details) {
-              if (_.mobileControls && _.enabledControls.seekSwipes) {
-                //if (!_.videoPlayerController!.value.isInitialized) {
-                //return;
-                //}
+      onLongPressStart: (_.mobileControls&&_.enabledControls.onLongPressSpeedUp)
+          ? (details) {
+              _.setPlaybackSpeed(2);
+            }
+          : null,
+      onLongPressEnd: (_.mobileControls&&_.enabledControls.onLongPressSpeedUp)
+          ? (details) {
+              _.setPlaybackSpeed(1);
+            }
+          : null,
+      onHorizontalDragUpdate: (DragUpdateDetails details) {
+        if (_.mobileControls && _.enabledControls.seekSwipes) {
+          //if (!_.videoPlayerController!.value.isInitialized) {
+          //return;
+          //}
 
                 //_.controls=true;
                 final Offset position = details.localPosition;

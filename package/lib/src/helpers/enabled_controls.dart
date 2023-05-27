@@ -13,6 +13,9 @@ class EnabledControls {
   /// on mobile, double tap on sides to seek forward or backwards
   final bool doubleTapToSeek;
 
+  /// on mobile, long press to speed up video and slows down when long press finishes.
+  final bool onLongPressSpeedUp;
+
   /// on desktop, double clicks with mouse go fullScreen or close it
   final bool desktopDoubleTapToFullScreen;
 
@@ -49,7 +52,9 @@ class EnabledControls {
       this.volumeSwipes = true,
       this.brightnessSwipes = true,
       this.doubleTapToSeek = true,
-      this.desktopDoubleTapToFullScreen = true});
+      this.desktopDoubleTapToFullScreen = true,
+      this.onLongPressSpeedUp=false
+      });
 
   EnabledControls copyWith({
     bool? desktopTapToPlayAndPause,
@@ -64,6 +69,7 @@ class EnabledControls {
     bool? numPadDecimalKeyToggleFit,
     bool? enterKeyOpensFullScreen,
     bool? spaceKeyTogglePlay,
+    bool? onLongPressSpeedUp
   }) {
     return EnabledControls(
       desktopTapToPlayAndPause:
@@ -83,6 +89,7 @@ class EnabledControls {
       enterKeyOpensFullScreen:
           enterKeyOpensFullScreen ?? this.enterKeyOpensFullScreen,
       spaceKeyTogglePlay: spaceKeyTogglePlay ?? this.spaceKeyTogglePlay,
+      onLongPressSpeedUp: onLongPressSpeedUp ?? this.onLongPressSpeedUp
     );
   }
 }

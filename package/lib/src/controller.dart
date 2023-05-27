@@ -85,7 +85,7 @@ class MeeduPlayerController {
   Rx<bool> bufferingVideoDuration = false.obs;
 
   Rx<bool> videoFitChanged = false.obs;
-  final Rx<BoxFit> _videoFit = Rx(BoxFit.fill);
+  final Rx<BoxFit> _videoFit;
   //Rx<double> scale = 1.0.obs;
   Rx<bool> rewindIcons = false.obs;
   Rx<bool> forwardIcons = false.obs;
@@ -288,7 +288,8 @@ class MeeduPlayerController {
     Responsive? responsive,
     this.durations = const Durations(),
     this.onVideoPlayerClosed,
-  }) {
+    BoxFit? initialFit,
+  }) : _videoFit = Rx(initialFit ?? BoxFit.fill) {
     if (responsive != null) {
       this.responsive = responsive;
     }
@@ -296,7 +297,10 @@ class MeeduPlayerController {
     if (!manageBrightness) {
       enabledControls = enabledControls.copyWith(brightnessSwipes: false);
     }
-    getUserPreferenceForFit();
+
+    if (initialFit == null) {
+      getUserPreferenceForFit();
+    }
 
     _errorText = errorText;
     tag = DateTime.now().microsecondsSinceEpoch.toString();
