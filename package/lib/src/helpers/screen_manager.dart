@@ -1,6 +1,7 @@
 import 'package:auto_orientation/auto_orientation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:universal_platform/universal_platform.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
 
@@ -32,8 +33,9 @@ class ScreenManager {
     await SystemChrome.setPreferredOrientations(orientations);
     await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: overlays);
-
-    // AutoOrientation.portraitAutoMode();
+    if (UniversalPlatform.isIOS) {
+      AutoOrientation.portraitAutoMode();
+    }
   }
 
   Future<void> setWindowsFullScreen(bool state, MeeduPlayerController _) async {

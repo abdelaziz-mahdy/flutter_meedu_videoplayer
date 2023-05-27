@@ -20,10 +20,9 @@ class _MeeduPlayerFullscreenPageState extends State<MeeduPlayerFullscreenPage> {
         if (widget.controller.isInPipMode.value) {
           widget.controller.closePip(context);
 
-          return true;
+          return false;
         }
-        // print("NO");
-        return false;
+        return true;
       },
       child: Scaffold(
         backgroundColor: Colors.black,
