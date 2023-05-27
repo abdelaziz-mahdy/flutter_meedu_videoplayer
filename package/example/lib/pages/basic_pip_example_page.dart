@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:universal_platform/universal_platform.dart';
 
-class BasicExamplePage extends StatefulWidget {
-  const BasicExamplePage({Key? key}) : super(key: key);
+class BasicPipExamplePage extends StatefulWidget {
+  const BasicPipExamplePage({Key? key}) : super(key: key);
 
   @override
-  State<BasicExamplePage> createState() => _BasicExamplePageState();
+  State<BasicPipExamplePage> createState() => _BasicPipExamplePageState();
 }
 
-class _BasicExamplePageState extends State<BasicExamplePage> {
+class _BasicPipExamplePageState extends State<BasicPipExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.primary,
-    // enabledButtons: const EnabledButtons(pip: true),
+    enabledButtons: const EnabledButtons(pip: true),
     // enabledControls: const EnabledControls(doubleTapToSeek: false),
-    // pipEnabled: true,
+    pipEnabled: true,
     // header: header
   );
 

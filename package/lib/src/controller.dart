@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu_videoplayer/src/helpers/desktop_pip_bk.dart';
 import 'package:flutter_meedu_videoplayer/src/native/pip_manager.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:screen_brightness/screen_brightness.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:volume_controller/volume_controller.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:universal_platform/universal_platform.dart';
+import 'package:window_manager/window_manager.dart';
 
 /// An enumeration of the different styles that can be applied to controls, such
 /// as buttons and icons and layouts.
@@ -223,6 +226,9 @@ class MeeduPlayerController {
 
   SharedPreferences? prefs;
 
+  DesktopPipBk? _desktopPipBk;
+  Size? _screenSizeBk;
+
   // returns the os version
   Future<double> get osVersion async {
     return _pipManager.osVersion;
@@ -341,15 +347,18 @@ class MeeduPlayerController {
       },
     );
 
-    if (pipEnabled && UniversalPlatform.isAndroid) {
-      // get the OS version and check if pip is available
-      _pipManager.checkPipAvailable().then(
-            (value) => _pipAvailable.value = value,
-          );
-      // listen the pip mode changes
-      _pipModeWorker = _pipManager.isInPipMode.ever(_onPipModeChanged);
-    } else {
-      _pipAvailable.value = false;
+    _pipAvailable.value = false;
+    if (pipEnabled) {
+      if (UniversalPlatform.isAndroid) {
+        // get the OS version and check if pip is available
+        _pipManager.checkPipAvailable().then(
+              (value) => _pipAvailable.value = value,
+            );
+        // listen the pip mode changes
+        _pipModeWorker = _pipManager.isInPipMode.ever(_onPipModeChanged);
+      } else if (UniversalPlatform.isDesktop) {
+        _pipAvailable.value = true;
+      }
     }
   }
 
@@ -770,12 +779,23 @@ class MeeduPlayerController {
         screenManager.setWebFullScreen(true, this);
       } else {
         if (desktopOrWeb) {
+          if (!isInPipMode.value) {
+            _screenSizeBk = await windowManager.getSize();
+          }
           screenManager.setWindowsFullScreen(true, this);
         } else {
           screenManager.setFullScreenOverlaysAndOrientations();
         }
       }
     }
+    setVideoAsAppFullScreen(context,
+        applyOverlaysAndOrientations: applyOverlaysAndOrientations,
+        disposePlayer: disposePlayer);
+  }
+
+  Future<void> setVideoAsAppFullScreen(BuildContext context,
+      {bool applyOverlaysAndOrientations = true,
+      bool disposePlayer = false}) async {
     _fullscreen.value = true;
 
     final route = PageRouteBuilder(
@@ -789,7 +809,7 @@ class MeeduPlayerController {
       },
     );
 
-    await Navigator.push(context, route);
+    await Navigator.of(context).push(route);
   }
 
   /// launch a video using the fullscreen apge
@@ -977,7 +997,7 @@ class MeeduPlayerController {
   void _onPipModeChanged(bool isInPipMode) {
     // if the pip mode was closed and before enter to pip mode the player was not in fullscreen
     if (!isInPipMode && _pipContextToFullscreen != null) {
-      Navigator.pop(_pipContextToFullscreen!); // close the fullscreen
+      Navigator.maybePop(_pipContextToFullscreen!); // close the fullscreen
       _pipContextToFullscreen = null;
     }
   }*/
@@ -1029,19 +1049,70 @@ class MeeduPlayerController {
     });
   }
 
+  double getAspectRatio() {
+    if (_videoPlayerController == null) {
+      return 16 / 9;
+    }
+
+    return _videoPlayerController!.value.size.width /
+        _videoPlayerController!.value.size.height;
+  }
+
   /// enter to picture in picture mode only Android
   ///
   /// only available since Android 7
   Future<void> enterPip(BuildContext context) async {
     if (pipAvailable.value && pipEnabled) {
-      controls = false; // hide the controls
-      if (!fullscreen.value) {
-        // if the player is not in the fullscreen mode
-        _pipContextToFullscreen = context;
-        goToFullscreen(context, applyOverlaysAndOrientations: false);
+      if (UniversalPlatform.isAndroid) {
+        await _enterPipAndroid(context);
+      } else if (UniversalPlatform.isDesktop) {
+        await _enterPipDesktop(context);
       }
-      await _pipManager.enterPip();
     }
+  }
+
+  Future<void> _enterPipAndroid(BuildContext context) async {
+    controls = false; // hide the controls
+    if (!fullscreen.value) {
+      // if the player is not in the fullscreen mode
+      _pipContextToFullscreen = context;
+      goToFullscreen(context, applyOverlaysAndOrientations: false);
+    }
+    await _pipManager.enterPip();
+  }
+
+  Future<void> _enterPipDesktop(BuildContext context) async {
+    if (_videoPlayerController == null) return;
+    if (!fullscreen.value) {
+      setVideoAsAppFullScreen(context);
+    }
+    double minH = max(MediaQuery.of(context).size.height * 0.15, 200);
+    double defaultH = max(MediaQuery.of(context).size.height * 0.30, 400);
+
+    double aspectRatio = getAspectRatio();
+    _desktopPipBk = DesktopPipBk(
+      isFullScreen: await windowManager.isFullScreen(),
+      size: await windowManager.isFullScreen()
+          ? (_screenSizeBk ??
+              Size(
+                MediaQuery.of(context).size.width / 2,
+                MediaQuery.of(context).size.height / 2,
+              ))
+          : await windowManager.getSize(),
+    );
+
+    await onFullscreenClose();
+    // ignore: use_build_context_synchronously
+
+    await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
+    await windowManager.center(animate: true);
+    await windowManager.setAlwaysOnTop(true);
+    await windowManager.setMinimumSize(Size(minH * (aspectRatio), minH));
+    await windowManager.setSize(Size(defaultH * (aspectRatio), defaultH));
+    // await windowManager.setAsFrameless();
+    await windowManager.setAspectRatio(aspectRatio);
+    // windowManager.setSkipTaskbar(true);
+    _pipManager.isInPipMode.value = true;
   }
 
   /// listener for pip changes
@@ -1051,6 +1122,38 @@ class MeeduPlayerController {
       Navigator.pop(_pipContextToFullscreen!); // close the fullscreen
       _pipContextToFullscreen = null;
     }
+  }
+
+  void closePip(BuildContext context) {
+    if (_pipManager.isInPipMode.value == true) {
+      if (UniversalPlatform.isDesktop) {
+        if (!_desktopPipBk!.isFullScreen) {
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).pop();
+        }
+
+        _closePipDesktop(context);
+      }
+    }
+  }
+
+  Future<void> _closePipDesktop(BuildContext context) async {
+    double defaultSizeHeight =
+        max(MediaQuery.of(context).size.height * 0.30, 300);
+    double defaultSizeWidth =
+        max(MediaQuery.of(context).size.width * 0.30, 500);
+
+    await windowManager.setTitleBarStyle(TitleBarStyle.normal);
+    await windowManager.setAlwaysOnTop(false);
+    await windowManager.setAspectRatio(0);
+    // // windowManager.setSkipTaskbar(false);
+    await windowManager.setSize(_desktopPipBk!.size);
+    await windowManager
+        .setMinimumSize(Size(defaultSizeWidth, defaultSizeHeight));
+    if (_desktopPipBk!.isFullScreen) {
+      screenManager.setWindowsFullScreen(true, this);
+    }
+    _pipManager.isInPipMode.value = false;
   }
 
   static MeeduPlayerController of(BuildContext context) {

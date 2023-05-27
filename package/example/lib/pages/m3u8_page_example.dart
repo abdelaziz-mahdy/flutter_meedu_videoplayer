@@ -216,7 +216,11 @@ class M3u8ExamplePage extends StatefulWidget {
 class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
   final _controller = MeeduPlayerController(
       screenManager: const ScreenManager(forceLandScapeInFullscreen: false),
-      enabledButtons: const EnabledButtons(rewindAndfastForward: false),
+      enabledButtons: const EnabledButtons(
+        rewindAndfastForward: false,
+        pip: true,
+      ),
+      pipEnabled: true,
       responsive: Responsive(buttonsSizeRelativeToScreen: 3));
   String fileName = "";
   List<Quality> _qualities = [];
@@ -313,13 +317,13 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
               onPressed: () {
                 _quality.value = quality; // change the video quality
                 _setDataSource(); // update the datasource
-                Navigator.pop(_);
+                Navigator.maybePop(_);
               },
             );
           },
         ),
         cancelButton: CupertinoActionSheetAction(
-          onPressed: () => Navigator.pop(_),
+          onPressed: () => Navigator.maybePop(_),
           isDestructiveAction: true,
           child: const Text("Cancel"),
         ),
@@ -348,7 +352,7 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
             ),
             onPressed: () {
               // close the fullscreen
-              Navigator.pop(context);
+              Navigator.maybePop(context);
             },
           ),
           Expanded(

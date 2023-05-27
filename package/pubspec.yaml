@@ -25,7 +25,7 @@ dependencies:
     # path: ../../video_player_media_kit
 
 
-  window_manager: ^0.3.0
+  window_manager: ^0.3.2
   wakelock: ^0.6.1+2
   shared_preferences: ^2.0.13
   path_provider: ^2.0.6
@@ -83,6 +83,7 @@ flutter:
     - assets/icons/rewind.png
     - assets/icons/sound.png
     - assets/icons/picture-in-picture.png
+    - assets/icons/exit_picture-in-picture.png
     - assets/icons/fit.png
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

@@ -56,7 +56,7 @@ class _PickFileExamplePageState extends State<PickFileExamplePage> {
             ),
             onPressed: () {
               // close the fullscreen
-              Navigator.pop(context);
+              Navigator.maybePop(context);
             },
           ),
           Expanded(
