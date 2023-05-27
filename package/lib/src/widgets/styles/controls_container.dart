@@ -604,7 +604,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
                     _.showControls.value ? Colors.black26 : Colors.transparent,
                 child: Stack(
                   children: [
-                    if (_.enabledControls.doubleTapToSeek && (_.mobileControls))
+                    if (_.enabledControls.doubleTapToSeek && (_.mobileControls && !_.lockedControls.value))
                       Positioned.fill(
                         bottom: widget.responsive.height * 0.20,
                         top: widget.responsive.height * 0.20,
