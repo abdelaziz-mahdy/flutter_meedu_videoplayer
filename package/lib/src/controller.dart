@@ -15,6 +15,12 @@ import 'package:universal_platform/universal_platform.dart';
 /// as buttons and icons and layouts.
 enum ControlsStyle {
   primary,
+
+  /// When a video is inserted into a scrollable list, the scroll functionality
+  /// is disabled due to the drag event.
+  /// To address this, I added a style to the default controller to allow scrolling.
+  /// prevent drag event for scrollable list
+  primaryList,
   secondary,
 
   /// The custom style is used to apply a custom style which you can provide in MeeduPlayerController.
