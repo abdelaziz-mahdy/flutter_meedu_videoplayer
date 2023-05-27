@@ -8,10 +8,16 @@ import 'package:window_manager/window_manager.dart';
 class ControlsContainer extends StatefulWidget {
   final Widget child;
   final Responsive responsive;
+  final bool preventVerticalDrag;
+  final bool preventHorizontalDrag;
   //Duration swipeDuration=Duration(seconds: 0);
-  const ControlsContainer(
-      {Key? key, required this.child, required this.responsive})
-      : super(key: key);
+  const ControlsContainer({
+    Key? key,
+    required this.child,
+    required this.responsive,
+    this.preventHorizontalDrag = false,
+    this.preventVerticalDrag = false,
+  }) : super(key: key);
 
   @override
   State<ControlsContainer> createState() => _ControlsContainerState();
@@ -444,7 +450,17 @@ class _ControlsContainerState extends State<ControlsContainer> {
         _.controls = !_.showControls.value;
         _dragInitialDelta = Offset.zero;
       },
-      onHorizontalDragUpdate: !_.mobileControls
+      onLongPressStart: (_.mobileControls&&_.enabledControls.onLongPressSpeedUp)
+          ? (details) {
+              _.setPlaybackSpeed(2);
+            }
+          : null,
+      onLongPressEnd: (_.mobileControls&&_.enabledControls.onLongPressSpeedUp)
+          ? (details) {
+              _.setPlaybackSpeed(1);
+            }
+          : null,
+      onHorizontalDragUpdate: (!_.mobileControls||widget.preventHorizontalDrag)
           ? null
           : (DragUpdateDetails details) {
               if (_.enabledControls.seekSwipes) {
@@ -472,10 +488,30 @@ class _ControlsContainerState extends State<ControlsContainer> {
                   _forwardDragUpdate(position, _);
                 }
               }
+                //_.controls=true;
+                final Offset position = details.localPosition;
+                if (_dragInitialDelta == Offset.zero) {
+                  final Offset delta = details.delta;
+                  if (details.localPosition.dx >
+                          widget.responsive.width * 0.1 &&
+                      ((widget.responsive.width - details.localPosition.dx) >
+                              widget.responsive.width * 0.1 &&
+                          !gettingNotification)) {
+                    _forwardDragStart(position, _);
+                    _dragInitialDelta = delta;
+                  } else {
+                    _.customDebugPrint("##############out###############");
+                    gettingNotification = true;
+                  }
+                }
+                if (!gettingNotification) {
+                  _forwardDragUpdate(position, _);
+                }
+              }
 
               //_.videoPlayerController!.seekTo(position);
             },
-      onHorizontalDragEnd: !_.mobileControls
+      onHorizontalDragEnd:(!_.mobileControls||widget.preventHorizontalDrag)
           ? null
           : (DragEndDetails details) {
               if (_.enabledControls.seekSwipes) {
@@ -486,7 +522,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
                 _forwardDragEnd(_);
               }
             },
-      onVerticalDragUpdate: !_.mobileControls
+      onVerticalDragUpdate: (!_.mobileControls||widget.preventVerticalDrag)
           ? null
           : (DragUpdateDetails details) {
               //if (!_.videoPlayerController!.value.isInitialized) {
@@ -537,7 +573,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
               //_.videoPlayerController!.seekTo(position);
             },
-      onVerticalDragEnd: !_.mobileControls
+      onVerticalDragEnd: (!_.mobileControls||widget.preventVerticalDrag)
           ? null
           : (DragEndDetails details) {
               //if (!_.videoPlayerController!.value.isInitialized) {
