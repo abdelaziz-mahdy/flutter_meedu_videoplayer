@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_meedu/meedu.dart';
 
 class PipManager {
-  final _channel = const MethodChannel("com.zezo357.flutter_meedu_videoplayer");
+  final _channel = const MethodChannel("com.zezo357.flutter_meedu_media_kit");
 
   final Completer<double> _osVersion = Completer();
   final Completer<bool> _pipAvailable = Completer();

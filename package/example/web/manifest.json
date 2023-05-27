@@ -1,11 +1,11 @@
 {
-    "name": "flutter_meedu_videoplayer_example",
-    "short_name": "flutter_meedu_videoplayer_example",
+    "name": "flutter_meedu_media_kit_example",
+    "short_name": "flutter_meedu_media_kit_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Demonstrates how to use the flutter_meedu_videoplayer plugin.",
+    "description": "Demonstrates how to use the flutter_meedu_media_kit plugin.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

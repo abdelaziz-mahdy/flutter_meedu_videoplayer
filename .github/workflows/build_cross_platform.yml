@@ -1,12 +1,12 @@
 name: Build_cross_platform
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'package/**'
       - '!package/README.md'
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'package/**'
       - '!package/README.md'
@@ -33,19 +33,19 @@ jobs:
       - run: flutter build apk --verbose
   
     
-  web:
-    name: Web
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: "true"
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: "stable"
-          cache: true
-      - run: flutter pub get
-      - run: flutter build web --verbose
+  # web:
+  #   name: Web
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         submodules: "true"
+  #     - uses: subosito/flutter-action@v2
+  #       with:
+  #         channel: "stable"
+  #         cache: true
+  #     - run: flutter pub get
+  #     - run: flutter build web --verbose
   windows:
     name: Windows
     runs-on: windows-latest

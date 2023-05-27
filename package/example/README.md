@@ -1,6 +1,6 @@
-# flutter_meedu_videoplayer_example
+# flutter_meedu_media_kit_example
 
-Demonstrates how to use the flutter_meedu_videoplayer plugin.
+Demonstrates how to use the flutter_meedu_media_kit plugin.
 
 ## Getting Started
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu_videoplayer/src/helpers/responsive.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/rewind_and_forward_layout.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/ripple_side.dart';
-import 'package:flutter_meedu_videoplayer/src/widgets/transitions.dart';
+import 'package:flutter_meedu_media_kit/src/helpers/responsive.dart';
+import 'package:flutter_meedu_media_kit/src/widgets/rewind_and_forward_layout.dart';
+import 'package:flutter_meedu_media_kit/src/widgets/ripple_side.dart';
+import 'package:flutter_meedu_media_kit/src/widgets/transitions.dart';
 
 class VideoCoreForwardAndRewind extends StatelessWidget {
   const VideoCoreForwardAndRewind(

@@ -1,5 +1,5 @@
-name: flutter_meedu_videoplayer_example
-description: Demonstrates how to use the flutter_meedu_videoplayer plugin.
+name: flutter_meedu_media_kit_example
+description: Demonstrates how to use the flutter_meedu_media_kit plugin.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -18,9 +18,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_meedu_videoplayer:
+  flutter_meedu_media_kit:
     # When depending on this package from a real application you should use:
-    #   flutter_meedu_videoplayer: ^x.y.z
+    #   flutter_meedu_media_kit: ^x.y.z
     # See https://dart.dev/tools/pub/dependencies#version-constraints
     # The example app is bundled with the plugin so we use a path dependency on
     # the parent directory to use the current plugin's version.

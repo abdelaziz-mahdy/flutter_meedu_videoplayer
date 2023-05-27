@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:flutter_meedu_media_kit/meedu_player.dart';
 
 class ControlsContainer extends StatefulWidget {
   final Widget child;
@@ -433,12 +433,13 @@ class _ControlsContainerState extends State<ControlsContainer> {
         _.controls = !_.showControls.value;
         _dragInitialDelta = Offset.zero;
       },
-      onLongPressStart: (_.mobileControls&&_.enabledControls.onLongPressSpeedUp)
-          ? (details) {
-              _.setPlaybackSpeed(2);
-            }
-          : null,
-      onLongPressEnd: (_.mobileControls&&_.enabledControls.onLongPressSpeedUp)
+      onLongPressStart:
+          (_.mobileControls && _.enabledControls.onLongPressSpeedUp)
+              ? (details) {
+                  _.setPlaybackSpeed(2);
+                }
+              : null,
+      onLongPressEnd: (_.mobileControls && _.enabledControls.onLongPressSpeedUp)
           ? (details) {
               _.setPlaybackSpeed(1);
             }
