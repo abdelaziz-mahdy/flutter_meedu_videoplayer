@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:flutter_meedu_videoplayer/src/widgets/lock_button.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class SecondaryBottomControls extends StatelessWidget {
   final Responsive responsive;
@@ -81,6 +83,9 @@ class SecondaryBottomControls extends StatelessWidget {
                     const SizedBox(width: 10)
                   ],
                   if (_.enabledButtons.pip) PipButton(responsive: responsive),
+                  if (!UniversalPlatform.isDesktopOrWeb &&
+                      _.enabledButtons.lockControls)
+                    LockButton(responsive: responsive),
                   if (_.enabledButtons.videoFit)
                     VideoFitButton(responsive: responsive),
                   if (_.enabledButtons.muteAndSound)

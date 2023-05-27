@@ -6,7 +6,8 @@ class EnabledButtons {
       muteAndSound,
       pip,
       fullscreen,
-      playBackSpeed;
+      playBackSpeed,
+      lockControls;
 
   const EnabledButtons({
     this.playPauseAndRepeat = true,
@@ -16,5 +17,6 @@ class EnabledButtons {
     this.pip = true,
     this.fullscreen = true,
     this.playBackSpeed = true,
+    this.lockControls=false
   });
 }

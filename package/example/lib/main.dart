@@ -4,6 +4,7 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/auto_fullscreen_on_rotation.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_with_looping_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/basic_lock_controls_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_pip_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/change_quality_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_controls.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "basic": (_) => const BasicExamplePage(),
         "basic_pip": (_) => const BasicPipExamplePage(),
+        "basic_lock": (_) => const BasicLockControlsExamplePage(),
         "basic_with_looping": (_) => const BasicExampleWithLoopingPage(),
         "only_gestures": (_) => const OnlyGesturesExamplePage(),
         "secondary_controls": (_) => const SecondaryExamplePage(),
@@ -114,6 +116,12 @@ class _HomePageState extends State<HomePage> {
                       routeName: 'basic_pip',
                       description:
                           'An example of how to load a video from a network source.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Basic lock Network example',
+                      routeName: 'basic_lock',
+                      description: 'An example of which you can lock controls.',
                     ),
                     buildButton(
                       context,

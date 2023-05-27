@@ -203,6 +203,9 @@ class MeeduPlayerController {
   /// for defining that video player needs mobile controls (even if its running on a web on a mobile device)
   bool mobileControls = false;
 
+  /// for defining that video player locked controls
+  final Rx<bool> _lockedControls = false.obs;
+
   /// controls if widgets inside videoplayer should get focus or not
   final bool excludeFocus;
 
@@ -239,6 +242,9 @@ class MeeduPlayerController {
 
   /// return fit of the Video,By default it is set to [BoxFit.contain]
   Rx<BoxFit> get videoFit => _videoFit;
+
+  /// returns true if the pip mode can used on the current device, the initial value will be false after check if pip is available
+  Rx<bool> get lockedControls => _lockedControls;
 
   /// A utility class that helps make the UI responsive by defining the size of
   /// icons, buttons, and text relative to the screen size.
@@ -743,6 +749,10 @@ class MeeduPlayerController {
 
   /// show or hide the player controls
   set controls(bool visible) {
+    // if (!UniversalPlatform.isDesktopOrWeb && visible && lockedControls.value) {
+    //   return;
+    // }
+
     // customDebugPrint("controls called with value $visible");
     if (fullscreen.value) {
       //customDebugPrint("Closed");
@@ -753,6 +763,12 @@ class MeeduPlayerController {
     _timer?.cancel();
     if (visible) {
       _hideTaskControls();
+    }
+  }
+
+  void toggleLockScreenMobile() {
+    if (!UniversalPlatform.isDesktopOrWeb) {
+      _lockedControls.value = !_lockedControls.value;
     }
   }
 

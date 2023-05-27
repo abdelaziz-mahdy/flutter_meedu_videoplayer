@@ -13,7 +13,9 @@ class CustomIcons {
       pip,
       exitPip,
       minimize,
-      fullscreen;
+      fullscreen,
+      lock,
+      unlock;
 
   const CustomIcons({
     this.play,
@@ -28,5 +30,7 @@ class CustomIcons {
     this.exitPip,
     this.minimize,
     this.fullscreen,
+    this.lock,
+    this.unlock,
   });
 }
