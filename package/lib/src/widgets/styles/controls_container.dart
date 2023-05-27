@@ -479,6 +479,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
           _.customDebugPrint("##############out###############");
           gettingNotification = true;
         }
+      } else {
         if (!gettingNotification) {
           _forwardDragUpdate(position, _);
         }
