@@ -313,7 +313,10 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
           (index) {
             final quality = _qualities[index];
             return CupertinoActionSheetAction(
-              child: Text(quality.label),
+              child: Text(
+                quality.label,
+                style: TextStyle(fontSize: _controller.responsive.fontSize()),
+              ),
               onPressed: () {
                 _quality.value = quality; // change the video quality
                 _setDataSource(); // update the datasource
@@ -334,7 +337,7 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
   _playM3u8Video(String url) async {
     await getStreamUrls(url);
     if (_qualities.isEmpty) {
-      throw Exception("No videos available");
+      throw Exception("No videos");
     }
     _quality.value = _qualities[0];
     _setDataSource();
@@ -443,9 +446,7 @@ class _M3u8ExamplePageState extends State<M3u8ExamplePage> {
                         valueListenable: _quality,
                         builder: (context, Quality? quality, child) {
                           return Text(
-                            quality != null
-                                ? quality.label
-                                : "No qualities loaded ",
+                            quality != null ? quality.label : "No qualities",
                             style: TextStyle(
                               fontSize: fontSize > 18 ? 18 : fontSize,
                               color: Colors.white,
