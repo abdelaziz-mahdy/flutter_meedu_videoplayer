@@ -1,3 +1,8 @@
+## 4.2.11-dev-3
+* updates to `video_player_media_kit 0.0.13`
+* Fixes media_kit not being caught
+* Improves media_kit logs 
+
 ## 4.2.11-dev-2
 * Fixes ios orientation
 * Fixes back button not working
