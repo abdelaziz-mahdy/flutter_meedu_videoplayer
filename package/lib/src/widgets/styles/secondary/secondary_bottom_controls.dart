@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_media_kit/meedu_player.dart';
+import 'package:flutter_meedu_media_kit/src/widgets/lock_button.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class SecondaryBottomControls extends StatelessWidget {
   final Responsive responsive;

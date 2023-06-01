@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu_media_kit/src/helpers/desktop_pip_bk.dart';
 import 'package:flutter_meedu_media_kit/src/native/pip_manager.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:screen_brightness/screen_brightness.dart';
@@ -1110,12 +1111,12 @@ class MeeduPlayerController {
   }
 
   double getAspectRatio() {
-    if (_videoPlayerController == null) {
+    if (_videoPlayerController == null && _videoPlayerController!.state.width !=null&& _videoPlayerController!.state.height !=null) {
       return 16 / 9;
     }
 
-    return _videoPlayerController!.value.size.width /
-        _videoPlayerController!.value.size.height;
+    return _videoPlayerController!.state.width! /
+        _videoPlayerController!.state.height!;
   }
 
   /// enter to picture in picture mode only Android

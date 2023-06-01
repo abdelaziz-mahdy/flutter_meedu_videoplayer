@@ -1,4 +1,4 @@
-import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:flutter_meedu_media_kit/meedu_player.dart';
 
 class CustomCallbacks {
   /// Callback for mobile: Triggered when a long press starts, typically used for speeding up the video.
