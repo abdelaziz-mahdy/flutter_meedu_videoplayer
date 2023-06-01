@@ -132,7 +132,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.2.10+1"
+    version: "4.2.11-dev-3"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -243,18 +243,18 @@ packages:
     dependency: transitive
     description:
       name: media_kit
-      sha256: "07df87b1acbed111246520206185d596560e6b8ed754677aa2e77fa2710a17ee"
+      sha256: "67cb78a254a2559f2d4d4a71748817967e3d8a5512071f4e6f63a1a8b8a50ca7"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.8"
+    version: "0.0.9+1"
   media_kit_libs_android_video:
     dependency: transitive
     description:
       name: media_kit_libs_android_video
-      sha256: ca84730fb6486f6cf9dff6966394dae7ec16a4d29d3b95193e15a23a7652e374
+      sha256: df98da77eb6ec3473cf627abc68702f9be5a47fd788de7fb4c70863ee82789c5
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.4"
+    version: "1.0.5"
   media_kit_libs_ios_video:
     dependency: transitive
     description:
@@ -299,10 +299,10 @@ packages:
     dependency: transitive
     description:
       name: media_kit_video
-      sha256: fc2baeac6f47cfbafdf4a8575cccdb5a2d021df9b68366c639639ccd44fb99d6
+      sha256: "89d3c2cdb0f74d1bb597a9c9a7678f656fe538d20620ad1317b7354fd5d1af15"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.10"
+    version: "0.0.12"
   meedu:
     dependency: transitive
     description:
