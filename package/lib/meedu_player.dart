@@ -12,6 +12,8 @@ export 'src/helpers/custom_icons.dart';
 export 'src/helpers/enabled_buttons.dart';
 export 'src/helpers/enabled_controls.dart';
 export 'src/helpers/enabled_overlays.dart';
+export 'src/helpers/custom_callbacks.dart';
+
 export 'src/helpers/durations.dart';
 export 'src/helpers/utils.dart';
 export 'package:media_kit/media_kit.dart';

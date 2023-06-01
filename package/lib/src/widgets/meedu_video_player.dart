@@ -46,13 +46,26 @@ class MeeduVideoPlayer extends StatefulWidget {
     Responsive responsive,
   )? customControls;
 
+  /// The distance from the bottom of the screen to the closed captions text.
+  ///
+  /// This value represents the vertical position of the closed captions display
+  /// from the bottom of the screen. It is measured in logical pixels and can be
+  /// used to adjust the positioning of the closed captions within the video player
+  /// UI. A higher value will move the closed captions higher on the screen, while
+  /// a lower value will move them closer to the bottom.
+  ///
+  /// By adjusting this distance, you can ensure that the closed captions are
+  /// displayed at an optimal position that doesn't obstruct other important
+  /// elements of the video player interface.
+  final double closedCaptionDistanceFromBottom;
   const MeeduVideoPlayer(
       {Key? key,
       required this.controller,
       this.header,
       this.bottomRight,
       this.customIcons,
-      this.customControls})
+      this.customControls,
+      this.closedCaptionDistanceFromBottom = 40})
       : super(key: key);
 
   @override
@@ -168,6 +181,11 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                         if (_.controlsEnabled &&
                             _.controlsStyle == ControlsStyle.primary)
                           PrimaryVideoPlayerControls(
+                            responsive: _.responsive,
+                          ),
+                        if (_.controlsEnabled &&
+                            _.controlsStyle == ControlsStyle.primaryList)
+                          PrimaryListVideoPlayerControls(
                             responsive: _.responsive,
                           ),
                         if (_.controlsEnabled &&

@@ -81,6 +81,9 @@ class SecondaryBottomControls extends StatelessWidget {
                     const SizedBox(width: 10)
                   ],
                   if (_.enabledButtons.pip) PipButton(responsive: responsive),
+                  if (!UniversalPlatform.isDesktopOrWeb &&
+                      _.enabledButtons.lockControls)
+                    LockButton(responsive: responsive),
                   if (_.enabledButtons.videoFit)
                     VideoFitButton(responsive: responsive),
                   if (_.enabledButtons.muteAndSound)

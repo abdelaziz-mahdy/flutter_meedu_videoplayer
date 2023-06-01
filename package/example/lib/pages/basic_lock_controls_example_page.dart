@@ -2,19 +2,22 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu_media_kit/meedu_player.dart';
+import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:universal_platform/universal_platform.dart';
 
-class BasicExamplePage extends StatefulWidget {
-  const BasicExamplePage({Key? key}) : super(key: key);
+class BasicLockControlsExamplePage extends StatefulWidget {
+  const BasicLockControlsExamplePage({Key? key}) : super(key: key);
 
   @override
-  State<BasicExamplePage> createState() => _BasicExamplePageState();
+  State<BasicLockControlsExamplePage> createState() =>
+      _BasicLockControlsExamplePageState();
 }
 
-class _BasicExamplePageState extends State<BasicExamplePage> {
+class _BasicLockControlsExamplePageState
+    extends State<BasicLockControlsExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.primary,
-    // enabledButtons: const EnabledButtons(pip: true),
+    enabledButtons: const EnabledButtons(lockControls: true),
     // enabledControls: const EnabledControls(doubleTapToSeek: false),
     // pipEnabled: true,
     // header: header

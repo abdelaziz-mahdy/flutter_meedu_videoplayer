@@ -32,8 +32,9 @@ class ScreenManager {
     await SystemChrome.setPreferredOrientations(orientations);
     await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: overlays);
-
-    // AutoOrientation.portraitAutoMode();
+    if (UniversalPlatform.isIOS) {
+      AutoOrientation.portraitAutoMode();
+    }
   }
 
   Future<void> setWindowsFullScreen(bool state, MeeduPlayerController _) async {

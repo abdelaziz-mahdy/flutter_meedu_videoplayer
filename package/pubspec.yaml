@@ -1,7 +1,7 @@
-name: flutter_meedu_media_kit
-description: a controls wrapper for media_kit.
-version: 4.2.10+1
-homepage: "https://github.com/zezo357/flutter_meedu_media_kit"
+name: flutter_meedu_videoplayer
+description: A cross Platform video player that uses video_player for android and ios and web, media_kit for windows and linux and macos.
+version: 4.2.11-dev-3
+homepage: "https://github.com/zezo357/flutter_meedu_videoplayer"
 environment:
   sdk: ">=2.16.2 <4.0.0"
   flutter: ">=2.5.0"
@@ -21,7 +21,9 @@ dependencies:
   universal_platform: ^1.0.0+1
   fullscreen_window: ^1.0.4
 
-  window_manager: ^0.3.0
+  window_manager: ^0.3.2
+  # window_manager: 
+  #   path: ../../window_manager
   wakelock: ^0.6.1+2
   shared_preferences: ^2.0.13
   # dio: ^5.0.0
@@ -91,6 +93,9 @@ flutter:
     - assets/icons/rewind.png
     - assets/icons/sound.png
     - assets/icons/picture-in-picture.png
+    - assets/icons/exit_picture-in-picture.png
+    - assets/icons/lock-screen.png
+    - assets/icons/exit_lock-screen.png
     - assets/icons/fit.png
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
