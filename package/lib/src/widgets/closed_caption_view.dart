@@ -4,7 +4,8 @@ import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 class ClosedCaptionView extends StatelessWidget {
   final Responsive responsive;
   final double distanceFromBottom;
-  const ClosedCaptionView({Key? key, required this.responsive,this.distanceFromBottom=30})
+  const ClosedCaptionView(
+      {Key? key, required this.responsive, this.distanceFromBottom = 30})
       : super(key: key);
 
   @override

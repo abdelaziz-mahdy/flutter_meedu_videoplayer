@@ -276,7 +276,7 @@ class MeeduPlayerController {
   /// Provides custom callback functions for specific player interactions.
   ///
   /// This class allows you to specify custom callback functions for player
-  /// interactions, such as long press events 
+  /// interactions, such as long press events
   final CustomCallbacks customCallbacks;
 
   /// creates an instance of [MeeduPlayerController]
