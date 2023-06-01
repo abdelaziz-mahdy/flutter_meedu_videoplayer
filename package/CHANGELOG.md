@@ -1,7 +1,9 @@
 ## 4.2.11-dev-3
-* updates to `video_player_media_kit 0.0.13`
-* Fixes media_kit not being caught
+* Updates to `video_player_media_kit 0.0.13`
+* Fixes media_kit errors not being caught
 * Improves media_kit logs 
+* MeeduVideoPlayer closedCaptionDistanceFromBottom to be able to set subtitles position
+* Custom callback for on long press start and end
 
 ## 4.2.11-dev-2
 * Fixes ios orientation

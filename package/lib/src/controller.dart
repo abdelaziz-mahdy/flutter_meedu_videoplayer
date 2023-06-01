@@ -257,12 +257,27 @@ class MeeduPlayerController {
   ///  this.buttonsSizeRelativeToScreen = 8,
   ///  this.maxButtonsSize = 40,
   ///});
-
   Responsive responsive = Responsive();
 
+  /// Defines the animation durations for various animations in a video.
+  ///
+  /// This class allows you to customize the duration of animations within the video player,
+  /// such as fade-in and fade-out durations, overlay show/hide animations, and more.
+  /// By modifying these durations, you can adjust the visual appearance and behavior
+  /// of the video player's animations according to your preferences.
   final Durations durations;
 
+  /// Controls the visibility of player overlays.
+  ///
+  /// Use this class to enable or disable the visibility of player overlays, such as
+  /// volume and brightness.
   final EnabledOverlays enabledOverlays;
+
+  /// Provides custom callback functions for specific player interactions.
+  ///
+  /// This class allows you to specify custom callback functions for player
+  /// interactions, such as long press events 
+  final CustomCallbacks customCallbacks;
 
   /// creates an instance of [MeeduPlayerController]
   ///
@@ -277,7 +292,6 @@ class MeeduPlayerController {
     this.controlsEnabled = true,
     this.manageWakeLock = true,
     this.manageBrightness = true,
-    //TODOOOOOOO:
     this.showLogs = true,
     this.excludeFocus = true,
     String? errorText,
@@ -297,6 +311,7 @@ class MeeduPlayerController {
     this.enabledButtons = const EnabledButtons(),
     this.enabledControls = const EnabledControls(),
     this.enabledOverlays = const EnabledOverlays(),
+    this.customCallbacks = const CustomCallbacks(),
     Responsive? responsive,
     this.durations = const Durations(),
     this.onVideoPlayerClosed,

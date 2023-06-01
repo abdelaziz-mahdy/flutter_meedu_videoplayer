@@ -577,13 +577,21 @@ class _ControlsContainerState extends State<ControlsContainer> {
         onLongPressStart:
             (_.mobileControls && _.enabledControls.onLongPressSpeedUp)
                 ? (details) {
-                    _.setPlaybackSpeed(2);
+                    if (_.customCallbacks.onLongPressStartedCallback != null) {
+                      _.customCallbacks.onLongPressStartedCallback!(_);
+                    } else {
+                      _.setPlaybackSpeed(2);
+                    }
                   }
                 : null,
         onLongPressEnd:
             (_.mobileControls && _.enabledControls.onLongPressSpeedUp)
                 ? (details) {
-                    _.setPlaybackSpeed(1);
+                    if (_.customCallbacks.onLongPressEndedCallback != null) {
+                      _.customCallbacks.onLongPressEndedCallback!(_);
+                    } else {
+                      _.setPlaybackSpeed(1);
+                    }
                   }
                 : null,
         onHorizontalDragUpdate:
