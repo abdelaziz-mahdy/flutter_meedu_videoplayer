@@ -4,6 +4,8 @@ import 'package:flutter_meedu_media_kit/meedu_player.dart';
 import 'package:flutter_meedu_media_kit_example/pages/auto_fullscreen_on_rotation.dart';
 import 'package:flutter_meedu_media_kit_example/pages/basic_example_page.dart';
 import 'package:flutter_meedu_media_kit_example/pages/basic_example_with_looping_page.dart';
+import 'package:flutter_meedu_media_kit_example/pages/basic_lock_controls_example_page.dart';
+import 'package:flutter_meedu_media_kit_example/pages/basic_pip_example_page.dart';
 import 'package:flutter_meedu_media_kit_example/pages/change_quality_example_page.dart';
 import 'package:flutter_meedu_media_kit_example/pages/custom_controls.dart';
 import 'package:flutter_meedu_media_kit_example/pages/custom_icon_size.dart';
