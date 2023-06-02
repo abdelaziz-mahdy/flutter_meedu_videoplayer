@@ -1,7 +1,9 @@
 ## 4.2.11-dev-4
-* Updates to `video_player_media_kit 0.0.14`
+* Updates to `video_player_media_kit 0.0.15`
 * Fixes errors happening at the end of the video
 * Fixes buffering indicator flickering when playing high quality video
+* Only log media_kit errors to avoid catching handled errors.
+
 
 ## 4.2.11-dev-3
 * Updates to `video_player_media_kit 0.0.13`
