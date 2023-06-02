@@ -456,10 +456,24 @@ class MeeduPlayerController {
 
     if (buffered.isNotEmpty) {
       _buffered.value = buffered;
-      isBuffering.value =
-          value.isPlaying && position.inSeconds >= buffered.last.end.inSeconds;
-      bufferedPercent.value =
-          buffered.last.end.inSeconds / duration.value.inSeconds;
+
+      // Calculate the end time of the last buffered segment
+      final lastBufferedEnd = buffered.last.end.inSeconds;
+
+      // Check if the video is playing and the position is near the end of the buffer
+      if (UniversalPlatform.isDesktop) {
+        isBuffering.value =
+            value.isPlaying && position.inSeconds > (lastBufferedEnd);
+      } else {
+        isBuffering.value =
+            value.isPlaying && position.inSeconds >= (lastBufferedEnd);
+      }
+      //respect the native is buffering flag 
+      isBuffering.value = isBuffering.value || value.isBuffering;
+
+      // Calculate the buffered percentage relative to the total video duration
+      // Update the buffered percentage value
+      bufferedPercent.value = lastBufferedEnd / duration.value.inSeconds;
     }
 
     // save the volume value
