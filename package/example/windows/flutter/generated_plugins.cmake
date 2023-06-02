@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  desktop_drop
   flutter_meedu_videoplayer
   fullscreen_window
   media_kit_libs_windows_video

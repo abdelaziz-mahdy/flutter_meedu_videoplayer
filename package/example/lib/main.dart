@@ -220,16 +220,16 @@ class _HomePageState extends State<HomePage> {
                     kIsWeb
                         ? buildDisabledButton(
                             context,
-                            text: "Pick file Example doesn't work on web",
+                            text: "Pick or drop file Example doesn't work on web",
                             description:
                                 'This example is not available on web due to restrictions.',
                           )
                         : buildButton(
                             context,
-                            text: 'Pick file',
+                            text: 'Pick or drop file',
                             routeName: 'pick-file',
                             description:
-                                'An example of how to pick a video file from the device storage.',
+                                'An example of how to pick or drop a video file from the device storage.',
                           ),
                     buildButton(
                       context,

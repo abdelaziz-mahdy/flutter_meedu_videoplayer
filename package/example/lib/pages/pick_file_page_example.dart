@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:desktop_drop/desktop_drop.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,25 +24,35 @@ class _PickFileExamplePageState extends State<PickFileExamplePage> {
     super.dispose();
   }
 
-  _onPickFile() async {
+// Function to pick a file and return the file path
+  Future<String?> pickFilePath() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['mov', 'avi', 'mp4', "mkv"],
+      allowedExtensions: ['mov', 'avi', 'mp4', 'mkv'],
     );
 
     if (result != null) {
-      File file = File(result.files.single.path!);
-      fileName = path.basename(file.path);
-      _controller.launchAsFullscreen(context,
-          autoplay: true,
-          dataSource: DataSource(
-            file: file,
-            type: DataSourceType.file,
-          ),
-          header: header);
+      String filePath = result.files.single.path!;
+
+      return filePath;
     } else {
-      // User canceled the picker
+      return null; // User canceled the picker
     }
+  }
+
+// Function to play a video file using the provided file path
+  void playVideoFile(BuildContext context, String filePath) {
+    File file = File(filePath);
+
+    _controller.launchAsFullscreen(
+      context,
+      autoplay: true,
+      dataSource: DataSource(
+        file: file,
+        type: DataSourceType.file,
+      ),
+      header: header,
+    );
   }
 
   Widget get header {
@@ -76,12 +87,49 @@ class _PickFileExamplePageState extends State<PickFileExamplePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("pick file"),
+        title: const Text("Pick File"),
       ),
       body: Center(
-        child: TextButton(
-          onPressed: _onPickFile,
-          child: const Text("Pick video file"),
+        child: DropTarget(
+          onDragDone: (details) {
+            if (details.files.isNotEmpty) {
+              playVideoFile(context, details.files.first.path);
+            }
+          },
+          child: GestureDetector(
+            onTap: () async {
+              String? filePath = await pickFilePath();
+              if (filePath != null) {
+                playVideoFile(context, filePath);
+              }
+            },
+            child: Container(
+              width: context.width * 0.80,
+              height: context.height * 0.30,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.upload_file,
+                    size: 50,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    "Pick or drop file here",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
