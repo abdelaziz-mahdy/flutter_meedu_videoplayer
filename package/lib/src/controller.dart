@@ -468,7 +468,7 @@ class MeeduPlayerController {
         isBuffering.value =
             value.isPlaying && position.inSeconds >= (lastBufferedEnd);
       }
-      //respect the native is buffering flag 
+      //respect the native is buffering flag
       isBuffering.value = isBuffering.value || value.isBuffering;
 
       // Calculate the buffered percentage relative to the total video duration
