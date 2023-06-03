@@ -220,7 +220,8 @@ class _HomePageState extends State<HomePage> {
                     kIsWeb
                         ? buildDisabledButton(
                             context,
-                            text: "Pick or drop file Example doesn't work on web",
+                            text:
+                                "Pick or drop file Example doesn't work on web",
                             description:
                                 'This example is not available on web due to restrictions.',
                           )
