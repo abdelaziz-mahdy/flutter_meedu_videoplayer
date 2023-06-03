@@ -460,7 +460,7 @@ class MeeduPlayerController {
 
       // Calculate the end time of the last buffered segment
       final lastBufferedEnd = buffered.last.end.inSeconds;
-      
+
       // Check if the video is playing and the position is near the end of the buffer
       if (VideoPlayerUsed.mediaKit) {
         isBuffering.value =
@@ -590,7 +590,10 @@ class MeeduPlayerController {
     }
     _position.value = position;
     customDebugPrint(
+        "position in seek function is ${_position.value.toString()}");
+    customDebugPrint(
         "duration in seek function is ${duration.value.toString()}");
+
     if (duration.value.inSeconds != 0) {
       await _videoPlayerController?.seekTo(position);
 
