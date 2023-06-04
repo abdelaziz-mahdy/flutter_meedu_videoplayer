@@ -1,3 +1,5 @@
+## 4.2.11-dev-7
+* WidgetsFlutterBinding.ensureInitialized(); reAdded to initMeeduPlayer (to avoid breaking changes)
 ## 4.2.11-dev-6
 * WidgetsFlutterBinding.ensureInitialized(); removed from initMeeduPlayer
 ## 4.2.11-dev-5
