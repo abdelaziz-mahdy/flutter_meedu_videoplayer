@@ -1,3 +1,5 @@
+## 4.2.11-dev-6
+* WidgetsFlutterBinding.ensureInitialized(); removed from initMeeduPlayer
 ## 4.2.11-dev-5
 * Updates to `video_player_media_kit 0.0.16`
 * Fixes seeking issue
