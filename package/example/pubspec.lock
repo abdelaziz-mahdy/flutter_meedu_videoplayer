@@ -259,7 +259,7 @@ packages:
     dependency: transitive
     description:
       name: media_kit
-      sha256: "080cfb5af8d04f8cc454cb4c5ea34b19de5b8e1a1b3af62a34e766364b5244ad"
+      sha256: "67cb78a254a2559f2d4d4a71748817967e3d8a5512071f4e6f63a1a8b8a50ca7"
       url: "https://pub.dev"
     source: hosted
     version: "0.0.9+1"
