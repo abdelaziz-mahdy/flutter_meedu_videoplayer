@@ -35,8 +35,147 @@ We have implemented a cross-platform video player, which provides a seamless vid
 
 
 
-<table><thead><tr><th>Feature</th><th>iOS</th><th>Android</th><th>Windows</th><th>Linux</th><th>macOS</th><th>Web</th></tr></thead><tbody><tr><td>Videos from Network</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Videos from Assets</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Videos from Local Files</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Looping</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>AutoPlay</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Swipe to Control Volume</td><td>✔️</td><td>✔️</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td></tr><tr><td>Swipe to Seek</td><td>✔️</td><td>✔️</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td><td>Keyboard Arrows</td></tr><tr><td>FullScreen</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Launch Player in FullScreen</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Playback Speed</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Fast Forward/Rewind</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>SRT Subtitles</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr><tr><td>Customization</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td><td>Partially</td></tr></tbody></table>
-
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>iOS</th>
+      <th>Android</th>
+      <th>Windows</th>
+      <th>Linux</th>
+      <th>macOS</th>
+      <th>Web</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Videos from Network</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Videos from Assets</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Videos from Local Files</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Looping</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>AutoPlay</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Swipe to Control Volume</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>Keyboard Arrows</td>
+      <td>Keyboard Arrows</td>
+      <td>Keyboard Arrows</td>
+      <td>Keyboard Arrows</td>
+    </tr>
+    <tr>
+      <td>Swipe to Seek</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>Keyboard Arrows</td>
+      <td>Keyboard Arrows</td>
+      <td>Keyboard Arrows</td>
+      <td>Keyboard Arrows</td>
+    </tr>
+    <tr>
+      <td>FullScreen</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Launch Player in FullScreen</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Playback Speed</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Fast Forward/Rewind</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>SRT Subtitles</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Customization</td>
+      <td>Partially</td>
+      <td>Partially</td>
+      <td>Partially</td>
+      <td>Partially</td>
+      <td>Partially</td>
+      <td>Partially</td>
+    </tr>
+    <tr>
+      <td>Picture in Picture (PIP)</td>
+      <td>Not Implemented (Help Wanted)</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>Implemented (Not tested)</td>
+      <td>Implemented (Crashes, waiting for window_manager release, fixed in GitHub)</td>
+      <td>Not Implemented</td>
+    </tr>
+  </tbody>
+</table>
 
 # Video Player Controls
 
@@ -46,7 +185,7 @@ We have implemented a cross-platform video player, which provides a seamless vid
 - Swipe vertically on the right side of the screen to control the video volume. (<em>volumeSwipes</em>)
 - Swipe vertically on the left side of the screen to control the video brightness. (<em>brightnessSwipes</em>)
 - Double-tap on the sides of the screen to seek forward or backward in the video. (<em>doubleTapToSeek</em>)
-
+- Long press on the screen to speed up the video, and the video slows down when the long press is released. (<em>onLongPressSpeedUp</em>)
 ## Desktop Controls
 - One-click with the mouse to toggle play and pause. (<em>desktopTapToPlayAndPause</em>)
 - Double-click with the mouse to toggle full-screen mode. (<em>desktopDoubleTapToFullScreen</em>)

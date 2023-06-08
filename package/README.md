@@ -18,8 +18,7 @@ We have implemented a cross-platform video player, which provides a seamless vid
 
 
 
-//TODO: UPDATE THIS TABLE here and in docs
-//TODO: ALso add initMeeduPlayer in docs if missing here or there
+
 <table>
 <caption><h4><a href="https://zezo357.github.io/flutter_meedu_videoplayer_example/">Flutter Web Demo</a></h4></caption>
 

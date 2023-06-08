@@ -1,3 +1,5 @@
+## 4.2.12+1
+* fixed readme
 ## 4.2.12
 * Updates to `video_player_media_kit 0.0.16`
 * Fixes seeking issue
