@@ -6,7 +6,8 @@ environment:
   sdk: ">=2.16.2 <4.0.0"
   flutter: ">=2.5.0"
 topics:
-  - video_player
+  - video-player
+  - video
 
 dependencies:
   flutter:
