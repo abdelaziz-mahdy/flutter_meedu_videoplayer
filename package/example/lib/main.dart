@@ -10,11 +10,13 @@ import 'package:flutter_meedu_videoplayer_example/pages/change_quality_example_p
 import 'package:flutter_meedu_videoplayer_example/pages/custom_controls.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_icon_size.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_icons_example.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/custom_subtitles.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/disabled_buttons_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/fullscreen_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/gridview_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/listview_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/m3u8_page_example.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/multi_subtitles.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/network_with_subtitle_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/one_page_to_other_page_example.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/only_gestures_example_page.dart';
@@ -50,6 +52,8 @@ class MyApp extends StatelessWidget {
         "fullscreen": (_) => const FullscreenExamplePage(),
         "with-header": (_) => const PlayerWithHeaderPage(),
         "subtitles": (_) => const NetworkWithSubtitlesPage(),
+        "custom-subtitles": (_) => const CustomNetworkWithSubtitlesPage(),
+        "multi-subtitles": (_) => const NetworkWithMultipleSubtitlesPage(),
         "playback-speed": (_) => const PlayBackSpeedExamplePage(),
         "quality-change": (_) => const ChangeQualityExamplePage(),
         "one-page-to-other": (_) => const OnePageExample(),
@@ -196,6 +200,20 @@ class _HomePageState extends State<HomePage> {
                       routeName: 'subtitles',
                       description:
                           'An example of how to add subtitles to the player.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Custom subtitles view example',
+                      routeName: 'custom-subtitles',
+                      description:
+                          'An example of how to add custom view for subtitles to the player.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'With multiple subtitles example',
+                      routeName: 'multi-subtitles',
+                      description:
+                          'An example of how to add multiple subtitles to the player.',
                     ),
                     buildButton(
                       context,
