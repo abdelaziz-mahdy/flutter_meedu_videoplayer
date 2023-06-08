@@ -10,9 +10,159 @@
 <img src="https://img.shields.io/github/last-commit/zezo357/flutter_meedu_media_kit/master?style=flat-square"/>
 <img src="https://img.shields.io/github/license/zezo357/flutter_meedu_media_kit?style=flat-square"/>
 
+<img src="assets/pip.gif" alt="meedu_player pip" width="160" />
+<img src="assets/q2.gif" alt="meedu_player" width="160" />
+<br/>
+<img src="assets/full.gif" alt="meedu_player" width="300" />
+<img src="assets/playing_video.png" alt="meedu_player" width="300" />
 
 
-### a controls wrapper for [media_kit](https://pub.dev/packages/media_kit) using same features and logic as [flutter_meedu_videoplayer](https://pub.dev/packages/flutter_meedu_videoplayer).
+<br/>
+<br/>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>iOS</th>
+      <th>Android</th>
+      <th>Windows</th>
+      <th>Linux</th>
+      <th>macOS</th>
+      <th>Web</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Videos from Network</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Videos from Assets</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Videos from Local Files</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Looping</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>AutoPlay</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Swipe to Control Volume</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>Keyboard Arrows</td>
+      <td>Keyboard Arrows</td>
+      <td>Keyboard Arrows</td>
+      <td>Keyboard Arrows</td>
+    </tr>
+    <tr>
+      <td>Swipe to Seek</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>Keyboard Arrows</td>
+      <td>Keyboard Arrows</td>
+      <td>Keyboard Arrows</td>
+      <td>Keyboard Arrows</td>
+    </tr>
+    <tr>
+      <td>FullScreen</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Launch Player in FullScreen</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Playback Speed</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>Fast Forward/Rewind</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <!-- <tr>
+      <td>SRT Subtitles</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr> -->
+    <tr>
+      <td>Customization</td>
+      <td>Partially</td>
+      <td>Partially</td>
+      <td>Partially</td>
+      <td>Partially</td>
+      <td>Partially</td>
+      <td>Partially</td>
+    </tr>
+    <tr>
+      <td>Picture in Picture (PIP)</td>
+      <td>Not Implemented (Help Wanted)</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>Implemented (Not tested)</td>
+      <td>Implemented (Crashes, waiting for window_manager release, fixed in GitHub)</td>
+      <td>Not Implemented</td>
+    </tr>
+  </tbody>
+</table>
+
 
 
 <!-- 👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_media_kit/)</b> -->
@@ -166,12 +316,14 @@
 
 # Video Player Controls
 
+
 ## Mobile Controls
 
 - Swipe horizontally to seek forward or backward in the video. (<em>seekSwipes</em>)
 - Swipe vertically on the right side of the screen to control the video volume. (<em>volumeSwipes</em>)
 - Swipe vertically on the left side of the screen to control the video brightness. (<em>brightnessSwipes</em>)
 - Double-tap on the sides of the screen to seek forward or backward in the video. (<em>doubleTapToSeek</em>)
+- Long press on the screen to speed up the video, and the video slows down when the long press is released. (<em>onLongPressSpeedUp</em>)
 
 ## Desktop Controls
 
@@ -183,6 +335,7 @@
 - Press the NumPad Decimal key (.) to toggle the video fit. (<em>numPadDecimalKeyToggleFit</em>)
 - Press the Enter key to open full-screen mode. (<em>enterKeyOpensFullScreen</em>)
 - Press the Space key to toggle between playing and pausing the video. (<em>spaceKeyTogglePlay</em>)
+
 
 
 

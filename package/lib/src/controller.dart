@@ -466,48 +466,43 @@ class MeeduPlayerController {
     }
   }
 
-  List<StreamSubscription> subscriptions = [];
+  void _listener() {
+    final value = _videoPlayerController!.value;
+    //update duration
+    duration.value = value.duration;
+    // set the current video position
+    final position = value.position;
+    _position.value = position;
+    if (!_isSliderMoving) {
+      _sliderPosition.value = position;
+    }
 
-  void startListeners() {
-    subscriptions.addAll(
-      [
-        videoPlayerController!.streams.playing.listen((event) {
-          if (event) {
-            playerStatus.status.value = PlayerStatus.playing;
-          } else {
-            //playerStatus.status.value = PlayerStatus.paused;
-          }
-        }),
-        videoPlayerController!.streams.completed.listen((event) {
-          if (event) {
-            playerStatus.status.value = PlayerStatus.completed;
-          } else {
-            //            playerStatus.status.value = PlayerStatus.playing;
-          }
-        }),
-        videoPlayerController!.streams.position.listen((event) {
-          _position.value = event;
-          if (!_isSliderMoving) {
-            _sliderPosition.value = event;
-          }
-        }),
-        videoPlayerController!.streams.duration.listen((event) {
-          duration.value = event;
-        }),
-        videoPlayerController!.streams.buffer.listen((event) {
-          _buffered.value = event;
-        }),
-        videoPlayerController!.streams.buffering.listen((event) {
-          isBuffering.value = event;
-        }),
-        videoPlayerController!.streams.volume.listen((event) {
-          if (!mute.value && _volumeBeforeMute != event) {
-            _volumeBeforeMute = event;
-          }
-        }),
-      ],
-    );
-  }
+    // set the video buffered loaded
+    final buffered = value.buffered;
+
+    if (buffered.isNotEmpty) {
+      _buffered.value = buffered;
+
+      // Calculate the end time of the last buffered segment
+      final lastBufferedEnd = buffered.last.end.inSeconds;
+
+      // Check if the video is playing and the position is near the end of the buffer
+        isBuffering.value =
+            value.isPlaying && position.inSeconds > (lastBufferedEnd);
+
+      //respect the native is buffering flag
+      isBuffering.value = isBuffering.value || value.isBuffering;
+
+      // Calculate the buffered percentage relative to the total video duration
+      // Update the buffered percentage value
+      bufferedPercent.value = lastBufferedEnd / duration.value.inSeconds;
+    }
+
+    // save the volume value
+    final volume = value.volume;
+    if (!mute.value && _volumeBeforeMute != volume) {
+      _volumeBeforeMute = volume;
+    }
 
   void removeListeners() {
     for (final s in subscriptions) {
@@ -605,7 +600,10 @@ class MeeduPlayerController {
     }
     _position.value = position;
     customDebugPrint(
+        "position in seek function is ${_position.value.toString()}");
+    customDebugPrint(
         "duration in seek function is ${duration.value.toString()}");
+
     if (duration.value.inSeconds != 0) {
       await _videoPlayerController?.seek(position);
 
@@ -672,10 +670,12 @@ class MeeduPlayerController {
 
   void onChangedSliderStart() {
     _isSliderMoving = true;
+    controls = true;
   }
 
   onChangedSlider(double v) {
     _sliderPosition.value = Duration(seconds: v.floor());
+    controls = true;
   }
 
   void onChangedSliderEnd() {

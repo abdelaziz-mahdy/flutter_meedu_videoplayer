@@ -1,12 +1,13 @@
-name: flutter_meedu_media_kit
-description: a controls wrapper for media_kit.
-version: 4.2.11-dev-3
-homepage: "https://github.com/zezo357/flutter_meedu_media_kit"
-
+name: flutter_meedu_videoplayer
+description: A cross Platform video player that uses video_player for android and ios and web, media_kit for windows and linux and macos.
+version: 4.2.12
+homepage: "https://github.com/zezo357/flutter_meedu_videoplayer"
 environment:
   sdk: ">=2.16.2 <4.0.0"
   flutter: ">=2.5.0"
-
+topics:
+  - video-player
+  - video
 
 dependencies:
   flutter:

@@ -24,6 +24,8 @@ import 'package:flutter_meedu_media_kit_example/pages/player_with_header_page.da
 import 'package:flutter_meedu_media_kit_example/pages/portrait_example_page.dart';
 import 'package:flutter_meedu_media_kit_example/pages/secondary_controls.dart';
 import 'package:flutter_meedu_media_kit_example/pages/yotube_page_example.dart';
+import 'package:flutter_meedu_media_kit_example/pages/custom_subtitles.dart';
+import 'package:flutter_meedu_media_kit_example/pages/multi_subtitles.dart';
 
 void main() {
   MediaKit.ensureInitialized();
@@ -36,6 +38,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: const HomePage(),
       routes: {
         "basic": (_) => const BasicExamplePage(),
@@ -49,6 +52,8 @@ class MyApp extends StatelessWidget {
         "fullscreen": (_) => const FullscreenExamplePage(),
         "with-header": (_) => const PlayerWithHeaderPage(),
         "subtitles": (_) => const NetworkWithSubtitlesPage(),
+        "custom-subtitles": (_) => const CustomNetworkWithSubtitlesPage(),
+        "multi-subtitles": (_) => const NetworkWithMultipleSubtitlesPage(),
         "playback-speed": (_) => const PlayBackSpeedExamplePage(),
         "quality-change": (_) => const ChangeQualityExamplePage(),
         "one-page-to-other": (_) => const OnePageExample(),
@@ -196,6 +201,20 @@ class _HomePageState extends State<HomePage> {
                     //   description:
                     //       'An example of how to add subtitles to the player.',
                     // ),
+                    // buildButton(
+                    //   context,
+                    //   text: 'Custom subtitles view example',
+                    //   routeName: 'custom-subtitles',
+                    //   description:
+                    //       'An example of how to add custom view for subtitles to the player.',
+                    // ),
+                    // buildButton(
+                    //   context,
+                    //   text: 'With multiple subtitles example',
+                    //   routeName: 'multi-subtitles',
+                    //   description:
+                    //       'An example of how to add multiple subtitles to the player.',
+                    // ),
                     buildButton(
                       context,
                       text: 'Playback speed example',
@@ -220,16 +239,17 @@ class _HomePageState extends State<HomePage> {
                     kIsWeb
                         ? buildDisabledButton(
                             context,
-                            text: "Pick file Example doesn't work on web",
+                            text:
+                                "Pick or drop file Example doesn't work on web",
                             description:
                                 'This example is not available on web due to restrictions.',
                           )
                         : buildButton(
                             context,
-                            text: 'Pick file',
+                            text: 'Pick or drop file',
                             routeName: 'pick-file',
                             description:
-                                'An example of how to pick a video file from the device storage.',
+                                'An example of how to pick or drop a video file from the device storage.',
                           ),
                     buildButton(
                       context,
