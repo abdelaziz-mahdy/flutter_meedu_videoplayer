@@ -47,6 +47,10 @@ class MeeduVideoPlayer extends StatefulWidget {
     Responsive responsive,
   )? customControls;
 
+  ///[customCaptionView] when a custom view for the captions is needed
+  final Widget Function(BuildContext context, MeeduPlayerController controller,
+      Responsive responsive, String text)? customCaptionView;
+
   /// The distance from the bottom of the screen to the closed captions text.
   ///
   /// This value represents the vertical position of the closed captions display
@@ -66,6 +70,7 @@ class MeeduVideoPlayer extends StatefulWidget {
       this.bottomRight,
       this.customIcons,
       this.customControls,
+      this.customCaptionView,
       this.closedCaptionDistanceFromBottom = 40})
       : super(key: key);
 
@@ -182,6 +187,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                           responsive: _.responsive,
                           distanceFromBottom:
                               widget.closedCaptionDistanceFromBottom,
+                          customCaptionView: widget.customCaptionView,
                         ),
                         if (_.controlsEnabled &&
                             _.controlsStyle == ControlsStyle.primary)
