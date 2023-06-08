@@ -1013,6 +1013,34 @@ class MeeduPlayerController {
     _videoFit.value = fit;
   }
 
+  ///Sets a closed caption file.
+  ///If [closedCaptionFile] is null, closed captions will be removed.
+  void setClosedCaptionFile(Future<ClosedCaptionFile>? closedCaptionFile) {
+    if (videoPlayerController == null) {
+      customDebugPrint("setClosedCaptionFile: videoPlayerController is null");
+      return;
+    }
+    videoPlayerController!.setClosedCaptionFile(closedCaptionFile);
+  }
+
+
+  /// Sets the caption offset.
+  ///
+  /// The [offset] will be used when getting the correct caption for a specific position.
+  /// The [offset] can be positive or negative.
+  ///
+  /// The values will be handled as follows:
+  /// *  0: This is the default behavior. No offset will be applied.
+  /// * >0: The caption will have a negative offset. So you will get caption text from the past.
+  /// * <0: The caption will have a positive offset. So you will get caption text from the future.
+  void setCaptionOffset(Duration offset) {
+    if (videoPlayerController == null) {
+      customDebugPrint("setCaptionOffset: videoPlayerController is null");
+      return;
+    }
+    videoPlayerController!.setCaptionOffset(offset);
+  }
+
   /// enter to picture in picture mode only Android
   ///
   /// only available since Android 7
@@ -1104,7 +1132,6 @@ class MeeduPlayerController {
     if (_videoPlayerController == null) {
       return 16 / 9;
     }
-
     return _videoPlayerController!.value.size.width /
         _videoPlayerController!.value.size.height;
   }
