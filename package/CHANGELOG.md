@@ -2,7 +2,7 @@
 * Added support for multi subtitles and example
   * setClosedCaptionFile
   * setCaptionOffset
-* 
+* Added custom subtitle view support and example 
 
 ## 4.2.11-dev-7
 * WidgetsFlutterBinding.ensureInitialized(); reAdded to initMeeduPlayer (to avoid breaking changes)
