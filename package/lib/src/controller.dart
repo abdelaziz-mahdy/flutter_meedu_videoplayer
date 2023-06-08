@@ -1023,7 +1023,6 @@ class MeeduPlayerController {
     videoPlayerController!.setClosedCaptionFile(closedCaptionFile);
   }
 
-
   /// Sets the caption offset.
   ///
   /// The [offset] will be used when getting the correct caption for a specific position.

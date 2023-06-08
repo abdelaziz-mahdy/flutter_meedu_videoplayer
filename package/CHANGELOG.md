@@ -1,43 +1,25 @@
-## 4.2.11-dev-8
-* Added support for multi subtitles and example
-  * setClosedCaptionFile
-  * setCaptionOffset
-* Added custom subtitle view support and example 
-
-## 4.2.11-dev-7
-* WidgetsFlutterBinding.ensureInitialized(); reAdded to initMeeduPlayer (to avoid breaking changes)
-## 4.2.11-dev-6
-* WidgetsFlutterBinding.ensureInitialized(); removed from initMeeduPlayer
-## 4.2.11-dev-5
+## 4.2.12
 * Updates to `video_player_media_kit 0.0.16`
 * Fixes seeking issue
 * Removed flickering of buffering when using media_kit
 * Fixes position slider hiding when changing position
-
-
-
-## 4.2.11-dev-4
-* Updates to `video_player_media_kit 0.0.15`
+* Added support for multi subtitles and example
+  * setClosedCaptionFile
+  * setCaptionOffset
+* Added custom subtitle view support and example 
 * Fixes errors happening at the end of the video
 * Fixes buffering indicator flickering when playing high quality video
 * Only log media_kit errors to avoid catching handled errors.
-
-
-## 4.2.11-dev-3
-* Updates to `video_player_media_kit 0.0.13`
-* Fixes media_kit errors not being caught
-* Improves media_kit logs 
+* initMeeduPlayer can set media_kit logs level
 * MeeduVideoPlayer closedCaptionDistanceFromBottom to be able to set subtitles position
 * Custom callback for on long press start and end
-
-## 4.2.11-dev-2
 * Fixes ios orientation
 * Fixes back button not working
-## 4.2.11-dev
 * Adding on long press speed up video in controls
 * Feature mobile UI lock [0Franky](https://github.com/0Franky)
 * Feature desktop pip [0Franky](https://github.com/0Franky)
 * Add ControlsStyle.primaryList for scrollable list [ADAIN](https://github.com/ADAIN)
+* Added topics
 
 ## 4.2.10
 * Improving the controls by showing overlays on top of the controls.
