@@ -1,3 +1,5 @@
+## 4.2.10+1
+* fixes volume
 ## 4.2.10
 
 - Improving the controls by showing overlays on top of the controls.

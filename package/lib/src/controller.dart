@@ -716,7 +716,7 @@ class MeeduPlayerController {
       volume.value = volumeNew;
       if (desktopOrWeb || videoPlayerVolume) {
         customDebugPrint("volume is $volumeNew");
-        await _videoPlayerController?.setVolume(volumeNew);
+        await _videoPlayerController?.setVolume(volumeNew*100);
         volumeUpdated();
       } else {
         try {
