@@ -1,6 +1,6 @@
 name: flutter_meedu_media_kit
 description: a controls wrapper for media_kit.
-version: 4.2.10+1
+version: 4.2.11
 homepage: "https://github.com/zezo357/flutter_meedu_media_kit"
 environment:
   sdk: ">=2.16.2 <4.0.0"
