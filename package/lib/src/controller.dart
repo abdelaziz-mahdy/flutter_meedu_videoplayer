@@ -462,7 +462,7 @@ class MeeduPlayerController {
         }),
         videoPlayerController!.streams.volume.listen((event) {
           if (!mute.value && _volumeBeforeMute != event) {
-            _volumeBeforeMute = event;
+            _volumeBeforeMute = event/100;
           }
         }),
       ],
@@ -678,7 +678,7 @@ class MeeduPlayerController {
 
   Future<void> getCurrentVolume() async {
     if (desktopOrWeb) {
-      _currentVolume.value = _videoPlayerController?.state.volume ?? 0;
+      _currentVolume.value = (_videoPlayerController?.state.volume ?? 0)/100;
     } else {
       try {
         _currentVolume.value = await VolumeController().getVolume();
