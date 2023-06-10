@@ -1,3 +1,8 @@
+## 4.2.13
+* autoHideControls: can be disabled thanks to [sommye-ctr](https://github.com/sommye-ctr)
+* seek will get recalled if failed to seek.
+* instead of debug prints, now its logs with the package name
+
 ## 4.2.12+1
 * fixed readme
 ## 4.2.12
