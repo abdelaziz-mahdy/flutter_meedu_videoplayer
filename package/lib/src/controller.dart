@@ -207,6 +207,9 @@ class MeeduPlayerController {
   /// for defining that video player locked controls
   final Rx<bool> _lockedControls = false.obs;
 
+  /// if the player should automatically hide the controls
+  final bool autoHideControls;
+
   /// controls if widgets inside videoplayer should get focus or not
   final bool excludeFocus;
 
@@ -295,6 +298,7 @@ class MeeduPlayerController {
     this.manageBrightness = true,
     this.showLogs = true,
     this.excludeFocus = true,
+    this.autoHideControls = true,
     String? errorText,
     this.controlsStyle = ControlsStyle.primary,
     this.header,
@@ -557,7 +561,7 @@ class MeeduPlayerController {
 
     playerStatus.status.value = PlayerStatus.playing;
     // screenManager.setOverlays(false);
-    if (hideControls) {
+    if (hideControls && autoHideControls) {
       _hideTaskControls();
     }
     //
@@ -796,7 +800,7 @@ class MeeduPlayerController {
     //customDebugPrint(visible);
     _showControls.value = visible;
     _timer?.cancel();
-    if (visible) {
+    if (visible && autoHideControls) {
       _hideTaskControls();
     }
   }

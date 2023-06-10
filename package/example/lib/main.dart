@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/auto_fullscreen_on_rotation.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/auto_hidecontrol_disable.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_example_with_looping_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_lock_controls_example_page.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
         "youtube": (_) => const YoutubeExamplePage(),
         "m3u8": (_) => const M3u8ExamplePage(),
         "auto_fullscreen": (_) => const AutoFullScreenExamplePage(),
+        "auto_hide_control_disable": (_) => const AutoHideControlsDisable(),
       },
     );
   }
@@ -142,6 +144,13 @@ class _HomePageState extends State<HomePage> {
                       routeName: 'only_gestures',
                       description:
                           'An example of how to load a video from a network source without rewind and forward buttons.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Basic example with hiding of controls false',
+                      routeName: 'auto_hide_control_disable',
+                      description:
+                          'An example of how to load a video from a network source with the player not controlling the visibility of controls.',
                     ),
                     buildButton(
                       context,
