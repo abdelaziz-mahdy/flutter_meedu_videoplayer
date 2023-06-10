@@ -235,10 +235,10 @@ packages:
     dependency: transitive
     description:
       name: lints
-      sha256: "0a217c6c989d21039f1498c3ed9f3ed71b354e69873f13a8dfc3c9fe76f1b452"
+      sha256: "5e4a9cd06d447758280a8ac2405101e0e2094d2a1dbdd3756aec3fe7775ba593"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.1"
+    version: "2.0.1"
   matcher:
     dependency: transitive
     description:
@@ -403,10 +403,10 @@ packages:
     dependency: transitive
     description:
       name: petitparser
-      sha256: cb3798bef7fc021ac45b308f4b51208a152792445cce0448c9a4ba5879dd8750
+      sha256: "49392a45ced973e8d94a85fdb21293fbb40ba805fc49f2965101ae748a3683b4"
       url: "https://pub.dev"
     source: hosted
-    version: "5.4.0"
+    version: "5.1.0"
   platform:
     dependency: transitive
     description:
@@ -792,10 +792,10 @@ packages:
     dependency: transitive
     description:
       name: xml
-      sha256: "5bc72e1e45e941d825fd7468b9b4cc3b9327942649aeb6fc5cdbf135f0a86e84"
+      sha256: "979ee37d622dec6365e2efa4d906c37470995871fe9ae080d967e192d88286b5"
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.0"
+    version: "6.2.2"
   youtube_explode_dart:
     dependency: "direct main"
     description:
@@ -805,5 +805,5 @@ packages:
     source: hosted
     version: "1.12.4"
 sdks:
-  dart: ">=3.0.0 <4.0.0"
+  dart: ">=3.0.0-0 <4.0.0"
   flutter: ">=3.7.0"
