@@ -147,10 +147,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                     buildButton(
                       context,
-                      text: 'Basic example with hiding of controls false',
+                      text: 'Basic example with auto hiding of controls set as false',
                       routeName: 'auto_hide_control_disable',
                       description:
-                          'An example of how to load a video from a network source with the player not controlling the visibility of controls.',
+                          'An example of how to load a video from a network source with the player not auto hiding controls.',
                     ),
                     buildButton(
                       context,
