@@ -1,3 +1,5 @@
+## 4.2.12
+* fixes more volume issues
 ## 4.2.11
 * fixes volume
 ## 4.2.10
