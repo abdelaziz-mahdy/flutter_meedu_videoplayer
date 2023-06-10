@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:developer' as dev;
 import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
@@ -101,6 +103,8 @@ class MeeduPlayerController {
   double mouseMoveInitial = 0;
   Timer? _timer;
   Timer? _timerForSeek;
+  Timer? _timerForCheckingSeek;
+
   Timer? _timerForVolume;
   Timer? _timerForShowingVolume;
   Timer? _timerForGettingVolume;
@@ -413,7 +417,7 @@ class MeeduPlayerController {
 
   void customDebugPrint(Object? object) {
     if (showLogs) {
-      print(object);
+      dev.log(object.toString(), name: "flutter_meedu_videoplayer");
     }
   }
 
@@ -422,7 +426,7 @@ class MeeduPlayerController {
     Duration seekTo = Duration.zero,
   }) async {
     if (seekTo != Duration.zero) {
-      customDebugPrint("Called seek function to$seekTo");
+      customDebugPrint("Called seek function to $seekTo");
       await this.seekTo(seekTo);
     }
 
@@ -595,28 +599,57 @@ class MeeduPlayerController {
         "duration in seek function is ${duration.value.toString()}");
 
     if (duration.value.inSeconds != 0) {
+      customDebugPrint(
+          "video controller duration ${_videoPlayerController!.value.duration.toString()}");
+
       await _videoPlayerController?.seekTo(position);
+      customDebugPrint("position after seek is ${_position.value.toString()}");
+
+      _checkIfSeekIsSuccess(position);
 
       // if (playerStatus.stopped) {
       //   play();
       // }
     } else {
-      _timerForSeek?.cancel();
-      _timerForSeek =
-          Timer.periodic(const Duration(milliseconds: 200), (Timer t) async {
-        //_timerForSeek = null;
-        customDebugPrint("SEEK CALLED");
-        if (duration.value.inSeconds != 0) {
-          await _videoPlayerController?.seekTo(position);
-
-          // if (playerStatus.stopped) {
-          //   play();
-          // }
-          t.cancel();
-          //_timerForSeek = null;
-        }
-      });
+      _timerForReSeek(position);
     }
+  }
+
+  void _checkIfSeekIsSuccess(Duration position) {
+    _timerForCheckingSeek?.cancel();
+    _timerForCheckingSeek =
+        Timer.periodic(const Duration(milliseconds: 500), (Timer t) async {
+      // customDebugPrint("_position.value: ${_position.value}");
+      // customDebugPrint("position: $position");
+      customDebugPrint(
+          "re seek needed?: ${_position.value.inSeconds < position.inSeconds}");
+
+      if (_position.value.inSeconds < position.inSeconds) {
+        _timerForReSeek(position);
+      }
+      if (_position.value.inSeconds != position.inSeconds ||
+          playerStatus.paused) {
+        t.cancel();
+      }
+    });
+  }
+
+  void _timerForReSeek(Duration position) async {
+    _timerForSeek?.cancel();
+    _timerForSeek =
+        Timer.periodic(const Duration(milliseconds: 200), (Timer t) async {
+      //_timerForSeek = null;
+      customDebugPrint("Re SEEK CALLED");
+      if (duration.value.inSeconds != 0) {
+        await _videoPlayerController?.seekTo(position);
+
+        // if (playerStatus.stopped) {
+        //   play();
+        // }
+        t.cancel();
+        //_timerForSeek = null;
+      }
+    });
   }
 
   /// Sets the playback speed of [this].
@@ -900,6 +933,7 @@ class MeeduPlayerController {
     _timerForGettingVolume?.cancel();
     timerForTrackingMouse?.cancel();
     _timerForSeek?.cancel();
+    _timerForCheckingSeek?.cancel();
     videoFitChangedTimer?.cancel();
     _pipModeWorker?.dispose();
     _position.close();
@@ -1104,6 +1138,7 @@ class MeeduPlayerController {
     _timerForGettingVolume?.cancel();
     timerForTrackingMouse?.cancel();
     _timerForSeek?.cancel();
+    _timerForCheckingSeek?.cancel();
     videoFitChangedTimer?.cancel();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _position.value = Duration.zero;

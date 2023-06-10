@@ -148,7 +148,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.2.12"
+    version: "4.2.12+1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -263,6 +263,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.11"
+  media_kit_libs_android_video:
+    dependency: "direct main"
+    description:
+      name: media_kit_libs_android_video
+      sha256: daeaeb254aee1089fa77f11cbeb0864a1238cbd0cb2a1c5ab9b2a2e66cc5ff42
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.6"
   media_kit_libs_ios_video:
     dependency: "direct main"
     description:
