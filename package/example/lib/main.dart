@@ -30,8 +30,9 @@ import 'package:flutter_meedu_videoplayer_example/pages/yotube_page_example.dart
 
 void main() {
   initMeeduPlayer(
-      androidUseMediaKit: true,
-      iosUseMediaKit: true,);
+    androidUseMediaKit: true,
+    iosUseMediaKit: true,
+  );
   runApp(const MyApp());
 }
 
@@ -149,7 +150,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     buildButton(
                       context,
-                      text: 'Basic example with auto hiding of controls set as false',
+                      text:
+                          'Basic example with auto hiding of controls set as false',
                       routeName: 'auto_hide_control_disable',
                       description:
                           'An example of how to load a video from a network source with the player not auto hiding controls.',

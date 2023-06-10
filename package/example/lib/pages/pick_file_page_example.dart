@@ -109,9 +109,9 @@ class _PickFileExamplePageState extends State<PickFileExamplePage> {
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Icon(
                     Icons.upload_file,
                     size: 50,
