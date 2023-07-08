@@ -704,7 +704,7 @@ class MeeduPlayerController {
   }
 
   onChangedSlider(double v) {
-    _sliderPosition.value = Duration(seconds: v.floor());
+    _sliderPosition.value = Duration(milliseconds: v.floor());
     controls = true;
   }
 
