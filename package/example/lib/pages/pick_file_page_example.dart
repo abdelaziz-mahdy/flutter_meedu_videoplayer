@@ -13,6 +13,7 @@ class PickFileExamplePage extends StatefulWidget {
   State<PickFileExamplePage> createState() => _PickFileExamplePageState();
 }
 
+
 class _PickFileExamplePageState extends State<PickFileExamplePage> {
   final _controller = MeeduPlayerController(
       screenManager: const ScreenManager(forceLandScapeInFullscreen: false),
