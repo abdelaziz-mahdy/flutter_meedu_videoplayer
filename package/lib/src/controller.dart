@@ -735,8 +735,8 @@ class MeeduPlayerController {
 
   Future<void> getCurrentVolume() async {
     if (desktopOrWeb) {
-      print(
-          "_videoPlayerController?.state.volume ${_videoPlayerController?.state.volume}");
+      // print(
+      //     "_videoPlayerController?.state.volume ${_videoPlayerController?.state.volume}");
       if ((_videoPlayerController?.state.volume ?? 0) == 1.0) {
         _currentVolume.value = (_videoPlayerController?.state.volume ?? 0);
       } else {
