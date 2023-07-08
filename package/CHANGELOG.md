@@ -1,5 +1,6 @@
 ## 4.2.14
 * Updating packages (video_player,window_manager,video_player_media_kit)
+* Fix Custom caption view (to be contestant when full screen or not)
 
 ## 4.2.13
 * autoHideControls: can be disabled thanks to [sommye-ctr](https://github.com/sommye-ctr)

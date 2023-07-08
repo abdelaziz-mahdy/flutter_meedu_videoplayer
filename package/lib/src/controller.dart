@@ -63,6 +63,9 @@ class MeeduPlayerController {
   String? _errorText;
   String? get errorText => _errorText;
   Widget? loadingWidget, header, bottomRight, customControls;
+  ///[customCaptionView] when a custom view for the captions is needed
+  Widget Function(BuildContext context, MeeduPlayerController controller,
+      Responsive responsive, String text)? customCaptionView;
   final ControlsStyle controlsStyle;
   final bool pipEnabled;
 
