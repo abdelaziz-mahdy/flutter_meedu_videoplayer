@@ -144,6 +144,9 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                     _.customControls =
                         widget.customControls!(context, _, _.responsive);
                   }
+                  if (widget.customCaptionView != null) {
+                    _.customCaptionView = widget.customCaptionView;
+                  }
                   return ExcludeFocus(
                     excluding: _.excludeFocus,
                     child: Stack(
@@ -183,7 +186,12 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                             ),
                           );
                         }),
-                        // ClosedCaptionView(responsive: _.responsive),
+                        ClosedCaptionView(
+                          responsive: _.responsive,
+                          distanceFromBottom:
+                              widget.closedCaptionDistanceFromBottom,
+                          customCaptionView: _.customCaptionView,
+                        ),
                         if (_.controlsEnabled &&
                             _.controlsStyle == ControlsStyle.primary)
                           PrimaryVideoPlayerControls(

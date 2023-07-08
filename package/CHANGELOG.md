@@ -1,3 +1,16 @@
+## 4.2.14
+* Updating packages (video_player,window_manager,video_player_media_kit)
+* Fix Custom caption view (to be contestant when full screen or not)
+* Fix weird slider look when video is short
+* Removed initWindowManagerIfNeeded from initMeeduPlayer, so it can be used separately
+
+## 4.2.13
+* autoHideControls: can be disabled thanks to [sommye-ctr](https://github.com/sommye-ctr)
+* seek will get recalled if failed to seek.
+* instead of debug prints, now its logs with the package name
+
+## 4.2.12+1
+* fixed readme
 ## 4.2.12
 * Updates to `video_player_media_kit 0.0.16`
 * Fixes seeking issue

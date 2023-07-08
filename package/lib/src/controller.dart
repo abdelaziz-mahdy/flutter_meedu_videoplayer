@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:developer' as dev;
 import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
@@ -65,6 +67,10 @@ class MeeduPlayerController {
   String? _errorText;
   String? get errorText => _errorText;
   Widget? loadingWidget, header, bottomRight, customControls;
+
+  ///[customCaptionView] when a custom view for the captions is needed
+  Widget Function(BuildContext context, MeeduPlayerController controller,
+      Responsive responsive, String text)? customCaptionView;
   final ControlsStyle controlsStyle;
   final bool pipEnabled;
 
@@ -108,6 +114,8 @@ class MeeduPlayerController {
   double mouseMoveInitial = 0;
   Timer? _timer;
   Timer? _timerForSeek;
+  Timer? _timerForCheckingSeek;
+
   Timer? _timerForVolume;
   Timer? _timerForShowingVolume;
   Timer? _timerForGettingVolume;
@@ -219,6 +227,9 @@ class MeeduPlayerController {
   /// for defining that video player locked controls
   final Rx<bool> _lockedControls = false.obs;
 
+  /// if the player should automatically hide the controls
+  final bool autoHideControls;
+
   /// controls if widgets inside videoplayer should get focus or not
   final bool excludeFocus;
 
@@ -307,6 +318,7 @@ class MeeduPlayerController {
     this.manageBrightness = true,
     this.showLogs = true,
     this.excludeFocus = true,
+    this.autoHideControls = true,
     String? errorText,
     this.controlsStyle = ControlsStyle.primary,
     this.header,
@@ -438,7 +450,7 @@ class MeeduPlayerController {
 
   void customDebugPrint(Object? object) {
     if (showLogs) {
-      print(object);
+      dev.log(object.toString(), name: "flutter_meedu_videoplayer");
     }
   }
 
@@ -447,7 +459,7 @@ class MeeduPlayerController {
     Duration seekTo = Duration.zero,
   }) async {
     if (seekTo != Duration.zero) {
-      customDebugPrint("Called seek function to$seekTo");
+      customDebugPrint("Called seek function to $seekTo");
       await this.seekTo(seekTo);
     }
 
@@ -567,7 +579,7 @@ class MeeduPlayerController {
 
     playerStatus.status.value = PlayerStatus.playing;
     // screenManager.setOverlays(false);
-    if (hideControls) {
+    if (hideControls && autoHideControls) {
       _hideTaskControls();
     }
     //
@@ -619,14 +631,13 @@ class MeeduPlayerController {
         if (duration.value.inSeconds != 0) {
           await _videoPlayerController?.seek(position);
 
-          // if (playerStatus.stopped) {
-          //   play();
-          // }
-          t.cancel();
-          //_timerForSeek = null;
-        }
-      });
-    }
+        // if (playerStatus.stopped) {
+        //   play();
+        // }
+        t.cancel();
+        //_timerForSeek = null;
+      }
+    });
   }
 
   /// Sets the playback speed of [this].
@@ -674,7 +685,7 @@ class MeeduPlayerController {
   }
 
   onChangedSlider(double v) {
-    _sliderPosition.value = Duration(seconds: v.floor());
+    _sliderPosition.value = Duration(milliseconds: v.floor());
     controls = true;
   }
 
@@ -806,7 +817,7 @@ class MeeduPlayerController {
     //customDebugPrint(visible);
     _showControls.value = visible;
     _timer?.cancel();
-    if (visible) {
+    if (visible && autoHideControls) {
       _hideTaskControls();
     }
   }
@@ -910,6 +921,7 @@ class MeeduPlayerController {
     _timerForGettingVolume?.cancel();
     timerForTrackingMouse?.cancel();
     _timerForSeek?.cancel();
+    _timerForCheckingSeek?.cancel();
     videoFitChangedTimer?.cancel();
     _pipModeWorker?.dispose();
     _position.close();
@@ -1087,6 +1099,7 @@ class MeeduPlayerController {
     _timerForGettingVolume?.cancel();
     timerForTrackingMouse?.cancel();
     _timerForSeek?.cancel();
+    _timerForCheckingSeek?.cancel();
     videoFitChangedTimer?.cancel();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _position.value = Duration.zero;

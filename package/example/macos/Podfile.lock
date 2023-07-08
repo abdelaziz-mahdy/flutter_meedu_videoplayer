@@ -64,12 +64,12 @@ SPEC CHECKSUMS:
   flutter_meedu_media_kit: fceb30a833044aaf6410c5da53c3d61ab3d6abbb
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   media_kit_libs_macos_video: 0a4a5bf21533cba968c0833f1b59e9af8b5847f1
-  media_kit_native_event_loop: 6cf347b98de9735713a86c188467a008af5f860e
+  media_kit_native_event_loop: 2d8c329aa5815d77a6f40623adeede4584307723
   media_kit_video: 1e311a3dfe41f276935f95518b51a0c3ff72114f
   path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
   screen_brightness_macos: 2d6d3af2165592d9a55ffcd95b7550970e41ebda
   screen_retriever: 59634572a57080243dd1bf715e55b6c54f241a38
-  shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
+  shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   wakelock_macos: bc3f2a9bd8d2e6c89fee1e1822e7ddac3bd004a9
   window_manager: 3a1844359a6295ab1e47659b1a777e36773cd6e8
 

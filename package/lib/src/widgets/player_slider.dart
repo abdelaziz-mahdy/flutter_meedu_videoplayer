@@ -26,8 +26,9 @@ class PlayerSlider extends StatelessWidget {
         RxBuilder(
           //observables: [_.sliderPosition, _.duration],
           (__) {
-            final int value = _.sliderPosition.value.inSeconds;
-            final double max = _.duration.value.inSeconds.toDouble();
+            final double value =
+                _.sliderPosition.value.inMilliseconds.toDouble();
+            final double max = _.duration.value.inMilliseconds.toDouble();
             if (value > max || max <= 0) {
               return Container();
             }
@@ -48,15 +49,15 @@ class PlayerSlider extends StatelessWidget {
                 ),
                 child: Slider(
                   min: 0,
-                  divisions: _.duration.value.inSeconds,
-                  value: value.toDouble(),
+                  divisions: null,
+                  value: value,
                   onChangeStart: (v) {
                     _.onChangedSliderStart();
                   },
                   onChangeEnd: (v) {
                     _.onChangedSliderEnd();
                     _.seekTo(
-                      Duration(seconds: v.floor()),
+                      Duration(milliseconds: v.floor()),
                     );
                   },
                   label: printDuration(_.sliderPosition.value),
