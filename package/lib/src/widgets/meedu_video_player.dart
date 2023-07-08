@@ -63,17 +63,16 @@ class MeeduVideoPlayer extends StatefulWidget {
   /// displayed at an optimal position that doesn't obstruct other important
   /// elements of the video player interface.
   // final double closedCaptionDistanceFromBottom;
-  const MeeduVideoPlayer(
-      {Key? key,
-      required this.controller,
-      this.header,
-      this.bottomRight,
-      this.customIcons,
-      this.customControls,
-      // this.customCaptionView,
-      // this.closedCaptionDistanceFromBottom = 40
-      })
-      : super(key: key);
+  const MeeduVideoPlayer({
+    Key? key,
+    required this.controller,
+    this.header,
+    this.bottomRight,
+    this.customIcons,
+    this.customControls,
+    // this.customCaptionView,
+    // this.closedCaptionDistanceFromBottom = 40
+  }) : super(key: key);
 
   @override
   State<MeeduVideoPlayer> createState() => _MeeduVideoPlayerState();
@@ -181,7 +180,10 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                                 // width: 640,
                                 // height: 480,
                                 child: _.videoPlayerController != null
-                                    ? Video(controller: _.videoController!)
+                                    ? Video(
+                                        controller: _.videoController!,
+                                        controls: NoVideoControls,
+                                      )
                                     : Container(),
                               ),
                             ),

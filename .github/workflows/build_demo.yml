@@ -3,15 +3,15 @@ name: Deploy Flutter Web to GitHub Pages
 defaults:
   run:
     working-directory: package/example
-# on:
-
-#   push:
-#     branches: [ main ]
-#     paths:
-#       - 'package/**'
-#       - '!package/README.md'
 on:
-  workflow_dispatch:
+
+  push:
+    branches: [ main ]
+    paths:
+      - 'package/**'
+      - '!package/README.md'
+# on:
+#   workflow_dispatch:
   
 jobs:
   deploy:
