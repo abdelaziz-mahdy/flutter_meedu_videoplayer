@@ -403,8 +403,8 @@ class MeeduPlayerController {
         package: dataSource.package,
       );
     } else if (dataSource.type == DataSourceType.network) {
-      tmp = VideoPlayerController.network(
-        dataSource.source!,
+      tmp = VideoPlayerController.networkUrl(
+        Uri.parse(dataSource.source!),
         formatHint: dataSource.formatHint,
         closedCaptionFile: dataSource.closedCaptionFile,
         httpHeaders: dataSource.httpHeaders ?? {},

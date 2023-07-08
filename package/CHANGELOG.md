@@ -1,3 +1,6 @@
+## 4.2.14
+* Updating packages (video_player,window_manager,video_player_media_kit)
+
 ## 4.2.13
 * autoHideControls: can be disabled thanks to [sommye-ctr](https://github.com/sommye-ctr)
 * seek will get recalled if failed to seek.
