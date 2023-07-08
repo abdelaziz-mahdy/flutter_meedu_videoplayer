@@ -478,43 +478,48 @@ class MeeduPlayerController {
     }
   }
 
-  void _listener() {
-    final value = _videoPlayerController!.value;
-    //update duration
-    duration.value = value.duration;
-    // set the current video position
-    final position = value.position;
-    _position.value = position;
-    if (!_isSliderMoving) {
-      _sliderPosition.value = position;
-    }
+  List<StreamSubscription> subscriptions = [];
 
-    // set the video buffered loaded
-    final buffered = value.buffered;
-
-    if (buffered.isNotEmpty) {
-      _buffered.value = buffered;
-
-      // Calculate the end time of the last buffered segment
-      final lastBufferedEnd = buffered.last.end.inSeconds;
-
-      // Check if the video is playing and the position is near the end of the buffer
-        isBuffering.value =
-            value.isPlaying && position.inSeconds > (lastBufferedEnd);
-
-      //respect the native is buffering flag
-      isBuffering.value = isBuffering.value || value.isBuffering;
-
-      // Calculate the buffered percentage relative to the total video duration
-      // Update the buffered percentage value
-      bufferedPercent.value = lastBufferedEnd / duration.value.inSeconds;
-    }
-
-    // save the volume value
-    final volume = value.volume;
-    if (!mute.value && _volumeBeforeMute != volume) {
-      _volumeBeforeMute = volume;
-    }
+  void startListeners() {
+    subscriptions.addAll(
+      [
+        videoPlayerController!.stream.playing.listen((event) {
+          if (event) {
+            playerStatus.status.value = PlayerStatus.playing;
+          } else {
+            //playerStatus.status.value = PlayerStatus.paused;
+          }
+        }),
+        videoPlayerController!.stream.completed.listen((event) {
+          if (event) {
+            playerStatus.status.value = PlayerStatus.completed;
+          } else {
+            //            playerStatus.status.value = PlayerStatus.playing;
+          }
+        }),
+        videoPlayerController!.stream.position.listen((event) {
+          _position.value = event;
+          if (!_isSliderMoving) {
+            _sliderPosition.value = event;
+          }
+        }),
+        videoPlayerController!.stream.duration.listen((event) {
+          duration.value = event;
+        }),
+        videoPlayerController!.stream.buffer.listen((event) {
+          _buffered.value = event;
+        }),
+        videoPlayerController!.stream.buffering.listen((event) {
+          isBuffering.value = event;
+        }),
+        videoPlayerController!.stream.volume.listen((event) {
+          if (!mute.value && _volumeBeforeMute != event) {
+            _volumeBeforeMute = event;
+          }
+        }),
+      ],
+    );
+  }
 
   void removeListeners() {
     for (final s in subscriptions) {
@@ -631,13 +636,14 @@ class MeeduPlayerController {
         if (duration.value.inSeconds != 0) {
           await _videoPlayerController?.seek(position);
 
-        // if (playerStatus.stopped) {
-        //   play();
-        // }
-        t.cancel();
-        //_timerForSeek = null;
-      }
-    });
+          // if (playerStatus.stopped) {
+          //   play();
+          // }
+          t.cancel();
+          //_timerForSeek = null;
+        }
+      });
+    }
   }
 
   /// Sets the playback speed of [this].
@@ -1124,7 +1130,9 @@ class MeeduPlayerController {
   }
 
   double getAspectRatio() {
-    if (_videoPlayerController == null && _videoPlayerController!.state.width !=null&& _videoPlayerController!.state.height !=null) {
+    if (_videoPlayerController == null &&
+        _videoPlayerController!.state.width != null &&
+        _videoPlayerController!.state.height != null) {
       return 16 / 9;
     }
 
