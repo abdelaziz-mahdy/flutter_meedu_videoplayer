@@ -15,7 +15,6 @@ import 'package:flutter_meedu_media_kit_example/pages/fullscreen_example_page.da
 import 'package:flutter_meedu_media_kit_example/pages/gridview_example.dart';
 import 'package:flutter_meedu_media_kit_example/pages/listview_example.dart';
 import 'package:flutter_meedu_media_kit_example/pages/m3u8_page_example.dart';
-import 'package:flutter_meedu_media_kit_example/pages/network_with_subtitle_page.dart';
 import 'package:flutter_meedu_media_kit_example/pages/one_page_to_other_page_example.dart';
 import 'package:flutter_meedu_media_kit_example/pages/only_gestures_example_page.dart';
 import 'package:flutter_meedu_media_kit_example/pages/pick_file_page_example.dart';
@@ -24,8 +23,8 @@ import 'package:flutter_meedu_media_kit_example/pages/player_with_header_page.da
 import 'package:flutter_meedu_media_kit_example/pages/portrait_example_page.dart';
 import 'package:flutter_meedu_media_kit_example/pages/secondary_controls.dart';
 import 'package:flutter_meedu_media_kit_example/pages/yotube_page_example.dart';
-import 'package:flutter_meedu_media_kit_example/pages/custom_subtitles.dart';
-import 'package:flutter_meedu_media_kit_example/pages/multi_subtitles.dart';
+
+import 'pages/auto_hidecontrol_disable.dart';
 
 void main() {
   MediaKit.ensureInitialized();
@@ -51,9 +50,9 @@ class MyApp extends StatelessWidget {
         "custom_sizes": (_) => const CustomSizesExamplePage(),
         "fullscreen": (_) => const FullscreenExamplePage(),
         "with-header": (_) => const PlayerWithHeaderPage(),
-        "subtitles": (_) => const NetworkWithSubtitlesPage(),
-        "custom-subtitles": (_) => const CustomNetworkWithSubtitlesPage(),
-        "multi-subtitles": (_) => const NetworkWithMultipleSubtitlesPage(),
+        // "subtitles": (_) => const NetworkWithSubtitlesPage(),
+        // "custom-subtitles": (_) => const CustomNetworkWithSubtitlesPage(),
+        // "multi-subtitles": (_) => const NetworkWithMultipleSubtitlesPage(),
         "playback-speed": (_) => const PlayBackSpeedExamplePage(),
         "quality-change": (_) => const ChangeQualityExamplePage(),
         "one-page-to-other": (_) => const OnePageExample(),

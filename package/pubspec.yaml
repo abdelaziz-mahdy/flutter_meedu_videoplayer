@@ -14,7 +14,6 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-  video_player: ^2.7.0
   volume_controller: ^2.0.3
   auto_orientation: ^2.3.1
   screen_brightness: ^0.2.0

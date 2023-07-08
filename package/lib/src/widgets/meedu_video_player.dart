@@ -47,9 +47,9 @@ class MeeduVideoPlayer extends StatefulWidget {
     Responsive responsive,
   )? customControls;
 
-  ///[customCaptionView] when a custom view for the captions is needed
-  final Widget Function(BuildContext context, MeeduPlayerController controller,
-      Responsive responsive, String text)? customCaptionView;
+  // ///[customCaptionView] when a custom view for the captions is needed
+  // final Widget Function(BuildContext context, MeeduPlayerController controller,
+  //     Responsive responsive, String text)? customCaptionView;
 
   /// The distance from the bottom of the screen to the closed captions text.
   ///
@@ -62,7 +62,7 @@ class MeeduVideoPlayer extends StatefulWidget {
   /// By adjusting this distance, you can ensure that the closed captions are
   /// displayed at an optimal position that doesn't obstruct other important
   /// elements of the video player interface.
-  final double closedCaptionDistanceFromBottom;
+  // final double closedCaptionDistanceFromBottom;
   const MeeduVideoPlayer(
       {Key? key,
       required this.controller,
@@ -70,8 +70,9 @@ class MeeduVideoPlayer extends StatefulWidget {
       this.bottomRight,
       this.customIcons,
       this.customControls,
-      this.customCaptionView,
-      this.closedCaptionDistanceFromBottom = 40})
+      // this.customCaptionView,
+      // this.closedCaptionDistanceFromBottom = 40
+      })
       : super(key: key);
 
   @override
@@ -144,9 +145,9 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                     _.customControls =
                         widget.customControls!(context, _, _.responsive);
                   }
-                  if (widget.customCaptionView != null) {
-                    _.customCaptionView = widget.customCaptionView;
-                  }
+                  // if (widget.customCaptionView != null) {
+                  //   _.customCaptionView = widget.customCaptionView;
+                  // }
                   return ExcludeFocus(
                     excluding: _.excludeFocus,
                     child: Stack(
@@ -186,12 +187,12 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                             ),
                           );
                         }),
-                        ClosedCaptionView(
-                          responsive: _.responsive,
-                          distanceFromBottom:
-                              widget.closedCaptionDistanceFromBottom,
-                          customCaptionView: _.customCaptionView,
-                        ),
+                        // ClosedCaptionView(
+                        //   responsive: _.responsive,
+                        //   distanceFromBottom:
+                        //       widget.closedCaptionDistanceFromBottom,
+                        //   customCaptionView: _.customCaptionView,
+                        // ),
                         if (_.controlsEnabled &&
                             _.controlsStyle == ControlsStyle.primary)
                           PrimaryVideoPlayerControls(
