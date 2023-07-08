@@ -4,7 +4,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_media_kit/meedu_player.dart';
-import 'package:path/path.dart' as path;
 
 class PickFileExamplePage extends StatefulWidget {
   const PickFileExamplePage({Key? key}) : super(key: key);
@@ -12,7 +11,6 @@ class PickFileExamplePage extends StatefulWidget {
   @override
   State<PickFileExamplePage> createState() => _PickFileExamplePageState();
 }
-
 
 class _PickFileExamplePageState extends State<PickFileExamplePage> {
   final _controller = MeeduPlayerController(

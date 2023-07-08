@@ -56,6 +56,7 @@ class ScreenManager {
 
   Future<void> setWebFullScreen(bool state, MeeduPlayerController _) async {
     _.fullscreen.value = state;
+
     try {
       FullScreenWindow.setFullScreen(state);
     } catch (e) {
