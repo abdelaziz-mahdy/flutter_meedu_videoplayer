@@ -26,7 +26,8 @@ class PlayerSlider extends StatelessWidget {
         RxBuilder(
           //observables: [_.sliderPosition, _.duration],
           (__) {
-            final double value = _.sliderPosition.value.inMilliseconds.toDouble();
+            final double value =
+                _.sliderPosition.value.inMilliseconds.toDouble();
             final double max = _.duration.value.inMilliseconds.toDouble();
             if (value > max || max <= 0) {
               return Container();
