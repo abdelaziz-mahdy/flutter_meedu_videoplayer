@@ -1,11 +1,13 @@
 name: flutter_meedu_media_kit
 description: a controls wrapper for media_kit.
-version: 4.2.12
+version: 4.2.14
 homepage: "https://github.com/zezo357/flutter_meedu_media_kit"
 environment:
   sdk: ">=2.16.2 <4.0.0"
   flutter: ">=2.5.0"
-
+topics:
+  - video-player
+  - video
 
 dependencies:
   flutter:
@@ -21,19 +23,21 @@ dependencies:
   universal_platform: ^1.0.0+1
   fullscreen_window: ^1.0.4
 
-  window_manager: ^0.3.0
+  window_manager: ^0.3.5
+  # window_manager: 
+  #   path: ../../window_manager
   wakelock: ^0.6.1+2
   shared_preferences: ^2.0.13
   # dio: ^5.0.0
   # dio_smart_retry: ^5.0.0
   path_provider: ^2.0.6
-  media_kit: ^0.0.8                              # Primary package.
+  media_kit: ^1.0.2                              # Primary package.
   
-  media_kit_video: ^0.0.10                       # For video rendering.
+  media_kit_video: ^1.0.2                        # For video rendering.
   
-  media_kit_native_event_loop: ^1.0.4            # Support for higher number of concurrent instances & better performance.
+  media_kit_native_event_loop: ^1.0.6            # Support for higher number of concurrent instances & better performance.
   
-  media_kit_libs_android_video: ^1.0.4           # Android package for video native libraries.
+  media_kit_libs_android_video: ^1.1.1           # Android package for video native libraries.
   media_kit_libs_ios_video: ^1.0.4               # iOS package for video native libraries.
   media_kit_libs_macos_video: ^1.0.5             # macOS package for video native libraries.
   media_kit_libs_windows_video: ^1.0.2           # Windows package for video native libraries.
@@ -91,6 +95,9 @@ flutter:
     - assets/icons/rewind.png
     - assets/icons/sound.png
     - assets/icons/picture-in-picture.png
+    - assets/icons/exit_picture-in-picture.png
+    - assets/icons/lock-screen.png
+    - assets/icons/exit_lock-screen.png
     - assets/icons/fit.png
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

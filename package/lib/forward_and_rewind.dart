@@ -12,7 +12,7 @@ class ForwardAndRewindStyle {
     EdgeInsetsGeometry? padding,
     BorderRadius? borderRadius,
     Color? ripple,
-    this.spaceBeetweenBarAndText = 10,
+    this.spaceBetweenBarAndText = 10,
   })  : bar = bar ?? BarStyle.forward(),
         padding = padding ?? const EdgeInsets.all(10),
         backgroundColor = backgroundColor ?? Colors.black.withOpacity(0.28),
@@ -72,7 +72,7 @@ class ForwardAndRewindStyle {
   ///```
   final BarStyle bar;
 
-  final double spaceBeetweenBarAndText;
+  final double spaceBetweenBarAndText;
 
   ///On double tap for rewind or forward the video viewer shows a ripple.
   final Color ripple;

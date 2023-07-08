@@ -1,7 +1,27 @@
+## 4.2.14
+* Updating packages (window_manager,media_kit)
+* Fix weird slider look when video is short
+
+
+## 4.2.13
+* autoHideControls: can be disabled thanks to [sommye-ctr](https://github.com/sommye-ctr)
+* instead of debug prints, now its logs with the package name
+* Fixes position slider hiding when changing position
+* Custom callback for on long press start and end
+* Fixes ios orientation
+* Fixes back button not working
+* Adding on long press speed up video in controls
+* Feature mobile UI lock [0Franky](https://github.com/0Franky)
+* Feature desktop pip [0Franky](https://github.com/0Franky)
+* Add ControlsStyle.primaryList for scrollable list [ADAIN](https://github.com/ADAIN)
+* Added topics
+
 ## 4.2.12
 * fixes more volume issues
 ## 4.2.11
 * fixes volume
+
+
 ## 4.2.10
 
 - Improving the controls by showing overlays on top of the controls.

@@ -173,7 +173,7 @@
 - Swipe vertically on the right side of the screen to control the video volume. (<em>volumeSwipes</em>)
 - Swipe vertically on the left side of the screen to control the video brightness. (<em>brightnessSwipes</em>)
 - Double-tap on the sides of the screen to seek forward or backward in the video. (<em>doubleTapToSeek</em>)
-
+- Long press on the screen to speed up the video, and the video slows down when the long press is released. (<em>onLongPressSpeedUp</em>)
 ## Desktop Controls
 - One-click with the mouse to toggle play and pause. (<em>desktopTapToPlayAndPause</em>)
 - Double-click with the mouse to toggle full-screen mode. (<em>desktopDoubleTapToFullScreen</em>)

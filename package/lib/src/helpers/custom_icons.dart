@@ -11,8 +11,11 @@ class CustomIcons {
       mute,
       videoFit,
       pip,
+      exitPip,
       minimize,
-      fullscreen;
+      fullscreen,
+      lock,
+      unlock;
 
   const CustomIcons({
     this.play,
@@ -24,7 +27,10 @@ class CustomIcons {
     this.mute,
     this.videoFit,
     this.pip,
+    this.exitPip,
     this.minimize,
     this.fullscreen,
+    this.lock,
+    this.unlock,
   });
 }

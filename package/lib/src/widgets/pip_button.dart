@@ -15,14 +15,21 @@ class PipButton extends StatelessWidget {
         // ],
         (__) {
       if (!_.pipAvailable.value) return Container();
+      String iconPath = 'assets/icons/picture-in-picture.png';
+      Widget? customIcon = _.customIcons.pip;
+      if (_.isInPipMode.value) {
+        iconPath = 'assets/icons/exit_picture-in-picture.png';
+        customIcon = _.customIcons.exitPip;
+      }
       return PlayerButton(
         size: responsive.buttonSize(),
         circle: false,
         backgroundColor: Colors.transparent,
         iconColor: Colors.white,
-        iconPath: 'assets/icons/picture-in-picture.png',
-        customIcon: _.customIcons.pip,
-        onPressed: () => _.enterPip(context),
+        iconPath: iconPath,
+        customIcon: customIcon,
+        onPressed: () =>
+            _.isInPipMode.value ? _.closePip(context) : _.enterPip(context),
       );
     });
   }
