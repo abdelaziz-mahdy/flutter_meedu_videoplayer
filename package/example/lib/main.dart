@@ -8,6 +8,7 @@ import 'package:flutter_meedu_videoplayer_example/pages/basic_example_with_loopi
 import 'package:flutter_meedu_videoplayer_example/pages/basic_lock_controls_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/basic_pip_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/change_quality_example_page.dart';
+import 'package:flutter_meedu_videoplayer_example/pages/custom_background.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_controls.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_icon_size.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/custom_icons_example.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
         "secondary_controls": (_) => const SecondaryExamplePage(),
         "custom_controls": (_) => const CustomControlsExamplePage(),
         "custom_sizes": (_) => const CustomSizesExamplePage(),
+        "custom_background": (_) => const CustomBackgroundPage(),
         "fullscreen": (_) => const FullscreenExamplePage(),
         "with-header": (_) => const PlayerWithHeaderPage(),
         "subtitles": (_) => const NetworkWithSubtitlesPage(),
@@ -176,6 +178,13 @@ class _HomePageState extends State<HomePage> {
                       routeName: 'custom_sizes',
                       description:
                           'An example of how to Customize icon and buttons and font sizes for the player.',
+                    ),
+                    buildButton(
+                      context,
+                      text: 'Custom background',
+                      routeName: 'custom_background',
+                      description:
+                          'An example of how to Customize player background color.',
                     ),
                   ],
                 ),

@@ -1,3 +1,5 @@
+## 4.2.15
+* MeeduVideoPlayer can take background color, which gets passed to media_kit widget too
 ## 4.2.14
 * Updating packages (video_player,window_manager,video_player_media_kit)
 * Fix Custom caption view (to be contestant when full screen or not)

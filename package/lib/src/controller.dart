@@ -31,6 +31,8 @@ enum ControlsStyle {
 
   /// The custom style is used to apply a custom style which you can provide in MeeduPlayerController.
   custom,
+
+
 }
 
 class MeeduPlayerController {
