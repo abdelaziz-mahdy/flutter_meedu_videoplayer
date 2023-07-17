@@ -221,7 +221,6 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                               responsive: _.responsive,
                               child: _.customControls!,
                             )
-                       
                         ],
                       ),
                     );
