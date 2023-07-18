@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu_videoplayer/forward_and_rewind.dart';
 import 'package:flutter_meedu_videoplayer/src/helpers/desktop_pip_bk.dart';
 import 'package:flutter_meedu_videoplayer/src/native/pip_manager.dart';
 import 'package:flutter_meedu_videoplayer/src/video_player_used.dart';
@@ -58,6 +59,9 @@ class MeeduPlayerController {
   /// the dataStatus to notify the load sources events
   /// [dataStatus] has a [status] observable
   final MeeduPlayerDataStatus dataStatus = MeeduPlayerDataStatus();
+
+  final ForwardAndRewindStyle forwardAndRewindStyle;
+
   final Color colorTheme;
   final bool controlsEnabled;
   String? _errorText;
@@ -327,6 +331,7 @@ class MeeduPlayerController {
     this.customCallbacks = const CustomCallbacks(),
     Responsive? responsive,
     this.durations = const Durations(),
+    this.forwardAndRewindStyle = const ForwardAndRewindStyle(),
     this.onVideoPlayerClosed,
     BoxFit? initialFit,
   }) : _videoFit = Rx(initialFit ?? BoxFit.fill) {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ForwardAndRewindStyle {
   /// With this argument change the icons that appear when double-tapping,
   /// also the style of the container that indicates when the video will be rewind or forward.
-  ForwardAndRewindStyle({
+  const ForwardAndRewindStyle({
     BarStyle? bar,
     Widget? rewind,
     Widget? forward,
@@ -13,10 +13,10 @@ class ForwardAndRewindStyle {
     BorderRadius? borderRadius,
     Color? ripple,
     this.spaceBetweenBarAndText = 10,
-  })  : bar = bar ?? BarStyle.forward(),
+  })  : bar = bar ?? const BarStyle.forward(),
         padding = padding ?? const EdgeInsets.all(10),
-        backgroundColor = backgroundColor ?? Colors.black.withOpacity(0.28),
-        ripple = ripple ?? Colors.white.withOpacity(0.28),
+        backgroundColor = backgroundColor ?? const Color.fromRGBO(0, 0, 0, 0.28),
+        ripple = ripple ?? const Color.fromRGBO(255, 255, 255, 0.28),
         borderRadius =
             borderRadius ?? const BorderRadius.all(Radius.circular(10)),
         rewind = rewind ?? const Icon(Icons.fast_rewind, color: Colors.white),

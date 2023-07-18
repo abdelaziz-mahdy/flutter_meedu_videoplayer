@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_meedu_videoplayer/bar.dart';
+import 'package:flutter_meedu_videoplayer/forward_and_rewind.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 class PortraitExamplePage extends StatefulWidget {
@@ -14,7 +16,9 @@ class _PortraitExamplePageState extends State<PortraitExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
       controlsStyle: ControlsStyle.primary,
       enabledControls: const EnabledControls(doubleTapToSeek: false),
-      responsive: Responsive(buttonsSizeRelativeToScreen: 6));
+      responsive: Responsive(buttonsSizeRelativeToScreen: 6),
+      forwardAndRewindStyle: const ForwardAndRewindStyle(bar:BarStyle.progress(height: 8,dotSize: 12,dot: Colors.red,color: Colors.red)),
+  );
 
   StreamSubscription? _playerEventSubs;
 
