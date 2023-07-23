@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class PlayerWithHeaderPage extends StatefulWidget {
   const PlayerWithHeaderPage({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class _PlayerWithHeaderPageState extends State<PlayerWithHeaderPage> {
   @override
   void dispose() {
     // The next line disables the wakelock again.
-    Wakelock.disable();
+    WakelockPlus.disable();
     _meeduPlayerController.dispose();
     super.dispose();
   }

@@ -13,8 +13,8 @@ import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:volume_controller/volume_controller.dart';
-import 'package:wakelock/wakelock.dart';
 import 'package:universal_platform/universal_platform.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
 
 /// An enumeration of the different styles that can be applied to controls, such
@@ -375,11 +375,11 @@ class MeeduPlayerController {
       (PlayerStatus status) {
         if (status == PlayerStatus.playing) {
           if (manageWakeLock && !UniversalPlatform.isLinux) {
-            Wakelock.enable();
+            WakelockPlus.enable();
           }
         } else {
           if (manageWakeLock && !UniversalPlatform.isLinux) {
-            Wakelock.disable();
+            WakelockPlus.disable();
           }
         }
       },
@@ -1157,7 +1157,7 @@ class MeeduPlayerController {
       _timer?.cancel();
       pause();
       if (manageWakeLock && !UniversalPlatform.isLinux) {
-        Wakelock.disable();
+        WakelockPlus.disable();
       }
 
       _videoPlayerController?.removeListener(_listener);

@@ -1,5 +1,6 @@
 ## 4.2.17
 * Updates to `video_player_media_kit 0.0.20`
+* migrate to wakelock_plus
 ## 4.2.16
 * Web fix black screen after closing full screen
 * fix web pause when closing full screen

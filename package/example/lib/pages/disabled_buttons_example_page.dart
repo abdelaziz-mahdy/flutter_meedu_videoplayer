@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class DisabledButtonsExample extends StatefulWidget {
   const DisabledButtonsExample({Key? key}) : super(key: key);
@@ -24,13 +24,13 @@ class _DisabledButtonsExampleState extends State<DisabledButtonsExample> {
   @override
   void initState() {
     super.initState();
-    // The following line will enable the Android and iOS wakelock.
+    // The following line will enable the Android and iOS WakelockPlus.
     _playerEventSubs = _meeduPlayerController.onPlayerStatusChanged.listen(
       (PlayerStatus status) {
         if (status == PlayerStatus.playing) {
-          Wakelock.enable();
+          WakelockPlus.enable();
         } else {
-          Wakelock.disable();
+          WakelockPlus.disable();
         }
       },
     );
@@ -44,7 +44,7 @@ class _DisabledButtonsExampleState extends State<DisabledButtonsExample> {
   void dispose() {
     // The next line disables the wakelock again.
     _playerEventSubs?.cancel();
-    Wakelock.disable();
+    WakelockPlus.disable();
     _meeduPlayerController.dispose();
     super.dispose();
   }
