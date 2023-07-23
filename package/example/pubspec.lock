@@ -148,7 +148,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.2.15"
+    version: "4.2.16"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
