@@ -186,7 +186,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                               (__) {
                             if (widget.controller.forceUIRefreshAfterFullScreen
                                 .value) {
-                              // print("NEEDS TO REFRASH UI");
+                              print("NEEDS TO REFRASH UI");
                               refresh();
                               widget.controller.forceUIRefreshAfterFullScreen
                                   .value = false;

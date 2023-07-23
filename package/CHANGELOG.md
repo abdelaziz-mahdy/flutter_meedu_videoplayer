@@ -1,3 +1,5 @@
+## 4.2.19
+* improved windows closing full screen 
 ## 4.2.18
 * fixes macos fullscreen crash
 ## 4.2.17
