@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:flutter_meedu_videoplayer/src/widgets/styles/controls_container.dart';
@@ -84,6 +85,8 @@ class MeeduVideoPlayer extends StatefulWidget {
 }
 
 class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
+  // bool oldUIRefresh = false;
+  ValueKey _key = const ValueKey(true);
   double videoWidth(VideoPlayerController? controller) {
     double width = controller != null
         ? controller.value.size.width != 0
@@ -110,6 +113,19 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
     // } else {
     //   return height;
     // }
+  }
+
+  void refresh() {
+    if (!kIsWeb) {
+      return;
+    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        _key = ValueKey(!_key.value);
+
+        // your state update logic goes here
+      });
+    });
   }
 
   @override
@@ -164,6 +180,15 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                           RxBuilder(
                               //observables: [_.videoFit],
                               (__) {
+                            if (widget.controller.forceUIRefreshAfterFullScreen
+                                .value) {
+                              // print("NEEDS TO REFRASH UI");
+                              refresh();
+                              widget.controller.forceUIRefreshAfterFullScreen
+                                  .value = false;
+                            }
+                            // widget.controller.forceUIRefreshAfterFullScreen
+                            //     .value = false;
                             _.dataStatus.status.value;
                             _.customDebugPrint(
                                 "Fit is ${widget.controller.videoFit.value}");
@@ -187,7 +212,10 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                                   // width: 640,
                                   // height: 480,
                                   child: _.videoPlayerController != null
-                                      ? VideoPlayer(_.videoPlayerController!)
+                                      ? VideoPlayer(
+                                          _.videoPlayerController!,
+                                          key: _key,
+                                        )
                                       : Container(),
                                 ),
                               ),

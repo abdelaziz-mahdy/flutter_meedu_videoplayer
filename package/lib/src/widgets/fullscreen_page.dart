@@ -43,7 +43,8 @@ class _MeeduPlayerFullscreenPageState extends State<MeeduPlayerFullscreenPage> {
     }
 
     widget.controller.launchedAsFullScreen = false;
-
+    //FORCE UI REFRESH
+    widget.controller.forceUIRefreshAfterFullScreen.value = true;
     super.dispose();
   }
 }
