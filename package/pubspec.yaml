@@ -23,7 +23,7 @@ dependencies:
   meta: ^1.7.0
   universal_platform: ^1.0.0+1
   fullscreen_window: ^1.0.4
-  video_player_media_kit: ^0.0.20
+  video_player_media_kit: ^0.0.21
   # video_player_media_kit:
   #   path: ../../video_player_media_kit
 
