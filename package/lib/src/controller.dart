@@ -374,11 +374,11 @@ class MeeduPlayerController {
     _playerEventSubs = onPlayerStatusChanged.listen(
       (PlayerStatus status) {
         if (status == PlayerStatus.playing) {
-          if (manageWakeLock && !UniversalPlatform.isLinux) {
+          if (manageWakeLock) {
             WakelockPlus.enable();
           }
         } else {
-          if (manageWakeLock && !UniversalPlatform.isLinux) {
+          if (manageWakeLock) {
             WakelockPlus.disable();
           }
         }
@@ -1156,7 +1156,7 @@ class MeeduPlayerController {
       _position.value = Duration.zero;
       _timer?.cancel();
       pause();
-      if (manageWakeLock && !UniversalPlatform.isLinux) {
+      if (manageWakeLock) {
         WakelockPlus.disable();
       }
 
