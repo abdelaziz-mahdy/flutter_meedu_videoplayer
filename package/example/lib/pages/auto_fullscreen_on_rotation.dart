@@ -10,7 +10,6 @@ import 'package:native_device_orientation/native_device_orientation.dart';
 class Quality {
   final String url, label;
   Quality({
-    
     required this.url,
     required this.label,
   });

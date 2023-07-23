@@ -96,13 +96,12 @@ class MeeduPlayerController {
 
   Rx<bool> videoFitChanged = false.obs;
   final Rx<BoxFit> _videoFit;
-  
+
   final Rx<bool> forceUIRefreshAfterFullScreen = false.obs;
 
   //Rx<double> scale = 1.0.obs;
   Rx<bool> rewindIcons = false.obs;
   Rx<bool> forwardIcons = false.obs;
-
 
   // NO OBSERVABLES
   bool _isSliderMoving = false;
