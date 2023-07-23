@@ -1,3 +1,5 @@
+## 4.2.18
+* fixes macos fullscreen crash
 ## 4.2.17
 * Updates to `video_player_media_kit 0.0.20`
 * migrate to wakelock_plus

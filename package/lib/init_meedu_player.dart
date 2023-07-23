@@ -17,7 +17,9 @@ Future<void> initMeeduPlayer(
   } else {
     VideoPlayerUsed.videoPlayer = true;
   }
-
+  if (UniversalPlatform.isDesktop) {
+    await windowManager.ensureInitialized();
+  }
   initVideoPlayerMediaKitIfNeeded(
       iosUseMediaKit: iosUseMediaKit,
       androidUseMediaKit: androidUseMediaKit,
