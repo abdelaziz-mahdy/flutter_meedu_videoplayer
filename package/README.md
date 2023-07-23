@@ -264,7 +264,7 @@ Also, during the build phase, the following warnings are not critical and cannot
 ```yaml
 dependencies:
   ...
-  media_kit_libs_ios_video: ^1.0.4         # iOS package for video (& audio) native libraries.
+  media_kit_libs_ios_video: ^1.0.5         # iOS package for video (& audio) native libraries.
 ```
 Also, software rendering is forced in the iOS simulator, due to an incompatibility with OpenGL ES.
 
@@ -274,7 +274,7 @@ Also, software rendering is forced in the iOS simulator, due to an incompatibili
 ```yaml
 dependencies:
   ...
-  media_kit_libs_android_video: ^1.0.3           # Android package for video native libraries.
+  media_kit_libs_android_video: ^1.2.0           # Android package for video native libraries.
 ```
 
 ### hls on web
