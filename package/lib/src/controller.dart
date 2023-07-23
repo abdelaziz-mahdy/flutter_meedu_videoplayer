@@ -1031,7 +1031,9 @@ class MeeduPlayerController {
           }
         }
       } else {
-        Navigator.pop(context);
+       if (this.fullscreen.value) {
+          Navigator.pop(context);
+        }
       }
     }
   }
