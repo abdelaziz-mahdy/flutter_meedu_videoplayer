@@ -1,5 +1,6 @@
 ## 4.2.16
 * Web fix black screen after closing full screen
+* fix web pause when closing full screen
 ## 4.2.15
 * MeeduVideoPlayer can take background color, which gets passed to media_kit widget too
 ## 4.2.14

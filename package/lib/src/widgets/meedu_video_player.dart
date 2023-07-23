@@ -119,12 +119,16 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
     if (!kIsWeb) {
       return;
     }
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         _key = ValueKey(!_key.value);
 
         // your state update logic goes here
       });
+      if (widget.controller.playerStatus.playing) {
+        widget.controller.play();
+      }
     });
   }
 
