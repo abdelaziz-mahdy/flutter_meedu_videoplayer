@@ -46,7 +46,7 @@ class PlayerSlider extends StatelessWidget {
                   activeTrackColor: _.forwardAndRewindStyle.bar.color,
                   trackHeight: _.forwardAndRewindStyle.bar.height,
                   thumbShape:
-                  RoundSliderThumbShape(enabledThumbRadius: _.forwardAndRewindStyle.bar.identifierWidth),
+                  RoundSliderThumbShape(enabledThumbRadius: _.forwardAndRewindStyle.bar.thumbRadius),
                 ),
                 child: Slider(
                   min: 0,

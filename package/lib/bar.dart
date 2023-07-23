@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BarStyle {
   final BorderRadius borderRadius;
   final Color secondBackground;
-  final double identifierWidth;
+  final double thumbRadius;
   final Color identifier;
   final Color background;
   final double height;
@@ -37,7 +37,7 @@ class BarStyle {
         background = background ?? const Color.fromRGBO(255, 255, 255, 0.2),
         borderRadius =
             borderRadius ?? const BorderRadius.all(Radius.circular(5)),
-        identifierWidth = dotSize;
+        thumbRadius = dotSize;
 
   /// The **[borderRadius]** that the VolumeBar will have
   ///
@@ -58,7 +58,7 @@ class BarStyle {
         background = background ?? const Color.fromRGBO(255, 255, 255, 0.2),
         borderRadius =
             borderRadius ?? const BorderRadius.all(Radius.circular(5)),
-        identifierWidth = 0.0;
+        thumbRadius = 0.0;
 
   const BarStyle.forward({
     this.width = 120,
@@ -66,7 +66,7 @@ class BarStyle {
     Color? color,
     Color? background,
     Color? identifier,
-    this.identifierWidth = 2.0,
+    this.thumbRadius = 2.0,
     BorderRadius? borderRadius,
   })  : identifier = identifier ?? Colors.red,
         color = color ?? Colors.white,
