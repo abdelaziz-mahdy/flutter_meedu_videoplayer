@@ -1,3 +1,5 @@
+## 4.2.21
+* Updating readme versions
 ## 4.2.20
 * Updates to `video_player_media_kit 0.0.21` to fix web compilation
 ## 4.2.19
