@@ -347,10 +347,10 @@ packages:
     dependency: transitive
     description:
       name: media_kit_libs_windows_video
-      sha256: "4aa12f61c9989c4d7159ed0c15640d645dbe59026ac9057a3651d026a409dcb9"
+      sha256: b343e644927982a2ef3db63877b36d84bdda8173d8318ca0d1c68c1ea8a35982
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.4"
+    version: "1.0.5"
   media_kit_native_event_loop:
     dependency: transitive
     description:
@@ -752,10 +752,10 @@ packages:
     dependency: transitive
     description:
       name: video_player_media_kit
-      sha256: "2d1e2389db93b9cbeba05d8b88d5eec1273675c7904e00c56ea08c776c6977a9"
+      sha256: "7472fca414cfe372560d9328a3da9e57d9ba1de4af7ed8d887ce6a9868dc2430"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.21"
+    version: "0.0.22"
   video_player_platform_interface:
     dependency: transitive
     description:

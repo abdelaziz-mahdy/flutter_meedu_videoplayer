@@ -1,3 +1,5 @@
+## 4.2.22
+* Updates to `video_player_media_kit 0.0.22` to fix errors when playing live streams
 ## 4.2.21
 * Updating readme versions
 ## 4.2.20
