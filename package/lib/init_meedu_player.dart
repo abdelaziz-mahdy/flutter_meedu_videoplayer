@@ -13,8 +13,7 @@ Future<void> initMeeduPlayer(
     {bool iosUseMediaKit = false,
     bool androidUseMediaKit = false,
     MPVLogLevel logLevel = MPVLogLevel.error,
-    bool throwErrors=true
-    }) async {
+    bool throwErrors = true}) async {
   WidgetsFlutterBinding.ensureInitialized();
   // await initWindowManagerIfNeeded();
   if (UniversalPlatform.isDesktop ||
@@ -31,7 +30,7 @@ Future<void> initMeeduPlayer(
       iosUseMediaKit: iosUseMediaKit,
       androidUseMediaKit: androidUseMediaKit,
       logLevel: logLevel,
-      throwErrors:throwErrors);
+      throwErrors: throwErrors);
 }
 
 Future<void> initWindowManagerIfNeeded() async {
