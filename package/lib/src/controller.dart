@@ -62,7 +62,7 @@ class MeeduPlayerController {
   final bool controlsEnabled;
   String? _errorText;
   String? get errorText => _errorText;
-  Widget? loadingWidget, header, bottomRight, customControls;
+  Widget? loadingWidget, header, bottomRight, customControls, videoOverlay;
 
   ///[customCaptionView] when a custom view for the captions is needed
   Widget Function(BuildContext context, MeeduPlayerController controller,

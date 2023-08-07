@@ -1,3 +1,5 @@
+## 4.2.24
+* Added videoOverlay to help with wrapping widget in both normal and fullScreen
 ## 4.2.23
 * Updates to `video_player_media_kit 0.0.23` to use latest version of media_kit, also allows disabling media_kit playback errors
 ## 4.2.22

@@ -81,6 +81,13 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
           aspectRatio: 16 / 9,
           child: MeeduVideoPlayer(
             controller: _meeduPlayerController,
+            // videoOverlay: (context, controller, responsive) => Container(
+            //   color: Colors.red,
+            //   child: SizedBox(
+            //     height: 50,
+            //     width: 50,
+            //   ),
+            // ),
             header: (context, controller, responsive) => header,
           ),
         ),

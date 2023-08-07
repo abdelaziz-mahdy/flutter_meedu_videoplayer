@@ -49,6 +49,13 @@ class MeeduVideoPlayer extends StatefulWidget {
     Responsive responsive,
   )? customControls;
 
+  ///[videoOverlay] can be used to wrap the player in any widget, to apply custom gestures, or apply custom watermarks
+  final Widget Function(
+    BuildContext context,
+    MeeduPlayerController controller,
+    Responsive responsive,
+  )? videoOverlay;
+
   ///[customCaptionView] when a custom view for the captions is needed
   final Widget Function(BuildContext context, MeeduPlayerController controller,
       Responsive responsive, String text)? customCaptionView;
@@ -76,6 +83,7 @@ class MeeduVideoPlayer extends StatefulWidget {
       this.customIcons,
       this.customControls,
       this.customCaptionView,
+      this.videoOverlay,
       this.closedCaptionDistanceFromBottom = 40,
       this.backgroundColor = Colors.black})
       : super(key: key);
@@ -166,7 +174,10 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                       _.bottomRight =
                           widget.bottomRight!(context, _, _.responsive);
                     }
-
+                    if (widget.videoOverlay != null) {
+                      _.videoOverlay =
+                          widget.videoOverlay!(context, _, _.responsive);
+                    }
                     if (widget.customControls != null) {
                       _.customControls =
                           widget.customControls!(context, _, _.responsive);
@@ -225,6 +236,7 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                               ),
                             );
                           }),
+                          if (_.videoOverlay != null) _.videoOverlay!,
                           ClosedCaptionView(
                             responsive: _.responsive,
                             distanceFromBottom:
