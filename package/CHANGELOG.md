@@ -1,3 +1,5 @@
+## 4.2.23
+* Updates to `video_player_media_kit 0.0.23` to use latest version of media_kit, also allows disabling media_kit playback errors
 ## 4.2.22
 * Updates to `video_player_media_kit 0.0.22` to fix errors when playing live streams
 ## 4.2.21
