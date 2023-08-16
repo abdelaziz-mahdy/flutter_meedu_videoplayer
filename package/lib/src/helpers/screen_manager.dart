@@ -41,15 +41,16 @@ class ScreenManager {
   Future<void> setWindowsFullScreen(bool state, MeeduPlayerController _) async {
     _.fullscreen.value = state;
     //customDebugPrint(await windowManager.isFullScreen());
-    await windowManager.ensureInitialized();
+    // await windowManager.ensureInitialized();
     //await windowManager.setFullScreen(state);
 
     if (state) {
       await windowManager.setFullScreen(state);
     } else {
       await windowManager.setFullScreen(state);
-      Size size = await windowManager.getSize();
-      await windowManager.setSize(Size(size.width + 1, size.height + 1));
+      // print("ASDFDSAFSDAF");
+      // Size size = await windowManager.getSize();
+      // await windowManager.setSize(Size(size.width + 1, size.height + 1));
       // await windowManager.restore();
     }
   }

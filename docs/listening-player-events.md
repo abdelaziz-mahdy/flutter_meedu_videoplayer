@@ -13,9 +13,9 @@ For example to keep the screen on when the video player is playing a video
   _playerEventSubs = _meeduPlayerController.onPlayerStatusChanged.listen(
       (PlayerStatus status) {
         if (status == PlayerStatus.playing) {
-          Wakelock.enable();// keep the screen on
+          wakelock_plusPlus.enable();// keep the screen on
         } else { // if the video is finished or paused
-          Wakelock.disable();
+          wakelock_plusPlus.disable();
         }
       },
     );
@@ -25,9 +25,9 @@ For example to keep the screen on when the video player is playing a video
     // DON'T FORGET CANCEL YOUR SUBSCRIPTIONS
     @override
     void dispose() {
-        // The next line disables the wakelock again.
+        // The next line disables the wakelock_plus again.
         _playerEventSubs?.cancel();
-        Wakelock.disable();// if you are using wakelock
+        wakelock_plusPlus.disable();// if you are using wakelock_plus
         _meeduPlayerController.dispose();
         super.dispose();
     }

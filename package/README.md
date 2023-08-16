@@ -31,8 +31,6 @@
   </tbody>
 </table> -->
 
-
-
 <table>
   <thead>
     <tr>
@@ -184,7 +182,9 @@
 - Swipe vertically on the left side of the screen to control the video brightness. (<em>brightnessSwipes</em>)
 - Double-tap on the sides of the screen to seek forward or backward in the video. (<em>doubleTapToSeek</em>)
 - Long press on the screen to speed up the video, and the video slows down when the long press is released. (<em>onLongPressSpeedUp</em>)
+
 ## Desktop Controls
+
 - One-click with the mouse to toggle play and pause. (<em>desktopTapToPlayAndPause</em>)
 - Double-click with the mouse to toggle full-screen mode. (<em>desktopDoubleTapToFullScreen</em>)
 - Use the keyboard up and down arrows to increase or decrease the video volume. (<em>volumeArrows</em>)

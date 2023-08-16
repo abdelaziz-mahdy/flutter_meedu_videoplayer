@@ -169,12 +169,15 @@
 
 ## Mobile Controls
 
+
 - Swipe horizontally to seek forward or backward in the video. (<em>seekSwipes</em>)
 - Swipe vertically on the right side of the screen to control the video volume. (<em>volumeSwipes</em>)
 - Swipe vertically on the left side of the screen to control the video brightness. (<em>brightnessSwipes</em>)
 - Double-tap on the sides of the screen to seek forward or backward in the video. (<em>doubleTapToSeek</em>)
 - Long press on the screen to speed up the video, and the video slows down when the long press is released. (<em>onLongPressSpeedUp</em>)
+
 ## Desktop Controls
+
 - One-click with the mouse to toggle play and pause. (<em>desktopTapToPlayAndPause</em>)
 - Double-click with the mouse to toggle full-screen mode. (<em>desktopDoubleTapToFullScreen</em>)
 - Use the keyboard up and down arrows to increase or decrease the video volume. (<em>volumeArrows</em>)
@@ -183,7 +186,6 @@
 - Press the NumPad Decimal key (.) to toggle the video fit. (<em>numPadDecimalKeyToggleFit</em>)
 - Press the Enter key to open full-screen mode. (<em>enterKeyOpensFullScreen</em>)
 - Press the Space key to toggle between playing and pausing the video. (<em>spaceKeyTogglePlay</em>)
-
 
 
 # Setup [media_kit](https://pub.dev/packages/media_kit).

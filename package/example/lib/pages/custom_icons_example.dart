@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu_media_kit/meedu_player.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:flutter_meedu_videoplayer/meedu_player.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class CustomIconsExamplePage extends StatefulWidget {
   const CustomIconsExamplePage({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class CustomIconsExamplePage extends StatefulWidget {
 class _CustomIconsExamplePageState extends State<CustomIconsExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.primary,
-    manageWakeLock: false,
+    managewakelock_plus: false,
     // enabledControls: const EnabledControls(doubleTapToSeek: false)
   );
 
@@ -23,13 +23,13 @@ class _CustomIconsExamplePageState extends State<CustomIconsExamplePage> {
   @override
   void initState() {
     super.initState();
-    // The following line will enable the Android and iOS wakelock.
+    // The following line will enable the Android and iOS wakelock_plusPlus.
     _playerEventSubs = _meeduPlayerController.onPlayerStatusChanged.listen(
       (PlayerStatus status) {
         if (status == PlayerStatus.playing) {
-          Wakelock.enable();
+          wakelock_plusPlus.enable();
         } else {
-          Wakelock.disable();
+          wakelock_plusPlus.disable();
         }
       },
     );
@@ -41,9 +41,9 @@ class _CustomIconsExamplePageState extends State<CustomIconsExamplePage> {
 
   @override
   void dispose() {
-    // The next line disables the wakelock again.
+    // The next line disables the wakelock_plus again.
     _playerEventSubs?.cancel();
-    Wakelock.disable();
+    wakelock_plusPlus.disable();
     _meeduPlayerController.dispose();
     super.dispose();
   }

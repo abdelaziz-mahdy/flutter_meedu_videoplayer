@@ -2,17 +2,17 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu_media_kit/meedu_player.dart';
+import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 import 'package:universal_platform/universal_platform.dart';
 
-class BasicExamplePage extends StatefulWidget {
-  const BasicExamplePage({Key? key}) : super(key: key);
+class CustomBackgroundPage extends StatefulWidget {
+  const CustomBackgroundPage({Key? key}) : super(key: key);
 
   @override
-  State<BasicExamplePage> createState() => _BasicExamplePageState();
+  State<CustomBackgroundPage> createState() => _CustomBackgroundPageState();
 }
 
-class _BasicExamplePageState extends State<BasicExamplePage> {
+class _CustomBackgroundPageState extends State<CustomBackgroundPage> {
   final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.primary,
     // enabledButtons: const EnabledButtons(pip: true),
@@ -81,13 +81,7 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
           aspectRatio: 16 / 9,
           child: MeeduVideoPlayer(
             controller: _meeduPlayerController,
-            // videoOverlay: (context, controller, responsive) => Container(
-            //   color: Colors.red,
-            //   child: SizedBox(
-            //     height: 50,
-            //     width: 50,
-            //   ),
-            // ),
+            backgroundColor: Colors.blue,
             header: (context, controller, responsive) => header,
           ),
         ),

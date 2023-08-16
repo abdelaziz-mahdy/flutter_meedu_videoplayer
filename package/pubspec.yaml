@@ -1,6 +1,6 @@
 name: flutter_meedu_media_kit
 description: a controls wrapper for media_kit.
-version: 4.2.14
+version: 4.2.24
 homepage: "https://github.com/zezo357/flutter_meedu_media_kit"
 environment:
   sdk: ">=2.16.2 <4.0.0"
@@ -26,7 +26,8 @@ dependencies:
   window_manager: ^0.3.5
   # window_manager: 
   #   path: ../../window_manager
-  wakelock: ^0.6.1+2
+  # wakelock_plus: ^0.6.1+2
+  wakelock_plus_plus: ^1.1.1
   shared_preferences: ^2.0.13
   # dio: ^5.0.0
   # dio_smart_retry: ^5.0.0

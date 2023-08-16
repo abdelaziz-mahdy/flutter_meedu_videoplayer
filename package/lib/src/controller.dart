@@ -12,8 +12,8 @@ import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_meedu_media_kit/meedu_player.dart';
 import 'package:volume_controller/volume_controller.dart';
-import 'package:wakelock/wakelock.dart';
 import 'package:universal_platform/universal_platform.dart';
+import 'package:wakelock_plus_plus/wakelock_plus_plus.dart';
 import 'package:window_manager/window_manager.dart';
 
 /// An enumeration of the different styles that can be applied to controls, such
@@ -66,7 +66,7 @@ class MeeduPlayerController {
   final bool controlsEnabled;
   String? _errorText;
   String? get errorText => _errorText;
-  Widget? loadingWidget, header, bottomRight, customControls;
+  Widget? loadingWidget, header, bottomRight, customControls, videoOverlay;
 
   ///[customCaptionView] when a custom view for the captions is needed
   Widget Function(BuildContext context, MeeduPlayerController controller,
@@ -101,9 +101,13 @@ class MeeduPlayerController {
 
   Rx<bool> videoFitChanged = false.obs;
   final Rx<BoxFit> _videoFit;
+
+  final Rx<bool> forceUIRefreshAfterFullScreen = false.obs;
+
   //Rx<double> scale = 1.0.obs;
   Rx<bool> rewindIcons = false.obs;
   Rx<bool> forwardIcons = false.obs;
+
   // NO OBSERVABLES
   bool _isSliderMoving = false;
   bool _looping = false;
@@ -233,8 +237,8 @@ class MeeduPlayerController {
   /// controls if widgets inside videoplayer should get focus or not
   final bool excludeFocus;
 
-  ///if the player should use wakelock
-  final bool manageWakeLock;
+  ///if the player should use wakelock_plus
+  final bool managewakelock_plus;
 
   /// if the player should manage Brightness
   final bool manageBrightness;
@@ -307,14 +311,14 @@ class MeeduPlayerController {
   ///
   /// [screenManager] the device orientations and overlays
   /// [controlsEnabled] if the player must show the player controls
-  /// [manageWakeLock] if the player should use wakelock
+  /// [managewakelock_plus] if the player should use wakelock_plus
   /// [errorText] message to show when the load process failed
   MeeduPlayerController({
     this.screenManager = const ScreenManager(),
     this.colorTheme = Colors.redAccent,
     Widget? loadingWidget,
     this.controlsEnabled = true,
-    this.manageWakeLock = true,
+    this.managewakelock_plus = true,
     this.manageBrightness = true,
     this.showLogs = true,
     this.excludeFocus = true,
@@ -382,12 +386,12 @@ class MeeduPlayerController {
     _playerEventSubs = onPlayerStatusChanged.listen(
       (PlayerStatus status) {
         if (status == PlayerStatus.playing) {
-          if (manageWakeLock && !UniversalPlatform.isLinux) {
-            Wakelock.enable();
+          if (managewakelock_plus) {
+            wakelock_plusPlus.enable();
           }
         } else {
-          if (manageWakeLock && !UniversalPlatform.isLinux) {
-            Wakelock.disable();
+          if (managewakelock_plus) {
+            wakelock_plusPlus.disable();
           }
         }
       },
@@ -1025,7 +1029,9 @@ class MeeduPlayerController {
           }
         }
       } else {
-        Navigator.pop(context);
+        if (this.fullscreen.value) {
+          Navigator.pop(context);
+        }
       }
     }
   }
@@ -1123,8 +1129,8 @@ class MeeduPlayerController {
       _position.value = Duration.zero;
       _timer?.cancel();
       pause();
-      if (manageWakeLock && !UniversalPlatform.isLinux) {
-        Wakelock.disable();
+      if (managewakelock_plus) {
+        wakelock_plusPlus.disable();
       }
 
       removeListeners();

@@ -1,26 +1,71 @@
-## 4.2.14
-* Updating packages (window_manager,media_kit)
-* Fix weird slider look when video is short
+## 4.2.24
 
+- Added videoOverlay to help with wrapping widget in both normal and fullScreen
+
+## 4.2.23
+
+- Updates to `video_player_media_kit 0.0.23` to use latest version of media_kit, also allows disabling media_kit playback errors
+
+## 4.2.22
+
+- Updates to `video_player_media_kit 0.0.22` to fix errors when playing live streams
+
+## 4.2.21
+
+- Updating readme versions
+
+## 4.2.20
+
+- Updates to `video_player_media_kit 0.0.21` to fix web compilation
+
+## 4.2.19
+
+- improved windows closing full screen
+
+## 4.2.18
+
+- fixes macos fullscreen crash
+
+## 4.2.17
+
+- Updates to `video_player_media_kit 0.0.20`
+- migrate to wakelock_plus_plus
+
+## 4.2.16
+
+- Web fix black screen after closing full screen
+- fix web pause when closing full screen
+
+## 4.2.15
+
+- MeeduVideoPlayer can take background color, which gets passed to media_kit widget too
+
+## 4.2.14
+
+- Updating packages (window_manager,media_kit)
+- Fix weird slider look when video is short
 
 ## 4.2.13
-* autoHideControls: can be disabled thanks to [sommye-ctr](https://github.com/sommye-ctr)
-* instead of debug prints, now its logs with the package name
-* Fixes position slider hiding when changing position
-* Custom callback for on long press start and end
-* Fixes ios orientation
-* Fixes back button not working
-* Adding on long press speed up video in controls
-* Feature mobile UI lock [0Franky](https://github.com/0Franky)
-* Feature desktop pip [0Franky](https://github.com/0Franky)
-* Add ControlsStyle.primaryList for scrollable list [ADAIN](https://github.com/ADAIN)
-* Added topics
+
+- autoHideControls: can be disabled thanks to [sommye-ctr](https://github.com/sommye-ctr)
+- instead of debug prints, now its logs with the package name
+- Fixes position slider hiding when changing position
+- Custom callback for on long press start and end
+- Fixes ios orientation
+- Fixes back button not working
+- Adding on long press speed up video in controls
+- Feature mobile UI lock [0Franky](https://github.com/0Franky)
+- Feature desktop pip [0Franky](https://github.com/0Franky)
+- Add ControlsStyle.primaryList for scrollable list [ADAIN](https://github.com/ADAIN)
+- Added topics
 
 ## 4.2.12
-* fixes more volume issues
-## 4.2.11
-* fixes volume
 
+- fixes more volume issues
+
+## 4.2.11
+
+- fixes volume
 
 ## 4.2.10
 
@@ -206,8 +251,8 @@
 
 ## 3.0.5
 
-- Disabled WakeLock on linux
-- Added manageWakeLock to constructor incase someone wants to disable WakeLock
+- Disabled wakelock_plus on linux
+- Added managewakelock_plus to constructor incase someone wants to disable wakelock_plus
 
 ## 3.0.4
 

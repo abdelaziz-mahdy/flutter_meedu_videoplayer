@@ -37,8 +37,32 @@
     // The value below is injected by flutter build, do not touch.
     var serviceWorkerVersion = null;
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"  type="application/javascript"></script>
-  <!-- This script adds the flutter initialization JS code -->
+    <script type="application/javascript">
+      function loadScript(src, callback, errorCallback) {
+          const script = document.createElement('script');
+          script.type = 'application/javascript';
+          script.src = src;
+
+          script.onload = callback;
+          script.onerror = errorCallback;
+
+          document.head.appendChild(script);
+      }
+
+      const cdnUrl = "https://cdn.jsdelivr.net/npm/hls.js@latest";
+      const unpkgUrl = "https://unpkg.com/hls.js@latest";
+
+      loadScript(cdnUrl, () => {
+          console.log('CDN script loaded successfully');
+      }, () => {
+          console.log('Failed to load from CDN, trying unpkg URL');
+          loadScript(unpkgUrl, () => {
+              console.log('unpkg script loaded successfully');
+          }, () => {
+              console.error('Failed to load from both CDN and unpkg URLs');
+          });
+      });
+  </script>  <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
 <body>

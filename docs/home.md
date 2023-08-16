@@ -1,8 +1,5 @@
 # flutter_meedu_media_kit
 
-
-
-
 <a href="https://www.buymeacoffee.com/zezo357" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 <a href='https://ko-fi.com/zezo357' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
 
@@ -16,10 +13,8 @@
 <img src="assets/full.gif" alt="meedu_player" width="300" />
 <img src="assets/playing_video.png" alt="meedu_player" width="300" />
 
-
 <br/>
 <br/>
-
 
 <table>
   <thead>
@@ -163,8 +158,6 @@
   </tbody>
 </table>
 
-
-
 <!-- 👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_media_kit/)</b> -->
 
 <!-- <table>
@@ -172,18 +165,16 @@
 
   <tbody>
     <tr>
-      <td rowspan="2"><img src="https://zezo357.github.io/flutter_meedu_media_kit/assets/q2.gif" alt="meedu_player" width="160" /></td>     
-      <td><img src="https://zezo357.github.io/flutter_meedu_media_kit/assets/full.gif" alt="meedu_player" width="300" /></td>      
-    </tr>   
+      <td rowspan="2"><img src="https://zezo357.github.io/flutter_meedu_media_kit/assets/q2.gif" alt="meedu_player" width="160" /></td>
+      <td><img src="https://zezo357.github.io/flutter_meedu_media_kit/assets/full.gif" alt="meedu_player" width="300" /></td>
+    </tr>
     <tr>
-      <td><img src="https://zezo357.github.io/flutter_meedu_media_kit/assets/playing_video.png" alt="meedu_player" width="300" /></td>     
-    </tr>  
+      <td><img src="https://zezo357.github.io/flutter_meedu_media_kit/assets/playing_video.png" alt="meedu_player" width="300" /></td>
+    </tr>
   </tbody>
 </table> -->
 
-
 # Video Player Controls
-
 
 ## Mobile Controls
 
@@ -204,11 +195,7 @@
 - Press the Enter key to open full-screen mode. (<em>enterKeyOpensFullScreen</em>)
 - Press the Space key to toggle between playing and pausing the video. (<em>spaceKeyTogglePlay</em>)
 
-
-
-
 # Setup [media_kit](https://pub.dev/packages/media_kit).
-
 
 ---
 
@@ -242,6 +229,7 @@ In this moment you only can watch a **black** `Container` that is because you ne
 <br/>
 
 To play a video from **network**
+
 ```dart
  _meeduPlayerController.setDataSource(
       DataSource(
@@ -255,6 +243,7 @@ To play a video from **network**
 <br/>
 
 To play a video from **assets** (Make sure that your asset is defined in your `pubspec.yaml`)
+
 ```dart
  _meeduPlayerController.setDataSource(
       DataSource(
@@ -289,12 +278,12 @@ To play a video from a local **File**
 
 # Basic example
 
-> We are using [wakelock](https://pub.dev/packages/wakelock) to keep the screen on when the video player is using
+> We are using [wakelock_plus](https://pub.dev/packages/wakelock_plus) to keep the screen on when the video player is using
 
 ```dart
 import 'package:flutter/material.dart';
 import 'package:meedu_player/meedu_player.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus_plus/wakelock_plus_plus.dart';
 
 class BasicExamplePage extends StatefulWidget {
   BasicExamplePage({Key? key}) : super(key: key);
@@ -311,8 +300,8 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
   @override
   void initState() {
     super.initState();
-// The following line will enable the Android and iOS wakelock.
-    Wakelock.enable();
+// The following line will enable the Android and iOS wakelock_plusPlus.
+    wakelock_plusPlus.enable();
 
     // Wait until the fisrt render the avoid posible errors when use an context while the view is rendering
     WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -322,8 +311,8 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
 
   @override
   void dispose() {
-    // The next line disables the wakelock again.
-    Wakelock.disable();
+    // The next line disables the wakelock_plus again.
+    wakelock_plusPlus.disable();
     _meeduPlayerController.dispose();// release the video player
     super.dispose();
   }
