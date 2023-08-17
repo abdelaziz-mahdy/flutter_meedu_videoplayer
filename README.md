@@ -1,8 +1,5 @@
 # flutter_meedu_media_kit
 
-
-
-
 <a href="https://www.buymeacoffee.com/zezo357" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 <a href='https://ko-fi.com/zezo357' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
 
@@ -10,11 +7,7 @@
 <img src="https://img.shields.io/github/last-commit/zezo357/flutter_meedu_media_kit/main?style=flat-square"/>
 <img src="https://img.shields.io/github/license/zezo357/flutter_meedu_media_kit?style=flat-square"/>
 
-
-
-### a controls wrapper for [media_kit](https://pub.dev/packages/media_kit) using same features and logic as [flutter_meedu_videoplayer](https://pub.dev/packages/flutter_meedu_videoplayer).
-
-
+### a controls wrapper for [media_kit](https://pub.dev/packages/media_kit) using same features and logic as [flutter_meedu_media_kit](https://pub.dev/packages/flutter_meedu_media_kit).
 
 👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_media_kit/)</b>
 
@@ -23,12 +16,12 @@
 
   <tbody>
     <tr>
-      <td rowspan="2"><img src="https://zezo357.github.io/flutter_meedu_media_kit/assets/q2.gif" alt="meedu_player" width="160" /></td>     
-      <td><img src="https://zezo357.github.io/flutter_meedu_media_kit/assets/full.gif" alt="meedu_player" width="300" /></td>      
-    </tr>   
+      <td rowspan="2"><img src="https://zezo357.github.io/flutter_meedu_media_kit/assets/q2.gif" alt="meedu_player" width="160" /></td>
+      <td><img src="https://zezo357.github.io/flutter_meedu_media_kit/assets/full.gif" alt="meedu_player" width="300" /></td>
+    </tr>
     <tr>
-      <td><img src="https://zezo357.github.io/flutter_meedu_media_kit/assets/playing_video.png" alt="meedu_player" width="300" /></td>     
-    </tr>  
+      <td><img src="https://zezo357.github.io/flutter_meedu_media_kit/assets/playing_video.png" alt="meedu_player" width="300" /></td>
+    </tr>
   </tbody>
 </table> -->
 
@@ -169,7 +162,6 @@
 
 ## Mobile Controls
 
-
 - Swipe horizontally to seek forward or backward in the video. (<em>seekSwipes</em>)
 - Swipe vertically on the right side of the screen to control the video volume. (<em>volumeSwipes</em>)
 - Swipe vertically on the left side of the screen to control the video brightness. (<em>brightnessSwipes</em>)
@@ -186,6 +178,5 @@
 - Press the NumPad Decimal key (.) to toggle the video fit. (<em>numPadDecimalKeyToggleFit</em>)
 - Press the Enter key to open full-screen mode. (<em>enterKeyOpensFullScreen</em>)
 - Press the Space key to toggle between playing and pausing the video. (<em>spaceKeyTogglePlay</em>)
-
 
 # Setup [media_kit](https://pub.dev/packages/media_kit).

@@ -26,23 +26,22 @@ dependencies:
   window_manager: ^0.3.5
   # window_manager: 
   #   path: ../../window_manager
-  # wakelock_plus: ^0.6.1+2
-  wakelock_plus_plus: ^1.1.1
+  wakelock_plus: ^1.1.1
   shared_preferences: ^2.0.13
   # dio: ^5.0.0
   # dio_smart_retry: ^5.0.0
   path_provider: ^2.0.6
-  media_kit: ^1.0.2                              # Primary package.
+  media_kit: ^1.1.4                              # Primary package.
   
-  media_kit_video: ^1.0.2                        # For video rendering.
+  media_kit_video: ^1.1.5                        # For video rendering.
   
-  media_kit_native_event_loop: ^1.0.6            # Support for higher number of concurrent instances & better performance.
+  media_kit_native_event_loop: ^1.0.7            # Support for higher number of concurrent instances & better performance.
   
-  media_kit_libs_android_video: ^1.1.1           # Android package for video native libraries.
-  media_kit_libs_ios_video: ^1.0.4               # iOS package for video native libraries.
-  media_kit_libs_macos_video: ^1.0.5             # macOS package for video native libraries.
-  media_kit_libs_windows_video: ^1.0.2           # Windows package for video native libraries.
-  media_kit_libs_linux: ^1.0.2                   # GNU/Linux dependency package.
+  media_kit_libs_android_video: ^1.3.2           # Android package for video native libraries.
+  media_kit_libs_ios_video: ^1.1.3               # iOS package for video native libraries.
+  media_kit_libs_macos_video: ^1.1.3             # macOS package for video native libraries.
+  media_kit_libs_windows_video: ^1.0.7           # Windows package for video native libraries.
+  media_kit_libs_linux: ^1.1.1                   # GNU/Linux dependency package.
   
 
 

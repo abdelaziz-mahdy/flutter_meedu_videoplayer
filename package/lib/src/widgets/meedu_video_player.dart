@@ -55,12 +55,7 @@ class MeeduVideoPlayer extends StatefulWidget {
     Responsive responsive,
   )? videoOverlay;
 
-  ///[videoOverlay] can be used to wrap the player in any widget, to apply custom gestures, or apply custom watermarks
-  final Widget Function(
-    BuildContext context,
-    MeeduPlayerController controller,
-    Responsive responsive,
-  )? videoOverlay;
+
 
   // ///[customCaptionView] when a custom view for the captions is needed
   // final Widget Function(BuildContext context, MeeduPlayerController controller,
@@ -69,31 +64,19 @@ class MeeduVideoPlayer extends StatefulWidget {
   ///[backgroundColor] video background color
   final Color backgroundColor;
 
-  ///[backgroundColor] video background color
-  final Color backgroundColor;
 
-  /// The distance from the bottom of the screen to the closed captions text.
-  ///
-  /// This value represents the vertical position of the closed captions display
-  /// from the bottom of the screen. It is measured in logical pixels and can be
-  /// used to adjust the positioning of the closed captions within the video player
-  /// UI. A higher value will move the closed captions higher on the screen, while
-  /// a lower value will move them closer to the bottom.
-  ///
-  /// By adjusting this distance, you can ensure that the closed captions are
-  /// displayed at an optimal position that doesn't obstruct other important
-  /// elements of the video player interface.
-  final double closedCaptionDistanceFromBottom;
-  const MeeduVideoPlayer(
-      {Key? key,
-      required this.controller,
-      this.header,
-      this.bottomRight,
-      this.customIcons,
-      this.customControls,
-      this.backgroundColor = Colors.black,
-      })
-      : super(key: key);
+
+
+  const MeeduVideoPlayer({
+    Key? key,
+    required this.controller,
+    this.header,
+    this.bottomRight,
+    this.customIcons,
+    this.customControls,
+    this.backgroundColor = Colors.black,
+    this.videoOverlay
+  }) : super(key: key);
 
   @override
   State<MeeduVideoPlayer> createState() => _MeeduVideoPlayerState();
@@ -102,10 +85,10 @@ class MeeduVideoPlayer extends StatefulWidget {
 class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
   // bool oldUIRefresh = false;
   ValueKey _key = const ValueKey(true);
-  double videoWidth(VideoPlayerController? controller) {
-    double width = controller != null
-        ? controller.value.size.width != 0
-            ? controller.value.size.width
+  double videoWidth(Player? controller) {
+    int width = (controller != null && controller.state.width != null)
+        ? controller.state.width! != 0
+            ? controller.state.width!
             : 640
         : 640;
     return width.toDouble();
@@ -123,11 +106,6 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
             : 480
         : 480;
     return height.toDouble();
-    // if (height < max) {
-    //   return max;
-    // } else {
-    //   return height;
-    // }
   }
 
   void refresh() {
@@ -155,128 +133,117 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
         autofocus: true,
         child: MeeduPlayerProvider(
           controller: widget.controller,
-          child: MediaKitTheme(
-            fillColor: widget.backgroundColor,
-            child: Container(
-                color: widget.backgroundColor,
-                child: LayoutBuilder(
-                  builder: (ctx, constraints) {
-                    MeeduPlayerController _ = widget.controller;
-                    if (_.controlsEnabled) {
-                      _.responsive.setDimensions(
-                        constraints.maxWidth,
-                        constraints.maxHeight,
-                      );
-                    }
+          child: Container(
+            color: widget.backgroundColor,
+            child: LayoutBuilder(
+              builder: (ctx, constraints) {
+                MeeduPlayerController _ = widget.controller;
+                if (_.controlsEnabled) {
+                  _.responsive.setDimensions(
+                    constraints.maxWidth,
+                    constraints.maxHeight,
+                  );
+                }
 
-                    if (widget.customIcons != null) {
-                      _.customIcons = widget.customIcons!(_.responsive);
-                    }
+                if (widget.customIcons != null) {
+                  _.customIcons = widget.customIcons!(_.responsive);
+                }
 
-                    if (widget.header != null) {
-                      _.header = widget.header!(context, _, _.responsive);
-                    }
+                if (widget.header != null) {
+                  _.header = widget.header!(context, _, _.responsive);
+                }
 
-                    if (widget.bottomRight != null) {
-                      _.bottomRight =
-                          widget.bottomRight!(context, _, _.responsive);
-                    }
-                    if (widget.videoOverlay != null) {
-                      _.videoOverlay =
-                          widget.videoOverlay!(context, _, _.responsive);
-                    }
-                    if (widget.customControls != null) {
-                      _.customControls =
-                          widget.customControls!(context, _, _.responsive);
-                    }
-                    if (widget.customCaptionView != null) {
-                      _.customCaptionView = widget.customCaptionView;
-                    }
-                    return ExcludeFocus(
-                      excluding: _.excludeFocus,
-                      child: Stack(
-                        // clipBehavior: Clip.hardEdge,
-                        // fit: StackFit.,
-                        alignment: Alignment.center,
-                        children: [
-                          RxBuilder(
-                              //observables: [_.videoFit],
-                              (__) {
-                            if (widget.controller.forceUIRefreshAfterFullScreen
-                                .value) {
-                              print("NEEDS TO REFRASH UI");
-                              refresh();
-                              widget.controller.forceUIRefreshAfterFullScreen
-                                  .value = false;
-                            }
-                            // widget.controller.forceUIRefreshAfterFullScreen
-                            //     .value = false;
-                            _.dataStatus.status.value;
-                            _.customDebugPrint(
-                                "Fit is ${widget.controller.videoFit.value}");
-                            // customDebugPrint(
-                            //     "constraints.maxWidth ${constraints.maxWidth}");
-                            // _.customDebugPrint(
-                            //     "width ${videoWidth(_.videoPlayerController, constraints.maxWidth)}");
-                            // customDebugPrint(
-                            //     "videoPlayerController ${_.videoPlayerController}");
-                            return Positioned.fill(
-                              child: FittedBox(
-                                clipBehavior: Clip.hardEdge,
-                                fit: widget.controller.videoFit.value,
-                                child: SizedBox(
-                                  width: videoWidth(
-                                    _.videoPlayerController,
-                                  ),
-                                  height: videoHeight(
-                                    _.videoPlayerController,
-                                  ),
-                                  // width: 640,
-                                  // height: 480,
-                                  child: _.videoPlayerController != null
-                                      ? VideoPlayer(
-                                          _.videoPlayerController!,
-                                          key: _key,
-                                        )
-                                      : Container(),
-                                ),
+                if (widget.bottomRight != null) {
+                  _.bottomRight = widget.bottomRight!(context, _, _.responsive);
+                }
+                if (widget.videoOverlay != null) {
+                  _.videoOverlay =
+                      widget.videoOverlay!(context, _, _.responsive);
+                }
+                if (widget.customControls != null) {
+                  _.customControls =
+                      widget.customControls!(context, _, _.responsive);
+                }
+
+                return ExcludeFocus(
+                  excluding: _.excludeFocus,
+                  child: Stack(
+                    // clipBehavior: Clip.hardEdge,
+                    // fit: StackFit.,
+                    alignment: Alignment.center,
+                    children: [
+                      RxBuilder(
+                          //observables: [_.videoFit],
+                          (__) {
+                        if (widget
+                            .controller.forceUIRefreshAfterFullScreen.value) {
+                          print("NEEDS TO REFRASH UI");
+                          refresh();
+                          widget.controller.forceUIRefreshAfterFullScreen
+                              .value = false;
+                        }
+                        // widget.controller.forceUIRefreshAfterFullScreen
+                        //     .value = false;
+                        _.dataStatus.status.value;
+                        _.customDebugPrint(
+                            "Fit is ${widget.controller.videoFit.value}");
+                        // customDebugPrint(
+                        //     "constraints.maxWidth ${constraints.maxWidth}");
+                        // _.customDebugPrint(
+                        //     "width ${videoWidth(_.videoPlayerController, constraints.maxWidth)}");
+                        // customDebugPrint(
+                        //     "videoPlayerController ${_.videoPlayerController}");
+                        return Positioned.fill(
+                          child: FittedBox(
+                            clipBehavior: Clip.hardEdge,
+                            fit: widget.controller.videoFit.value,
+                            child: SizedBox(
+                              width: videoWidth(
+                                _.videoPlayerController,
                               ),
-                            );
-                          }),
-                          if (_.videoOverlay != null) _.videoOverlay!,
-                          ClosedCaptionView(
-                            responsive: _.responsive,
-                            distanceFromBottom:
-                                widget.closedCaptionDistanceFromBottom,
-                            customCaptionView: _.customCaptionView,
+                              height: videoHeight(
+                                _.videoPlayerController,
+                              ),
+                              // width: 640,
+                              // height: 480,
+                              child: _.videoPlayerController != null
+                                  ? Video(
+                                      controller: _.videoController!,
+                                      key: _key,
+                                      fill: widget.backgroundColor)
+                                  : Container(),
+                            ),
                           ),
-                          if (_.controlsEnabled &&
-                              _.controlsStyle == ControlsStyle.primary)
-                            PrimaryVideoPlayerControls(
-                              responsive: _.responsive,
-                            ),
-                          if (_.controlsEnabled &&
-                              _.controlsStyle == ControlsStyle.primaryList)
-                            PrimaryListVideoPlayerControls(
-                              responsive: _.responsive,
-                            ),
-                          if (_.controlsEnabled &&
-                              _.controlsStyle == ControlsStyle.secondary)
-                            SecondaryVideoPlayerControls(
-                              responsive: _.responsive,
-                            ),
-                          if (_.controlsEnabled &&
-                              _.controlsStyle == ControlsStyle.custom &&
-                              _.customControls != null)
-                            ControlsContainer(
-                              responsive: _.responsive,
-                              child: _.customControls!,
-                            )
-                        ],
-                      ),
-                    );
-                  },
-                )),
+                        );
+                      }),
+                      if (_.videoOverlay != null) _.videoOverlay!,
+                      if (_.controlsEnabled &&
+                          _.controlsStyle == ControlsStyle.primary)
+                        PrimaryVideoPlayerControls(
+                          responsive: _.responsive,
+                        ),
+                      if (_.controlsEnabled &&
+                          _.controlsStyle == ControlsStyle.primaryList)
+                        PrimaryListVideoPlayerControls(
+                          responsive: _.responsive,
+                        ),
+                      if (_.controlsEnabled &&
+                          _.controlsStyle == ControlsStyle.secondary)
+                        SecondaryVideoPlayerControls(
+                          responsive: _.responsive,
+                        ),
+                      if (_.controlsEnabled &&
+                          _.controlsStyle == ControlsStyle.custom &&
+                          _.customControls != null)
+                        ControlsContainer(
+                          responsive: _.responsive,
+                          child: _.customControls!,
+                        )
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),

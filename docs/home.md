@@ -283,7 +283,7 @@ To play a video from a local **File**
 ```dart
 import 'package:flutter/material.dart';
 import 'package:meedu_player/meedu_player.dart';
-import 'package:wakelock_plus_plus/wakelock_plus_plus.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class BasicExamplePage extends StatefulWidget {
   BasicExamplePage({Key? key}) : super(key: key);
@@ -300,8 +300,8 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
   @override
   void initState() {
     super.initState();
-// The following line will enable the Android and iOS wakelock_plusPlus.
-    wakelock_plusPlus.enable();
+// The following line will enable the Android and iOS WakelockPlus.
+    WakelockPlus.enable();
 
     // Wait until the fisrt render the avoid posible errors when use an context while the view is rendering
     WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -312,7 +312,7 @@ class _BasicExamplePageState extends State<BasicExamplePage> {
   @override
   void dispose() {
     // The next line disables the wakelock_plus again.
-    wakelock_plusPlus.disable();
+    WakelockPlus.disable();
     _meeduPlayerController.dispose();// release the video player
     super.dispose();
   }

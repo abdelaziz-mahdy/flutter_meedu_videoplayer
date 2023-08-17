@@ -1,22 +1,6 @@
 ## 4.2.24
-
+- migrate to latest media_kit version.
 - Added videoOverlay to help with wrapping widget in both normal and fullScreen
-
-## 4.2.23
-
-- Updates to `video_player_media_kit 0.0.23` to use latest version of media_kit, also allows disabling media_kit playback errors
-
-## 4.2.22
-
-- Updates to `video_player_media_kit 0.0.22` to fix errors when playing live streams
-
-## 4.2.21
-
-- Updating readme versions
-
-## 4.2.20
-
-- Updates to `video_player_media_kit 0.0.21` to fix web compilation
 
 ## 4.2.19
 
@@ -29,7 +13,7 @@
 ## 4.2.17
 
 - Updates to `video_player_media_kit 0.0.20`
-- migrate to wakelock_plus_plus
+- migrate to wakelock_plus
 
 ## 4.2.16
 
@@ -252,7 +236,7 @@
 ## 3.0.5
 
 - Disabled wakelock_plus on linux
-- Added managewakelock_plus to constructor incase someone wants to disable wakelock_plus
+- Added manageWakeLock to constructor incase someone wants to disable wakelock_plus
 
 ## 3.0.4
 
