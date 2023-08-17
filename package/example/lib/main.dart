@@ -27,8 +27,10 @@ import 'package:flutter_meedu_media_kit_example/pages/yotube_page_example.dart';
 
 import 'pages/auto_hidecontrol_disable.dart';
 
-void main() {
-  MediaKit.ensureInitialized();
+Future<void> main() async {
+   MediaKit.ensureInitialized();
+      await windowManager.ensureInitialized();
+
   runApp(const MyApp());
 }
 

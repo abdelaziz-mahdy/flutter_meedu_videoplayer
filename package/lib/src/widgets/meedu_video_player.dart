@@ -55,8 +55,6 @@ class MeeduVideoPlayer extends StatefulWidget {
     Responsive responsive,
   )? videoOverlay;
 
-
-
   // ///[customCaptionView] when a custom view for the captions is needed
   // final Widget Function(BuildContext context, MeeduPlayerController controller,
   //     Responsive responsive, String text)? customCaptionView;
@@ -64,19 +62,16 @@ class MeeduVideoPlayer extends StatefulWidget {
   ///[backgroundColor] video background color
   final Color backgroundColor;
 
-
-
-
-  const MeeduVideoPlayer({
-    Key? key,
-    required this.controller,
-    this.header,
-    this.bottomRight,
-    this.customIcons,
-    this.customControls,
-    this.backgroundColor = Colors.black,
-    this.videoOverlay
-  }) : super(key: key);
+  const MeeduVideoPlayer(
+      {Key? key,
+      required this.controller,
+      this.header,
+      this.bottomRight,
+      this.customIcons,
+      this.customControls,
+      this.backgroundColor = Colors.black,
+      this.videoOverlay})
+      : super(key: key);
 
   @override
   State<MeeduVideoPlayer> createState() => _MeeduVideoPlayerState();
@@ -210,7 +205,9 @@ class _MeeduVideoPlayerState extends State<MeeduVideoPlayer> {
                                   ? Video(
                                       controller: _.videoController!,
                                       key: _key,
-                                      fill: widget.backgroundColor)
+                                      fill: widget.backgroundColor,
+                                      controls: NoVideoControls,
+                                    )
                                   : Container(),
                             ),
                           ),

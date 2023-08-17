@@ -41,8 +41,8 @@ class ScreenManager {
   Future<void> setWindowsFullScreen(bool state, MeeduPlayerController _) async {
     _.fullscreen.value = state;
     //customDebugPrint(await windowManager.isFullScreen());
-    // await windowManager.ensureInitialized();
     //await windowManager.setFullScreen(state);
+    await windowManager.ensureInitialized();
 
     if (state) {
       await windowManager.setFullScreen(state);
