@@ -1,3 +1,6 @@
+## 4.3.0+1
+* fixed slider shifting
+
 ## 4.3.0
 * migrating from media_kit due to it crashing apps when used in the package
 * using fvp for desktop and maybe replaced on mobile if people want 
