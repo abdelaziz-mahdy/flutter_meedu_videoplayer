@@ -191,7 +191,7 @@ Add the following to your `pubspec.yaml`:
 
 ```
 dependencies:
-  flutter_meedu_videoplayer: ^4.2.6
+  flutter_meedu_videoplayer: ^{{version}}
 ```
 
 ## Initialize
