@@ -478,7 +478,7 @@ class MeeduPlayerController {
       final lastBufferedEnd = buffered.last.end.inSeconds;
 
       // Check if the video is playing and the position is near the end of the buffer
-      if (VideoPlayerUsed.mediaKit) {
+      if (VideoPlayerUsed.fvp) {
         isBuffering.value =
             value.isPlaying && position.inSeconds > (lastBufferedEnd);
       } else {

@@ -18,6 +18,6 @@ export 'src/helpers/durations.dart';
 export 'src/helpers/utils.dart';
 
 export 'package:video_player/video_player.dart';
-export 'package:fvp/fvp.dart';
+
 export 'init_meedu_player.dart';
 export 'package:flutter_meedu/ui.dart';

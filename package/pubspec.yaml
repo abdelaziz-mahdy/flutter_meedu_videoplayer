@@ -29,6 +29,8 @@ dependencies:
   # video_player_cross_platform:
   #    path: ../../video_player_cross_platform
   fvp: ^0.1.0
+  # fvp:
+  #   path: ../../fvp
   window_manager: ^0.3.5
   # window_manager: 
   #   path: ../../window_manager
