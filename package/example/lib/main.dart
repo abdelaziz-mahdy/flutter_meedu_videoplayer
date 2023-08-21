@@ -31,8 +31,8 @@ import 'package:flutter_meedu_videoplayer_example/pages/yotube_page_example.dart
 
 void main() {
   initMeeduPlayer(
-    androidUseMediaKit: true,
-    iosUseMediaKit: true,
+    androidUseFVP: true,
+    iosUseFVP: true,
   );
   runApp(const MyApp());
 }

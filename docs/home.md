@@ -9,7 +9,7 @@
 > We have implemented a cross-platform video player, which provides a seamless video playback experience.
 
 > - [video_player](https://pub.dev/packages/video_player) for Android, iOS, and web.
-> - [media_kit](https://pub.dev/packages/media_kit) for desktop platforms.
+> - [fvp](https://pub.dev/packages/fvp) for desktop platforms.
 
 <img src="assets/pip.gif" alt="meedu_player pip" width="160" />
 <img src="assets/q2.gif" alt="meedu_player" width="160" />
@@ -219,15 +219,9 @@ Add the next permission
 And add `android:usesCleartextTraffic="true"` in your Application tag.
 <br/>
 
-## Android (replace original video_player with media_kit one)
+## Android (replace original video_player with fvp one)
 
-1. Just add this package and set androidUseMediaKit to true in initMeeduPlayer
-
-```yaml
-dependencies:
-  ...
-  media_kit_libs_android_video: 1.3.0             # Android package for video native libraries.
-```
+1. Just add this package and set androidUseFVP to true in initMeeduPlayer
 
 ## iOS
 
@@ -249,66 +243,9 @@ In your `Podfile` you need set a minimum target version like 9.0 or higher
 platform :ios, '9.0'
 ```
 
-## iOS (replace original video_player with media_kit one)
+## iOS (replace original video_player with fvp one)
 
-1. The minimum supported iOS version is 13.0, so the target needs to be set IPHONEOS_DEPLOYMENT_TARGET to 13.0 in `ios\Runner.xcodeproj\project.pbxproj`
-2. Just add this package in case you set iosUseMediaKit to true in initMeeduPlayer
-
-```yaml
-dependencies:
-  ...
-  media_kit_libs_ios_video: ^1.1.1          # iOS package for video (& audio) native libraries.
-```
-
-Also, software rendering is forced in the iOS simulator, due to an incompatibility with OpenGL ES.
-
-## Windows
-
-Everything ready.
-
-## Linux
-
-System shared libraries from distribution specific user-installed packages are used by-default. You can install these as follows.
-
-#### Ubuntu / Debian
-
-```bash
-sudo apt install libmpv-dev mpv
-```
-
-#### Packaging
-
-There are other ways to bundle these within your app package e.g. within Snap or Flatpak. Few examples:
-
-- [Celluloid](https://github.com/celluloid-player/celluloid/blob/master/flatpak/io.github.celluloid_player.Celluloid.json)
-- [VidCutter](https://github.com/ozmartian/vidcutter/tree/master/_packaging)
-
-## macOS
-
-Note: macos is not tested (if you have any problems open an issue)
-
-Everything ready.
-
-The minimum supported macOS version is 11.0,set MACOSX_DEPLOYMENT_TARGET = 11.0 `macos\Runner.xcodeproj\project.pbxproj`
-
-Also, during the build phase, the following warnings are not critical and cannot be silenced:
-
-```log
-#import "Headers/media_kit_video-Swift.h"
-        ^
-/path/to/media_kit/media_kit_test/build/macos/Build/Products/Debug/media_kit_video/media_kit_video.framework/Headers/media_kit_video-Swift.h:270:31: warning: 'objc_ownership' only applies to Objective-C object or block pointer types; type here is 'CVPixelBufferRef' (aka 'struct __CVBuffer *')
-- (CVPixelBufferRef _Nullable __unsafe_unretained)copyPixelBuffer SWIFT_WARN_UNUSED_RESULT;
-```
-
-```log
-# 1 "<command line>" 1
- ^
-<command line>:20:9: warning: 'POD_CONFIGURATION_DEBUG' macro redefined
-#define POD_CONFIGURATION_DEBUG 1 DEBUG=1
-        ^
-#define POD_CONFIGURATION_DEBUG 1
-        ^
-```
+1. Just add this package in case you set iosUseFVP to true in initMeeduPlayer
 
 ## hls on web
 
