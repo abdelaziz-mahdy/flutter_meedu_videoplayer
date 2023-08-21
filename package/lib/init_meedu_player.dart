@@ -12,7 +12,6 @@ import 'package:window_manager/window_manager.dart';
 Future<void> initMeeduPlayer(
     {bool iosUseMediaKit = false,
     bool androidUseMediaKit = false,
-    MPVLogLevel logLevel = MPVLogLevel.error,
     bool throwErrors = true}) async {
   WidgetsFlutterBinding.ensureInitialized();
   // await initWindowManagerIfNeeded();
@@ -26,11 +25,12 @@ Future<void> initMeeduPlayer(
   if (UniversalPlatform.isDesktop) {
     await windowManager.ensureInitialized();
   }
-  initVideoPlayerCrossPlatformIfNeeded(
-      iosUseMediaKit: iosUseMediaKit,
-      androidUseMediaKit: androidUseMediaKit,
-      logLevel: logLevel,
-      throwErrors: throwErrors);
+  MdkVideoPlayer.registerWith(); 
+  // initVideoPlayerCrossPlatformIfNeeded(
+  //     iosUseMediaKit: iosUseMediaKit,
+  //     androidUseMediaKit: androidUseMediaKit,
+  //     logLevel: logLevel,
+  //     throwErrors: throwErrors);
 }
 
 Future<void> initWindowManagerIfNeeded() async {
