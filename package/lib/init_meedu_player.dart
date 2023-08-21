@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
-import 'package:flutter_meedu_videoplayer/register_fvp/register_fvp.dart';
 import 'package:flutter_meedu_videoplayer/src/video_player_used.dart';
+import 'package:fvp/fvp.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -19,7 +19,7 @@ Future<void> initMeeduPlayer({
   if (UniversalPlatform.isDesktop ||
       (iosUseFVP && UniversalPlatform.isIOS) ||
       (androidUseFVP && UniversalPlatform.isAndroid)) {
-    fvpRegisterWith();
+  registerWith();
     VideoPlayerUsed.fvp = true;
   } else {
     VideoPlayerUsed.videoPlayer = true;
