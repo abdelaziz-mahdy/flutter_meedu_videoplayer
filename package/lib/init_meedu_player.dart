@@ -26,7 +26,7 @@ Future<void> initMeeduPlayer(
   if (UniversalPlatform.isDesktop) {
     await windowManager.ensureInitialized();
   }
-  initVideoPlayerMediaKitIfNeeded(
+  initVideoPlayerCrossPlatformIfNeeded(
       iosUseMediaKit: iosUseMediaKit,
       androidUseMediaKit: androidUseMediaKit,
       logLevel: logLevel,
