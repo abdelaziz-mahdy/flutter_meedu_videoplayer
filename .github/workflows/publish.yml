@@ -8,5 +8,5 @@ on:
 jobs:
   publish:
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
-    # with:
-    #   working-directory: path/to/package/within/repository
+    with:
+      working-directory: package
