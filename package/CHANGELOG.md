@@ -1,3 +1,8 @@
+## 4.3.0
+* migrating from media_kit due to it crashing apps when used in the package
+* using fvp for desktop and maybe replaced on mobile if people want 
+## 4.2.27
+* migrate to video_player_cross_platform to avoid issues with media_kit
 ## 4.2.26
 * media_kit windows version to 1.0.6
 * media_kit linux version to 1.1.0
