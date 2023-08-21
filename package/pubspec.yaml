@@ -7,7 +7,6 @@ environment:
   flutter: ">=2.5.0"
 topics:
   - video-player
-  - video_player
   - video
   - player
 
