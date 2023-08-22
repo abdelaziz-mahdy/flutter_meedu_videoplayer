@@ -28,11 +28,17 @@ import 'package:flutter_meedu_videoplayer_example/pages/player_with_header_page.
 import 'package:flutter_meedu_videoplayer_example/pages/portrait_example_page.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/secondary_controls.dart';
 import 'package:flutter_meedu_videoplayer_example/pages/yotube_page_example.dart';
+import 'package:logging/logging.dart';
 
 void main() {
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((record) {
+    print(
+        '${record.loggerName}.${record.level.name}: ${record.time}: ${record.message}');
+  });
   initMeeduPlayer(
-    androidUseFVP: true,
-    iosUseFVP: true,
+    androidUseFVP: false,
+    iosUseFVP: false,
   );
   runApp(const MyApp());
 }

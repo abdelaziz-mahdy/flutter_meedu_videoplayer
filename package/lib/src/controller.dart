@@ -617,52 +617,52 @@ class MeeduPlayerController {
       await _videoPlayerController?.seekTo(position);
       customDebugPrint("position after seek is ${_position.value.toString()}");
 
-      _checkIfSeekIsSuccess(position);
+      // _checkIfSeekIsSuccess(position);
 
       // if (playerStatus.stopped) {
       //   play();
       // }
     } else {
-      _timerForReSeek(position);
+      // _timerForReSeek(position);
     }
   }
 
-  void _checkIfSeekIsSuccess(Duration position) {
-    _timerForCheckingSeek?.cancel();
-    _timerForCheckingSeek =
-        Timer.periodic(const Duration(milliseconds: 500), (Timer t) async {
-      // customDebugPrint("_position.value: ${_position.value}");
-      // customDebugPrint("position: $position");
-      customDebugPrint(
-          "re seek needed?: ${_position.value.inSeconds < position.inSeconds}");
+  // void _checkIfSeekIsSuccess(Duration position) {
+  //   _timerForCheckingSeek?.cancel();
+  //   _timerForCheckingSeek =
+  //       Timer.periodic(const Duration(milliseconds: 500), (Timer t) async {
+  //     customDebugPrint("_position.value: ${_position.value}");
+  //     customDebugPrint("position requested: $position");
+  //     customDebugPrint(
+  //         "re seek needed?: ${_position.value.inSeconds < position.inSeconds}");
 
-      if (_position.value.inSeconds < position.inSeconds) {
-        _timerForReSeek(position);
-      }
-      if (_position.value.inSeconds != position.inSeconds ||
-          playerStatus.paused) {
-        t.cancel();
-      }
-    });
-  }
+  //     if (_position.value.inSeconds < position.inSeconds) {
+  //       _timerForReSeek(position);
+  //     }
+  //     if (_position.value.inSeconds != position.inSeconds ||
+  //         playerStatus.paused) {
+  //       t.cancel();
+  //     }
+  //   });
+  // }
 
-  void _timerForReSeek(Duration position) async {
-    _timerForSeek?.cancel();
-    _timerForSeek =
-        Timer.periodic(const Duration(milliseconds: 200), (Timer t) async {
-      //_timerForSeek = null;
-      customDebugPrint("Re SEEK CALLED");
-      if (duration.value.inSeconds != 0) {
-        await _videoPlayerController?.seekTo(position);
+  // void _timerForReSeek(Duration position) async {
+  //   _timerForSeek?.cancel();
+  //   _timerForSeek =
+  //       Timer.periodic(const Duration(milliseconds: 200), (Timer t) async {
+  //     //_timerForSeek = null;
+  //     customDebugPrint("Re SEEK CALLED");
+  //     if (duration.value.inSeconds != 0) {
+  //       await _videoPlayerController?.seekTo(position);
 
-        // if (playerStatus.stopped) {
-        //   play();
-        // }
-        t.cancel();
-        //_timerForSeek = null;
-      }
-    });
-  }
+  //       // if (playerStatus.stopped) {
+  //       //   play();
+  //       // }
+  //       t.cancel();
+  //       //_timerForSeek = null;
+  //     }
+  //   });
+  // }
 
   /// Sets the playback speed of [this].
   ///
