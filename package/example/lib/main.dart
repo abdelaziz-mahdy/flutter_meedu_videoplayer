@@ -37,7 +37,7 @@ void main() {
         '${record.loggerName}.${record.level.name}: ${record.time}: ${record.message}');
   });
   initMeeduPlayer(
-    androidUseFVP: false,
+    androidUseFVP: true,
     iosUseFVP: false,
   );
   runApp(const MyApp());
