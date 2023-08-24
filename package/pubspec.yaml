@@ -9,7 +9,6 @@ topics:
   - video-player
   - video
   - player
-
 dependencies:
   flutter:
     sdk: flutter
