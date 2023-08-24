@@ -1,6 +1,6 @@
 name: flutter_meedu_videoplayer
 description: A cross Platform video player that uses video_player for android and ios and web, fvp for windows and linux and macos.
-version: 4.3.0+1
+version: 4.3.1
 homepage: "https://github.com/zezo357/flutter_meedu_videoplayer"
 environment:
   sdk: ">=2.16.2 <4.0.0"
@@ -26,7 +26,7 @@ dependencies:
   fullscreen_window: ^1.0.4
   # video_player_cross_platform:
   #    path: ../../video_player_cross_platform
-  fvp: ^0.2.1
+  fvp: ^0.3.0
   # fvp:
   #   git: https://github.com/wang-bin/fvp
   # fvp:
