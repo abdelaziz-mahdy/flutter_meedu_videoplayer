@@ -31,9 +31,8 @@ dependencies:
   path: ^1.8.0
   path_provider: ^2.0.6
   native_device_orientation: ^1.1.4
-  http: ^0.13.5
   logging: ^1.2.0
-  youtube_explode_dart: ^1.12.4
+  youtube_explode_dart: ^2.0.2
   video_player_web_hls: ^1.0.0+3
   desktop_drop: ^0.4.1
 
