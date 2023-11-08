@@ -10,8 +10,7 @@ class GridViewExample extends StatefulWidget {
   State<GridViewExample> createState() => _GridViewExampleState();
 }
 
-class _GridViewExampleState extends State<GridViewExample>
-    with AutomaticKeepAliveClientMixin {
+class _GridViewExampleState extends State<GridViewExample> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -19,10 +18,7 @@ class _GridViewExampleState extends State<GridViewExample>
       appBar: AppBar(),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 500,
-            childAspectRatio: 16 / 9,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5),
+            maxCrossAxisExtent: 500, childAspectRatio: 16 / 9, crossAxisSpacing: 5, mainAxisSpacing: 5),
         itemBuilder: (_, index) => VideoItem(
           uniqueKey: "$index",
         ),
@@ -43,8 +39,7 @@ class VideoItem extends StatefulWidget {
   _VideoItemState createState() => _VideoItemState();
 }
 
-class _VideoItemState extends State<VideoItem>
-    with AutomaticKeepAliveClientMixin {
+class _VideoItemState extends State<VideoItem> with AutomaticKeepAliveClientMixin {
   final MeeduPlayerController _controller = MeeduPlayerController(
       screenManager: const ScreenManager(orientations: [
         DeviceOrientation.portraitUp,
@@ -58,8 +53,7 @@ class _VideoItemState extends State<VideoItem>
     super.initState();
     _controller.setDataSource(
       DataSource(
-        source:
-            'https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov',
+        source: 'https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_360p.mp4',
         type: DataSourceType.network,
       ),
       autoplay: false,

@@ -10,8 +10,7 @@ class ListViewExample extends StatefulWidget {
   State<ListViewExample> createState() => _ListViewExampleState();
 }
 
-class _ListViewExampleState extends State<ListViewExample>
-    with AutomaticKeepAliveClientMixin {
+class _ListViewExampleState extends State<ListViewExample> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -38,8 +37,7 @@ class VideoItem extends StatefulWidget {
   _VideoItemState createState() => _VideoItemState();
 }
 
-class _VideoItemState extends State<VideoItem>
-    with AutomaticKeepAliveClientMixin {
+class _VideoItemState extends State<VideoItem> with AutomaticKeepAliveClientMixin {
   final MeeduPlayerController _controller = MeeduPlayerController(
       screenManager: const ScreenManager(orientations: [
         DeviceOrientation.portraitUp,
@@ -53,8 +51,7 @@ class _VideoItemState extends State<VideoItem>
     super.initState();
     _controller.setDataSource(
       DataSource(
-        source:
-            'https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov',
+        source: 'https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_360p.mp4',
         type: DataSourceType.network,
         httpHeaders: {
           // u can change the link to  ur referr

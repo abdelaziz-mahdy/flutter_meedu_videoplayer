@@ -19,8 +19,7 @@ class AutoFullScreenExamplePage extends StatefulWidget {
   const AutoFullScreenExamplePage({Key? key}) : super(key: key);
 
   @override
-  State<AutoFullScreenExamplePage> createState() =>
-      _AutoFullScreenExamplePageState();
+  State<AutoFullScreenExamplePage> createState() => _AutoFullScreenExamplePageState();
 }
 
 class _AutoFullScreenExamplePageState extends State<AutoFullScreenExamplePage> {
@@ -31,19 +30,16 @@ class _AutoFullScreenExamplePageState extends State<AutoFullScreenExamplePage> {
 
   final _qualities = [
     Quality(
-      url:
-          "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h480p.mov",
-      label: "480p",
+      url: "https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_180p.mp4",
+      label: "180p",
     ),
     Quality(
-      url:
-          "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
+      url: "https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_360p.mp4",
+      label: "360p",
+    ),
+    Quality(
+      url: "https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_720p.mp4",
       label: "720p",
-    ),
-    Quality(
-      url:
-          "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h1080p.mov",
-      label: "1080p",
     ),
   ];
 
@@ -67,7 +63,7 @@ class _AutoFullScreenExamplePageState extends State<AutoFullScreenExamplePage> {
   void initState() {
     super.initState();
 
-    // Set the default video quality to 480p.
+    // Set the default video quality to 180p.
     _quality.value = _qualities[0];
 
     // Listen to the video position changes and save the current position.
@@ -83,9 +79,7 @@ class _AutoFullScreenExamplePageState extends State<AutoFullScreenExamplePage> {
     });
 
     // Listen for device orientation changes.
-    _orientation = NativeDeviceOrientationCommunicator()
-        .onOrientationChanged(useSensor: true)
-        .listen((event) {
+    _orientation = NativeDeviceOrientationCommunicator().onOrientationChanged(useSensor: true).listen((event) {
       // Cancel any active debounce timers.
       if (_debounceTimer?.isActive ?? false) {
         _debounceTimer?.cancel();
@@ -96,8 +90,7 @@ class _AutoFullScreenExamplePageState extends State<AutoFullScreenExamplePage> {
         print("onOrientationChanged $event");
 
         // Check the device orientation to identify the current mode.
-        if (event == NativeDeviceOrientation.portraitUp ||
-            event == NativeDeviceOrientation.portraitDown) {
+        if (event == NativeDeviceOrientation.portraitUp || event == NativeDeviceOrientation.portraitDown) {
           // Exit fullscreen mode if the device was put in fullscreen mode from an orientation change.
           if (_controller.fullscreen.value && fullScreenFromOrientation) {
             _controller.setFullScreen(false, context);
@@ -105,8 +98,7 @@ class _AutoFullScreenExamplePageState extends State<AutoFullScreenExamplePage> {
           }
         }
 
-        if (event == NativeDeviceOrientation.landscapeLeft ||
-            event == NativeDeviceOrientation.landscapeRight) {
+        if (event == NativeDeviceOrientation.landscapeLeft || event == NativeDeviceOrientation.landscapeRight) {
           // Enter fullscreen mode if the device is in landscape mode and not in fullscreen mode.
           if (!_controller.fullscreen.value) {
             _controller.setFullScreen(true, context);

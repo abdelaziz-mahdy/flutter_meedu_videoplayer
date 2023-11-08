@@ -12,8 +12,7 @@ class SecondaryExamplePage extends StatefulWidget {
 
 class _SecondaryExamplePageState extends State<SecondaryExamplePage> {
   final _meeduPlayerController = MeeduPlayerController(
-      controlsStyle: ControlsStyle.secondary,
-      enabledButtons: const EnabledButtons(rewindAndfastForward: false));
+      controlsStyle: ControlsStyle.secondary, enabledButtons: const EnabledButtons(rewindAndfastForward: false));
 
   StreamSubscription? _playerEventSubs;
 
@@ -36,8 +35,7 @@ class _SecondaryExamplePageState extends State<SecondaryExamplePage> {
     _meeduPlayerController.setDataSource(
       DataSource(
         type: DataSourceType.network,
-        source:
-            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
+        source: "https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_360p.mp4",
       ),
       autoplay: true,
     );

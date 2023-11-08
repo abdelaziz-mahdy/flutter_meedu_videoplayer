@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
 const videos = [
-  'https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov',
-  'https://movietrailers.apple.com/movies/independent/bill-ted-face-the-music/bill-and-ted-face-the-music-trailer-1_h720p.mov',
-  'https://movietrailers.apple.com/movies/roadsideattractions/words-on-bathroom-walls/words-on-bathroom-walls-trailer-1_h720p.mov',
-  'https://movietrailers.apple.com/movies/independent/alone/alone-trailer-1_h720p.mov',
-  'https://movietrailers.apple.com/movies/fox/the-new-mutants/the-new-mutants-trailer-1_h720p.mov',
+  'https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_360p.mp4',
+  'https://movietrailers.apple.com/movies/independent/bill-ted-face-the-music/bill-and-ted-face-the-music-trailer-1_h360p.mov',
+  'https://movietrailers.apple.com/movies/roadsideattractions/words-on-bathroom-walls/words-on-bathroom-walls-trailer-1_h360p.mov',
+  'https://movietrailers.apple.com/movies/independent/alone/alone-trailer-1_h360p.mov',
+  'https://movietrailers.apple.com/movies/fox/the-new-mutants/the-new-mutants-trailer-1_h360p.mov',
 ];
 
 class FullscreenExamplePage extends StatefulWidget {
@@ -32,9 +32,8 @@ class _FullscreenExamplePageState extends State<FullscreenExamplePage> {
   //   ),
   // );
 
-  final MeeduPlayerController _meeduPlayerController = MeeduPlayerController(
-      colorTheme: Colors.blue,
-      enabledButtons: const EnabledButtons(rewindAndfastForward: false));
+  final MeeduPlayerController _meeduPlayerController =
+      MeeduPlayerController(colorTheme: Colors.blue, enabledButtons: const EnabledButtons(rewindAndfastForward: false));
   ValueNotifier<int> currentIndex = ValueNotifier(0);
   DataSource? _dataSource;
 

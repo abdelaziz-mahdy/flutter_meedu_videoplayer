@@ -8,8 +8,7 @@ class AutoHideControlsDisable extends StatefulWidget {
   const AutoHideControlsDisable({Key? key}) : super(key: key);
 
   @override
-  State<AutoHideControlsDisable> createState() =>
-      _AutoHideControlsDisableState();
+  State<AutoHideControlsDisable> createState() => _AutoHideControlsDisableState();
 }
 
 class _AutoHideControlsDisableState extends State<AutoHideControlsDisable> {
@@ -43,8 +42,7 @@ class _AutoHideControlsDisableState extends State<AutoHideControlsDisable> {
     await _meeduPlayerController.setDataSource(
         DataSource(
           type: DataSourceType.network,
-          source:
-              "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
+          source: "https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_360p.mp4",
         ),
         autoplay: true,
         looping: false);

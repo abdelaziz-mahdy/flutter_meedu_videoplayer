@@ -7,8 +7,7 @@ class CustomControlsExamplePage extends StatefulWidget {
   const CustomControlsExamplePage({Key? key}) : super(key: key);
 
   @override
-  State<CustomControlsExamplePage> createState() =>
-      _CustomControlsExamplePageState();
+  State<CustomControlsExamplePage> createState() => _CustomControlsExamplePageState();
 }
 
 class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
@@ -38,15 +37,13 @@ class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
     _meeduPlayerController.setDataSource(
       DataSource(
         type: DataSourceType.network,
-        source:
-            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
+        source: "https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_360p.mp4",
       ),
       autoplay: true,
     );
 
     ///use this stream to listen the player data events like completed, playing, paused
-    _playerEventSubs =
-        _meeduPlayerController.onPlayerStatusChanged.listen((event) {
+    _playerEventSubs = _meeduPlayerController.onPlayerStatusChanged.listen((event) {
       print(event);
     });
   }
@@ -105,16 +102,13 @@ class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
                               child: RxBuilder(
                                 (__) => Row(
                                   children: [
-                                    Expanded(
-                                        child: MuteSoundButton(
-                                            responsive: responsive)),
+                                    Expanded(child: MuteSoundButton(responsive: responsive)),
                                     !controller.mute.value
                                         ? Expanded(
                                             flex: 2,
                                             child: Slider(
                                               value: controller.volume.value,
-                                              onChanged: (value) =>
-                                                  controller.setVolume(value),
+                                              onChanged: (value) => controller.setVolume(value),
                                             ),
                                           )
                                         : const Expanded(
@@ -129,12 +123,8 @@ class _CustomControlsExamplePageState extends State<CustomControlsExamplePage> {
                       ),
                       Row(
                         children: [
-                          if (controller.bottomRight != null) ...[
-                            controller.bottomRight!,
-                            const SizedBox(width: 10)
-                          ],
-                          if (controller.enabledButtons.videoFit)
-                            VideoFitButton(responsive: responsive),
+                          if (controller.bottomRight != null) ...[controller.bottomRight!, const SizedBox(width: 10)],
+                          if (controller.enabledButtons.videoFit) VideoFitButton(responsive: responsive),
                           if (controller.enabledButtons.fullscreen) ...[
                             FullscreenButton(
                               size: responsive.buttonSize(),

@@ -16,8 +16,7 @@ class ChangeQualityExamplePage extends StatefulWidget {
   const ChangeQualityExamplePage({Key? key}) : super(key: key);
 
   @override
-  State<ChangeQualityExamplePage> createState() =>
-      _ChangeQualityExamplePageState();
+  State<ChangeQualityExamplePage> createState() => _ChangeQualityExamplePageState();
 }
 
 class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
@@ -29,19 +28,16 @@ class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
 
   final _qualities = [
     Quality(
-      url:
-          "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h480p.mov",
-      label: "480p",
+      url: "https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_180p.mp4",
+      label: "180p",
     ),
     Quality(
-      url:
-          "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
+      url: "https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_360p.mp4",
+      label: "360p",
+    ),
+    Quality(
+      url: "https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_720p.mp4",
       label: "720p",
-    ),
-    Quality(
-      url:
-          "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h1080p.mov",
-      label: "1080p",
     ),
   ];
 
@@ -56,7 +52,7 @@ class _ChangeQualityExamplePageState extends State<ChangeQualityExamplePage> {
   @override
   void initState() {
     super.initState();
-    _quality.value = _qualities[0]; // set the default video quality (480p)
+    _quality.value = _qualities[0]; // set the default video quality (180p)
 
     // listen the video position
     _currentPositionSubs = _controller.onPositionChanged.listen(

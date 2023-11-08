@@ -11,8 +11,8 @@ class PlayerWithHeaderPage extends StatefulWidget {
 }
 
 class _PlayerWithHeaderPageState extends State<PlayerWithHeaderPage> {
-  final MeeduPlayerController _meeduPlayerController = MeeduPlayerController(
-      controlsStyle: ControlsStyle.secondary, manageWakeLock: false);
+  final MeeduPlayerController _meeduPlayerController =
+      MeeduPlayerController(controlsStyle: ControlsStyle.secondary, manageWakeLock: false);
 
   @override
   void initState() {
@@ -35,8 +35,7 @@ class _PlayerWithHeaderPageState extends State<PlayerWithHeaderPage> {
     _meeduPlayerController.setDataSource(
       DataSource(
         type: DataSourceType.network,
-        source:
-            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
+        source: "https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_360p.mp4",
       ),
       autoplay: true,
     );

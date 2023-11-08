@@ -15,8 +15,7 @@ class _DisabledButtonsExampleState extends State<DisabledButtonsExample> {
   final _meeduPlayerController = MeeduPlayerController(
     controlsStyle: ControlsStyle.primary,
     manageWakeLock: false,
-    enabledButtons: const EnabledButtons(
-        fullscreen: false, pip: false, rewindAndfastForward: false),
+    enabledButtons: const EnabledButtons(fullscreen: false, pip: false, rewindAndfastForward: false),
   );
 
   StreamSubscription? _playerEventSubs;
@@ -53,8 +52,7 @@ class _DisabledButtonsExampleState extends State<DisabledButtonsExample> {
     _meeduPlayerController.setDataSource(
       DataSource(
         type: DataSourceType.network,
-        source:
-            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
+        source: "https://jinyus.github.io/flutter_meedu_videoplayer/assets/sample_360p.mp4",
       ),
       autoplay: true,
     );
