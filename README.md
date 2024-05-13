@@ -4,8 +4,8 @@
 <a href='https://ko-fi.com/zezo357' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
 
 <a target="blank" href="https://pub.dev/packages/flutter_meedu_videoplayer"><img src="https://img.shields.io/pub/v/flutter_meedu_videoplayer?include_prereleases&style=flat-square"/></a>
-<img src="https://img.shields.io/github/last-commit/zezo357/flutter_meedu_videoplayer/master?style=flat-square"/>
-<img src="https://img.shields.io/github/license/zezo357/flutter_meedu_videoplayer?style=flat-square"/>
+<img src="https://img.shields.io/github/last-commit/abdelaziz-mahdy/flutter_meedu_videoplayer/master?style=flat-square"/>
+<img src="https://img.shields.io/github/license/abdelaziz-mahdy/flutter_meedu_videoplayer?style=flat-square"/>
 
 ### Cross-Platform Video Player
 
@@ -14,18 +14,18 @@ We have implemented a cross-platform video player, which provides a seamless vid
 - [video_player](https://pub.dev/packages/video_player) for Android, iOS, and web.
 - [fvp](https://pub.dev/packages/fvp) for desktop platforms.
 
-👋 👉 <b>[Complete documentation here](https://zezo357.github.io/flutter_meedu_videoplayer/)</b>
+👋 👉 <b>[Complete documentation here](https://abdelaziz-mahdy.github.io/flutter_meedu_videoplayer/)</b>
 
 <table>
-<caption><h4><a href="https://zezo357.github.io/flutter_meedu_videoplayer_example/">Flutter Web Demo</a></h4></caption>
+<caption><h4><a href="https://abdelaziz-mahdy.github.io/flutter_meedu_videoplayer_example/">Flutter Web Demo</a></h4></caption>
 
   <tbody>
     <tr>
-      <td rowspan="2"><img src="https://zezo357.github.io/flutter_meedu_videoplayer/assets/q2.gif" alt="meedu_player" width="160" /></td>     
-      <td><img src="https://zezo357.github.io/flutter_meedu_videoplayer/assets/full.gif" alt="meedu_player" width="300" /></td>      
+      <td rowspan="2"><img src="https://abdelaziz-mahdy.github.io/flutter_meedu_videoplayer/assets/q2.gif" alt="meedu_player" width="160" /></td>     
+      <td><img src="https://abdelaziz-mahdy.github.io/flutter_meedu_videoplayer/assets/full.gif" alt="meedu_player" width="300" /></td>      
     </tr>   
     <tr>
-      <td><img src="https://zezo357.github.io/flutter_meedu_videoplayer/assets/playing_video.png" alt="meedu_player" width="300" /></td>     
+      <td><img src="https://abdelaziz-mahdy.github.io/flutter_meedu_videoplayer/assets/playing_video.png" alt="meedu_player" width="300" /></td>     
     </tr>  
   </tbody>
 </table>
