@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io' show Platform;
 
 import 'package:flutter/services.dart';
-import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu/rx.dart';
 
 class PipManager {
   final _channel = const MethodChannel("com.zezo357.flutter_meedu_videoplayer");

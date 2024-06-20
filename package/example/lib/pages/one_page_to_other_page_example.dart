@@ -59,7 +59,7 @@ class _OnePageExampleState extends State<OnePageExample> {
       DataSource(
         type: DataSourceType.network,
         source:
-            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
+            "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
       ),
       autoplay: true,
     );
@@ -148,7 +148,7 @@ class _PageTwoState extends State<PageTwo> {
       DataSource(
         type: DataSourceType.network,
         source:
-            "https://movietrailers.apple.com/movies/fox/the-new-mutants/the-new-mutants-trailer-1_h720p.mov",
+            "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
       ),
       autoplay: true,
     );

@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu/rx.dart';
 import 'package:flutter_meedu_videoplayer/src/helpers/desktop_pip_bk.dart';
 import 'package:flutter_meedu_videoplayer/src/native/pip_manager.dart';
 import 'package:flutter_meedu_videoplayer/src/video_player_used.dart';
@@ -16,6 +16,7 @@ import 'package:volume_controller/volume_controller.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:flutter_meedu_videoplayer/src/helpers/durations.dart' as meeduDurations;
 
 /// An enumeration of the different styles that can be applied to controls, such
 /// as buttons and icons and layouts.
@@ -281,7 +282,7 @@ class MeeduPlayerController {
   /// such as fade-in and fade-out durations, overlay show/hide animations, and more.
   /// By modifying these durations, you can adjust the visual appearance and behavior
   /// of the video player's animations according to your preferences.
-  final Durations durations;
+  final meeduDurations.Durations durations;
 
   /// Controls the visibility of player overlays.
   ///
@@ -330,7 +331,7 @@ class MeeduPlayerController {
     this.enabledOverlays = const EnabledOverlays(),
     this.customCallbacks = const CustomCallbacks(),
     Responsive? responsive,
-    this.durations = const Durations(),
+    this.durations = const meeduDurations.Durations(),
     this.onVideoPlayerClosed,
     BoxFit? initialFit,
   }) : _videoFit = Rx(initialFit ?? BoxFit.fill) {
