@@ -1,3 +1,6 @@
+## 4.3.2
+* deps updates 
+
 ## 4.3.1
 * Updates fvp to `fvp: ^0.3.0`
 ## 4.3.0+1
