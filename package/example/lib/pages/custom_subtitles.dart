@@ -35,7 +35,7 @@ class _CustomNetworkWithSubtitlesPageState
     await _controller.setDataSource(
       DataSource(
         source:
-            'https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4',
+            'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
         type: DataSourceType.network,
         closedCaptionFile: _loadCaptions(),
       ),

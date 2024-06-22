@@ -40,7 +40,7 @@ android {
         applicationId "com.zezo357.flutter_meedu_videoplayer_example"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 19
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -59,4 +59,13 @@ android {
 flutter {
     source '../..'
 }
-
+// https://github.com/flutter/flutter/issues/119247#issuecomment-1405825291
+configurations.all {
+    resolutionStrategy {
+        eachDependency {
+            if ((requested.group == "org.jetbrains.kotlin") && (requested.name.startsWith("kotlin-stdlib"))) {
+                useVersion("1.8.22")
+            }
+        }
+    }
+}

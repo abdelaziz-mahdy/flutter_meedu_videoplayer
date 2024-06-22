@@ -53,7 +53,7 @@ class _CustomIconsExamplePageState extends State<CustomIconsExamplePage> {
       DataSource(
         type: DataSourceType.network,
         source:
-            "https://movietrailers.apple.com/movies/paramount/the-spongebob-movie-sponge-on-the-run/the-spongebob-movie-sponge-on-the-run-big-game_h720p.mov",
+            "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
       ),
       autoplay: true,
     );

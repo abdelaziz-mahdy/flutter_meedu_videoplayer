@@ -1,4 +1,4 @@
-import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu/rx.dart';
 
 enum DataStatus { none, loading, loaded, error }
 
