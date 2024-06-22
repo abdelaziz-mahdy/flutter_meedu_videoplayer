@@ -19,15 +19,16 @@ jobs:
     name: Android
     runs-on: windows-latest
     steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "true"
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
           cache: 'gradle'
           check-latest: true
-      - uses: actions/checkout@v2
-        with:
-          submodules: "true"
+
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
