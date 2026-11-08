@@ -1,5 +1,9 @@
 # flutter_meedu_videoplayer
 
+> [!NOTE]
+> This package is no longer developed.
+> For new projects, use [video_player](https://pub.dev/packages/video_player) with [fvp](https://pub.dev/packages/fvp) as the backend, and [universal_video_controls](https://pub.dev/packages/universal_video_controls) for the controls.
+
 <a href="https://www.buymeacoffee.com/zezo357" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 <a href='https://ko-fi.com/zezo357' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
 
